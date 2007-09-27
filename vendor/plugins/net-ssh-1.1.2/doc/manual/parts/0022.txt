@@ -1,0 +1,42 @@
+The SyncShell service allows you to execute commands on the shell and block until they finish. It is not fool-proof--it has to use some tricks to accomplish this task, and some commands may foul it up. But for most tasks, it works admirably.
+
+{{{lang=ruby,number=true,caption=Using the SyncShell service
+Net::SSH.start( 'localhost' ) do |session|
+
+  shell = session.shell.sync
+
+  out = shell.pwd
+  p out.stdout
+
+  out = shell.test "-e foo"
+  p out.status
+
+  out = shell.cd "/really/bogus/directory"
+  p out.stderr
+  p out.status
+
+  out = shell.ruby "-v"
+  p out.stdout
+
+  out = shell.cd "/usr/lib"
+
+ out = shell.ls "-l"
+  p out.stdout
+
+  out = shell.send_command( "bc", <<CMD )
+5+5
+10*2
+scale=5
+3/4
+quit
+CMD
+  p out.stdout
+
+  p shell.exit
+
+end
+}}}
+
+The result of executing each command is an object that encapsulates the @stdout@ and @stderr@ streams, and the exit status of the command.
+
+To explicitly execute a command, use the @#send_command@ instead of @#send_data@--otherwise, the command will be executed asynchronously, which is not what you want. Also, if you pass a second parameter to the @#send_command@ method, it is interpreted as the @stdin@ data to send to the new process.

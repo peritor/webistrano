@@ -1,0 +1,64 @@
+An _instantiation pipeline_ is a sequence of elements, each of which knows how to perform some aspect of the instantiation of a service.
+
+Every service consists of at least one instantiation element--the block that was given when the service was registered. Other elements may be combined with this block to enforce various aspects of lifestyle management, such as _multiplicity_ (singleton vs. prototype) and _laziness_ (deferred vs. immediate instantiation).
+
+h3. Standard Pipeline Elements
+
+There are six standard pipeline elements available in Needle (although you may certainly create your own):
+
+* @deferred@: this will always return a proxy that wraps subsequent pipeline elements, causing the subsequent elements to be executed only when a method is invoked on the proxy (at which point the method is then delegated to the resulting service).
+* @initialize@: this will invoke a method on the resulting service (defaults to @initialize_service@, though it can be changed). It is used for doing final initialization of services (for services that need it).
+* @interceptor@: this element is used to implement the proxy that wraps the interceptors around the service. It is only attached to the pipeline when an interceptor is attached to a service.
+* @multiton@: this element enforces a multiton guard on the service. This means that the service will only be instantiated once for each unique set of parameters given to the service.
+* @singleton@: this is a multiplicity guard that ensures a service is instantiated only once per process.
+* @threaded@: this is like the @singleton@ element, but it ensures that a service is instantiated no more than once _per thread_.
+
+h3. Priorities
+
+Just like interceptors, pipeline elements have priorities as well. These priorities determine the order in which the elements are executed in the pipeline.
+
+Each element type has a default priority, although that priority can be overridden when the element is added to the pipeline.
+
+h3. Custom Pipeline Elements
+
+Creating new pipeline elements simple. Just create a new class that extends @Needle::Pipeline::Element@. Set the default pipeline priority (using the @#set_default_priority@ class method), and then implement the @#call@ method (accepting at least two parameters: the container and the service point).
+
+{{{lang=ruby,number=true,caption=Custom pipeline element example
+require 'needle/pipeline/element'
+
+class MyPipelineElement < Needle::Pipeline::Element
+  set_default_priority 50
+  
+  def call( container, point, *args )
+    ...
+    result = succ.call( container, point, *args )
+    ...
+    return result
+  end
+end
+}}}
+
+To invoke the next element of the pipeline, just invoke @#succ.call(...)@.
+
+If needed, you can also implement @#initialize_element@ (with no arguments), which you may invoke to perform initialization of the element. From there, you can access the options that were given to the element via the @#options@ accessor.
+
+See the implementations of the existing elements in @needle/lifecycle@ for examples.
+
+h3. Added Pipelines Elements to Services
+
+You can specify the pipeline elements to use for a service via the @:pipeline@ option. This must refer to an array, each element of which must be either a symbol (in which case it references an element of the @:pipeline_elements@ service), or a class (in which case it must implement the interface required by @Needle::Pipeline::Element).
+
+{{{lang=ruby,caption=Adding pipelines to services
+reg.register( :foo, :pipeline => [ :singleton, MyPipelineElement ] ) { ... }
+}}}
+
+The elements will be sorted based on their priorities, with lower priorities sorting closer to the instantiation block, and higher priorities sorting closer to the client.
+
+h3. Making Custom Pipeline Elements Available
+
+You can make your custom pipeline elements available (so they can be referenced by symbol, instead of class name) by adding them to the @:pipeline_elements@ service:
+
+{{{lang=ruby,number=true,caption=Publishing custom pipeline elements
+reg.pipeline_elements[ :my_pipeline_element ] = MyPipelineElement
+reg.register( :foo, :pipeline => [ :singleton, :my_pipeline_element ] ) { ... }
+}}}

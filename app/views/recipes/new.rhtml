@@ -1,0 +1,12 @@
+<h2>New recipe</h2>
+
+<% form_for(:recipe, :url => recipes_path) do |f| %>
+
+  <%= render(:partial => 'form')%>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', recipes_path, :class => 'arrow_link' %>

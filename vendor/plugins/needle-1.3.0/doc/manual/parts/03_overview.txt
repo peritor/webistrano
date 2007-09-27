@@ -1,0 +1,19 @@
+The _service locator_ design pattern can be considered a subset of dependency injection. Because it is simpler, it is as good of a place to start teaching DI as any.
+
+To demonstrate both techniques, we'll pretend we're going to write an online forum application. To start, let's come up with a rough design by cataloging the components we'll need.
+
+* @Logger@. This will be used to write messages to a file.
+* @Authenticator@. This will be used to validate whether a user is who they say they are.
+* @Database@. This encapsulates access to the database that will store our forum data.
+* @Session@. This represents a single user's session.
+* @View@. The presentation manager, used to render pages to the user.
+* @Application@. The controller that ties it all together.
+
+(Of course, a _real_ online forum application would be significantly more complex, but the above components will do for our purposes.)
+
+The dependencies between these components are:
+
+* @Authenticator@ _has_ @Database@ (for querying user authentication information) and @Logger@
+* @Database@ _has_ @Logger@ (for indicating database accesses and query times)
+* @Session@ _has_ @Database@ (for storing session information) and @Logger@
+* @Application@ _has_ @Database@, @View@, @Session@, and @Authenticator@, and @Logger@

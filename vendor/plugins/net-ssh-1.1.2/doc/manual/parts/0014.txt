@@ -1,0 +1,32 @@
+There are various callbacks that may be registered on a channel. Registering a callback is as simple as invoking the corresponding method on the channel and giving it a block that should be invoked when the named action occurs. The following table describes each callback and how it is used.
+
+table(list).
+|_. Name |_. Description |
+|=^. @on_close@ | This callback should accept a single parameter: the channel being closed.  It is called immediately after the channel is removed from the connection. The callback should not send any data through the channel, since at this point the channel is no longer connected to the remote host.|
+|=^. @on_confirm_failed@ | This callback should accept four parameters: the channel instance, the reason code, a description of why the confirm failed, and the language code for the message.  It is called immediately after the server has indicated that a channel could not be opened.|
+|=^. @on_confirm_open@ | This callback should accept a single parameter: the channel being opened.  It is called immediately after the server has confirmed that the channel has been opened. This callback is typically set by a block passed to an @#open_channel@ call.|
+|=^. @on_data@ | This callback is invoked when data is received over the channel from the remote server. This data typically corresponds to the remote process's @stdout@ stream. The channel should accept two parameters: the channel itself, and the data being received.|
+|=^. @on_eof@ | This callback is called when the server indicates that no more data will be sent _from the server_ over this channel. Your program is still welcome to send data to the server, but you are guaranteed at this point that your @on_data@ and @on_extended_data@ callbacks will no longer be called for this channel. The callback should accept a single parameter, the channel itself.|
+|=^. @on_extended_data@ | This callback is called when _extended data_ is received from the server. There are (potentially) many _types_ of extended data. The callback should accept three parameters: the channel, an integer indicating the type of the data, and the data itself.  Right now, you can pretty much count on the data type being a "1", which corresponds to the remote process's @stderr@ stream. Other data types are not defined in the SSH specification, but that does not mean some SSH servers won't try to invent their own.|
+|=^. @on_failure@ | When a request is sent over a channel (via the @send_request@ or @send_request_string@ methods), it may either succeed or fail. If it fails, this callback will be invoked. It should take a single parameter: the channel itself.|
+|=^. @on_request@ | When the server sends a "channel request" to the client, this callback will be invoked. Channel requests from the server typically indicate things like the exit status of a process. This callback should take four parameters: the channel, the type of request (as a string, like "exit-status"), a boolean (indicating whether or not the server wants an explicit reply to this request), and the data from the request, which will be a buffer object (see the API documentation for @Net::SSH::Util::ReaderBufferImpl@).|
+|=^. @on_success@ | When a request is sent over a channel (via the @send_request@ or @send_request_string@ methods), it may either succeed or fail. If it succeeds, this callback will be invoked. It should take a single parameter: the channel itself.|
+|=^. @on_window_adjust@ | When the server asks the client to adjust this channel's window size, this callback will be invoked. It should accept two parameters: the channel, and the number of bytes to add the channel's window size.|
+
+In general, you will never need to register callbacks for @on_failure@, @on_request@, @on_success@, or @on_window_adjust@, unless you are needing to implement support for some subservice or piggy-backed protocol (like SFTP).
+
+Following is an example of registering callbacks on a channel:
+
+{{{lang=ruby,caption=Registering callbacks on a channel,number=true
+Net::SSH.start( 'host' ) do |session|
+  session.open_channel do |channel|
+    channel.on_close do |ch|
+      puts "channel closed successfully."
+    end
+    puts "closing channel..."
+    channel.close
+  end
+
+  session.loop
+end
+}}}

@@ -1,0 +1,24 @@
+By default, when you create a namespace in Needle, the namespace is registered as a service. The type of the service is determined by the @:namespace_impl_factory@ service, which (by default) returns the @Needle::Container@ class.
+
+You can specify your own custom implementation for namespaces by registering your own @:namespace_impl_factory@ service. In fact, each namespace can have its own implementation of subnamespaces--just register a @:namespace_impl_factory@ in each one that you want to be specialized.
+
+Here's a contrived example. Suppose you want each namespace to keep track of the precise time that it was created.
+
+{{{lang=ruby,number=true,caption=Custom namespace implementations
+class TimeTrackerNamespace < Needle::Container
+  attr_reader :birth_date
+
+  def initialize( *args )
+    super
+    @birth_date = Time.now
+  end
+end
+
+reg = Needle::Registry.new
+reg.register( :namespace_impl_factory ) { TimeTrackerNamespace }
+
+reg.namespace :hello
+p reg.hello.birth_date
+}}}
+
+In general, you'll be better off having your custom implementation extend @Needle::Container@, although the only _real_ requirement is that your implementation publish the same interface as the default namespace implementation.

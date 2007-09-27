@@ -1,0 +1,485 @@
+<html>
+  <head>
+    <title>Needle Manual :: Chapter 6: Service Models</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Needle&mdash;</span><br />
+            <span class="tagline">to the point --></span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Needle Version: <strong>1.3.0</strong><br />
+            Manual Last Updated: <strong>2005-12-24 15:20 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Needle Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Needle?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">How Can It Help Me?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Alternatives</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Registry
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Creating</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Services</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Namespaces</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Service Locator
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Conventional Architecture</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Locator Pattern</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Dependency Injection
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Setup</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                Interceptors
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Architecture</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Attaching</a></li>
+                
+                  <li><a href="chapter-5.html#s4">Ordering</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Custom</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-6.html">
+                Service Models
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Pipelines</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Models</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Logging
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-7.html#s2">LogFactory</a></li>
+                
+                  <li><a href="chapter-7.html#s3">Configuration</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-8.html">
+                Service Libraries
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-8.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-8.html#s2">Creating Libraries</a></li>
+                
+                  <li><a href="chapter-8.html#s3">Using Libraries</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-9.html">
+                Customizing Needle
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-9.html#s1">Namespaces</a></li>
+                
+                  <li><a href="chapter-9.html#s2">Interceptors</a></li>
+                
+                  <li><a href="chapter-9.html#s3">Contexts</a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://needle.rubyforge.org/api/index.html">Needle API</a></li>
+            <li><a href="http://needle.rubyforge.org/faq.html">Needle FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-5.html">Previous (5. Interceptors)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-7.html">Next (7. Logging)</a>
+  
+</div></div>
+
+<h1>6. Service Models</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       6.1. Overview
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Service models are the mechanism by which a client can specify how the lifestyle of a particular service should be managed. By default, all services are managed as <em>singletons</em>, but it is a simple matter to choose a different behavior when a service is registered.</p>
+
+
+	<p>Underneath, service models are implemented using an <em>instantiation pipeline</em>.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       6.2. Pipelines
+     </h2>
+
+   
+
+   <div class="section">
+     <p>An <em>instantiation pipeline</em> is a sequence of elements, each of which knows how to perform some aspect of the instantiation of a service.</p>
+
+
+	<p>Every service consists of at least one instantiation element&#8212;the block that was given when the service was registered. Other elements may be combined with this block to enforce various aspects of lifestyle management, such as <em>multiplicity</em> (singleton vs. prototype) and <em>laziness</em> (deferred vs. immediate instantiation).</p>
+
+
+	<h3>Standard Pipeline Elements</h3>
+
+
+	<p>There are six standard pipeline elements available in Needle (although you may certainly create your own):</p>
+
+
+	<ul>
+	<li><code>deferred</code>: this will always return a proxy that wraps subsequent pipeline elements, causing the subsequent elements to be executed only when a method is invoked on the proxy (at which point the method is then delegated to the resulting service).</li>
+		<li><code>initialize</code>: this will invoke a method on the resulting service (defaults to <code>initialize_service</code>, though it can be changed). It is used for doing final initialization of services (for services that need it).</li>
+		<li><code>interceptor</code>: this element is used to implement the proxy that wraps the interceptors around the service. It is only attached to the pipeline when an interceptor is attached to a service.</li>
+		<li><code>multiton</code>: this element enforces a multiton guard on the service. This means that the service will only be instantiated once for each unique set of parameters given to the service.</li>
+		<li><code>singleton</code>: this is a multiplicity guard that ensures a service is instantiated only once per process.</li>
+		<li><code>threaded</code>: this is like the <code>singleton</code> element, but it ensures that a service is instantiated no more than once <em>per thread</em>.</li>
+	</ul>
+
+
+	<h3>Priorities</h3>
+
+
+	<p>Just like interceptors, pipeline elements have priorities as well. These priorities determine the order in which the elements are executed in the pipeline.</p>
+
+
+	<p>Each element type has a default priority, although that priority can be overridden when the element is added to the pipeline.</p>
+
+
+	<h3>Custom Pipeline Elements</h3>
+
+
+	<p>Creating new pipeline elements simple. Just create a new class that extends <code>Needle::Pipeline::Element</code>. Set the default pipeline priority (using the <code>#set_default_priority</code> class method), and then implement the <code>#call</code> method (accepting at least two parameters: the container and the service point).</p>
+
+
+	<div class='figure'>
+<span class='caption'>Custom pipeline element example [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">require</span> <span class="punct">'</span><span class="string">needle/pipeline/element</span><span class="punct">'</span>
+
+<span class="keyword">class </span><span class="class">MyPipelineElement</span> <span class="punct">&lt;</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Pipeline</span><span class="punct">::</span><span class="constant">Element</span>
+  <span class="ident">set_default_priority</span> <span class="number">50</span>
+  
+  <span class="keyword">def </span><span class="method">call</span><span class="punct">(</span> <span class="ident">container</span><span class="punct">,</span> <span class="ident">point</span><span class="punct">,</span> <span class="punct">*</span><span class="ident">args</span> <span class="punct">)</span>
+    <span class="punct">...</span>
+    <span class="ident">result</span> <span class="punct">=</span> <span class="ident">succ</span><span class="punct">.</span><span class="ident">call</span><span class="punct">(</span> <span class="ident">container</span><span class="punct">,</span> <span class="ident">point</span><span class="punct">,</span> <span class="punct">*</span><span class="ident">args</span> <span class="punct">)</span>
+    <span class="punct">...</span>
+    <span class="keyword">return</span> <span class="ident">result</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>To invoke the next element of the pipeline, just invoke <code>#succ.call(...)</code>.</p>
+
+
+	<p>If needed, you can also implement <code>#initialize_element</code> (with no arguments), which you may invoke to perform initialization of the element. From there, you can access the options that were given to the element via the <code>#options</code> accessor.</p>
+
+
+	<p>See the implementations of the existing elements in <code>needle/lifecycle</code> for examples.</p>
+
+
+	<h3>Added Pipelines Elements to Services</h3>
+
+
+	<p>You can specify the pipeline elements to use for a service via the <code>:pipeline</code> option. This must refer to an array, each element of which must be either a symbol (in which case it references an element of the <code>:pipeline_elements</code> service), or a class (in which case it must implement the interface required by @Needle::Pipeline::Element).</p>
+
+
+	<div class='figure'>
+<span class='caption'>Adding pipelines to services [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span><span class="punct">,</span> <span class="symbol">:pipeline</span> <span class="punct">=&gt;</span> <span class="punct">[</span> <span class="symbol">:singleton</span><span class="punct">,</span> <span class="constant">MyPipelineElement</span> <span class="punct">]</span> <span class="punct">)</span> <span class="punct">{</span> <span class="punct">...</span> <span class="punct">}</span></pre></div></div></div>
+
+
+	<p>The elements will be sorted based on their priorities, with lower priorities sorting closer to the instantiation block, and higher priorities sorting closer to the client.</p>
+
+
+	<h3>Making Custom Pipeline Elements Available</h3>
+
+
+	<p>You can make your custom pipeline elements available (so they can be referenced by symbol, instead of class name) by adding them to the <code>:pipeline_elements</code> service:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Publishing custom pipeline elements [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">pipeline_elements</span><span class="punct">[</span> <span class="symbol">:my_pipeline_element</span> <span class="punct">]</span> <span class="punct">=</span> <span class="constant">MyPipelineElement</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span><span class="punct">,</span> <span class="symbol">:pipeline</span> <span class="punct">=&gt;</span> <span class="punct">[</span> <span class="symbol">:singleton</span><span class="punct">,</span> <span class="symbol">:my_pipeline_element</span> <span class="punct">]</span> <span class="punct">)</span> <span class="punct">{</span> <span class="punct">...</span> <span class="punct">}</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       6.3. Models
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Specifying an entire pipeline for every service point can be tedious. For that reason, there are <em>service models</em>. A service model is a kind of template that names a pre-configured sequence of pipeline elements. Needle comes preconfigured with many service models.</p>
+
+
+	<h3>Standard Service Models:</h3>
+
+
+	<table class="list">
+		<tr>
+			<th style="text-align:left;">Name</th>
+			<th style="text-align:left;">Pipeline</th>
+			<th style="text-align:left;">Effect</th>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:multiton</code></td>
+			<td style="vertical-align:top;"><code>:multiton</code></td>
+			<td>The returned value will be unique for each unique parameter set given to the service.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:multiton_deferred</code></td>
+			<td style="vertical-align:top;"><code>:multiton</code>, <code>:deferred</code></td>
+			<td>As <code>:multiton</code>, but a proxy is returned, deferring the instantiation of the service itself until a method is invoked on it.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:multiton_initialize</code></td>
+			<td style="vertical-align:top;"><code>:multiton</code>, <code>:initialize</code></td>
+			<td>As <code>:multiton</code>, but invoke an initialization method on every service instance as soon as they are created.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:multiton_deferred_initialize</code></td>
+			<td style="vertical-align:top;"><code>:multiton</code>, <code>:deferred</code>, <code>:initialize</code></td>
+			<td>As <code>:multiton</code>, but a proxy is returned, deferring the instantiation of the service itself until a method is invoked on it. When the service is instantiated, an initialization method will be invoked on it.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:prototype</code></td>
+			<td style="vertical-align:top;">(empty)</td>
+			<td>Immediately instantiate the service, at every request.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:prorotype_deferred</code></td>
+			<td style="vertical-align:top;"><code>:deferred</code></td>
+			<td>Return a proxy, that will instantiate the service the first time a method is invoked on the proxy. A new proxy instance will be returned for each request.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:prototype_initialize</code></td>
+			<td style="vertical-align:top;"><code>:initialize</code></td>
+			<td>Immediately instantiate the service, and invoke an initialization method, at every request.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:prototype_deferred_initialize</code></td>
+			<td style="vertical-align:top;"><code>:deferred</code>, <code>:initialize</code></td>
+			<td>Return a proxy, that will instantiate the service and invoke an initialization method the first time a method is invoked on the proxy. A new proxy instance will be returned for each request.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:singleton</code></td>
+			<td style="vertical-align:top;"><code>:singleton</code></td>
+			<td>Immediately instantiate the service the first time it is requested, returning a cached instance subsequently.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:singleton_deferred</code></td>
+			<td style="vertical-align:top;"><code>:singleton</code>, <code>:deferred</code></td>
+			<td>Return a proxy that will instantiate the service the first time a method is requested on the proxy. Subsequent requests for this service will return the same proxy instance.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:singleton_initialize</code></td>
+			<td style="vertical-align:top;"><code>:singleton</code>, <code>:initialize</code></td>
+			<td>Immediately instantiate a service and invoke an initialization method on it. Subsequent requests for this service will return a cached instance.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:singleton_deferred_initialize</code></td>
+			<td style="vertical-align:top;"><code>:singleton</code>, <code>:deferred</code>, <code>:initialize</code></td>
+			<td>Return a proxy that will instantiate the service and invoke an initialization method on it the first time a method is requested on the proxy. Subsequent requests for this service will return the same proxy instance.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:threaded</code></td>
+			<td style="vertical-align:top;"><code>:threaded</code></td>
+			<td>Immediately instantiate the service the first time it is requested from the current thread, returning a cached instance for every subsequent request from the same thread.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:threaded_deferred</code></td>
+			<td style="vertical-align:top;"><code>:threaded</code>, <code>:deferred</code></td>
+			<td>Return a proxy object that will instantiate the service the first time a method is invoked on the proxy. Subsequent requests for this service from a given thread will return the thread&#8217;s cached instance.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:threaded_initialize</code></td>
+			<td style="vertical-align:top;"><code>:threaded</code>, <code>:initialize</code></td>
+			<td>Immediately instantiate the service the first time it is requested from the current thread and invoke an initialization method on it. Subsequent requests for this service from the same thread will return the cached instance.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:threaded_deferred_initialize</code></td>
+			<td style="vertical-align:top;"><code>:threaded</code>, <code>:deferred</code>, <code>:initialize</code></td>
+			<td>Return a proxy object that will instantiate the service and invoke an initialization method on it the first time a method is invoked on the proxy. Subsequent requests for this service from a given thread will return the thread&#8217;s cached instance.</td>
+		</tr>
+	</table>
+
+
+
+
+	<h3>Specifying a Service Model</h3>
+
+
+	<p>You specify the service model by passing the <code>:model</code> option when you register a service. (You must only specify <em>either</em> the model, <em>or</em> the pipeline, but not both.)</p>
+
+
+	<div class='figure'>
+<span class='caption'>Specifying a service model [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span><span class="punct">,</span> <span class="symbol">:model</span> <span class="punct">=&gt;</span> <span class="symbol">:singleton_deferred</span> <span class="punct">)</span> <span class="punct">{...}</span></pre></div></div></div>
+
+
+	<h3>Defining New Models</h3>
+
+
+	<p>You can create your own service models by adding the corresponding pipelines to the <code>:service_models</code> service:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Defining a custom model [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">service_models</span><span class="punct">[</span> <span class="symbol">:my_service_model</span> <span class="punct">]</span> <span class="punct">=</span> <span class="punct">[</span> <span class="symbol">:singleton</span><span class="punct">,</span> <span class="symbol">:my_pipeline_element</span> <span class="punct">]</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span><span class="punct">,</span> <span class="symbol">:model</span> <span class="punct">=&gt;</span> <span class="symbol">:my_service_model</span> <span class="punct">)</span> <span class="punct">{...}</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-5.html">Previous (5. Interceptors)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-7.html">Next (7. Logging)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<h2>Project: <%=h @project.name %></h2>
+
+<div class="special_box stages_box">
+  <% if @project.stages.count > 0 %>
+    <p><strong>Choose a stage:</strong></p>
+    <% for stage in @project.stages %>
+        <p><%= link_to h(stage.name), project_stage_path(@project, stage), :class => 'arrow_link'  %></p>
+    <% end %>
+  <% else %>  
+    <p><strong>No stage configured yet</strong></p>
+    <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
+  <% end %>
+</div>
+
+<div style="float: left; width:380px;">
+  <div class="box_top_left">
+    <div class="box_top_right">
+  	  <div class="box_top">
+	  </div>
+    </div>
+  </div>
+  <div class="box_body" style="min-height: 123px;">
+    <div>
+		<p>
+		<b>Description:</b>
+		  <%=h @project.description %>
+		</p>
+		<p>
+		  <b>Project Type:</b>
+		  <%=h @project.template %>
+		</p>
+		<p>
+	    <b>#Deployments:</b>
+		  <%=h @project.deployments.count %>
+		</p><br />
+		<%= link_to 'Edit Project', edit_project_path(@project), :class => 'arrow_link' %> | 
+		<%= link_to 'Delete', project_path(@project), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
+	</div>	
+  </div>
+  <div class="box_bottom_left">
+    <div class="box_bottom_right">
+      <div class="box_bottom">  
+  	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>
+<br>
+
+<fieldset class="fieldset">
+  <legend>Stages</legend>
+  <%= render(:partial => 'stages')%>
+  <br />
+  <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
+</fieldset>
+
+<br /><br />
+
+<fieldset class="fieldset">
+  <legend>Project configuration</legend>
+  <%= render(:partial => 'configs')%>
+  <br />
+  <%= link_to 'New configuration', new_project_project_configuration_path(@project), :class => 'arrow_link' %>
+</fieldset>

@@ -1,0 +1,17 @@
+<h2>Editing host: <%=h @host.name %></h2>
+
+<% flashed_errors(:host) %>
+
+<% form_for(:host, :url => host_path(@host), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>Name (DNS name or IP address)</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', host_path(@host), :class => 'arrow_link'  %> |
+<%= link_to 'Back', hosts_path, :class => 'arrow_link'  %>

@@ -1,0 +1,27 @@
+<% flashed_errors(:user) %>
+<p>
+  <b>Login</b><br />
+  <%= text_field 'user', 'login', :style =>'width:330px;' %>
+</p>
+
+<p>
+  <b>Email</b><br />
+  <%= text_field 'user', 'email', :style =>'width:330px;' %>
+</p>
+
+<p>
+  <b>Password</b><br />
+  <%= password_field 'user', 'password', :style =>'width:330px;' %>
+</p>
+
+<p>
+  <b>Password confirmation</b><br />
+  <%= password_field 'user', 'password_confirmation', :style =>'width:330px;' %>
+</p>
+
+<% if logged_in? && current_user.admin? -%>
+  <p>
+    <b>Admin?</b><br />
+    <%= check_box 'user', 'admin' %>
+  </p>
+<% end -%>

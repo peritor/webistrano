@@ -1,0 +1,75 @@
+<% flashed_errors(:role) %>
+<p>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="2">
+        <b>Role</b><br />
+	  </td>
+      <td >
+        <b>Custom Role</b><br />
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+        <%= select('role', 'name', Role::DEFAULT_NAMES, { :include_blank => true }, {:style => 'width:250px;'}) %>
+      </td>
+      <td  style="padding:0px;">&nbsp;<b>or</b>&nbsp;</td>
+      <td valign="bottom">
+		<%= text_field 'role', 'custom_name', :style =>'width:250px;' %>
+      </td>
+    </tr>
+  </table><br>
+</p>
+<p>
+  <b>Host</b><br />
+  <span class="<%= @role.errors.on('host') ? 'fieldWithErrors' : '' %>">
+  <%= select('role', 'host_id', @host_choices, { :include_blank => true }, {:style => 'width:250px;'}) %>
+  </span>
+</p>
+<p>
+  <b>Custom SSH Port</b> (leave blank for default)<br />
+  <%= text_field 'role', 'ssh_port', :style =>'width:50px;' %>
+</p>
+<p>
+  <b>Primary</b> (tick this for the DB master)<br />
+  <%= check_box 'role', 'primary', :style =>'' %>
+</p>
+<p>
+  <b>No release</b> (tick this if you do not wand any checkouts on this host)<br />
+  <%= check_box 'role', 'no_release', :style =>'' %>
+</p>
+
+<% content_for(:page_scripts) do %>
+  <script type="text/javascript">
+  
+    Event.observe(window, 'load', function(){
+      role_name();
+      Event.observe('role_name', 'change', role_name);
+      Event.observe('role_custom_name', 'change', role_custom_name);
+    });
+
+  
+    function role_name(){
+      var name = $('role_name');
+      var custom_name = $('role_custom_name');
+      
+      if(name.value != ''){
+        custom_name.disable();
+      } else {
+        custom_name.enable();
+      }
+    }
+    
+    function role_custom_name(){
+      var name = $('role_name');
+      var custom_name = $('role_custom_name');
+      
+      if(custom_name.value != ''){
+        name.disable();
+      } else {
+        name.enable();
+      }
+    }
+  
+  </script>
+<% end %>

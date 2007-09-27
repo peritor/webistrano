@@ -1,0 +1,14 @@
+<h2>New configuration for <%= current_stage_project_description %></h2>
+
+<% flashed_errors(:configuration) %>
+
+<% form_for(:configuration, :url => project_stage_stage_configurations_path(@project, @stage)) do |f| %>
+  
+  <%= render(:partial => 'project_configurations/form')%>
+  <br/>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', project_stage_path(@project, @stage), :class => 'arrow_link' %>

@@ -1,0 +1,12 @@
+Needle is not the only fish in the dependency-injection pond, even when it comes to Ruby. Other containers at your disposal include:
+
+* "Copland":http://copland.rubyforge.org. Copland aims to be an "application framework", taking something of a heavy-weight approach to DI. In so doing, it provides functionality that Needle does not, but at the cost of performance. It also uses external (YAML) configuration files. It is inspired by a Java framework ("HiveMind":http://jakarta.apache.org/hivemind), and so has a vaguely Java-ish flavor to it.
+* "Rico":http://www.picocontainer.org/Rico. Rico is another project inspired by a Java project ("PicoContainer":http://www.picocontainer.org). It is very lean, and appears to be experimental.
+* "Tudura":http://sourceforge.jp/projects/nihohi/. I do not have any information on this project, as the information is all in Japanese. If someone with more information about Tudura would like to step forward, I'd be happy to post a summary here.
+* "MinDI":http://redshift.sourceforge.net/mindi/ is a recent contender that takes a very novel approach to dependency injection. Instead of instantiating a container and adding services to it, you declare a class, mixin a DI module, and add services to the class as methods, thereby making the class the container.
+
+There is, at the time of this writing, at least one other project on RubyForge devoted to DI ("Pith":http://rubyforge.org/projects/pith), although it has no public releases yet.
+
+So, which one should you choose? It comes down to an issue of personal preference, mostly, but also one of what you are wanting to accomplish. Needle excels at providing an unobtrusive, light-weight container for managing your dependencies. The cost of it being light-weight is that there is functionality it does not provide, which other containers may. If you really need that missing functionality, you are required to either implement it yourself, or select a different container.
+
+For most tasks, I think you'll find Needle more than sufficient.

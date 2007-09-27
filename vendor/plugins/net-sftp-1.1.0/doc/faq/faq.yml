@@ -1,0 +1,183 @@
+---
+- "What is Net::SFTP?": |
+    Net::SFTP is a pure-Ruby implementation of the SFTP protocol. That's
+    "SFTP" as in "Secure File Transfer Protocol", as defined as an adjuct to the
+    SSH specification. _Not_ "SFTP" as in "Secure FTP" (a _completely_ different
+    beast). Nor is it an implementation of the "Simple File Transfer Protocol"
+    (which is in no way secure).
+
+- "How do I...":
+  - "...connect to an SFTP server?":
+    - "I'd like to connect without first getting a Net::SSH connection...": |
+        Something like this:
+
+        <code><pre>
+          require 'net/sftp'
+
+          Net::SFTP.start(host, user, password) do |sftp|
+            ...
+          end
+        </pre></code>
+
+        @Net::SFTP.start@ accepts the same parameters as @Net::SSH.start@,
+        so I'll direct you to that documentation for all the particulars.
+
+    - "I already have an open Net::SSH connection...": |
+        You can piggy-back an SFTP connection on an existing Net::SSH
+        connection, which can be useful if you've already got an SSH
+        connection that you're using for port forwarding or whatever.
+
+        <code><pre>
+          require 'net/ssh'
+          require 'net/sftp'
+
+          Net::SSH.start(host, user, password) do |ssh|
+            ...
+            ssh.sftp.connect do |sftp|
+              ...
+            end
+            ...
+          end
+        </pre></code>
+
+  - "...upload data?":
+    - "I want to upload an entire file on disk...": |
+        Assuming you already have an SFTP connection:
+
+        <code><pre>
+          sftp.put_file "/path/to/local.file", "/path/to/remote.file"
+        </pre></code>
+
+    - "I want to upload bytes from a string or other object...": |
+        Assuming you already have an SFTP connection, and your data is stored
+        in a string named @data@:
+
+        <code><pre>
+          sftp.open_handle("/path/to/remote.file", "w") do |handle|
+            result = sftp.write(handle, data)
+            puts result.code # the result of the operation
+          end
+        </pre></code>
+
+        If (for whatever reason) you'd rather not use blocks, you can do
+        without, but be sure to call @close_handle@ when you're done:
+
+        <code><pre>
+          handle = sftp.open_handle("/path/to/remote.file", "w")
+          result = sftp.write(handle, data)
+          puts result.code # the result of the operation
+          sftp.close_handle(handle)
+        </pre></code>
+
+  - "...download data?":
+    - "I want to download directly to a local file...": |
+        Assuming you already have an SFTP connection:
+
+        <code><pre>
+          sftp.get_file "/path/to/remote.file", "/path/to/local.file"
+        </pre></code>
+
+    - "I want to download to a string in memory...": |
+        Assuming you already have an SFTP connection:
+
+        <code><pre>
+          data = nil
+          sftp.open_handle("/path/to/remote.file") do |handle|
+            data = sftp.read(handle)
+          end
+        </pre></code>
+
+    - "I want to be notified of the progress of the download...": |
+        You can specify both a "chunk size" and a "progress callback". The
+        callback will be invoked for every "chunk size" bytes that are
+        received:
+
+        <code><pre>
+          sftp.open_handle("/path/to/remote.file") do |handle|
+            begin
+              STDOUT.sync = true
+              data = sftp.read(handle, :chunk_size => 4096,
+                :progress_callback => lambda { |data| print "." })
+              puts
+            ensure
+              STDOUT.sync = false
+            end
+          end
+        </pre></code>
+
+  - "...manage file permissions?":
+      - "I want to query a file's permissions...": |
+          File permissions are one of the @stat@ attributes of files and
+          directories:
+
+          <code><pre>
+            p sftp.stat("/path/to/remote.file").permissions
+          </pre></code>
+
+      - "I want to change a file's permissions...": |
+          Just use @setstat@ to change the permissions of an existing file: 
+
+          <code><pre>
+            sftp.setstat("/path/to/remote.file", :permissions => 0644)
+          </pre></code>
+
+      - "I already have an open handle for the remote file...": |
+          If you have a handle for the remote file, you can use @fstat@ and
+          @fsetstat@ to query and set the permissions:
+
+          <code><pre>
+            sftp.open_handle("/path/to/remote.file") do |handle|
+              permissions = sftp.fstat(handle)
+              sftp.fsetstat(handle, :permissions => permissions | 0444)
+            end
+          </pre></code>
+
+  - "...manage directories?":
+    - "I want to query the contents of a directory...": |
+        You query the contents of a directory by calling @opendir@ to obtain
+        a handle to the directory, and then using @readdir@ on the handle to
+        obtain a list of directory entries. Be sure to close the handle when
+        you're done:
+
+        <code><pre>
+          handle = sftp.opendir("/usr/lib")
+          items = sftp.readdir(handle)
+          items.each do |item|
+            puts item.filename
+            puts item.longname
+            p item.attributes # permissions, atime, etc.
+          end
+          sftp.close_handle(handle)
+        </pre></code>
+
+    - "I want to create a directory...": |
+        Use @mkdir@:
+
+        <code><pre>
+          sftp.mkdir("/path/to/remote/dir", :permissions => 0500)
+        </pre></code>
+
+    - "I want to remove a directory...": |
+        Use @rmdir@:
+
+        <code><pre>
+          sftp.rmdir("/path/to/remote/dir")
+        </pre></code>
+
+  - "...delete a file?": |
+      Use @remove@:
+
+      <code><pre>
+        sftp.remove("/path/to/remote.file")
+      </pre></code>
+
+  - "...rename a file?": |
+      Use @rename@:
+
+      <code><pre>
+        sftp.rename("/path/to/remote.file", "/path/to/new.file")
+      </pre></code>
+
+      It should be noted that @rename@ is only supported by version 2 or
+      later of the SFTP protocol, so if you're using an older SFTP server you
+      might not be able to use this operation.

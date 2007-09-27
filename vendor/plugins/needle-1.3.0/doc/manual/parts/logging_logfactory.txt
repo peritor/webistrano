@@ -1,0 +1,39 @@
+The LogFactory is available as a service, so that any component that needs a logger instance can gain easy access to one. The factory's service name is @:logs@.
+
+{{{lang=ruby,caption=Accessing the LogFactory service
+factory = reg.logs
+}}}
+
+You obtain logger instances from the factory by passing a logger name to @#get@:
+
+{{{lang=ruby,caption=Getting a named logger instance
+logger = reg.logs.get "a logger name"
+}}}
+
+Subsequent calls to @#get@ will return the same logger instance for the given logger name.
+
+h3. Loggers for Services
+
+Typically, you'll use this to assign a logger instance to a service when it is constructed. In that case, the name of the logger is the fully-qualified name of the service:
+
+{{{lang=ruby,number=true,caption=Getting a logger for a service
+reg.register( :foo ) do |c,p|
+  Foo.new( c.logs.get( p.fullname ) )
+end
+}}}
+
+As a convenience, if the value passed to @#get@ responds to either @fullname@ or @name@, the return value of that message will be used as the name. Thus, you can do the following:
+
+{{{lang=ruby,number=true,caption=Getting a logger for a service (simplified)
+reg.register( :foo ) do |c,p|
+  Foo.new( c.logs.get( p ) )
+end
+}}}
+
+As a further convenience, there is a @:log_for@ service that is parameterized. Just pass the name of the log to retreive (or the service point instance) and it will return the log handle directly:
+
+{{{lang=ruby,number=true,caption=Getting a logger for a service (simplified further)
+reg.register( :foo ) do |c,p|
+  Foo.new( c.log_for( p ) )
+end
+}}}

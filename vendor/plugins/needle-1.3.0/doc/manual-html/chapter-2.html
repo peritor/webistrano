@@ -1,0 +1,538 @@
+<html>
+  <head>
+    <title>Needle Manual :: Chapter 2: Registry</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Needle&mdash;</span><br />
+            <span class="tagline">to the point --></span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Needle Version: <strong>1.3.0</strong><br />
+            Manual Last Updated: <strong>2005-12-24 15:20 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Needle Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Needle?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">How Can It Help Me?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Alternatives</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-2.html">
+                Registry
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Creating</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Services</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Namespaces</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Service Locator
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Conventional Architecture</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Locator Pattern</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Dependency Injection
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Setup</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                Interceptors
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Architecture</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Attaching</a></li>
+                
+                  <li><a href="chapter-5.html#s4">Ordering</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Custom</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Service Models
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Pipelines</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Models</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Logging
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-7.html#s2">LogFactory</a></li>
+                
+                  <li><a href="chapter-7.html#s3">Configuration</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-8.html">
+                Service Libraries
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-8.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-8.html#s2">Creating Libraries</a></li>
+                
+                  <li><a href="chapter-8.html#s3">Using Libraries</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-9.html">
+                Customizing Needle
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-9.html#s1">Namespaces</a></li>
+                
+                  <li><a href="chapter-9.html#s2">Interceptors</a></li>
+                
+                  <li><a href="chapter-9.html#s3">Contexts</a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://needle.rubyforge.org/api/index.html">Needle API</a></li>
+            <li><a href="http://needle.rubyforge.org/faq.html">Needle FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-1.html">Previous (1. Introduction)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-3.html">Next (3. Service Locator)</a>
+  
+</div></div>
+
+<h1>2. Registry</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       2.1. Overview
+     </h2>
+
+   
+
+   <div class="section">
+     <p>The registry is at the heart of any dependency-injected application or library. All services are registered with the registry, so that when an application needs an instance of a particular service, it may obtain that service reference by querying the registry.</p>
+
+
+	<p>In order to use Needle, you only really <em>need</em> to understand how to create and manipulate registry objects.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       2.2. Creating
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Creating a registry is as simple as calling <code>Needle::Registry.new</code>. This will give you a new registry object, bootstrapped to contain a few general services.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Creating a registry [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">require</span> <span class="punct">'</span><span class="string">needle</span><span class="punct">'</span>
+
+<span class="ident">registry</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">new</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Once you have the reference to the registry, you can register services with it, create new namespaces in it, and so forth.</p>
+
+
+	<p>Alternatively, you can pass a block to <code>#new</code>:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Creating a registry with a block [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">new</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">r</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>The parameter to the block will be a reference to the registry. This allows you to register services with the registry as soon as it is created.</p>
+
+
+	<p>Another convenience method is <code>#define!</code>:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Creating a registry with #define! [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">define!</span> <span class="keyword">do</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>This block accepts no parameters, and evaluates the block as if it were passed to <code>Registry#define!</code> (see below).</p>
+
+
+	<p>There can be problems with using <code>define!</code>, however, since it uses <code>instance_eval</code> to evaluate the block within the context of another object. If you find yourself running into scoping issues, you might want to consider using <code>#define</code>:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Creating a registry with #define [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">define</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">b</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>This block accepts a single parameter&#8212;a &#8220;builder&#8221; object to aid in registering services&#8212;and evaluates the block as if it were passed to <code>Registry#define</code> (see below).</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       2.3. Services
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Registering services with a Needle registry is very straightforward. The simplest way to do it is:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Registering services [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span></pre></div></div></div>
+
+
+	<p>The above will register a new service with the registry, naming it <code>:foo</code>. When <code>:foo</code> is requested from the registry, a new instance of <code>Bar</code> will be instantiated and returned.</p>
+
+
+	<p>You get services from the registry in either of two ways:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Accessing services [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="comment"># Treating the registry as a Hash</span>
+<span class="ident">svc</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">[</span><span class="symbol">:foo</span><span class="punct">]</span>
+
+<span class="comment"># Treating the service as a property of the registry</span>
+<span class="ident">svc</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">.</span><span class="ident">foo</span></pre></div></td></tr></table></div></div>
+
+
+	<h3>Convenience Methods</h3>
+
+
+	<p>Because you will often need to register many services with a registry at once, two convenience methods have been provided to make this use case lean and mean.</p>
+
+
+	<p>The first is <code>define</code>. Just pass a block to define that accepts one parameter. This parameter will be a &#8220;builder&#8221; object that allows you to define services just by sending them as messages to the builder:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Defining services [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">define</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">b</span><span class="punct">|</span>
+  <span class="ident">b</span><span class="punct">.</span><span class="ident">foo</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="ident">b</span><span class="punct">.</span><span class="ident">bar</span> <span class="punct">{</span> <span class="constant">Foo</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Alternative, you can call <code>define!</code>, passing a block that accepts no parameters. This block will be evaluated in the &#8220;builder&#8221; object&#8217;s context, with any unrecognized method call being interpreted as a new service registration of that name:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Defining services via #define! [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">define!</span> <span class="keyword">do</span>
+  <span class="ident">foo</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="ident">bar</span> <span class="punct">{</span> <span class="constant">Foo</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Both of the above will register two new services with the registry, <code>:foo</code> and <code>:bar</code>.</p>
+
+
+	<h3>Default Lifestyle</h3>
+
+
+	<p>By default, a service is only instantiated once per registry. This means that (using the above example) if the service <code>:foo</code> were queried twice, the registry would return the same object for both queries:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Demonstrating singleton service behavior [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">svc1</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">.</span><span class="ident">foo</span>
+<span class="ident">svc2</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">.</span><span class="ident">foo</span>
+
+<span class="ident">p</span> <span class="ident">svc1</span><span class="punct">.</span><span class="ident">object_id</span> <span class="punct">==</span> <span class="ident">svc2</span><span class="punct">.</span><span class="ident">object_id</span> <span class="comment">#=&gt; true</span></pre></div></td></tr></table></div></div>
+
+
+	<p>You can change this behavior, with <em>service models</em>. See the chapter on Service Models for more information.</p>
+
+
+	<h3>Parameterized Services</h3>
+
+
+	<p>Needle also supports <em>parameterized services</em>. These are services that, when requested, require contextual information to be passed as a parameter so that the service can be correctly initialized.</p>
+
+
+	<p>Consider the following example, in which some hypothetical <code>Printer</code> class represents any of a number of printers, based on a parameter given to its constructor.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Parameterized services [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:printer</span><span class="punct">,</span> <span class="symbol">:model</span> <span class="punct">=&gt;</span> <span class="symbol">:multiton</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">c</span><span class="punct">,</span><span class="ident">p</span><span class="punct">,</span><span class="ident">name</span><span class="punct">|</span>
+  <span class="constant">Printer</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span> <span class="ident">c</span><span class="punct">.</span><span class="ident">log_for</span><span class="punct">(</span> <span class="ident">p</span> <span class="punct">),</span> <span class="ident">name</span> <span class="punct">)</span>
+<span class="keyword">end</span>
+
+<span class="ident">mono</span>  <span class="punct">=</span> <span class="ident">registry</span><span class="punct">.</span><span class="ident">printer</span><span class="punct">(</span> <span class="symbol">:monochrome</span> <span class="punct">)</span>
+<span class="ident">color</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">.</span><span class="ident">printer</span><span class="punct">(</span> <span class="symbol">:color</span> <span class="punct">)</span></pre></div></td></tr></table></div></div>
+
+
+	<p>There are a few things to note about the above example:</p>
+
+
+	<ol>
+	<li>The <code>:multiton</code> model is explicitly requested. This is necessary because the default service model (<code>:singleton</code>) does not allow parameterized services. Most of the time, you&#8217;ll use the multiton service model with parameterized services, but you don&#8217;t have to. You could also use any of the prototype models as well.</li>
+	</ol>
+
+
+	<ol>
+	<li>The constructor block for the <code>:printer</code> service takes three parameters, <code>c</code>, <code>p</code>, and <code>name</code>. The first two parameters, <code>c</code> and <code>p</code>, represent the container and the service point, respectively. Any parameters after those two are the contextual parameters given when the service is requested. In this case, there is only one contextual parameter: the name of the printer.</li>
+	</ol>
+
+
+	<ol>
+	<li>Notice the first parameter to the Printer constructor: <code>c.log_for(p)</code>. This is itself invoking a parameterized service, named <code>:log_for</code>, and passing <code>p</code> as the contextual information. This will return a new logger handle for the service point <code>p</code> (i.e., the current service point).</li>
+	</ol>
+
+
+	<ol>
+	<li>See how the printer service is requested on the last two lines. In this case, the <code>#printer</code> message is sent to the registry with a single parameter. You can also request the service in two other ways:</li>
+	</ol>
+
+
+	<div class='figure'>
+<span class='caption'>Accessing parameterized services [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">dot_matrix</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">[</span> <span class="symbol">:printer</span><span class="punct">,</span> <span class="symbol">:dot_matrix</span> <span class="punct">]</span>
+<span class="ident">ink_jet</span>    <span class="punct">=</span> <span class="ident">registry</span><span class="punct">.</span><span class="ident">get</span><span class="punct">(</span> <span class="symbol">:printer</span><span class="punct">,</span> <span class="symbol">:ink_jet</span> <span class="punct">)</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Choose the style that works best for you.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s4"></a>
+       2.4. Namespaces
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Namespaces allow you to organize your services. The feature has many different applications, including:</p>
+
+
+	<ol>
+	<li>Third-parties may distribute Needle-enabled libraries without worrying about their choice of service names conflicting with the service names of their clients.</li>
+		<li>Developers may organize complex applications into modules, and the service definitions may be stored in the registry to reflect that organization.</li>
+		<li>Services deeper in the hierarchy may override services higher up.</li>
+	</ol>
+
+
+	<p>Creating a namespace is as easy as invoking the <code>#namespace</code> method of the registry (or of another namespace):</p>
+
+
+	<div class='figure'>
+<span class='caption'>Creating a namespace [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">namespace</span> <span class="symbol">:stuff</span></pre></div></div></div>
+
+
+	<p>This would create a new namespace in the registry called <code>:stuff</code>. The application may then proceed to register services inside that namespace:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Registering services in a namespace [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">stuff</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+<span class="punct">...</span>
+<span class="ident">svc</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">.</span><span class="ident">stuff</span><span class="punct">.</span><span class="ident">foo</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Here&#8217;s a tip: <em>namespaces are just a special kind of service.</em> This means that you can access namespaces in the same ways that you can access services:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Accessing a namespace [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">svc</span> <span class="punct">=</span> <span class="ident">registry</span><span class="punct">[</span><span class="symbol">:stuff</span><span class="punct">][</span><span class="symbol">:foo</span><span class="punct">]</span></pre></div></div></div>
+
+
+	<h3>Convenience Methods</h3>
+
+
+	<p>Because it is often the case that you will be creating a namespace and then immediately registering services on it, you can pass a block to <code>namespace</code>. The block will receive a reference to the new namespace:</p>
+
+
+	<div class='figure'>
+<span class='caption'>More registering services in a namespace [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">namespace</span> <span class="symbol">:stuff</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">spc</span><span class="punct">|</span>
+  <span class="ident">spc</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>If you prefer the <code>define</code> approach to registering services, you may like <code>namespace_define</code>, which creates the new namespace and immediately calls <code>define</code> on it:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Creating namespaces with #namespace_define [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">namespace_define</span> <span class="symbol">:stuff</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">b</span><span class="punct">|</span>
+  <span class="ident">b</span><span class="punct">.</span><span class="ident">foo</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>And, to mirror the <code>namespace_define</code> method, there is also a <code>namespace_define!</code> method. This method creates a new namespace and then does a <code>define!</code> call on that namespace.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Creating namespaces with #namespace_define! [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">namespace_define!</span> <span class="symbol">:stuff</span> <span class="keyword">do</span>
+  <span class="ident">foo</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>The above code would create a new namespace called <code>:stuff</code> in the registry, and would then proceed to register a service called <code>:foo</code> in the new namespace.</p>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-1.html">Previous (1. Introduction)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-3.html">Next (3. Service Locator)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

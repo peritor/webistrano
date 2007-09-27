@@ -1,0 +1,5 @@
+Interceptors are objects (or blocks) that sit between a client and a service and _intercept_ messages (methods) sent to the service. Each service may have many such interceptors. When control is passed to an interceptor, it may then do something before and after passing control to the next interceptor, possibly even returning instead of passing control. This allows for some simple AOP(Aspect-Oriented Programming)-like hooks to be placed on your services.
+
+Needle comes with one interceptor, the LoggingInterceptor. This allows you to easily trace the execution of your services by logging method entry and exit, as well as any exceptions that are raised.
+
+You can, of course, implement your own interceptors as well.

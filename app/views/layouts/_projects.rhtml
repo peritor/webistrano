@@ -1,0 +1,39 @@
+<div id="projects_open_content" style="<%=h show_if_opened(status) %>">
+  <% if Project.count > 0 %>
+    <% for project in Project.find(:all, :order => "name ASC") %>
+      <a href="<%= project_path(project) %>" class="menu_link <%=h active_link_class(project) %>">
+		    <div class="menu_icons">
+		  
+		  <%= image_tag('peritor_theme/arrow_menu_right.gif', :width => '20', :height => '20', :border => '0', :style => "#{h( do_not_show_stages_of_project(project))}", :id => "#{h(dom_id(project))}_arrow_right", :onclick => "open_menu('#{h( dom_id(project))}'); return false;" )%>
+		  
+		  <%= image_tag('peritor_theme/arrow_menu_down.gif', :width => '20', :height => '20', :border => '0', :style => "#{h( show_stages_of_project(project))}", :id => "#{h(dom_id(project))}_arrow_down", :onclick => "close_menu('#{h( dom_id(project))}'); return false;" )%></div>
+		    <div class="menu_link_title has_submenu">
+		      <%=h project.name %>
+		    </div>
+      </a>
+      <div id="<%=h dom_id(project) %>_stages" style="<%=h show_stages_of_project(project) %>">
+	    <% if project.stages.count > 0 %>
+        <% for stage in project.stages %>
+          <a href="<%= project_stage_path(project, stage) %>" class="menu_link <%=h active_link_class(stage) %>">
+	          <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px"><%=h stage.name %></div>
+			    </a>
+        <% end %>
+		<% else %>
+      <a href="<%= new_project_stage_path(project) %>" class="menu_link menu_link_new">
+	      <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px">New stage</div>
+	    </a>
+		<% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="menu_item">No project created yet</div>
+   <a href="<%= new_project_path %>" class="menu_link  menu_link_create">New project</a>
+  <% end %>
+</div>
+<div id="projects_closed_content" style="<%=h show_if_closed(status) %>">
+  <a href="javascript:open_menu_box('projects')" class="menu_link  menu_link_create">
+	  <div class="menu_link_title">
+	    <%=h pluralize(Project.count, 'project')%>
+	  </div>
+  </a>
+</div>

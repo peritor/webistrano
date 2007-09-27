@@ -1,0 +1,12 @@
+<h2>Editing user: <%= user_info(@user)%></h2>
+
+<% form_for(:user, :url => user_path(@user), :html => { :method => :put }) do |f| %>
+  
+  <%= render(:partial => 'form')%>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', user_path(@user), :class => 'arrow_link' %>

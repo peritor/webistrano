@@ -1,0 +1,10 @@
+
+1.1
+
+* Multiple UI fixes and enhancements
+
+* Moved recipes from project level to stage level. So multiple stages can share recipes. 
+
+* Updated included net-ssh to 1.1.2
+
+1.0

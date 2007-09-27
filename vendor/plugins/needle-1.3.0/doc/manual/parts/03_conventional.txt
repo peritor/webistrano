@@ -1,0 +1,29 @@
+A conventional architecture will have each component instantiate its own dependencies. For example, the @Application@ would do something like this:
+
+{{{lang=ruby,number=true,caption=A conventional application implementation
+class Application
+  def initialize
+    @logger = Logger.new
+    @authenticator = Authenticator.new
+    @database = Database.new
+    @view = View.new
+    @session = Session.new
+  end
+end
+}}}
+
+However, the above is already flawed, because the @Authenticator@ and the @Session@ both need access to the @Database@, so you really need to make sure you instantiate things in the right order and pass them as parameters to the constructor of each object that needs them, like so:
+
+{{{lang=ruby,number=true,caption=A parameterized application implementation
+class Application
+  def initialize
+    @view = View.new
+    @logger = Logger.new
+    @database = Database.new( @logger )
+    @authenticator = Authenticator.new( @logger, @database )
+    @session = Session.new( @logger, @database )
+  end
+end
+}}}
+
+The problem with this is that if you later decide that @View@ needs to access the database, you need to rearrange the order of how things are instantiated in the @Application@ constructor.

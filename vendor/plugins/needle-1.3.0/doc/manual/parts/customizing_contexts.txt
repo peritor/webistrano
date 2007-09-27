@@ -1,0 +1,24 @@
+A _definition context_ is used when registering services using any of the @#define@ interfaces. For example, @Container#define@ yields an instance of a definition context to the given block, and @Container#define!@ uses the block in an @instance_eval@ on a definition context.
+
+The default implementation used for definition contexts is defined by the @:definition_context_factory@ service. By default, this service returns @Needle::DefinitionContext@, but you can specify your own definition context implementations by overriding this service. In fact, each namespace could have its own definition context implementation, if needed.
+
+Consider the following contrived example, where you want to provide a convenient way to register services of type Hash.
+
+{{{lang=ruby,number=true,caption=Custom DefinitionContext example
+class MyDefinitionContext < Needle::DefinitionContext
+  def register_hash( name, opts={} )
+    this_container.register( name, opts ) { Hash.new }
+  end
+end
+
+reg = Needle::Registry.new
+reg.register( :definition_context_factory ) { MyDefinitionContext }
+
+reg.define do |b|
+  b.register_hash( :test1 )
+  b.register_hash( :test2 )
+end
+
+reg.test1[:key] = "value"
+reg.test2[:foo] = "bar"
+}}}

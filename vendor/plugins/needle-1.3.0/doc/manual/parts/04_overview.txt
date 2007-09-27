@@ -1,0 +1,9 @@
+The service locator works well when there are few dependencies, and the dependency graph is not very deep. However, it has a few drawbacks:
+
+# It requires each object to accept the locator as a parameter, and to know how to use it. This is problematic if you want to use existing classes that were created without knowledge of a locator. (I.e., @Logger@, in the Ruby library).
+
+# It requires each object to know what the services are named, in the locator. If you ever decide to change the name of a service in the locator, you may have to change lots of code to comply with the change.
+
+# For deep dependency graphs, it can become cumbersome to have to pass the locator to each constructor.
+
+This is where _dependency injection_ comes in. It allows you to define how each service is initialized, including setting dependencies (either via constructor parameters or via property accessors). In fact, it can do a lot more than that, even allowing you to specify how the lifestyle of the service should be managed and hooking "interceptors" onto the service to filter method invocations.

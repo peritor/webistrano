@@ -1,0 +1,9 @@
+<p>
+  <b>Name</b> (e.g. 'Prod', 'Test', 'Dev')<br />
+  <%= text_field 'stage', :name %>
+</p>
+
+<p>
+  <b>Alert these emails on deploy</b> (separated by space)<br />
+  <%= text_field 'stage', :alert_emails, :style =>'width:330px' %>
+</p>

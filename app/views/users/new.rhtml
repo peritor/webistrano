@@ -1,0 +1,9 @@
+<h2>New User Account</h2>
+
+<% form_for :user, :url => users_path do |f| -%>
+  <%= render(:partial => 'form')%>
+
+  <p>
+    <%= submit_tag "Create Account" %>
+  </p>
+<% end -%>

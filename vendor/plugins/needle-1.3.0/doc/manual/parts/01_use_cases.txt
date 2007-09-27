@@ -1,0 +1,141 @@
+So, what can Needle do for you? Ultimately, it can reduce the amount of code that you have to write, simplifying many common programming tasks for you. This has the two-fold benefit of both decreasing application development time, and of decreasing the effort needed to maintain your application.
+
+But what, _specifically_, can Needle do for you?
+
+Try these on for size:
+
+* "Log Method Execution":#logexec
+* "Reference Another Service":#refsvc
+* "Unit Testing":#unittest
+* "Lifestyle Management":#lifestyle
+
+(Thanks to Howard Lewis Ship for his "HiveMind":http://jakarta.apache.org/hivemind documentation, from which some of the above bullet points were adapted.)
+
+
+h3. Log Method Execution <a name="#logexec"></a>
+
+Needle has an integrated logging framework, and the ability to log execution trace information without modifying a single line of code in your classes. This means that you can easily see what methods get called, with what arguments, and what the return values are, all without having to physically modify any of your classes.
+
+Consider the following code, demonstrating how this would be done without Needle:
+
+{{{lang=ruby,number=true,caption=Logging method execution without Needle
+def foo( arg1, arg2 )
+  @log.debug( "in foo with #{arg1} and #{arg2}" ) if @log.debug?
+  ...
+  result = the_result_of_the_method
+  @log.debug( "finishing foo with #{result}" ) if @log.debug
+  return result
+rescue Exception => e
+  @log.debug( "foo raised exception #{e.message} (#{e.class})" ) if @log.debug?
+  raise
+end
+}}}
+
+Now, multiply that by the number of methods in your class... the logging messages quickly overpower the rest of the code, and detract from the flow of your program. This makes your program harder to debug, test, and maintain.
+
+Now, consider the same method using Needle's integrated logging framework...
+
+{{{lang=ruby,number=true,caption=Logging method execution with Needle
+def foo( arg1, arg2 )
+  ...
+  return the_result_of_the_method
+end
+}}}
+
+Then, when you define the service that you want to add the logging to:
+
+{{{lang=ruby,number=true,caption=Adding the logging interceptor to a service
+registry.register( :service_name_here ) { |reg| ... }
+registry.intercept( :service_name_here ).with! { logging_interceptor }
+}}}
+
+That's right. There's no explicit logging code in there. Instead, you just tell Needle that the methods of the class should be logged, and away it goes. This has the added benefit of allowing your objects to be unit tested, without spewing log messages everywhere.
+
+h3. Reference Another Service <a name="#refsvc"></a>
+
+Invariably in a large application services will reference other services. This is typically accomplished through something like this:
+
+{{{lang=ruby,number=true,caption=Looking up services without Needle
+class Component
+  ...
+  def foo( parms )
+    @service ||= lookup_service
+    @service.do_something( parms )
+  end
+
+  def lookup_service
+    ...
+  end
+  ...
+end
+}}}
+
+Whether the lookup is done lazily, as shown above, or when the class is first instantiated is irrelevant. The point is that you either have to implement a bunch of code to look up a service based on some criteria, or you hard code the class of the service (which creates tight coupling and makes things like unit testing harder).
+
+With Needle, you just declare a setter for the service, and then tell Needle that the class depends on the other service:
+
+{{{lang=ruby,number=true,caption=Wiring services with Needle
+class Component
+  attr_writer :service
+  ...
+  def foo( parms )
+    @service.do_something( parms )
+  end
+  ...
+end
+
+registry.register( :component ) do |reg| 
+  c = Component.new
+  c.service = reg.some_other_service
+  c
+end
+}}}
+
+Then, when your service is instantiated, Needle will automatically look for and instantiate the dependencies for you. This makes for cleaner code, and looser coupling between services.
+
+h3. Unit Testing <a name="#unittest"></a>
+
+Large applications can prove troublesome to unit test exhaustively, especially if there is any kind of tight coupling between components. Such coupling of components can make it difficult to test them separately.
+
+Needle, by its very nature, encourages loose coupling of components. Also, because dependencies are never instantiated in code, but are instead accepted via setters or constructor arguments, it is trivial to replace those dependencies with mock objects at unit test time.
+
+Consider this tightly coupled example:
+
+{{{lang=ruby,number=true,caption=Tight coupling
+def foo( args )
+  @some_dependency ||= MyNewDependency.new
+  @some_dependency.do_something(args)
+end
+}}}
+
+It is impossible to test the method @#foo@ without also testing the MyNewDependency class. However, if the @@some_dependency@ object is made a property that is set externally, you can replace it at test time with a blank:
+
+{{{lang=ruby,number=true,caption=Loose coupling
+attr_writer :some_dependency
+
+def foo( args )
+  @some_dependency.do_something( args )
+end
+}}}
+
+The unit test would become something like this:
+
+{{{lang=ruby,number=true,caption=Unit testing with a mock object
+def test_foo
+  @obj.some_dependecy = MyMockDependency.new
+  @obj.foo( args )
+  assert @obj.is_in_some_state
+end
+}}}
+
+h3. Lifestyle Management <a name="#lifestyle"></a>
+
+Singleton objects are a fact of life in complex systems. The singleton design pattern is powerful and useful. However, using the Singleton mixin, or declaring methods at the class level, can make your code difficult to unit test since the state of such objects cannot be easily reset.
+
+Needle has a solution. You can tell Needle to treat a service as either a _prototype_ service (meaning it will be instantiated every time you ask for it, like calling @#new@), or a _singleton_ service (meaning it will only be instantiated once, and the same instance will be returned for subsequent requests).
+
+Your object is still just a plain ol' ordinary Ruby object, but Needle has effectively transformed it into a singleton. This means you can unit test it as if it were nothing special, but when it is used in your application it will act like a singleton.
+
+Lifestyle management also means that you can control _when_ a service is instantiated.  The _prototype_ and _singleton_ models will always be instantiated as soon as they are requested. Sometimes, though, you don't want that--you'd like the instantiation to be deferred as late as possible.
+
+With Needle, you can indicate that a service should use deferred instantiation. This will cause the service to not actually be instantiated until a method is actually invoked on it.  Using this model, you can have services depend on themselves, or other forms of cyclical dependencies.

@@ -1,0 +1,40 @@
+<h2>Projects</h2>
+
+<fieldset class="fieldset">
+  <legend> <%=h pluralize(Project.count, 'Project')%> listed</legend>
+
+<% if @projects.empty? %>
+<br/>
+    No projects configured yet.<br />
+    Please add a project.
+  <br/>
+<% else %>
+  <table class="sortable">
+    <tr>
+      <th width="1%">Name</th>
+      <th width="94%">Description</th>
+      <th width="1%">#Stages</th>
+      <th width="1%">#Deploy.</th>
+      <th width="1%">Created At</th>
+      <th width="1%"></th>
+      <th width="1%"></th>
+    </tr>
+    <% for project in @projects %>
+      <tr class="<%= cycle :even, :odd, :name => 'projects'  %>">
+        <td><%= link_to h(project.name), project_path(project) %></td>
+        <td><%=h project.description %></td>
+        <td><%=h project.stages.count %></td>
+        <td><%=h project.deployments.count %></td>
+        <td><%=h project.created_at.to_s(:date_with_day) %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Delete', project_path(project), :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<br />
+
+<%= link_to 'New project', new_project_path, :class => 'arrow_link' %>
+
+</fieldset>

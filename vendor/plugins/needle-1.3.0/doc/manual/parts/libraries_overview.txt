@@ -1,0 +1,3 @@
+Using Needle as it has been presented so far works fine when you are dealing with a single application, all self-encapsulated. When you start dealing with combining multiple libraries, each potentially written by a different author, into a single registry, things get a little more complicated.
+
+Needle provides a way for service authors to share their services. All it requires is that authors centralize their service configuration.

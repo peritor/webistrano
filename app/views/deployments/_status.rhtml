@@ -1,0 +1,77 @@
+<div class="special_box status_box">
+	<div style="padding:0px 0px 0px 30px;">
+      <%= image_tag('peritor_theme/status_' + @deployment.status + '.gif') %>
+    </div>
+</div>
+
+<div style="float: left; width:380px">
+  <div class="box_top_left">
+    <div class="box_top_right">
+  	  <div class="box_top">
+	  </div>
+    </div>
+  </div>
+  <div class="box_body" style="height: 123px;">
+	<p>
+      <b>Task:</b>
+	  <%=h @deployment.task %>
+	</p>
+	<p>
+	  <b>Stage:</b>
+	  <%= link_to @deployment.stage.name, project_stage_path(@project, @stage) %> of Project <%= link_to @deployment.stage.project.name, project_path(@project) %> 
+	</p>
+	<p>
+	  <b>Deployed by:</b> 
+	  <%= user_info(@deployment.user) rescue '' %>
+	</p>
+	<p>
+	  <b>Started (UTC):</b>
+	  <%=h @deployment.created_at.to_s(:log) %>
+	</p>
+  	<p>
+	  <b>Completed (UTC):</b>
+	  <%=h @deployment.completed_at.to_s(:log) rescue nil %>
+	</p>
+  </div>
+  <div class="box_bottom_left">
+    <div class="box_bottom_right">
+      <div class="box_bottom">  
+  	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>
+
+<br />
+
+<fieldset class="fieldset">
+  <legend>Comment</legend>
+  <%=web_friendly_text @deployment.comment %>
+</fieldset>
+<br /> <br />
+
+<fieldset class="fieldset">
+  <legend>Log</legend>
+	<div class="log_output">
+  		<pre><%=h @deployment.log.gsub('\n', "\n") rescue '' %></pre>
+	</div>
+</fieldset>
+
+<% unless @deployment.completed? %>
+  <script type="text/javascript">
+    
+    function update_status(){
+      new Ajax.Updater('status_info','<%=h project_stage_deployment_path(@project, @stage, @deployment) %>',{
+        method: 'get',
+        evalScripts: true,
+        parameters: {
+          random_differentiator: Math.floor(Math.random()*50000) // work around IE caching bug
+        }
+      });
+    }
+    
+    setTimeout(update_status, 3000);
+    
+  </script>
+<% end %>

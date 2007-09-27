@@ -1,0 +1,492 @@
+---
+- "What is a...":
+  - "container?": >-
+      A _container_ is collection of service points and other containers. It
+      is used to organize services. Each container has access to all of the
+      service points in its ancestor containers.
+
+  - "registry?": >-
+      A _registry_ is a special kind of container that has no parent container.
+      It also defines a few services (such as the LoggingInterceptor, and
+      the various service models and pipeline elements), so that they are
+      available by default to all of the services it contains.
+
+  - "service point?": >-
+      A _service point_ is the definition of a service. Just as a class is the
+      definition of an object, and you instantiate an object from a class, so
+      do you instantiate services from service points.
+
+  - "service?": >-
+      A _service_ is the instantiation of a service point.
+
+  - "parameterized service?": >-
+      A _parameterized_ service is a service that allows contextual parameters
+      to be passed to the service when it is created. Such services are
+      typically used in conjunction with the @multiton@ service model, but
+      the only real requirement is that they _not_ be used with a service model
+      that does not support multiple parameters (like @singleton@ or
+      @threaded@).
+
+  - "service model?": >-
+      A _service model_ is a description of the lifecycle of a service. By
+      default, all services are _singletons_, meaning that every time you ask
+      a container for a particular service, you'll get the same object
+      instance back.
+
+
+      There are other service models available, though, including "prototype"
+      (which returns a new instance for each request of a service) and
+      "deferred" (which returns a proxy, deferring the instatiation of the
+      service itself until a method is invoked on the service). 
+
+  - "interceptor?": >-
+      An _interceptor_ is an object that may be placed between the client and
+      a service. Every request to the service is thus _intercepted_ by that
+      object, which can do operations on the request (such as logging) and may
+      even reroute or ignore the request altogether. This provides a kind of
+      "poor man's AOP", since you can do "before", "after", and "around" advice
+      on the methods of a service.
+
+
+      Needle comes with one standard interceptor, the LoggingInterceptor. It
+      will log a message on method entry and exit, and also when an exception
+      is raised.
+
+  - "pipeline?": >-
+      In Needle, the _instantiation pipeline_ is used to control how and when
+      services are instantiated. The _service models_ are implemented as
+      pipelines.
+
+
+      Just as the _interceptors_ are for hooking into method invocations, the
+      pipelines are for hooking into service instantiations. Every time a
+      service is requested, it's instantiation pipeline is executed. By
+      choosing the appropriate kinds of pipeline elements, all of the available
+      service models can be implemented (prototype, prototype_deferred,
+      singleton, singleton_deferred, etc.).
+
+- "How do I...":
+  - "create a new registry?": >-
+      There are several ways to create a new registry. The simplist is just to
+      invoke Registry#new.
+
+
+      <pre>
+        reg = Needle::Registry.new
+      </pre>
+
+
+      This will create a new Registry instance. You can also send a block to
+      #new, in which case the new registry will be yielded to it:
+
+
+      <pre>
+        reg = Needle::Registry.new do |r|
+          ...
+        end
+      </pre>
+
+
+      There are two other factory methods you can use for creating a Registry
+      instance. Both require a block.
+
+
+      <pre>
+        r1 = Needle::Registry.define do |builder|
+          ...
+        end
+
+        r2 = Needle::Registry.define! do
+          ...
+        end
+      </pre>
+
+
+      Registry#define creates a "builder" object that you can use define
+      services more conveniently. Register#define! (with a bang) does the same
+      thing, but evaluates the block within the context of the builder.
+
+  - "register a service?": >-
+      The first way to register a service is by calling #register on the
+      registry (or a namespace):
+
+
+      <pre>
+        reg.register( :foo ) { Foo.new }
+      </pre>
+
+
+      The (first) parameter to #register is the name of the service, and the
+      block should return the implementation of the service. If needed, the
+      block can accept two parameters--the container that the service is being
+      registered with, and an object that represents the service being defined
+      (called a "service point"):
+
+
+      <pre>
+        reg.register( :foo ) do |container,point|
+          Foo.new( container[:bar], point.fullname )
+        end
+      </pre>
+
+
+      You can also use Container#define and Container#define! to register
+      services.  These approaches are friendlier if you are needing to register
+      several services at once.
+
+
+      <pre>
+        reg.define do |builder|
+          builder.foo { Foo.new }
+          builder.bar { |c,p| Bar.new( c[:foo], p.name ) }
+        end
+
+        reg.define! do
+          baz { |c,p| Baz.new( c[:bar], p.name ) }
+          zoom { Buggy.new }
+        end
+      </pre>
+
+
+      Container#define yields a new "builder" object to the block. Messages
+      sent to the builder are interpreted as service names, and if a block is
+      sent with the message, a new service is registered under that name.
+
+      
+      Container#define! does likewise, except it evaluates the block within the
+      context of the builder object.
+
+
+      If you do not pass a block to #define, it will return the builder object,
+      so you could do something like the following if you only need to define
+      one or two services:
+
+
+      <pre>
+        reg.define.foo { ... }
+      </pre>
+
+
+      Lastly, you can get the builder directly and add services using it:
+
+
+      <pre>
+        builder = reg.builder
+        builder.baz { ... }
+        builder.bar { ... }
+      </pre>
+
+
+      (This last is the same as calling #define without arguments, but is more
+      readable if you intend to use the builder object multiple times.)
+      
+  - "reference a service?": >-
+      Referencing a service can be done in either of two ways. The first is to
+      treat the container (i.e., registry) as a hash, passing the name of the
+      service as an argument to Container#[]:
+
+
+      <pre>
+        svc = registry[:foo]
+        svc.do_something_interesting
+      </pre>
+
+
+      A more convenient (but slightly more peril-fraught) approach is to send
+      the name of the method to the registry as a message:
+
+
+      <pre>
+        svc = registry.foo
+      </pre>
+
+
+      Be aware that this latter approach will only work when the service name
+      does not conflict with the name of an existing method on the container.
+      For example, if you were to do:
+
+
+      <pre>
+        registry.register( :hash ) { "hello, world" }
+        p registry.hash
+      </pre>
+
+
+      You would get the hash value of the registry object, instead of the value
+      value of the service (which would be "hello, world").
+
+  - "select a service model for a service (i.e., change the default model of lifecycle management)?": >-
+      By default, a service will be managed as a singleton, i.e., every request
+      of that service will return the same object instance. This is the
+      _singleton_ service model.
+
+
+      To select a different service model, pass it as an option when you
+      register the service:
+
+
+      <pre>
+        registry.register( :foo, :model => :prototype ) {...}
+        registry.define.bar( :model => :threaded ) {...}
+        registry.define! do
+          baz( :model => :singleton_deferred ) {...}
+          ...
+        end
+        ...
+      </pre>
+
+  - "create a namespace?": >-
+      Namespaces allow you to organize your services into hierarchical
+      packages. You can create namespaces in a few ways. The first (and
+      simplest) is to just call Container#namespace:
+
+
+      <pre>
+        registry.namespace( :stuff )
+      </pre>
+
+
+      This will create a namespace in the registry, called stuff. If you send a
+      block as well, the block will be invoked (with the new namespace yielded
+      to it) the first time the namespace is requested:
+
+
+      <pre>
+        registry.namespace( :stuff ) do |ns|
+          ns.register( :foo ) {...}
+          ns.define.bar {...}
+          ns.define! do
+            baz {...}
+            buf {...}
+          end
+        end
+      </pre>
+
+      Because it is so common to immediately define services on the new
+      namespace, there are some convenience methods to make this more...
+      convenient.
+
+
+      <pre>
+        registry.namespace_define!( :stuff ) do
+          foo {...}
+          bar {...}
+          baz {...}
+        end
+
+        registry.namespace_define( :more_stuff ) do |b|
+          b.blah {...}
+          b.argh {...}
+          b.hack {...}
+        end
+      </pre>
+
+
+      The first one, above, creates the namespace and calls Container#define!.
+      The second creates the namespace and calls Container#define. In both
+      cases, _the namespace is created immediately_, unlike Container#namespace
+      which only creates the namespace when it is first requested.
+
+
+      Lastly, note that namespace's are just special services. Thus, you can
+      pass options to the namespace methods just as you can with
+      Container#register and friends.
+
+  - "write log messages?": >-
+      You can obtain a new logger instance from the @:logs@ and @:log_for@
+      services. Once you have a logger instance, you can invoke the #debug,
+      #info, #warn, #error, and #fatal methods on the instance to log messages
+      of the corresponding severity.
+
+
+      <pre>
+        logger = registry.logs.get( "a name for my logger" )
+        logger.debug "This is a debug message"
+        logger.info "This is an informational message"
+        ...
+        logger2 = registry.log_for( "another logger name" )
+        ...
+      </pre>
+
+
+      The two approaches shown above are identical--the second approach (using
+      the @log_for@ service) is just a convenience for @logs.get@.
+
+
+      Log messages are written, by default, to a file called "needle.log", in
+      the same directory that the application was invoked from.
+
+
+      You can also use a logging interceptor to automatically log all external
+      method invocations on a service. This includes method entry and exit, as
+      well as any exceptions that are raised inside the method.
+
+
+      <pre>
+        registry.register( :foo ) { ... }
+        registry.intercept( :foo ).with { |r| r.logging_interceptor }
+
+        foo.something
+        foo.another_method( 1, 2, 3 )
+      </pre>
+
+
+      See the chapter in the "User's Manual":http://needle.rubyforge.org about
+      logging for more information on how to use and configure loggers.
+
+  - "exclude methods from being intercepted?": >-
+      Only interceptors that explicitly support exclusion of methods can help
+      you here.  Fortunately, the LoggingInterceptor is one of them. (If you
+      write your own interceptor and would like similar functionality, see the
+      IncludeExclude module.)
+
+
+      In the case of the LoggingInterceptor, just pass an array of patterns
+      (matching method names and/or arities) as the "exclude" option, when
+      declaring the interceptor:
+
+
+      <pre>
+        registry.register( :foo ) { ... }
+        registry.intercept( :foo ).
+          with { |r| r.logging_interceptor }.
+          with_options :exclude => [ 'foo', 'bar(>4)', '*(<2)' ]
+      </pre>
+
+
+      The above will exclude from interception any method named 'foo', or any
+      invocation of 'bar' with more than 4 arguments, or any method invocation
+      with fewer than two arguments.
+
+
+      You can also give an array of patterns to _include_. These cause methods
+      to be explicitly intercepted even if they match an exclude pattern:
+
+
+      <pre>
+        registry.register( :foo ) { ... }
+        registry.intercept( :foo ).
+          with { |r| r.logging_interceptor }.
+          with_options :exclude => [ 'foo', 'bar(>4)', '*(<2)' ],
+                       :include => [ 'baz' ]
+
+        foo = registry.foo
+        foo.baz
+      </pre>
+
+
+      This would result in the call to #baz being intercepted, even though it
+      matches an exclude pattern (@*(<2)@).
+
+  - "include services defined in another library?": >-
+      This requires that the other library be implemented in such a way that it
+      expects to be "included" by other libraries/applications. For example,
+      Needle encourages the use of a method called @register_services@, which
+      accepts a container as a parameter:
+
+
+      <pre>
+        module A
+          module B
+            def register_services( container )
+              ...
+            end
+            module_function :register_services
+          end
+        end
+      </pre>
+
+
+      If the library has been implemented in this way, you can simply do a
+      require of the library and then invoke the @register_services@ method.
+
+
+      There is a convenience method in Container for doing this. Just call
+      Container#require, passing the file to require and a string (or symbol)
+      identifying the name of the module that contains the registration method.
+      You can also pass a symbol as the third parameter naming the registration
+      method, but it defaults to @:register_services@.
+
+
+      <pre>
+        require 'a/b'
+        A::B.register_services( container )
+
+        # or
+
+        container.require( 'a/b', "A::B" )
+      </pre>
+
+
+      The definition context (i.e., the "builder" object) also supports the
+      require method, so you can do:
+
+
+      <pre>
+        container.define do |b|
+          b.require "a/b", "A::B"
+          b.foo { ... }
+          ...
+        end
+      </pre>
+
+- "When should I...":
+  - "use a different service model?":
+    - "Like, :prototype?": >-
+        The prototype service model is appropriate when the service:
+
+
+        * has internal state
+
+        * will be used multiple times for different situations
+
+
+        For example, if you have a GUI library, a "button" service could be a
+        prototype, because you will likely have many buttons in an application,
+        with each button being an independent instance.
+      
+    - "Like, :singleton?": >-
+        The singleton service model is the default, so you should rarely need
+        to explicitly specify it as a model. It is appropriate for services
+        that:
+
+
+        * guard some specific functionality
+
+        * represent state that is global across an application
+
+    - "Like, :threaded?": >-
+        Threaded is similar to singleton, but it allows one unique instance of
+        the service _per thread_. Thus, it is appropriate to the same
+        situations as singleton, but specific to a thread, instead of an
+        application. This is useful for web applications that are run in a
+        single virtual machine, and which share a single registry.
+
+    - "Like, deferred?": >-
+        Deferred models use a proxy to enforce lazy initialization of the
+        service. A service using a deferred service model (ie,
+        @:prototype_deferred@, @:multiton_deferred@, @:singleton_deferred@, or
+        @:threaded_deferred@) will not be instantiated until the first time a
+        method is invoked on the service.
+
+
+        This makes a deferred model appropriate when a service is expensive to
+        instantiate, since you can wait to do the expensive initialization
+        until it is really needed. Applications will start up faster when their
+        dependences use deferred instantiation.
+
+    - "Like, initialize?": >-
+        This is useful when you have a method that you want to be invoked
+        automatically after a service has been instantiated. Consider the case
+        where a service is initialized primarily using setters, but requires
+        some logic to be executed to complete the initialization phase. In this
+        case, you could always explicitly invoke the initialization method(s)
+        in the constructor block, but if many services use the same
+        initialization method, it can be more convenient to use an "initialize"
+        service model.
+
+    - "Like, multiton?": >-
+        Multitons are useful for factories, where you have a class that
+        differentiates its instances based on some construction parameters that
+        need to be determined at runtime. Thus, multitons are always used with
+        parameterized services.

@@ -1,0 +1,12 @@
+<h2>Editing project: <%=h @project.name %></h2>
+
+<% form_for(:project, :url => project_path(@project), :html => { :method => :put }) do |f| %>
+  
+  <%= render(:partial => 'form')%>
+  <p><br>
+    <%= submit_tag "Update" %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', project_path(@project), :class => 'arrow_link' %>

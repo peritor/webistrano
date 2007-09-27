@@ -1,0 +1,35 @@
+The last approach to interacting with remote processes is the @#popen3@ method of @#process@ service. It is a _synchronous_ approach, meaning that each method call _may_ (potentially) block until data is received; you can't be using other features of the Net::SSH package while using it, but you don't have to mess with callbacks.
+
+If you are familiar with the "popen3" Ruby module, this will seem familiar. It's not a perfect clone of the "popen3" module's functionality, but it's close. What you do is you specify the process to invoke, and then you get three pseudo-IO objects back: the process's input stream, it's output stream, and it's error stream. You can write to the input stream to send data to the process, or read from the output and error streams. Reading from the output or error streams will block until data is available, which makes it very convenient for interacting with a single remote process.
+
+Here's the previous "bc" example, rewritten to use @#popen3@:
+
+{{{lang=ruby,number=true,caption=Using #process.popen3
+Net::SSH.start( 'host' ) do |session|
+
+  input, output, error = session.process.popen3( "bc" )
+
+  [ "5+5", "7*12", "sqrt(2.000000)" ].each do |formula|
+    input.puts formula
+    puts "#{formula}=#{output.read}"
+  end
+
+  input.puts "quit"
+
+end
+}}}
+
+Much more concise, isn't it? One caveat, though: there is no way to kill the process (unless the process can terminate itself, such as through the use of issuing bc's "quit" command as used above) without closing the session. To remedy this, there is also a block version of popen3 that provides an explicit scope for the three data streams:
+
+{{{lang=ruby,number=true,caption=Transactional form of #process.popen3
+Net::SSH.start( 'host' ) do |session|
+  session.process.popen3( "bc" ) do |input, output, error|
+    [ "5+5", "7*12", "sqrt(2.000000)" ].each do |formula|
+      input.puts formula
+ puts "#{formula}=#{output.read}"
+    end
+  end
+end
+}}}
+
+The three streams will be closed and process explicitly terminated when the block ends.

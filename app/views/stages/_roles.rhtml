@@ -1,0 +1,29 @@
+<% if @stage.hosts.empty? %>
+  <p>
+    No hosts for this stage. A host is a physical host that this stage should deploy to.
+    Please add a host.
+  </p>
+<% else %>
+  <table class="sortable">
+    <tr>
+      <th width="24%">Host</th>
+      <th width="24%">Role</th>
+      <th width="24%">SSH Port</th>
+      <th width="25%">Attributes</th>
+      <th width="1%">Status</th>
+      <th width="1%"></th>
+      <th width="1%"></th>
+    </tr>
+  <% for role in @stage.roles %>
+    <tr class="<%= cycle :even, :odd, :name => 'roles' %>">
+      <td><%= link_to h(role.host.name), host_path(role.host) %></td>
+      <td><%=h role.name %></td>
+      <td><%=h role.port %></td>
+      <td><%=h role.role_attribute_hash.inspect unless role.role_attribute_hash.blank?  %></td>
+      <td><%= role.status_in_html %></td>
+      <td><%= link_to 'Edit', edit_project_stage_role_path(@project, @stage, role) %></td>
+      <td><%= link_to 'Delete', project_stage_role_path(@project, @stage, role), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

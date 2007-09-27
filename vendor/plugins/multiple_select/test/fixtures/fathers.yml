@@ -1,0 +1,19 @@
+without_sons:
+  id: 1
+  name: Without children
+  
+with_sons:
+  id: 2
+  name: With children
+  
+without_habtm_sons:
+  id: 3
+  name: Without HABTM children
+
+with_habtm_sons:
+  id: 4
+  name: With HABTM children
+
+with_toys:
+  id: 5
+  name: With toys

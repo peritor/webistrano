@@ -1,0 +1,5 @@
+require 'webistrano/extensions'
+require 'webistrano/configuration'
+require 'webistrano/logger'
+require 'webistrano/deployer'
+require 'webistrano/template'

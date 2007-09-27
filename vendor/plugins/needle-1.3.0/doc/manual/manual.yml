@@ -1,0 +1,78 @@
+--- !jamisbuck.org,2004/^manual
+
+# This content is made available under the Attribution-ShareAlike 2.0
+# license from the Create Commons:
+#
+#   http://creativecommons.org/licenses/by-sa/2.0/
+
+meta: !^meta
+  copyright: 2004
+  author: Jamis Buck
+  email: jamis@37signals.com
+
+product: !^product
+  name: Needle
+  tagline: to the point -->
+  version: !!eval require "../../lib/needle/version"; Needle::Version::STRING
+  logo: needle.png
+  urls:
+    - Project Page: http://rubyforge.org/projects/needle
+    - User Manual: http://needle.rubyforge.org
+    - API Documentation: http://needle.rubyforge.org/api
+    - FAQ Document: http://needle.rubyforge.org/faq.html
+    - Needle Wiki: http://needle.rubyforge.org/wiki/wiki.pl
+
+recent_updates:
+  - Added Needle graphic (thanks to Bruce Williams)
+  - Added syntax highlighting to code blocks
+
+chapters:
+
+- Introduction:
+  - What is Needle?: !!file parts/01_what_is_needle.txt
+  - How Can It Help Me?: !!file parts/01_use_cases.txt
+  - Alternatives: !!file parts/01_alternatives.txt
+  - License Information: !!file parts/01_license.txt
+  - Support: !!file parts/01_support.txt
+      
+- Registry:
+  - Overview: !!file parts/02_overview.txt
+  - Creating: !!file parts/02_creating.txt
+  - Services: !!file parts/02_services.txt
+  - Namespaces: !!file parts/02_namespaces.txt
+
+- Service Locator:
+  - Overview: !!file parts/03_overview.txt
+  - Conventional Architecture: !!file parts/03_conventional.txt
+  - Locator Pattern: !!file parts/03_locator.txt
+
+- Dependency Injection:
+  - Overview: !!file parts/04_overview.txt
+  - Setup: !!file parts/04_setup.txt
+
+- Interceptors:
+  - Overview: !!file parts/interceptors_overview.txt
+  - Architecture: !!file parts/interceptors_architecture.txt
+  - Attaching: !!file parts/interceptors_attaching.txt
+  - Ordering: !!file parts/interceptors_ordering.txt
+  - Custom: !!file parts/interceptors_custom.txt
+
+- Service Models:
+  - Overview: !!file parts/models_overview.txt
+  - Pipelines: !!file parts/models_pipelines.txt
+  - Models: !!file parts/models_models.txt
+
+- Logging:
+  - Overview: !!file parts/logging_overview.txt
+  - LogFactory: !!file parts/logging_logfactory.txt
+  - Configuration: !!file parts/logging_configuration.txt
+
+- Service Libraries:
+  - Overview: !!file parts/libraries_overview.txt
+  - Creating Libraries: !!file parts/libraries_creating.txt
+  - Using Libraries: !!file parts/libraries_using.txt
+
+- Customizing Needle:
+  - Namespaces: !!file parts/customizing_namespaces.txt
+  - Interceptors: !!file parts/customizing_interceptors.txt
+  - Contexts: !!file parts/customizing_contexts.txt

@@ -1,0 +1,545 @@
+2007-06-18 12:07  jamis
+
+	* version bump
+
+2007-06-18 11:45  jamis
+
+	* Make sure we try and create the directory if it doesn't
+	  exist
+
+2007-06-18 11:35  jamis
+
+	* make sure hosts are written to the known_hosts file in the
+	  correct format
+
+2007-06-18 09:17  jamis
+
+	* Fixed bug #6156 (ruby -w warnings)
+
+2007-06-18 09:03  jamis
+
+	* Fixed bug #11532 (Hang after MSG_CHANNEL_OPEN_FAILURE)
+
+2007-06-18 08:39  jamis
+
+	* Fixed bug #10818 (Exception in split_data_for_packet)
+
+2007-06-18 08:11  jamis
+
+	* Fixed bug 6667 (wrong SOCKS 5 auth version)
+
+2007-06-18 08:08  jamis
+
+	* update the NEWS file
+
+2007-06-18 08:05  jamis
+
+	* allow the remaining data to be empty (as it will be,
+	  apparently, with some aes ciphers)
+
+2007-06-18 07:57  jamis
+
+	* Fixed typo that broke :very paranoid setting
+
+2007-06-18 07:52  jamis
+
+	* use the first known key for a particular host as the
+	  preferred key type when negotiating the algorithm, to avoid
+	  host key verification problems
+
+2007-05-10 10:30  jamis
+
+	* turns out the padding didn't help. pulling it
+
+2007-05-10 09:47  jamis
+
+	* add some padding so the gem file can be installed on windows
+
+2007-05-09 22:05  jamis
+
+	* Version bump
+
+2007-05-09 22:03  jamis
+
+	* Fixed broken mkdir in key verifier
+
+2007-05-09 21:54  jamis
+
+	* Fixed "address family for hostname not supported" errors on
+	  windows
+
+2007-04-30 23:28  jamis
+
+	* update datestamp on the NEWS file
+
+2007-04-30 22:03  jamis
+
+	* version bump
+
+2007-04-30 22:02  jamis
+
+	* Updated docs about the :paranoid key
+
+2007-04-29 22:00  jamis
+
+	* need to return the right values for this to work
+
+2007-04-29 21:57  jamis
+
+	* Add a "lenient-host-key-verifier" which is used by default,
+	  and which tries to detect whether a connection is being
+	  tunnelled and if so will not try to verify the host key.
+
+2007-04-11 00:21  jamis
+
+	* tweak the host key verifier, so that instead of prompting,
+	  it raises an exception when a key does not match a
+	  previously cached key for host
+
+2007-04-07 15:42  jamis
+
+	* treat rb-keygen as an executable
+
+2007-04-07 15:20  jamis
+
+	* version bump
+
+2007-04-07 15:19  jamis
+
+	* update manual to include :paranoid setting
+
+2007-04-07 15:13  jamis
+
+	* Add rb-keygen
+
+2007-04-07 15:09  jamis
+
+	* Host key verification, enabled by default
+
+2007-04-05 10:37  jamis
+
+	* ssh agent forwarding
+
+2006-09-09 17:56  jamis
+
+	* Fix rdoc options
+
+2006-09-09 17:54  jamis
+
+	* update NEWS
+
+2006-09-09 17:50  jamis
+
+	* Update version
+
+2006-09-07 12:25  jamis
+
+	* Add support in gemspec for "beta" gems, using the revision
+	  number appended to the version
+
+2006-09-07 12:03  jamis
+
+	* Use read instead of sysread
+
+2006-09-07 12:03  jamis
+
+	* Use printf instead of echo -n for better compatibility
+
+2006-09-07 12:03  jamis
+
+	* fix bad syntax
+
+2006-09-07 11:19  jamis
+
+	* Don't allow the username to be nil
+
+2006-09-07 10:54  jamis
+
+	* Add a #connection accessor to the session. Add initial
+	  support for server-originated global requests.
+
+2006-04-14 21:10  jamis
+
+	* Fix a bug caused by monkeypatching in Rails
+
+2006-02-18 20:38  jamis
+
+	* Set release date for 1.0.8
+
+2006-02-18 20:34  jamis
+
+	* Move connect for forwarded connections outside of thread so
+	  errors can be caught. Version bump to 1.0.8.
+
+2006-01-27 08:38  jamis
+
+	* Set release date for 1.0.7
+
+2006-01-24 21:32  jamis
+
+	* Fix intermittent corrupt mac bug, caused by threaded apps
+	  potentially interrupting the recv operation while reading
+	  the hmac from the socket
+
+2006-01-23 07:41  jamis
+
+	* Remove some unused links from the manual
+
+2006-01-20 12:36  jamis
+
+	* Remove documentation suggesting that ruby-password will be
+	  used if present (it won't)
+
+2006-01-19 23:18  jamis
+
+	* Update contact address in THANKS file
+
+2006-01-19 23:07  jamis
+
+	* Update release date
+
+2006-01-19 23:03  jamis
+
+	* Do not print the banner message by default on authorization
+	  (rarely useful for automated processes anyway)
+
+2006-01-19 22:33  jamis
+
+	* Send NEWKEYS message first, for compability with
+	  wodSSHServer (which won't send NEWKEYS until it recieves
+	  NEWKEYS from the client). Version bump to 1.0.6.
+
+2006-01-02 09:51  jamis
+
+	* Update NEWS file
+
+2005-12-31 23:18  jamis
+
+	* Add connection.ping! and session.ping!. Version bump.
+
+2005-12-26 19:05  jamis
+
+	* Add some disambiguating parentheses
+
+2005-12-24 12:59  jamis
+
+	* Fix problems with rake's cd/chdir under Ruby 1.8.4
+
+2005-12-24 12:50  jamis
+
+	* Update rakefile
+
+2005-12-24 12:50  jamis
+
+	* Update NEWS file
+
+2005-12-24 12:47  jamis
+
+	* Fix broken tests under 1.8.4. Change references to obsolete
+	  contact email address. Tiny version bump.
+
+2005-11-09 10:05  jamis
+
+	* Version bump
+
+2005-11-09 10:03  jamis
+
+	* Don't blow up on windows if the pageant process cannot be
+	  found
+
+2005-07-26 23:12  jamis
+
+	* Updated NEWS file. Fixed README to not indicate that
+	  Net::SSH is beta (it's mature, now, and has been for awhile)
+
+2005-07-26 23:05  jamis
+
+	* Updated recent changes in manual
+
+2005-07-26 23:04  jamis
+
+	* Corrected documentation for the channel on_request callback
+
+2005-07-26 23:02  jamis
+
+	* Version bump
+
+2005-07-26 23:01  jamis
+
+	* Fix channel on_request callback signature. Better thread-
+	  safety in the connection driver. Typos.
+
+2005-06-17 15:46  jamis
+
+	* Fixed address of svn repo
+
+2005-06-17 15:16  jamis
+
+	* Copy/paste error
+
+2005-06-17 15:04  jamis
+
+	* Restore task for publishing the user manual
+
+2005-06-17 14:45  jamis
+
+	* Updated the manual from the defunct Hieraki-based
+	  documentation
+
+2005-06-17 09:41  jamis
+
+	* Version bump
+
+2005-05-28 20:40  jamis
+
+	* Guard against recursive/simultaneous calls when processing
+	  data requests
+
+2005-04-03 11:17  jamis
+
+	* Added a :timeout option on the transport session
+
+2005-02-17 13:40  jamis
+
+	* Fix suggested by Peter Verhage that allows the Putty Agent
+	  to be used (currently was not working on windows).
+
+2005-02-06 16:42  jamis
+
+	* Removed pubdoc dependency on pubman in Rakefile, due to
+	  pubman having been removed.
+
+2005-02-06 16:39  jamis
+
+	* Added Daniel Berger to the THANKS file for his help with
+	  getting the unit tests to pass under Windows.
+
+2005-02-06 16:38  jamis
+
+	* Updated the NEWS file for the 1.0 release.
+
+2005-02-06 16:34  jamis
+
+	* ChangeLog generation is automated again. The new svn log is
+	  reformatted and prepended to the original CVS log
+	  (ChangeLog.cvs).
+
+2005-02-06 15:57  jamis
+
+	* Manual builder was still wrapped in the Needle module (from
+	  which it was copied). Version bumped to 1.0.0.
+
+2005-02-01 12:20  jamis
+
+	* Allow a password to be specified programatically for
+	  keyboard-interactive. This allows keyboard-interactive to be
+	  used in many cases just like 'password'.
+
+2005-01-25 11:44  jamis
+
+	* All tests (except the integration tests) pass on Windows
+	  now. Perhaps even some of the random "corrupted hmac" errors
+	  I've seen occur on occassion will be fixed now...
+
+2005-01-25 07:54  jamis
+
+	* Removed extraneous whitespace between list items.
+
+2005-01-14 15:28  jamis
+
+	* Channels now respect their own local window and maximum
+	  packet sizes, and report reasonable values to the server.
+	  This fixes a bug that caused problems when large quantities
+	  of data were requested of the server and certain server-
+	  maximums were being exceeded.
+
+2005-01-12 10:11  jamis
+
+	* hostbased bug has been (tentatively) squashed
+
+2005-01-12 10:10  jamis
+
+	* Use Socket#close instead of Socket#shutdown. Also, hostname
+	  look up is more intelligent and should never raise an
+	  exception--it will instead log an error if the hostname
+	  absolutely cannot be looked up.
+
+2005-01-12 10:07  jamis
+
+	* The authentication process is now aware of the
+	  authentication methods that the server has indicated can
+	  possibly succeed. Methods that cannot possibly succeed will
+	  no longer even be attempted.
+
+2005-01-12 09:35  jamis
+
+	* Use Socket#close instead of Socket#shutdown in the proxy
+	  unit tests. This allows the tests to pass when run in
+	  Windows.
+
+2005-01-11 16:21  jamis
+
+	* Rakefile was removing ChangeLog. Added bug with hostbased to
+	  TODO.
+
+2005-01-11 14:38  jamis
+
+	* Added a "tag" task for easier tagging off the current HEAD.
+
+2005-01-11 14:31  jamis
+
+	* Rakefile no longer tries to build the changelog.
+
+2005-01-11 14:12  jamis
+
+	* Added the ChangeLog and updated the NEWS file.
+
+2005-01-11 14:01  jamis
+
+	* Bumped version, updated NEWS, and added more feature
+	  demonstrations to the sync-shell-demo.rb script.
+
+2005-01-11 13:46  jamis
+
+	* Added syntax highlighted code blocks, and shell
+	  documentation. Also tweaked stylesheets.
+
+2005-01-11 09:07  jamis
+
+	* Simplified the shell service. The 'stdout' and 'stderr',
+	  etc. parameters to the service were not working anyway, and
+	  may be better implemented as a wrapper around the shell
+	  service, anyway.
+
+2005-01-10 16:39  jamis
+
+	* Changed copyright line and author email address.
+
+2005-01-10 16:30  jamis
+
+	* Added SyncShell subservice, reimplemented ssh-client demo,
+	  and added demos for both Shell and SyncShell.
+
+2005-01-10 12:50  jamis
+
+	* Added first pass at the shell service, and updated the ssh-
+	  client to use it. Also fixed some breakage in the popen3
+	  test cases.
+
+2005-01-09 14:14  jamis
+
+	* Keyboard-interactive is correctly implemented now.
+
+2005-01-09 12:17  jamis
+
+	* Getting better at dealing with interactive processes. Added
+	  an ssh-client demo.
+
+2005-01-07 13:12  minam
+
+	* Name of the cvs2cl executable changed. Added more TODO's, to keep
+	  me busy with.
+
+2005-01-04 20:49  minam
+
+	* Added "host" and "options" attributes to Session (thanks to
+	  Daniel Hobe).
+
+2005-01-04 13:17  minam
+
+	* Raise an error if an attempt is made to load a file as a public
+	  key, which is not a public key.
+
+2005-01-04 12:27  minam
+
+	* If an agent wasn't running, the authentication would fail with an
+	  unhelpful error. This fix should allow authentication to proceed,
+	  even in the absense of an ssh-agent.
+
+2004-12-01 22:12  minam
+
+	* Updated NEWS file.
+
+2004-12-01 21:26  minam
+
+	* Pageant support! Fixed documentation. Bumped version to 0.6.0.
+	  Added support for external services. The USERNAME environment
+	  variable is used if USER is not set. Moved the README to the
+	  project root (for consistency with other project files). Fixed
+	  some documentation typos.
+
+2004-11-23 13:42  minam
+
+	* Forgot to include the 'examples' subdirectory in the packages.
+
+2004-11-23 13:21  minam
+
+	* Cut-and-paste errors. :(
+
+2004-11-23 13:17  minam
+
+	* Added date of this release to NEWS file.
+
+2004-11-23 13:16  minam
+
+	* Minor rakefile tweakage.
+
+2004-11-23 13:14  minam
+
+	* Added Needle as a dependency in gemspec.
+
+2004-11-23 13:12  minam
+
+	* Updated TODO (prompter impl was added)
+
+2004-11-23 13:11  minam
+
+	* Added a prompter implementation, instead of depending on
+	  ruby-password.
+
+2004-11-23 12:43  minam
+
+	* :verbose and :log options were not being removed from the options
+	  before being passed to the transport layer, which was causing the
+	  transport layer to fail.
+
+2004-11-23 12:42  minam
+
+	* Oops. :verbosity should have been :verbose.
+
+2004-11-23 12:40  minam
+
+	* Documented the :log and :verbosity options.
+
+2004-11-23 12:37  minam
+
+	* Added examples. Made it easier to customize logging in
+	  Net::SSH::Session.
+
+2004-11-23 11:45  minam
+
+	* Changed FAQ link.
+
+2004-11-23 11:29  minam
+
+	* Updated manual for new version.
+
+2004-11-23 11:28  minam
+
+	* Updated TODO list. Fixed a documentation typo in channel.rb.
+
+2004-11-22 14:37  minam
+
+	* Added :coverage goal, to run rcov on the unit tests.
+
+2004-11-22 14:05  minam
+
+	* *sigh* These shouldn't have been checked it. :(
+
+2004-11-22 13:52  minam
+
+	* Initial revision
+
+2004-11-22 13:52  minam
+
+	* Refactored the whole blame thing

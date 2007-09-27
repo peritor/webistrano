@@ -1,0 +1,12 @@
+<h2>Editing recipe: <%=h @recipe.name %></h2>
+
+<% form_for(:recipe, :url => recipe_path(@recipe), :html => { :method => :put }) do |f| %>
+
+  <%= render(:partial => 'form')%>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', recipe_path(@recipe), :class => 'arrow_link' %>

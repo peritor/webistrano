@@ -1,0 +1,32 @@
+<% if @deployments.empty? %>
+  <br/>
+    This user has never deployed any stages. 
+  <br/>
+<% else %>
+  <table class="sortable">
+    <tr>
+      <th>Project</th>
+      <th>Stage</th>
+      <th>Task</th>
+      <th>Started<br> (UTC)</th>
+      <th>Completed<br> (UTC)</th>
+      <th style="width:200px;">Comment</th>
+      <th>Status</th>
+    </tr>
+  <% for deployment in @deployments %>
+    <tr class="<%= cycle :even, :odd, :name => 'deployments' %>">
+      <td ><%= link_to h(deployment.stage.project.name), project_path(deployment.stage.project) %></td>
+      <td><%= link_to h(deployment.stage.name), project_stage_path(deployment.stage.project, deployment.stage) %></td>
+      <td><%= link_to h(deployment.task), project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %></td>
+      <td ><%=h deployment.created_at.to_s(:log)  %></td>
+      <td><%=h deployment.completed_at.to_s(:log) rescue nil %></td>
+      <td><%=h truncate(deployment.comment, 37) %></td>
+      <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/'+deployment.status_image)%></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+<% if @deployments.size != @user.deployments.count %>
+  <br />
+  <%= link_to "Complete deployment history", deployments_user_path(@user), :class => 'arrow_link' %>
+<% end %>

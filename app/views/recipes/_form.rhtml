@@ -1,0 +1,15 @@
+<% flashed_errors(:recipe) %>
+<p>
+  <b>Name</b><br />
+  <%= text_field 'recipe', 'name', :style =>'width:300px; ' %>
+</p>
+
+<p>
+  <b>Description</b><br />
+  <%= text_area 'recipe', 'description', :style =>'width:600px; height: 100px;' %>
+</p>
+
+<p>
+  <b>Body</b><br />
+  <%= text_area 'recipe', 'body', :style =>'width:600px; height: 400px;' %>
+</p>

@@ -1,0 +1,12 @@
+<h2>Editing host of <%= link_to h(current_project.name), project_path(current_project) %>/<%= link_to h(current_stage.name), project_stage_path(current_project, current_stage) %></h2>
+
+<% form_tag(project_stage_role_path(current_project, current_stage), :method => :put) do %>
+  
+  <%= render(:partial => 'form')%>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', project_stage_path(current_project, current_stage), :class => 'arrow_link' %>

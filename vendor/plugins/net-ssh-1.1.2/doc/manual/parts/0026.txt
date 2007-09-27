@@ -1,0 +1,15 @@
+Forwarding remote connections to the local host is also straightforward; simply call the @#remote_to@ method of the @#forward@ service. This takes three (or four) parameters: the local port and host to be forwarded to (in that order), and the remote port to listen on. The fourth parameter is optional, and is the bind address on the remote machine; this defaults to "127.0.0.1".
+
+{{{lang=ruby,number=true,caption=Forwarding a remote port
+Net::SSH.start( 'host' ) do |session|
+  session.forward.remote_to( 80, 'www.google.com', 1234 )
+  session.loop
+end
+}}}
+
+The above example causes any connection on port 1234 of the remote machine (_from_ the remote machine) to be forwarded via the local host to port 80 at www.google.com. To make things a bit more open, you could specify a bind address of 0.0.0.0:
+
+{{{lang=ruby,caption=Specifying the bind address when forwarding a remote port
+session.forward.remote_to( 80, 'www.google.com', 1234, '0.0.0.0' )
+}}}
+

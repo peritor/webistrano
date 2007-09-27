@@ -1,0 +1,602 @@
+/* GENERAL */
+
+body {
+	background-color: #CACACA;
+	font-family: "Trebuchet MS", Verdana, serif;
+	line-height: 16px;
+}
+
+ul {
+	margin: 0px;
+}
+
+p {
+	margin: 0px 0px;
+	padding: 0px 0px 7px 0px;
+}
+
+form p {
+	margin: 0px 0px;
+	padding: 0px 0px 15px 0px;
+}
+
+a {
+	color: #A40008;
+	font-weight: bold;
+	text-decoration: none
+}
+a:hover {
+	color: #A40008;
+	font-weight: bold;
+	text-decoration: underline
+}
+
+select, input, textarea {
+	border: 1px solid #AAAAAA;
+	padding: 2px;
+	margin-top: 2px;
+	font-family: "Trebuchet MS", Verdana, serif;
+	font-size: 12px;
+}
+
+select {
+	padding: 0px;
+}
+
+input:focus, textarea:focus {
+	background-color: #F9F9F9;
+	border: 1px solid #666666;
+}
+
+/* FIELDSETS */
+
+fieldset {
+	border: 1px solid #CCCCCC;
+	padding: 5px 20px 15px 20px;
+}
+
+legend {
+	font-size: 17px;
+	padding: 1px;
+	font-weight: bold;
+	color: #333333;
+}
+
+/* LAYOUT APPLICATION */
+
+#container_left {
+	margin: 0 auto;
+	width: 950px;
+	background: url(<%= image_path('peritor_theme/bg_left.png')%>) left repeat-y;
+}
+
+#container_right {
+	width: 950px;
+	background: url(<%= image_path('peritor_theme/bg_right.png')%>) right repeat-y;
+}
+
+#header_top {
+	width: 890px;
+	height: 88px;
+	background: url(<%= image_path('peritor_theme/bg_top.png')%>) repeat-x;
+	border-bottom: 1px solid #AAAAAA;
+}
+
+#header_left {
+	width: 920px;
+	height: 89px;
+	padding: 0px 0px 0px 30px;
+	background: url(<%= image_path('peritor_theme/bg_left_top.png')%>) left top no-repeat;
+}
+
+#header_right {
+	height: 89px;
+	padding: 0px 30px 0px 0px;
+	background: url(<%= image_path('peritor_theme/bg_right_top.png')%>) right top no-repeat;
+}
+
+#sub_header {
+	text-align: right;
+	float: right;
+	font-weight: bold;
+	font-size: 16px;
+	color: #444444;
+	padding-right: 10px;
+	padding-top: 59px;
+}
+#main_content {
+	margin: 0px 20px;
+	padding: 30px 20px 20px 20px;
+	background: #FFFFFF;
+	min-height: 350px;
+} 
+
+#main_content_bottom {
+	width: 890px;
+	height: 30px;
+	background: url(<%= image_path('peritor_theme/bg_bottom.png')%>) repeat-x;
+}
+
+#main_content_bottom_left {
+	width: 920px;
+	height: 30px;
+	padding: 0px 0px 0px 30px;
+	background: url(<%= image_path('peritor_theme/bg_left_bottom.png')%>) left top no-repeat;
+}
+
+#main_content_bottom_right {
+	height: 30px;
+	padding: 0px 30px 0px 0px;
+	background: url(<%= image_path('peritor_theme/bg_right_bottom.png')%>) right top no-repeat;
+}
+
+#footer {
+	width:870px;
+	font-size: 11px;
+	font-weight: bold;
+	margin: 0px auto
+}
+
+#footer_logged {
+	float: right;
+}
+
+.content {
+	float: left;
+	width: 670px;
+	text-align: left;
+	padding: 0px 0px 0px 30px;
+	*padding: 0px;
+	font-size: 12px;
+}
+
+/* MENU */
+
+.menu {
+	width: 139px;
+	float: left;
+	font-size: 12px;
+	margin-right: 30px;
+}
+
+.menu_box {
+	width: 169px;
+	margin: 0px 0px 20px 0px;
+}
+
+.menu_box_header {
+	height: 23px;
+	background: url(<%= image_path('peritor_theme/menu_top.gif')%>) repeat-x;	
+}
+
+.menu_box_arrow {
+	float: right;
+	line-height:none;
+	cursor:pointer;
+	margin: 0px;
+	padding: 0px;
+	height:20px;
+}
+
+.menu_box_body {
+	padding: 10px 0px 2px 0px;
+	border-right: 1px solid #c30911;
+	border-left: 1px solid #c30911;
+	width: 167px;
+	overflow: hidden;
+}
+
+.menu_box_footer {
+	width: 169px;
+	height: 8px;
+	background: url(<%= image_path('peritor_theme/menu_bottom.gif')%>) top repeat-x;	
+}
+
+.menu_item{
+	padding: 2px 0px 4px 10px;
+}
+
+.menu_title {
+	padding: 4px 0px 0px 11px;
+}
+
+.has_submenu{
+  padding-left: 0px !important;
+}
+
+.menu_title a {
+	font-size: 13px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+.menu_title a:hover {
+	color: #FFFFFF;
+}
+
+.menu_link_title {
+	padding: 5px 0px 4px 10px;
+	line-height: 1;
+	height:11px;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: hand;
+}
+
+.menu_icons {
+	float:left;
+	height:20px;
+	margin-top:1px;
+}
+
+a.menu_link {
+	outline-style:none !important;
+	outline-width:0pt !important;
+	display: block;
+	clear: both;
+	width:167px;
+	color: #000000;
+	font-weight: bold;
+	line-height:1;
+	margin-bottom: 1px;
+	text-decoration: none;
+}
+
+a.menu_link:hover {
+	color: #A40008;
+	background-color: #EEEEEE;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a.active_menu_link {
+	color: #A40008;
+	background-color: #EEEEEE;
+}
+
+a.active_menu_link:hover {
+	color: #A40008;
+	background-color: #EEEEEE;
+}
+
+a.menu_link_new {
+	background: url(<%= image_path('peritor_theme/arrow_content.gif')%>) left no-repeat;	
+	background-position: 29px 4px;
+	padding-left: 13px;
+}
+
+a.menu_link_create {
+	background: url(<%= image_path('peritor_theme/arrow_content.gif')%>) left no-repeat;	
+	background-position: 8px 4px;
+	padding-left: 13px;
+}
+
+
+/* CONTENT LINKS */
+
+a.arrow_link {
+	background: url(<%= image_path('peritor_theme/arrow_content.gif')%>) left no-repeat;	
+	padding-left: 14px;
+}
+
+a.arrow_link_big {
+	background: url(<%= image_path('peritor_theme/arrow_content_big.gif')%>) left no-repeat;	
+	padding-left: 14px;
+	font-size: 17px;
+}
+
+/* BOX */ 
+
+.box_top, .box_bottom {
+	height: 20px;
+	background-color: #EEEEEE;
+}
+
+/*.box_box {
+	float:right;
+	margin-left: 20px;
+}
+
+.recipes_box {
+	width: 300px;
+	height: 83px;
+	margin-top: 5px;
+	padding: 5px;
+	overflow: auto;
+	border: 1px solid #AAAAAA;
+}
+*/
+
+.box_body {
+	height: auto;
+	padding: 0px 20px 0px 20px;
+	background-color: #EEEEEE;
+}
+
+.box_top_left {
+	height: 20px;
+	padding-left:10px;
+	background: url(<%= image_path('peritor_theme/box_left_top.gif')%>) left no-repeat;
+}
+
+.box_top_right {
+	height: 20px;
+	padding-right:10px;
+	background: url(<%= image_path('peritor_theme/box_right_top.gif')%>)  right no-repeat;
+}
+
+.box_bottom_left {
+	height: 20px;
+	padding-left:10px;
+	background: url(<%= image_path('peritor_theme/box_left_bottom.gif')%>) left no-repeat;
+}
+
+.box_bottom_right {
+	height: 20px;
+	padding-right:10px;
+	background: url(<%= image_path('peritor_theme/box_right_bottom.gif')%>)  right no-repeat;
+}
+
+/* FLASHBOX */
+
+#flash {
+	padding: 5px;
+	color: #A40008;
+	font-weight: bold;
+}
+
+.flashbox_top {
+	height: 20px;
+	background: url(<%= image_path('peritor_theme/flashbox_top.gif')%>) repeat-x;
+}
+
+.flashbox_bottom {
+	height: 20px;
+	background: url(<%= image_path('peritor_theme/flashbox_bottom.gif')%>) repeat-x;
+}
+
+.flashbox_body_left {
+	height: auto;
+	padding: 0px 0px 0px 20px;
+	background-color: #EEEEEE;
+	background: url(<%= image_path('peritor_theme/flashbox_left.gif')%>) left repeat-y;
+}
+
+.flashbox_body_right {
+	height: auto;
+	padding: 0px 20px 0px 0px;
+	background-color: #EEEEEE;
+	background: url(<%= image_path('peritor_theme/flashbox_right.gif')%>) right repeat-y;
+}
+
+.flashbox_top_left {
+	height: 20px;
+	padding-left:20px;
+	background: url(<%= image_path('peritor_theme/flashbox_left_top.gif')%>) left no-repeat;
+}
+
+.flashbox_top_right {
+	height: 20px;
+	padding-right:20px;
+	background: url(<%= image_path('peritor_theme/flashbox_right_top.gif')%>) right no-repeat;
+}
+
+.flashbox_bottom_left {
+	height: 20px;
+	padding-left:20px;
+	background: url(<%= image_path('peritor_theme/flashbox_left_bottom.gif')%>) left no-repeat;
+}
+
+.flashbox_bottom_right {
+	height: 20px;
+	padding-right:20px;
+	background: url(<%= image_path('peritor_theme/flashbox_right_bottom.gif')%>) right no-repeat;
+}
+
+/* TEXT */
+
+#header h1 {
+	margin-bottom: 0px;
+	font-size: 28px;
+	font-weight: bold;
+	color: #A40008
+}
+.content h2 {
+	margin-top: 0px;
+	font-size: 24px;
+	line-height: 30px;
+	font-weight: bold;
+	text-align: left;
+	color: #A40008
+}
+.content h3 {
+	margin-top: 0px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: left;
+	color: #A40008
+}
+.clear {
+	display: block;
+	clear: both;
+	width: 100%;
+	height:1px;
+	overflow:hidden;
+}
+
+/*
+.quote {
+	margin: 20px;
+	text-align: center;
+	font-weight: bold;
+	font-style: italic
+}
+*/
+
+
+/* TABLES */
+
+table.sortable { width:100% }
+table.sortable tr.odd { background-color: #FAFAFA; }
+table.sortable tr.even { background-color: #EEEEEE; }
+table.sortable tbody tr:hover { background-color: #CCCCCC; }
+table.sortable td { padding: 4px; }
+table.sortable th { padding: 4px; white-space: nowrap;}
+
+/* MISC */
+
+div.log_output {
+  margin: 10px 0px;
+  padding: 10px;
+  color: #333333;
+  background-color: #EEEEEE;
+  overflow: auto;
+  width: 600px;
+}
+
+div.action_box{
+  float: right;
+  width: 274px;
+  margin-left: 10px;
+  margin-top: 37px; 
+}
+
+div.special_box{
+  float: right;
+  margin-top: -10px;
+  height: 150px;
+  width: 230px;
+  padding:30px 10px 10px 30px;
+}
+
+div.status_box{
+  background: url(<%= image_path('peritor_theme/box_status.gif')%>) no-repeat;
+}
+
+div.stages_box{
+  background: url(<%= image_path('peritor_theme/box_stages.gif')%>) no-repeat;
+}
+
+div.host_box{
+  background: url(<%= image_path('peritor_theme/box_host.gif')%>) no-repeat;
+}
+
+div.recipe_box{
+  background: url(<%= image_path('peritor_theme/box_recipe.gif')%>) no-repeat;
+}
+
+div.user_box{
+  background: url(<%= image_path('peritor_theme/box_user.gif')%>) no-repeat;
+}
+
+.role_status_deployed{
+  color: green;
+}
+
+.role_status_blank{
+  color: red;
+}
+
+.role_status_setup_done{
+/*  color: #333333;*/
+}
+
+.deployment_status_success{
+  color: green;
+}
+
+.deployment_status_failed{
+  color: red;
+}
+
+.role_status_running{
+/*  color: #333333;*/
+}
+
+.configuration_prompt{
+  font-style:italic;
+}
+
+/* RAILS related */
+
+.fieldWithErrors input, .fieldWithErrors select, .fieldWithErrors textarea {
+  background-color: #FFDFDF;
+  border: 1px solid #A40008;
+  display: inline;
+  margin-bottom: 7px;
+}
+
+/*
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+*/
+div.uploadStatus {
+  margin: 5px;
+}
+
+div.progressBar {
+  margin: 5px;
+}
+
+div.progressBar div.border {
+  background-color: #fff;
+  border: 1px solid grey;
+  width: 100%;
+}
+
+div.progressBar div.background {
+  background-color: #333;
+  height: 18px;
+  width: 0%;
+}
+
+/* multiple select helper */ 
+
+.multiple_select {
+  border: 1px solid #aaa;
+  height: 100px;
+  width: 330px;
+  padding: 2px;
+  overflow: auto;
+}
+
+.multiple_select, .multiple_select ul {
+  list-style-type: none;
+  margin-top: 2px;
+}
+
+.multiple_select_checkbox {
+  background: #fff;
+}
+
+.alt {
+  background: #eef;
+}

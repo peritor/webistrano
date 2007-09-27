@@ -1,0 +1,5 @@
+Interceptors are implemented as proxy objects that front the requested service. Thus, if you request a service that has 3 interceptors wrapped around it, you're really getting a proxy object back that will invoke the interceptors (in order) before the requested method of the service is invoked.
+
+The interceptors themselves are attached to the service during the execution of its instantiation pipeline (see Service Models). Thus, any action in the pipeline that is situated closer to the service than the interceptor pipeline action will bypass the interceptors altogether. This allows you to attach hooks to your service that can be called without invoking the interceptors on the service.
+
+Another thing to keep in mind is that the interceptors are one-to-one for each service instance. Thus, if your service is a prototype (see the Service Models chapter), you'll have one instance of each interceptor for each instance of your service.

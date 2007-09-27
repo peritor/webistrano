@@ -1,0 +1,50 @@
+The @#process.open@ interface provides a simpler way to manage interactive sessions. It still works via callbacks, and it still requires a kind of state machine in order to process input, but it does simplify things a little bit.
+
+Just open an SSH session. The @#process@ service of the session manages access to convenience methods for handling and communicating with remote processes. In particular the @#open@ method of the @#process@ service allows you to constuct callbacks for dealing with remote processes, more conveniently than using channels directly.
+
+Consider the "bc" command. It is a command-line calculator that accepts expressions on @stdin@ and writes the results to @stdout@. When it encounters the word @quit@ on the input, it exits. Sounds like a great way to demonstrate the @process@ service...
+
+{{{lang=ruby,number=true,caption=Using #process.open
+Net::SSH.start( 'host' ) do |session|
+
+  session.process.open( "bc" ) do |bc|
+    dialog = [ "5+5", "7*12", "sqrt(2.000000)", "quit" ]
+
+    bc.on_success do |p|
+      puts "requesting result of #{dialog.first}"
+      p.puts dialog.shift
+    end
+
+    bc.on_stdout do |p,data|
+      puts "--> #{data}"
+      unless dialog.empty?
+        puts "requesting result of #{dialog.first}"
+        p.puts dialog.shift
+      end
+    end
+
+ bc.on_exit do |p, status|
+      puts "process finished with exit status: #{status}"
+    end
+  end
+
+end
+}}}
+
+Notice the progression. First, the session itself is started. Then, while the session is active, the process is invoked (via @#process.open@). After we have a handle to the process (which is yielded to the block, in this case), we set up the callbacks on the process. These are reminiscent of, but different from, the callbacks that we set up on the channel itself in the previous section.
+
+The following callbacks are defined for a process handle:
+
+table(list).
+|_. Name |_. Description |
+|=^. @on_exit@ | This callback is invoked when the process terminates normally. The block should accept two parameters: the process handle itself, and the exit status of the process.|
+|=^. @on_failure@ | This callback is invoked when the process could not be invoked. It should take two parameters: the process handle itself, and a status string (which currently always @nil@).|
+|=^. @on_success@ | This callback is invoked after the process has been successfully started.  The callback should take a single parameter: the process handle itself.|
+|=^. @on_stderr@ | This callback is invoked when data is received from the process's @stderr@ stream. The callback should have two parameters: the process handle, and the data.|
+|=^. @on_stdout@ | This callback is invoked when data is received from the process's @stdout@ stream. The callback should have two parameters: the process handle, and the data.|
+
+Sending data to the process is as simple as calling @puts@ on the process handle. If you don't want a newline appended to your data, use @write@ instead.
+
+Notice that, when sending a block to @#process.open@, you do not have to explicitly invoke @session.loop@. It is implicitly called at the end of the block. If you ever want to set up multiple processes to run in parallel, simply use @#process.open@ without a block. The process handle will be returned, and you will be required to execute @session.loop@ manually.
+
+For more information on the @#process.open@ service, see the API documentation for @Net::SSH::Service::Process::Open@.

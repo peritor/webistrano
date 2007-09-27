@@ -1,0 +1,25 @@
+<div id="users_open_content" style="<%=h show_if_opened(status) %>">
+  <% if User.count > 0 %>
+    <% for user in User.find(:all, :order => "login ASC") %>
+      <a href="<%= user_path(user) %>" class="menu_link <%=h active_link_class(user) %>">
+		    <div class="menu_link_title">
+		      <%=h user.login %>
+		    </div>
+	    </a>
+    <% end %>
+  <% else %>
+    <div class="menu_item">No user created yet</div>
+    <a href="<%= new_user_path %>" class="menu_link  menu_link_create">
+	    <div class="menu_link_title">
+	      New user
+	    </div>
+	  </a>
+  <% end %>
+</div>
+<div id="users_closed_content" style="<%=h show_if_closed(status) %>">
+  <a href="javascript:open_menu_box('users')" class="menu_link  menu_link_create">
+	  <div class="menu_link_title">
+	    <%=h pluralize(User.count, 'user')%>
+	  </div>
+  </a>  
+</div>

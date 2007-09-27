@@ -1,0 +1,63 @@
+There are two ways to attach interceptors to your services. The first is to implement an interceptor _factory_ that returns new interceptor _instances_, and attach the factory to your service. The second is to specify a block that implements the required functionality. Both have their uses.
+
+h3. Interceptor Factories
+
+Interceptor factories are useful in situations where you want to implement some functionality and have it apply to multiple services. Interceptors from factories are also faster (less overhead) than interceptors from blocks, and so might be appropriate where performance is an issue.
+
+An example is the LoggingInterceptor that ships with Needle. Because it is functionality that could be used on any number of services, it is implemented as a factory.
+
+You can attach interceptor factories to your service using the @#interceptor(...).with {...}@ syntax:
+
+{{{lang=ruby,number=true,caption=Attaching an interceptor to a service
+reg.register( :foo ) {...}
+reg.intercept( :foo ).with { MyInterceptorFactory }
+}}}
+
+Note that you could also make the interceptor factory a service:
+
+{{{lang=ruby,number=true,caption=Attaching an service as an interceptor
+reg.register( :foo ) {...}
+reg.register( :my_interceptor ) { MyInterceptorFactory }
+reg.intercept( :foo ).with { |c| c.my_interceptor }
+}}}
+
+And, to make accessing interceptor services even more convenient, you can use the @#with!@ method (which executes its block within the context of the calling container):
+
+{{{lang=ruby,number=true,caption=Attaching an service as an interceptor via #with!
+reg.register( :foo ) {...}
+reg.register( :my_interceptor ) { MyInterceptorFactory }
+reg.intercept( :foo ).with! { my_interceptor }
+}}}
+
+h3. Blocks
+
+Sometimes creating an entire class to implement an interceptor is overkill. This is particularly the case during debugging or testing, when you might want to attach an interceptor to class to verify that a parameter passed is correct, or a return value is what you expect. To satisfy these conditions, you can using the
+@#doing@ method.  Just give it a block that accepts two parameters (the chain, and context) and you're good to go!
+
+{{{lang=ruby,number=true,caption=Defining interceptors on the fly
+reg.register( :foo ) {...}
+reg.intercept( :foo ).doing { |chain,ctx| ...; chain.process_next( ctx ) }
+}}}
+
+Note that this approach is about 40% slower than using an interceptor factory, so it should not be used if performance is an issue.
+
+h3. Options
+
+Some interceptors can accept configuration options. For example, the LoggingInterceptor allows clients to specify methods that should and shouldn't be intercepted. Options are specified via the @#with_options@ method.
+
+{{{lang=ruby,number=true,caption=Configuring interceptors
+reg.register( :foo ) {...}
+reg.intercept( :foo ).
+  with { |c| c.logging_interceptor }.
+  with_options( :exclude => [ "method1", "method2" ] )
+}}}
+
+Options can apply to the blocks given to the @#doing@ method, too. The block may access the options via the @#data[:options]@ member of the context:
+
+{{{lang=ruby,number=true,caption=Configuring #doing interceptors
+reg.intercept( :foo ).
+  doing { |ch,ctx| ...; p ctx.data[:options][:value]; ... }.
+  with_options( :value => "hello" )
+}}}
+
+With blocks, of course, the value of such an approach is limited.

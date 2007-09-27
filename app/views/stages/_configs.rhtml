@@ -1,0 +1,26 @@
+<% if @stage.configuration_parameters.empty? %>
+  <br/>
+    No stage specific configuration added yet. Stage specific configuration entries override project configuration entries. 
+    Typical examples are a different repository path (e.g. trunk) or a different Rails environment.
+    Please add configuration entries.
+  <br/>
+<% else %>
+  <table class="sortable">
+    <tr>
+      <th width="20%">Name</th>
+      <th width="77%">Value</th>
+      <th width="1%">Prompt?</th>
+      <th width="1%"></th>
+      <th width="1%"></th>
+    </tr>
+  <% for config in @stage.configuration_parameters %>
+    <tr class="<%= cycle :even, :odd, :name => 'configs' %>">
+      <td><%=h config.name %></td>
+      <td><%=h hide_password_in_value(config) %></td>
+      <td><%= config.prompt_status_in_html %></td>
+      <td><%= link_to 'Edit', edit_project_stage_stage_configuration_path(@project, @stage, config) %></td>
+      <td><%= link_to 'Delete', project_stage_stage_configuration_path(@project, @stage, config), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

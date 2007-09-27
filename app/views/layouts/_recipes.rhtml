@@ -1,0 +1,25 @@
+<div id="recipes_open_content" style="<%=h show_if_opened(status) %>">
+  <% if Recipe.count > 0 %>
+    <% for recipe in Recipe.find(:all, :order => "name ASC") %>
+      <a href="<%= recipe_path(recipe) %>" class="menu_link <%=h active_link_class(recipe) %>">
+		    <div class="menu_link_title">
+		      <%=h recipe.name %>
+		    </div>
+	    </a>
+    <% end %>
+  <% else %>
+    <div class="menu_item">No recipe created yet</div>
+    <a href="<%= new_recipe_path %>" class="menu_link  menu_link_create">
+  	  <div class="menu_link_title">
+  	    New recipe
+  	  </div>
+	  </a>
+  <% end %>
+</div>
+<div id="recipes_closed_content" style="<%=h show_if_closed(status) %>">
+  <a href="javascript:open_menu_box('recipes')" class="menu_link  menu_link_create">
+	  <div class="menu_link_title">
+	    <%=h pluralize(Recipe.count, 'recipe')%>
+	  </div>
+  </a>
+</div>

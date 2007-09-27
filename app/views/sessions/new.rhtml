@@ -1,0 +1,20 @@
+<h2>Welcome to Webistrano</h2>
+
+<% form_tag sessions_path do -%>
+
+  <fieldset class="fieldset">
+    <legend>Webistrano login</legend>
+    <p><label for="login">Login</label><br/>
+    <%= text_field_tag 'login' %></p>
+
+    <p><label for="password">Password</label><br/>
+    <%= password_field_tag 'password' %></p>
+
+    <p><%= check_box_tag 'remember_me', :style => 'border: none;' %>
+    <label for="remember_me">Remember me</label></p>
+
+    <p>
+    <%= submit_tag 'Log in' %>
+    </p>
+  </fieldset>
+<% end -%>

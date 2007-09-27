@@ -1,0 +1,210 @@
+#!/usr/bin/env ruby
+# =======================================================================
+# Net::SSH -- A Ruby module implementing the SSH2 client protocol
+# Copyright (C) 2004-2007 Jamis Buck (jamis@37signals.com)
+# 
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+# 
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+# 
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+# =======================================================================
+
+require 'base64'
+require 'optparse'
+require 'net/ssh'
+require 'net/ssh/util/openssl'
+require 'net/ssh/util/buffer'
+
+begin
+  require 'password'
+  $use_password = true
+rescue LoadError
+  $use_password = false
+end
+
+# This class represents the "keygen" application for the Net::SSH suite.
+# It implements a subset of the functionality of ssh-keygen, and tries to
+# be reasonably commandline-compatible.
+class KeyGenerator
+
+  # Create a new KeyGenerator. By default the script's commandline will be
+  # used to initialize the generator, but you can specify a different array
+  # of options manually.
+  #
+  # If there is an error parsing the arguments, the application will halt
+  # after displaying the error and a description of available options.
+  def initialize( args=ARGV )
+    begin
+      parse_args( args )
+    rescue OptionParser::ParseError => e
+      puts "Error: #{e.message}"
+      puts @parser
+      exit
+    end
+  end
+
+  # The driver for the application. Currently, it just calls +generate_key+,
+  # but eventually other functionality may be added. This method would do
+  # the logic to determine which methods should be invoked.
+  def run
+    generate_key
+  end
+
+  KEYS = {
+    "rsa" => OpenSSL::PKey::RSA,
+    "dsa" => OpenSSL::PKey::DSA
+  }
+
+  # Generate and export public and private key files according to the settings
+  # given by the options array when the object was instantiated. For values that
+  # may not have been specified (like filename, and passphrase), the user will
+  # be prompted. If the 'ruby-password' module is installed, it will be used for
+  # prompting for the passphrase, otherwise a simple +gets+ will be used.
+  def generate_key
+    key_class = KEYS[ @options[:type] ] or
+      raise NotImplementedError, "unsupported key type `#{@options[:type]}'"
+
+    if_chatty "generating key..."
+    key = key_class.new( @options[ :bits ] )
+
+    unless ( filename = @options[ :filename ] )
+      default = "#{ENV['HOME']}/.ssh/id_#{@options[:type]}"
+      print "Enter file in which to save the key (#{default}): "
+      answer = gets.strip
+      filename = ( answer.length == 0 ? default : answer )
+    end
+
+    unless ( passphrase = @options[ :new_passphrase ] )
+      loop do
+        passphrase = get_password "Enter passphrase (empty for no passphrase): "
+        verify_phrase = get_password "Enter same passphrase again: "
+        break if passphrase == verify_phrase
+      end
+
+      passphrase = nil if passphrase.length == 0
+    end
+
+    if passphrase
+      private_pem = key.export( OpenSSL::Cipher::Cipher.new( "des-ede3-cbc" ), passphrase )
+    else
+      private_pem = key.export
+    end
+
+    public_pem = export_ssh_pubkey( key )
+
+    File.open( filename, "w" ) { |file| file.write private_pem }
+    File.open( filename + ".pub", "w" ) { |file| file.write public_pem }
+
+    if_chatty "done!"
+  end
+  private :generate_key
+
+  # Returns a string representing the SSH-formatted public key, suitable for inserting
+  # into (for instance) the authorized_keys file.
+  def export_ssh_pubkey( key )
+    s = key.ssh_type + " "
+
+    writer = Net::SSH::Util::WriterBuffer.new
+    writer.write_key key
+    s << Base64.encode64( writer.to_s ).strip.gsub( /[\n\r\t ]/, "" )
+    s << " #{ENV['USER']}@#{ENV['HOSTNAME']}"
+
+    s
+  end
+  private :export_ssh_pubkey
+
+  # A utility method for getting a password. If the 'ruby-password' module is available,
+  # it will be used, otherwise a +print+/+gets+ combination will be used. The entered
+  # password will be returned.
+  def get_password( prompt )
+    if $use_password
+      return Password.get( prompt )
+    else
+      print prompt
+      return gets.chomp
+    end
+  end
+  private :get_password
+
+  # Parse the given arguments as if they were commandline arguments.
+  def parse_args( args )
+    @options = {
+      :bits => 1024
+    }
+
+    @parser = OptionParser.new do |parser|
+      parser.banner = "Usage: rb-keygen [options]"
+
+      parser.separator ""
+      parser.separator "Options:"
+
+      parser.on( "-b", "--bits BITS",
+                 "Number of bits in the key to create." ) do |bits|
+        @options[ :bits ] = bits.to_i
+      end
+
+      parser.on( "-f", "--filename FILENAME",
+                 "Filename of the keyfile." ) do |filename|
+        @options[ :filename ] = filename
+      end
+                  
+      parser.on( "-q", "--quiet", "Suppress normal output." ) do
+        @options[ :quiet ] = true
+      end
+                  
+      parser.on( "-t", "--type TYPE",
+                 "Specify the TYPE of key to create (`rsa' or `dsa')" ) do |type|
+        unless [ "rsa", "dsa" ].include? type
+          raise OptionParser::ParseError, "`#{type}' is not a valid key type, must be `rsa' or `dsa'"
+        end
+        @options[ :type ] = type
+      end
+
+      parser.on( "-N", "--new-passphrase PHRASE",
+                 "Provide new passphrase" ) do |phrase|
+        @options[ :new_passphrase ] = phrase
+      end
+
+      parser.separator ""
+      parser.separator "Other options:"
+
+      parser.on_tail( "-h", "--help", "Show this message" ) do
+        puts parser
+        exit
+      end
+    end
+
+    @parser.parse! args
+
+    unless @options[ :type ]
+      raise OptionParser::ParseError, "You must specify a key type (-t)"
+    end
+
+    unless [ "rsa", "dsa" ].include? @options[ :type ]
+      raise OptionParser::ParseError, "You must specify a key type (-t)"
+    end
+  end
+  private :parse_args
+
+  # Used for logging optional messages. If the application was told to be
+  # quiet (with the -q option), this method does nothing; otherwise, it
+  # prints the messages to +stderr+.
+  def if_chatty( *args )
+    unless @options[ :quiet ]
+      $stderr.puts(*args)
+    end
+  end
+  private :if_chatty
+
+end
+
+KeyGenerator.new.run

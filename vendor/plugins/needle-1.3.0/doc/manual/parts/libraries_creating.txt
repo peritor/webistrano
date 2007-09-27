@@ -1,0 +1,30 @@
+This centralization is implemented by creating a module for each library you want to have services for. That module should then define a module function called (by default) @register_services@. This function should accept a single parameter--the Needle container that the services will be added to.
+
+For example, if I had a library of cryptographic routines and I wanted to make them accessible as Needle services, I would create a module to contain the service definitions. Typically, this module will be defined in a file called "services.rb", although you can certainly name it whatever you like.
+
+{{{lang=ruby,number=true,caption=Needle-enabled library example
+module Crypto
+  
+  def register_services( container )
+    container.namespace_define( :crypto ) do |b|
+      b.prng do
+        require 'crypto/prng'
+        PRNG.new
+      end
+
+      b.des do
+        require 'crypto/des'
+        DES.new
+      end
+
+      ...
+    end
+  end
+  module_function :register_services
+
+end
+}}}
+
+Notice that there are no explicit dependencies on Needle, only on the interfaces Needle publishes. Thus, third-parties can add service configuration modules to their libraries without introducing dependencies on Needle.
+
+Once a service library has been created, it can then be accessed from another library or application that wishes to import those services.

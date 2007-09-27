@@ -1,0 +1,331 @@
+<html>
+  <head>
+    <title>Needle Manual :: Chapter 4: Dependency Injection</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Needle&mdash;</span><br />
+            <span class="tagline">to the point --></span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Needle Version: <strong>1.3.0</strong><br />
+            Manual Last Updated: <strong>2005-12-24 15:20 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Needle Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Needle?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">How Can It Help Me?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Alternatives</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Registry
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Creating</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Services</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Namespaces</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Service Locator
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Conventional Architecture</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Locator Pattern</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-4.html">
+                Dependency Injection
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Setup</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                Interceptors
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Architecture</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Attaching</a></li>
+                
+                  <li><a href="chapter-5.html#s4">Ordering</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Custom</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Service Models
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Pipelines</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Models</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Logging
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-7.html#s2">LogFactory</a></li>
+                
+                  <li><a href="chapter-7.html#s3">Configuration</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-8.html">
+                Service Libraries
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-8.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-8.html#s2">Creating Libraries</a></li>
+                
+                  <li><a href="chapter-8.html#s3">Using Libraries</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-9.html">
+                Customizing Needle
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-9.html#s1">Namespaces</a></li>
+                
+                  <li><a href="chapter-9.html#s2">Interceptors</a></li>
+                
+                  <li><a href="chapter-9.html#s3">Contexts</a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://needle.rubyforge.org/api/index.html">Needle API</a></li>
+            <li><a href="http://needle.rubyforge.org/faq.html">Needle FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-3.html">Previous (3. Service Locator)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-5.html">Next (5. Interceptors)</a>
+  
+</div></div>
+
+<h1>4. Dependency Injection</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       4.1. Overview
+     </h2>
+
+   
+
+   <div class="section">
+     <p>The service locator works well when there are few dependencies, and the dependency graph is not very deep. However, it has a few drawbacks:</p>
+
+
+	<ol>
+	<li>It requires each object to accept the locator as a parameter, and to know how to use it. This is problematic if you want to use existing classes that were created without knowledge of a locator. (I.e., <code>Logger</code>, in the Ruby library).</li>
+	</ol>
+
+
+	<ol>
+	<li>It requires each object to know what the services are named, in the locator. If you ever decide to change the name of a service in the locator, you may have to change lots of code to comply with the change.</li>
+	</ol>
+
+
+	<ol>
+	<li>For deep dependency graphs, it can become cumbersome to have to pass the locator to each constructor.</li>
+	</ol>
+
+
+	<p>This is where <em>dependency injection</em> comes in. It allows you to define how each service is initialized, including setting dependencies (either via constructor parameters or via property accessors). In fact, it can do a lot more than that, even allowing you to specify how the lifestyle of the service should be managed and hooking &#8220;interceptors&#8221; onto the service to filter method invocations.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       4.2. Setup
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Setting up for DI is very similar to the setup for a service locator, but instead of passing the locator (we&#8217;ll call it a <em>registry</em> now), we only pass (or set) the dependencies that the service itself needs.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Dependency injection example [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br />27<br />28<br />29<br />30<br />31<br />32<br />33<br />34<br />35<br />36<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">require</span> <span class="punct">'</span><span class="string">needle</span><span class="punct">'</span>
+
+<span class="keyword">def </span><span class="method">create_application</span>
+  <span class="ident">registry</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">define</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">b</span><span class="punct">|</span>
+    <span class="ident">b</span><span class="punct">.</span><span class="ident">view</span>          <span class="punct">{</span> <span class="constant">View</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+    <span class="ident">b</span><span class="punct">.</span><span class="ident">logger</span>        <span class="punct">{</span> <span class="constant">Logger</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+    <span class="ident">b</span><span class="punct">.</span><span class="ident">database</span>      <span class="punct">{</span> <span class="constant">Database</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">logger</span> <span class="punct">)</span> <span class="punct">}</span>
+    <span class="ident">b</span><span class="punct">.</span><span class="ident">authenticator</span> <span class="punct">{</span> <span class="constant">Authenticator</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span><span class="ident">b</span><span class="punct">.</span><span class="ident">logger</span><span class="punct">,</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">database</span><span class="punct">)</span> <span class="punct">}</span>
+    <span class="ident">b</span><span class="punct">.</span><span class="ident">session</span>       <span class="punct">{</span> <span class="constant">Session</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span><span class="ident">b</span><span class="punct">.</span><span class="ident">logger</span><span class="punct">,</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">database</span><span class="punct">)</span> <span class="punct">}</span>
+
+    <span class="ident">b</span><span class="punct">.</span><span class="ident">app</span> <span class="keyword">do</span>
+      <span class="ident">app</span> <span class="punct">=</span> <span class="constant">Application</span><span class="punct">.</span><span class="ident">new</span>
+      <span class="ident">app</span><span class="punct">.</span><span class="ident">logger</span> <span class="punct">=</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">logger</span>
+      <span class="ident">app</span><span class="punct">.</span><span class="ident">view</span> <span class="punct">=</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">view</span>
+      <span class="ident">app</span><span class="punct">.</span><span class="ident">database</span> <span class="punct">=</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">database</span>
+      <span class="ident">app</span><span class="punct">.</span><span class="ident">authenticator</span> <span class="punct">=</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">authenticator</span>
+      <span class="ident">app</span><span class="punct">.</span><span class="ident">session</span> <span class="punct">=</span> <span class="ident">b</span><span class="punct">.</span><span class="ident">session</span>
+      <span class="ident">app</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+
+  <span class="ident">registry</span><span class="punct">[</span><span class="symbol">:app</span><span class="punct">]</span>
+<span class="keyword">end</span>
+
+<span class="keyword">class </span><span class="class">Application</span>
+  <span class="ident">attr_writer</span> <span class="symbol">:view</span><span class="punct">,</span> <span class="symbol">:logger</span><span class="punct">,</span> <span class="symbol">:database</span><span class="punct">,</span> <span class="symbol">:authenticator</span><span class="punct">,</span> <span class="symbol">:session</span>
+<span class="keyword">end</span>
+
+<span class="keyword">class </span><span class="class">Session</span>
+  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span> <span class="ident">logger</span><span class="punct">,</span> <span class="ident">database</span> <span class="punct">)</span>
+    <span class="attribute">@database</span> <span class="punct">=</span> <span class="ident">database</span>
+    <span class="attribute">@logger</span> <span class="punct">=</span> <span class="ident">logger</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="punct">...</span></pre></div></td></tr></table></div></div>
+
+
+	<p>The <code>create_application</code> method is now (necessarily) a little more complex, since it now contains all of the initialization logic for each service in the application. However, look how much simpler this made the other classes, especially the <code>Application</code> class.</p>
+
+
+	<p>Now, each class no longer even needs to care that it is being initialized via another container. All it knows is that when it is created, it will be given each of its dependencies (either as constructor parameters or as property accessors).</p>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-3.html">Previous (3. Service Locator)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-5.html">Next (5. Interceptors)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

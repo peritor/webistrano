@@ -1,0 +1,36 @@
+<% if @stage.deployments.empty? %>
+  <br/>
+    This stage was never deployed. 
+  <br/>
+<% else %>
+  <table class="sortable">
+    <tr>
+      <th width="1%">Task</th>
+      <th width="1%">Started (UTC)</th>
+      <th width="1%">Completed (UTC)</th>
+      <th width="95%">Comment</th>
+      <th width="1%">User</th>
+      <th width="1%">Status</th>
+    </tr>
+  <% for deployment in @stage.recent_deployments %>
+    <tr class="<%= cycle :even, :odd, :name => 'deployments' %>">
+      <td><%= link_to h(deployment.task), project_stage_deployment_path(@project, @stage, deployment) %></td>
+      <td nowrap><%=h deployment.created_at.to_s(:log)  %></td>
+      <td nowrap><%=h deployment.completed_at.to_s(:log) rescue nil %></td>
+      <td><%=h truncate(deployment.comment, 37) %></td>
+      <td><%= user_info(deployment.user) rescue '' %></td>
+      <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/'+deployment.status_image)%></td>
+    </tr>
+  <% end %>
+  </table>  
+<% end %>
+<br />
+  <% if @stage.deployment_possible? %>
+    <%= link_to 'New deployment', new_project_stage_deployment_path(current_project, @stage), :class => 'arrow_link' %> <%= (@stage.deployments.count > 1) ? '|' : '' %>
+  <% else %>
+    A deployment is currently not possible:<br />
+    <%= display_deployment_problems(@stage) %>
+  <% end %>
+  <% if @stage.deployments.count > 1 %>
+    <%= link_to "Complete deployment history", project_stage_deployments_path(@project, @stage), :class => 'arrow_link' %>
+  <% end %>

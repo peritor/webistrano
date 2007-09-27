@@ -1,0 +1,18 @@
+sqlite:
+  :adapter: sqlite
+  :dbfile: multiple_select.sqlite.db
+sqlite3:
+  :adapter: sqlite3
+  :dbfile: multiple_select.sqlite3.db
+postgresql:
+  :adapter: postgresql
+  :username: postgres
+  :password: postgres
+  :database: multiple_select_test
+  :min_messages: ERROR
+mysql:
+  :adapter: mysql
+  :host: localhost
+  :username: rails
+  :password:
+  :database: multiple_select_test

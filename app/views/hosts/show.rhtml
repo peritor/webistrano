@@ -1,0 +1,47 @@
+<h2>Host: <%=h @host.name %></h2>
+
+<div class="special_box host_box">
+</div>
+
+<div style="float: left; width:380px;">
+  <div class="box_top_left">
+    <div class="box_top_right">
+  	  <div class="box_top">
+	  </div>
+    </div>
+  </div>
+  <div class="box_body" style="min-height: 123px;">
+    <div>
+		<p>
+		  <b>Name:</b>
+		  <%=h @host.name %>
+		</p>
+		<p>
+		  <b>#Stages:</b>
+		  <%=h @host.stages.uniq.size %>
+		</p>
+		<p>
+		  <b>#Roles:</b>
+		  <%=h @host.roles.count %>
+		</p><br />
+		<%= link_to 'Edit Host', edit_host_path(@host), :class => 'arrow_link' %> | 
+		<%= link_to 'Delete', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %>
+	</div>	
+  </div>
+  <div class="box_bottom_left">
+    <div class="box_bottom_right">
+      <div class="box_bottom">  
+  	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>
+<br>
+
+<fieldset class="fieldset">
+  <legend>Stages</legend>
+  <%= render(:partial => 'stages')%>
+</fieldset>
+
+

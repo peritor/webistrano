@@ -1,0 +1,502 @@
+<html>
+  <head>
+    <title>Needle Manual :: Chapter 1: Introduction</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Needle&mdash;</span><br />
+            <span class="tagline">to the point --></span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Needle Version: <strong>1.3.0</strong><br />
+            Manual Last Updated: <strong>2005-12-24 15:20 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Needle Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li><strong>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Needle?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">How Can It Help Me?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Alternatives</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Registry
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Creating</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Services</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Namespaces</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Service Locator
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Conventional Architecture</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Locator Pattern</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Dependency Injection
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Setup</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                Interceptors
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Architecture</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Attaching</a></li>
+                
+                  <li><a href="chapter-5.html#s4">Ordering</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Custom</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Service Models
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Pipelines</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Models</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Logging
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-7.html#s2">LogFactory</a></li>
+                
+                  <li><a href="chapter-7.html#s3">Configuration</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-8.html">
+                Service Libraries
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-8.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-8.html#s2">Creating Libraries</a></li>
+                
+                  <li><a href="chapter-8.html#s3">Using Libraries</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-9.html">
+                Customizing Needle
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-9.html#s1">Namespaces</a></li>
+                
+                  <li><a href="chapter-9.html#s2">Interceptors</a></li>
+                
+                  <li><a href="chapter-9.html#s3">Contexts</a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://needle.rubyforge.org/api/index.html">Needle API</a></li>
+            <li><a href="http://needle.rubyforge.org/faq.html">Needle FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-2.html">Next (2. Registry)</a>
+  
+</div></div>
+
+<h1>1. Introduction</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       1.1. What is Needle?
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Needle is a dependency injection (also, inversion of control) container for <a href="http://www.ruby-lang.org">Ruby</a>.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       1.2. How Can It Help Me?
+     </h2>
+
+   
+
+   <div class="section">
+     <p>So, what can Needle do for you? Ultimately, it can reduce the amount of code that you have to write, simplifying many common programming tasks for you. This has the two-fold benefit of both decreasing application development time, and of decreasing the effort needed to maintain your application.</p>
+
+
+	<p>But what, <em>specifically</em>, can Needle do for you?</p>
+
+
+	<p>Try these on for size:</p>
+
+
+	<ul>
+	<li><a href="#logexec">Log Method Execution</a></li>
+		<li><a href="#refsvc">Reference Another Service</a></li>
+		<li><a href="#unittest">Unit Testing</a></li>
+		<li><a href="#lifestyle">Lifestyle Management</a></li>
+	</ul>
+
+
+	<p>(Thanks to Howard Lewis Ship for his <a href="http://jakarta.apache.org/hivemind">HiveMind</a> documentation, from which some of the above bullet points were adapted.)</p>
+
+
+	<h3>Log Method Execution <a name="#logexec"></a></h3>
+
+
+	<p>Needle has an integrated logging framework, and the ability to log execution trace information without modifying a single line of code in your classes. This means that you can easily see what methods get called, with what arguments, and what the return values are, all without having to physically modify any of your classes.</p>
+
+
+	<p>Consider the following code, demonstrating how this would be done without Needle:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Logging method execution without Needle [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">def </span><span class="method">foo</span><span class="punct">(</span> <span class="ident">arg1</span><span class="punct">,</span> <span class="ident">arg2</span> <span class="punct">)</span>
+  <span class="attribute">@log</span><span class="punct">.</span><span class="ident">debug</span><span class="punct">(</span> <span class="punct">&quot;</span><span class="string">in foo with <span class="expr">#{arg1}</span> and <span class="expr">#{arg2}</span></span><span class="punct">&quot;</span> <span class="punct">)</span> <span class="keyword">if</span> <span class="attribute">@log</span><span class="punct">.</span><span class="ident">debug?</span>
+  <span class="punct">...</span>
+  <span class="ident">result</span> <span class="punct">=</span> <span class="ident">the_result_of_the_method</span>
+  <span class="attribute">@log</span><span class="punct">.</span><span class="ident">debug</span><span class="punct">(</span> <span class="punct">&quot;</span><span class="string">finishing foo with <span class="expr">#{result}</span></span><span class="punct">&quot;</span> <span class="punct">)</span> <span class="keyword">if</span> <span class="attribute">@log</span><span class="punct">.</span><span class="ident">debug</span>
+  <span class="keyword">return</span> <span class="ident">result</span>
+<span class="keyword">rescue</span> <span class="constant">Exception</span> <span class="punct">=&gt;</span> <span class="ident">e</span>
+  <span class="attribute">@log</span><span class="punct">.</span><span class="ident">debug</span><span class="punct">(</span> <span class="punct">&quot;</span><span class="string">foo raised exception <span class="expr">#{e.message}</span> (<span class="expr">#{e.class}</span>)</span><span class="punct">&quot;</span> <span class="punct">)</span> <span class="keyword">if</span> <span class="attribute">@log</span><span class="punct">.</span><span class="ident">debug?</span>
+  <span class="keyword">raise</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Now, multiply that by the number of methods in your class&#8230; the logging messages quickly overpower the rest of the code, and detract from the flow of your program. This makes your program harder to debug, test, and maintain.</p>
+
+
+	<p>Now, consider the same method using Needle&#8217;s integrated logging framework&#8230;</p>
+
+
+	<div class='figure'>
+<span class='caption'>Logging method execution with Needle [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">def </span><span class="method">foo</span><span class="punct">(</span> <span class="ident">arg1</span><span class="punct">,</span> <span class="ident">arg2</span> <span class="punct">)</span>
+  <span class="punct">...</span>
+  <span class="keyword">return</span> <span class="ident">the_result_of_the_method</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Then, when you define the service that you want to add the logging to:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Adding the logging interceptor to a service [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">registry</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:service_name_here</span> <span class="punct">)</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">reg</span><span class="punct">|</span> <span class="punct">...</span> <span class="punct">}</span>
+<span class="ident">registry</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:service_name_here</span> <span class="punct">).</span><span class="ident">with!</span> <span class="punct">{</span> <span class="ident">logging_interceptor</span> <span class="punct">}</span></pre></div></td></tr></table></div></div>
+
+
+	<p>That&#8217;s right. There&#8217;s no explicit logging code in there. Instead, you just tell Needle that the methods of the class should be logged, and away it goes. This has the added benefit of allowing your objects to be unit tested, without spewing log messages everywhere.</p>
+
+
+	<h3>Reference Another Service <a name="#refsvc"></a></h3>
+
+
+	<p>Invariably in a large application services will reference other services. This is typically accomplished through something like this:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Looking up services without Needle [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">class </span><span class="class">Component</span>
+  <span class="punct">...</span>
+  <span class="keyword">def </span><span class="method">foo</span><span class="punct">(</span> <span class="ident">parms</span> <span class="punct">)</span>
+    <span class="attribute">@service</span> <span class="punct">||=</span> <span class="ident">lookup_service</span>
+    <span class="attribute">@service</span><span class="punct">.</span><span class="ident">do_something</span><span class="punct">(</span> <span class="ident">parms</span> <span class="punct">)</span>
+  <span class="keyword">end</span>
+
+  <span class="keyword">def </span><span class="method">lookup_service</span>
+    <span class="punct">...</span>
+  <span class="keyword">end</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Whether the lookup is done lazily, as shown above, or when the class is first instantiated is irrelevant. The point is that you either have to implement a bunch of code to look up a service based on some criteria, or you hard code the class of the service (which creates tight coupling and makes things like unit testing harder).</p>
+
+
+	<p>With Needle, you just declare a setter for the service, and then tell Needle that the class depends on the other service:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Wiring services with Needle [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">class </span><span class="class">Component</span>
+  <span class="ident">attr_writer</span> <span class="symbol">:service</span>
+  <span class="punct">...</span>
+  <span class="keyword">def </span><span class="method">foo</span><span class="punct">(</span> <span class="ident">parms</span> <span class="punct">)</span>
+    <span class="attribute">@service</span><span class="punct">.</span><span class="ident">do_something</span><span class="punct">(</span> <span class="ident">parms</span> <span class="punct">)</span>
+  <span class="keyword">end</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span>
+
+<span class="ident">registry</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:component</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">reg</span><span class="punct">|</span> 
+  <span class="ident">c</span> <span class="punct">=</span> <span class="constant">Component</span><span class="punct">.</span><span class="ident">new</span>
+  <span class="ident">c</span><span class="punct">.</span><span class="ident">service</span> <span class="punct">=</span> <span class="ident">reg</span><span class="punct">.</span><span class="ident">some_other_service</span>
+  <span class="ident">c</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Then, when your service is instantiated, Needle will automatically look for and instantiate the dependencies for you. This makes for cleaner code, and looser coupling between services.</p>
+
+
+	<h3>Unit Testing <a name="#unittest"></a></h3>
+
+
+	<p>Large applications can prove troublesome to unit test exhaustively, especially if there is any kind of tight coupling between components. Such coupling of components can make it difficult to test them separately.</p>
+
+
+	<p>Needle, by its very nature, encourages loose coupling of components. Also, because dependencies are never instantiated in code, but are instead accepted via setters or constructor arguments, it is trivial to replace those dependencies with mock objects at unit test time.</p>
+
+
+	<p>Consider this tightly coupled example:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Tight coupling [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">def </span><span class="method">foo</span><span class="punct">(</span> <span class="ident">args</span> <span class="punct">)</span>
+  <span class="attribute">@some_dependency</span> <span class="punct">||=</span> <span class="constant">MyNewDependency</span><span class="punct">.</span><span class="ident">new</span>
+  <span class="attribute">@some_dependency</span><span class="punct">.</span><span class="ident">do_something</span><span class="punct">(</span><span class="ident">args</span><span class="punct">)</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>It is impossible to test the method <code>#foo</code> without also testing the MyNewDependency class. However, if the <code>@some_dependency</code> object is made a property that is set externally, you can replace it at test time with a blank:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Loose coupling [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">attr_writer</span> <span class="symbol">:some_dependency</span>
+
+<span class="keyword">def </span><span class="method">foo</span><span class="punct">(</span> <span class="ident">args</span> <span class="punct">)</span>
+  <span class="attribute">@some_dependency</span><span class="punct">.</span><span class="ident">do_something</span><span class="punct">(</span> <span class="ident">args</span> <span class="punct">)</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>The unit test would become something like this:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Unit testing with a mock object [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">def </span><span class="method">test_foo</span>
+  <span class="attribute">@obj</span><span class="punct">.</span><span class="ident">some_dependecy</span> <span class="punct">=</span> <span class="constant">MyMockDependency</span><span class="punct">.</span><span class="ident">new</span>
+  <span class="attribute">@obj</span><span class="punct">.</span><span class="ident">foo</span><span class="punct">(</span> <span class="ident">args</span> <span class="punct">)</span>
+  <span class="ident">assert</span> <span class="attribute">@obj</span><span class="punct">.</span><span class="ident">is_in_some_state</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<h3>Lifestyle Management <a name="#lifestyle"></a></h3>
+
+
+	<p>Singleton objects are a fact of life in complex systems. The singleton design pattern is powerful and useful. However, using the Singleton mixin, or declaring methods at the class level, can make your code difficult to unit test since the state of such objects cannot be easily reset.</p>
+
+
+	<p>Needle has a solution. You can tell Needle to treat a service as either a <em>prototype</em> service (meaning it will be instantiated every time you ask for it, like calling <code>#new</code>), or a <em>singleton</em> service (meaning it will only be instantiated once, and the same instance will be returned for subsequent requests).</p>
+
+
+	<p>Your object is still just a plain ol&#8217; ordinary Ruby object, but Needle has effectively transformed it into a singleton. This means you can unit test it as if it were nothing special, but when it is used in your application it will act like a singleton.</p>
+
+
+	<p>Lifestyle management also means that you can control <em>when</em> a service is instantiated.  The <em>prototype</em> and <em>singleton</em> models will always be instantiated as soon as they are requested. Sometimes, though, you don&#8217;t want that&#8212;you&#8217;d like the instantiation to be deferred as late as possible.</p>
+
+
+	<p>With Needle, you can indicate that a service should use deferred instantiation. This will cause the service to not actually be instantiated until a method is actually invoked on it.  Using this model, you can have services depend on themselves, or other forms of cyclical dependencies.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       1.3. Alternatives
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Needle is not the only fish in the dependency-injection pond, even when it comes to Ruby. Other containers at your disposal include:</p>
+
+
+	<ul>
+	<li><a href="http://copland.rubyforge.org">Copland</a>. Copland aims to be an &#8220;application framework&#8221;, taking something of a heavy-weight approach to DI. In so doing, it provides functionality that Needle does not, but at the cost of performance. It also uses external (YAML) configuration files. It is inspired by a Java framework (<a href="http://jakarta.apache.org/hivemind">HiveMind</a>), and so has a vaguely Java-ish flavor to it.</li>
+		<li><a href="http://www.picocontainer.org/Rico">Rico</a>. Rico is another project inspired by a Java project (<a href="http://www.picocontainer.org">PicoContainer</a>). It is very lean, and appears to be experimental.</li>
+		<li><a href="http://sourceforge.jp/projects/nihohi/">Tudura</a>. I do not have any information on this project, as the information is all in Japanese. If someone with more information about Tudura would like to step forward, I&#8217;d be happy to post a summary here.</li>
+		<li><a href="http://redshift.sourceforge.net/mindi/">MinDI</a> is a recent contender that takes a very novel approach to dependency injection. Instead of instantiating a container and adding services to it, you declare a class, mixin a DI module, and add services to the class as methods, thereby making the class the container.</li>
+	</ul>
+
+
+	<p>There is, at the time of this writing, at least one other project on RubyForge devoted to <span class="caps">DI </span>(<a href="http://rubyforge.org/projects/pith">Pith</a>), although it has no public releases yet.</p>
+
+
+	<p>So, which one should you choose? It comes down to an issue of personal preference, mostly, but also one of what you are wanting to accomplish. Needle excels at providing an unobtrusive, light-weight container for managing your dependencies. The cost of it being light-weight is that there is functionality it does not provide, which other containers may. If you really need that missing functionality, you are required to either implement it yourself, or select a different container.</p>
+
+
+	<p>For most tasks, I think you&#8217;ll find Needle more than sufficient.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s4"></a>
+       1.4. License Information
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Needle is made available under either the <span class="caps">BSD</span> license, or the same license Ruby (which, by extension, also allows the <span class="caps">GPL</span> as a permissable license as well). You can view the full text of any of these licenses in the <code>doc</code> subdirectory of the Needle distrubtion. The texts of the <span class="caps">BSD</span> and <span class="caps">GPL</span> licenses are also available online: <a href="http://www.opensource.org/licenses/bsd-license.php">BSD</a> and <a href="http://www.opensource.org/licenses/gpl-license.php">GPL</a>.</p>
+
+
+	<p>This manual (in any form, be it source or otherwise) and the scripts and templates used to generate it, are all distributed under the <a href="http://creativecommons.org">Creative Commons</a> <a href="http://creativecommons.org/licenses/by-sa/2.0">Attribution-ShareAlike</a> license.</p>
+
+
+	<p>If you desire permission to use either Needle or the manual in a manner incompatible with these licenses, please contact the copyright holder (<a href="mailto:jamis@37signals.com">Jamis Buck</a>) in order to negotiate a more compatible license.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s5"></a>
+       1.5. Support
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Mailing lists, bug trackers, feature requests, and public forums are available (courtesy of <a href="http://rubyforge.org">RubyForge</a>) at Needle&#8217;s RubyForge project page. Just direct your browser to <a href="http://rubyforge.org/projects/needle">http://rubyforge.org/projects/needle</a>.</p>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-2.html">Next (2. Registry)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

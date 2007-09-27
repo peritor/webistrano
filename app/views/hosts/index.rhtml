@@ -1,0 +1,29 @@
+<h2>Hosts</h2>
+
+<fieldset class="fieldset">
+  <legend> <%=h pluralize(Host.count, 'Host')%> listed</legend>
+
+<table class="sortable">
+  <tr>
+    <th width="33%">Name</th>
+    <th width="33%">#Stages</th>
+    <th width="32%">#Roles</th>
+    <th width="1%"></th>
+    <th width="1%"></th>
+  </tr>
+  <% for host in @hosts %>
+    <tr class="<%= cycle :even, :odd  %>">
+      <td><%= link_to h(host.name), host_path(host) %></td>
+      <td><%=h host.stages.count %></td>
+      <td><%=h host.roles.count %></td>
+      <td><%= link_to 'Edit', edit_host_path(host) %></td>
+      <td><%= link_to 'Delete', host_path(host), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New host', new_host_path, :class => 'arrow_link' %>
+
+</fieldset>

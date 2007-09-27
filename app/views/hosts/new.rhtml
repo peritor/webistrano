@@ -1,0 +1,16 @@
+<h2>New host</h2>
+
+<% flashed_errors(:host) %>
+
+<% form_for(:host, :url => hosts_path) do |f| %>
+  <p>
+    <b>Name (DNS name or IP address)</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', hosts_path, :class => 'arrow_link'  %>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta name="description" content="Peritor Webistrano - Capristrano Deployment the easy way" />
+  <meta name="keywords" content="rubyonrails ruby rails capistrano deployment" />
+  <title>Peritor Webistrano</title>
+  <link rel="shortcut icon" href="/favicon.ico"></link>
+  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= yield :page_scripts %>
+</head>
+
+<body>
+
+
+<div id="container_left">
+  <div id="container_right">
+
+    <div id="header_left">
+	  <div id="header_right">
+	  	<div id="header_top">
+	  		<div id="sub_header">Capistrano deployment the easy way</div>
+	 		<a href="/"><%= image_tag('peritor_theme/webistrano_logo.gif', :border => '0')%></a>
+		</div>
+      </div>
+    </div>
+
+    <div id="main_content">
+     <div class="menu">
+	    <%= render(:partial => 'layouts/menu') if logged_in? %>
+	  </div>
+      <div class="content">
+      
+        <% unless flash[:notice].blank? %>
+			    <%= nice_flash(flash[:notice]) %>
+        <% end %>
+        
+        <%= yield :flash_content %>
+      
+	      <% unless @page_title.blank? %>
+          <h2><%=h @page_title %></h2>
+	      <% end %>
+	      <%= yield :action_box %>
+        <%= yield  %>
+      
+      </div>
+
+
+    <div class="clear"></div>
+  </div>
+
+  <div id="main_content_bottom_left">
+	  <div id="main_content_bottom_right">
+	  	<div id="main_content_bottom"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+  <div id="footer">
+	<div id="footer_logged">
+	  <% if logged_in? %>
+	   Logged in as <%= link_to h(current_user.login), user_path(current_user) %> | <%= link_to 'Logout', '/logout' %> 
+	  <% end %>
+    </div>
+    Copyright &copy; 2007 | Version <%=h WEBISTRANO_VERSION %> | <a href="http://labs.peritor.com/webistrano" target="_blank">http://labs.peritor.com/webistrano</a>
+  </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,3 @@
+The registry is at the heart of any dependency-injected application or library. All services are registered with the registry, so that when an application needs an instance of a particular service, it may obtain that service reference by querying the registry.
+
+In order to use Needle, you only really _need_ to understand how to create and manipulate registry objects.

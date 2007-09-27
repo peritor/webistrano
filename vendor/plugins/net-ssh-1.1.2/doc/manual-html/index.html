@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <title>Net::SSH Manual</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Net::SSH&mdash;</span><br />
+            <span class="tagline">Secure Shell for Ruby</span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Net::SSH Version: <strong>1.1.2</strong><br />
+            Manual Last Updated: <strong>2007-06-18 18:12 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Net::SSH Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">What isn&#8217;t Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Getting Net::SSH</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+                  <li><a href="chapter-1.html#s6">About the Author</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Starting a Session
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Using Net::SSH.start</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Using a Public/Private Key</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Options</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Using Net::SSH::Session</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Channels
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">What are Channels?</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Session.loop</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Channel Types</a></li>
+                
+                  <li><a href="chapter-3.html#s4">Opening a Channel</a></li>
+                
+                  <li><a href="chapter-3.html#s5">Callbacks</a></li>
+                
+                  <li><a href="chapter-3.html#s6">Channel Operations</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Executing Commands
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Using Channels</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Using #process.open</a></li>
+                
+                  <li><a href="chapter-4.html#s3">Using #process.popen3</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                User Shells
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Using Channels</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Shell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s4">SyncShell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Terminal Clients</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Port Forwarding
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Local-to-Remote</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Remote-to-Local</a></li>
+                
+                  <li><a href="chapter-6.html#s4">Direct Channels</a></li>
+                
+                  <li><a href="chapter-6.html#s5">Remote-to-Local Handlers</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Using Proxies
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-7.html#s2"><span class="caps">HTTP</span></a></li>
+                
+                  <li><a href="chapter-7.html#s3"><span class="caps">SOCKS</span></a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://net-ssh.rubyforge.org/api/index.html">Net::SSH API</a></li>
+            <li><a href="http://rubyforge.org/tracker/?atid=1842&group_id=274&func=browse">Net::SSH FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+          <p class="product-manual">Product Manual</p>
+
+<p align="center">
+  <img src=""
+       alt="Net::SSH: Secure Shell for Ruby" />
+</p>
+
+<p align="center">
+  
+    Project Page: <a href="http://rubyforge.org/projects/net-ssh">http://rubyforge.org/projects/net-ssh</a><br />
+  
+    User Manual: <a href="http://net-ssh.rubyforge.org">http://net-ssh.rubyforge.org</a><br />
+  
+    API Documentation: <a href="http://net-ssh.rubyforge.org/api">http://net-ssh.rubyforge.org/api</a><br />
+  
+</p>
+
+
+  <p align="center"><strong>Recent Updates to This Manual</strong></p>
+  <table border='0' cellpadding='0' cellspacing='0' align='center'><tr><td>
+    <ul>
+      
+        <li>Added information on ssh-agent forwarding.</li>
+      
+        <li>Added information about the :paranoid setting.</li>
+      
+    </ul>
+  </table>
+
+
+<p class="copyright">
+  Copyright &copy; 2004-2007
+                   Jamis Buck
+                   (<a href="mailto:jamis@jamisbuck.org">jamis@jamisbuck.org</a>)
+</p>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

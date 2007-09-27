@@ -1,0 +1,43 @@
+There are various additional options that you can specify when connecting. These options allow you to specify such things as the cipher algorithm to use, whether or not the data stream will be compressed, or explicit paths to the private keys to use.
+
+Options are specified as a hash in the last parameter to the @start@ method. If using the keyword parameters version of the @start@ method, the options hash is whatever is left after processing the @:username@, @:password@, and @:port@ options.
+
+The complete list of available options, and their valid values, is given in the following table.
+
+table(list).
+|_. Option |_. Description |
+|^=. @:auth_methods@ | This is the list of authorization methods to try. It defaults to "publickey", "hostbased", "password", and "keyboard-interactive". (These are also the only authorization methods that are supported.) If you want them to be tried in a different order, or if you don't want certain methods to be used, you can specify your own list via this option.|
+|^=. @:compression@ | The compression algorithm to use when compressing the data stream. Valid values are @none@ and @zlib@. The default is @none@.|
+|^=. @:compression_level@ | This is only used when the compression algorithm is @zlib@. It is an integer value from 0 to 9, representing the quality of the compression. A 0 is no compression, and a 9 is most compression. The default is 6.|
+|^=. @:container@ | This is the dependency injection container to use when registering all of the services that Net::SSH uses internally. If unspecified (the default) a new container will be created. This option allows you to reuse a single container for multiple application components.|
+|^=. @:crypto_backend@ | This is the cryptography backend to use. It defaults to @:ossl@, which specifies the OpenSSL cryptography engine. Currently, this is the only supported backend, but in the future others may be provided, and this is how they would be selected.|
+|^=. @:encryption@ | This is the cipher algorithm to use when sending/receiving data to/from the remote server. It defaults to @3des-cbc@. Other valid algorithms supported by Net::SSH are @aes128-cbc@, @blowfish-cbc@, @aes256-cbc@, @aes192-cbc@, @idea-cbc@, and @none@. Note that the values you specify here are only _suggestions_, and if the server you are contacting cannot use your recommended algorithm, a fallback algorithm will be used (typically chosen in the order the algorithms were listed, above). This option may take an array, if you want to specify the order of the fallback algorithms to try, as well. |
+|^=. @:forward_agent@ | Set to a true value to request that the local authentication agent be forwarded to the remote host. By default the agent will not be forwarded. |
+|^=. @:hmac@ | This specifies the "message authentication code" (MAC) algorithm to use to ensure that each packet transmitted and recieved is authentic. This defaults to @hmac-md5@. Other valid algorithms supported by Net::SSH are @hmac-sha1@, @hmac-md5-96@, @hmac-md5-sha1@, and @none@. Note that the values you specify here are only _suggestions_, and if the server you are contacting cannot use your recommended algorithm, a fallback algorithm will be used (typically chosen in the order the algorithms were listed, above).  This option may take an array, if you want to specify the order of the fallback algorithms to try, as well. |
+|^=. @:host_key@ | This specifies the host key type that should be used when negotiating keys with the server. This defaults to @ssh-dss@, but may also be @ssh-rsa@. As with some other option types, the value you specify is only a recommendation, not a commandment, and if the server cannot honor the key type you specified, a fallback will be chosen from among the other supported types. If you wish to specify the fallback algorithms to try, you may pass an array as the value of this option, which contains (in order) the key types to try. |
+|^=. @:host_keys@ | This is an array of file names that contain the private keys which identify the host your script is running on. These default to @/etc/ssh/ssh_host_dsa_key@ and @/etc/ssh/ssh_host_rsa_key@ (which are both typically only readable by root). These keys are only used in hostbased authentication.|
+|^=. @:kex@ | This specifies the "key-exchange" (KEX) algorithm to use when exchanging keys. Two algorithms are currently supported: @diffie-hellman-group-exchange-sha1@, and @diffie-hellman-group1-sha1@. The default is @diffie-hellman-group-exchange-sha1@.|
+|^=. @:keys@ | This specifies the list of private key files to use _instead_ of the defaults (@$HOME/.ssh/id_dsa@, @$HOME/.ssh2/id_dsa@, @$HOME/.ssh/id_rsa@, and @$HOME/.ssh2/id_rsa@). The value of this option should be an array of strings.|
+|^=. @:languages@ | This option specifies the preferred language (or languages) that should be used when communicating error messages. It has no effect on Net::SSH, but may cause the server (if it supports your suggested language) to send errors in the language you request. The default is empty.|
+|^=. @:log@ | Specifies either a string or an IO object. If it is a string, it names the file that all log messages should be written to. Otherwise, the messages will be written to the IO object directly. Defaults to STDERR.|
+|^=. @:paranoid@ | Controls how Net::SSH responds to a server key that it does not recognize. The default, @true@, will result in all keys being accepted the first time they are seen for a particular host, and then an exception being raised if the key ever changes. However, no host key verification will be done if the connection appears to be tunneled over a locally forwarded port. If set to @false@, no server key verification is done. You can also set this to @:very@, in which case errors are raised even if the connection appears to be tunneled.|
+|^=. @:port@ | This is the port number that should be used to connect to the remote machine. If you wish to specify the port, you are generally better off specifying it as the second parameter to @start@, rather than as an option, but you _can_ specify it this way, if you prefer.|
+|^=. @:registry_options@ | If the @:container@ option is not specified, a new container will be created. This option specifies a hash of additional options that may be used to configure the new container (registry). By default, it is empty.|
+|^=. @:verbose@ | Specifies how verbose the logging should be. Valid values are @:fatal@, @:error@, @:warn@, @:info@, and @:debug@. Defaults to @:warn@. WARNING: selecting @:debug@ will result in LOTS of output! (Further customization of verbosity can be accomplished by specifying which Net::SSH components should have which logging levels, via the @:registry_options@ option.)|
+
+For example, the following code snippet will connect to the given remote host, and requests that the @ssh-rsa@ host key type be used, with the @blowfish-cbc@ cipher algorithm, and requests that the given private key file be used. Also, the data stream will be compressed.
+
+{{{lang=ruby,number=true,caption=Specifying options when connecting
+require 'net/ssh'
+require 'logger'
+
+Net::SSH.start(
+  'host', 'user',
+  :host_key => "ssh-rsa",
+  :encryption => "blowfish-cbc",
+  :keys => [ "/tmp/temporary-key" ],
+  :compression => "zlib"
+) do |session|
+  ...
+end
+}}}

@@ -1,0 +1,3 @@
+Each channel has a _type_. Usually, you will use "session" channels, but there are also "x11" channels, "forwarded-tcpip" channels, and "direct-tcpip" channels.  Net::SSH currently has no support for "x11" channels. The "forwarded-tcpip" and "direct-tcpip" channels are managed internally via the port-forwarding interfaces.
+
+The "session" channel type allows for a broad range of actions, including (but not limited to) SFTP requests and remote process execution.

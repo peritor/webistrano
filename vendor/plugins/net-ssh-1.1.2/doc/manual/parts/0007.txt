@@ -1,0 +1,67 @@
+Just as with the "OpenSSH":http://www.openssh.org version of the @ssh@ utilities, Net::SSH supports authentication using public/private keys.
+
+h3. I don't know what public/private keys are... Explain, please?
+
+Public key/private key encryption is just one way of hiding information from prying eyes. The idea is that you have two tokens: a _public key_, and a _private key_.  The private key is yours alone--you never let _anyone_ else see it. The _public key_, on the other hand, is distributable. You give it to anyone that you want to be able to communicate with you securely.
+
+The remote party uses your public key to encrypt information. Anything encrypted with your public key may only be decrypted with the corresponding private key, and since you have the only copy of that, you can rest easily knowing that no one can easily intercept your communications!
+
+Net::SSH allows you to define a private key, which it will then attempt to use during authentication with the remote server. If the remote server has a copy of the corresponding public key, you will be able to log into that remote server without having to specify a password. Not only is this convenient, but for Ruby scripts, it is much more secure, since you don't have to hard-code your password in your script.
+
+h3. Setting up public/private keys
+
+Net::SSH, by default, will use the private keys that you have set up for use with ssh. These keys are called "id_dsa" and "id_rsa", and are located under your home directory, either in a ".ssh" subdirectory, or a ".ssh2" subdirectory.
+
+The "id_dsa" key is the preferred key (since it uses the stronger DSA encryption), but both DSA and RSA are supported.
+
+To create these keys, you can use the "ssh-keygen" utility from "OpenSSH":http://www.openssh.org. Alternatively, if you have the Net::SSH::Utilities package installed, you can use the "rb-keygen" utility (which is a pure-Ruby implementation of most of the functionality of ssh-keygen).
+
+{{{lang=shell,caption=Generating an SSH key
+ssh-keygen -t dsa
+}}}
+
+(If you would rather use an RSA key, replace "dsa" with "rsa" in the command given above.)
+
+Accept all the defaults when prompted. You will also be asked for a passphrase. This passphrase is an additional level of protection, which prevents anyone from being able to use your private key without knowing the passphrase. Unfortunately, it also means that you have to enter the passphrase every time you use your key.  It is up to you what price you want to pay for security, but if you _can_ leave the passphrase blank. In this case, anyone that has a copy of your private key can use it, but it's a little more convenient to deal with.
+
+Once you create your keys, you then need to set up your account on each remote server so that it knows about your public key. To do this, log into the remote server and edit (or create) the file (in your home directory) ".ssh/authorized_keys". Just copy the contents of your public key (in your local machine's home directory, called ".ssh/id_dsa.pub" or ".ssh/id_rsa.pub") into the "authorized_keys" file on a line of its own. Then save the file and logout.  Everything _should_ now be set up.
+
+(Note: if you have an SSH client installed, it will typically have its own key generation utility. You can use that instead, if you prefer.)
+
+h3. Connecting using public/private keys
+
+Public/private keys are always tried before the explicit password authentication, even if you provide a password. Thus, if you _only_ want to use public/private key authentication, simply remove the password from the argument list. If you can successfully obtain a session handle, then your keys are set up correctly!
+
+{{{lang=ruby,number=true,caption=SSH authentication using keys
+Net::SSH.start( 'host', 'user' ) do |session|
+  ...
+end
+}}}
+
+Furthermore, if your @USER@ environment variable is set to the username that you want to log into the remote machine as, you can even leave the @username@ parameter off:
+
+{{{lang=ruby,number=true,caption=Authentication with an implicit user name
+Net::SSH.start( 'host' ) do |session|
+  ...
+end
+}}}
+
+h3. Using keys with passphrases
+
+When you use a private key that was created with a passphrase, you will be prompted to enter the passphrase when the key is loaded. This may make such a key inappropriate for use in automated environments, but it is certainly more secure than the use of unprotected private keys.
+
+h3. Using an SSH agent
+
+Most SSH clients come with what is called an _agent_. This is a program that is continually running, and which keeps track of all of a user's keys. When an SSH client needs to perform an operation using one of the user's keys, it requests the operation via the agent, rather than performing the operation itself directly with a key.  
+
+The benefit of this is what is known as _single sign-on_. If any of your keys have a passphrase, this allows you to enter the passphrase _once_ (when the key is loaded by the agent), and then any SSH program you use will never prompt you for that passphrase again.
+
+Net::SSH includes support for interfacing with an SSH agent. This includes support for the "PuTTY agent (pageant)":http://www.chiark.greenend.org.uk/~sgtatham/putty/ on Windows systems.
+
+On Unixish systems, you allow your Net::SSH programs to interface with a running agent by making sure that the @SSH_AGENT_SOCK@ environment variable is set to the location of the Unix domain socket that the agent is listening to. Also, make sure you have added all of your keys to the agent (typically by running the @ssh-add@ utility.
+
+On Windows, the pageant process will be detected automatically, if it is running.
+
+A future version of Net::SSH may include it's own agent implementation as well, to make using an agent on a variety of platforms simpler.
+
+Agent forwarding is available, and may be requested with the :forward_agent option to Net::SSH.start. Agents are not forwarded by default. 

@@ -1,0 +1,73 @@
+--- !jamisbuck.org,2004/^manual
+
+# This content is made available under the Attribution-ShareAlike 2.0
+# license from the Create Commons:
+#
+#   http://creativecommons.org/licenses/by-sa/2.0/
+
+meta: !^meta
+  copyright: 2004-2007
+  author: Jamis Buck
+  email: jamis@jamisbuck.org
+
+product: !^product
+  name: Net::SSH
+  tagline: Secure Shell for Ruby
+  version: !!eval require "../../lib/net/ssh/version"; Net::SSH::Version::STRING
+  #logo: net-ssh.png
+  urls:
+    - Project Page: http://rubyforge.org/projects/net-ssh
+    - User Manual: http://net-ssh.rubyforge.org
+    - API Documentation: http://net-ssh.rubyforge.org/api
+
+recent_updates:
+  - "Added information on ssh-agent forwarding."
+  - "Added information about the :paranoid setting."
+
+chapters:
+
+- "Introduction":
+  - "What is Net::SSH?": !!file parts/0000.txt
+  - "What isn't Net::SSH?": !!file parts/0001.txt
+  - "Getting Net::SSH": !!file parts/0002.txt
+  - "License Information": !!file parts/0003.txt
+  - "Support": !!file parts/0004.txt
+  - "About the Author": !!file parts/0005.txt
+
+- "Starting a Session":
+  - "Using Net::SSH.start": !!file parts/0006.txt
+  - "Using a Public/Private Key": !!file parts/0007.txt
+  - "Options": !!file parts/0008.txt
+  - "Using Net::SSH::Session": !!file parts/0009.txt
+
+- "Channels":
+  - "What are Channels?": !!file parts/0010.txt
+  - "Session.loop": !!file parts/0011.txt
+  - "Channel Types": !!file parts/0012.txt
+  - "Opening a Channel": !!file parts/0013.txt
+  - "Callbacks": !!file parts/0014.txt
+  - "Channel Operations": !!file parts/0015.txt
+
+- "Executing Commands":
+  - "Using Channels": !!file parts/0016.txt
+  - "Using #process.open": !!file parts/0017.txt
+  - "Using #process.popen3": !!file parts/0018.txt
+
+- "User Shells":
+  - "Introduction": !!file parts/0019.txt
+  - "Using Channels": !!file parts/0020.txt
+  - "Shell Service": !!file parts/0021.txt
+  - "SyncShell Service": !!file parts/0022.txt
+  - "Terminal Clients": !!file parts/0023.txt
+
+- "Port Forwarding":
+  - "Introduction": !!file parts/0024.txt
+  - "Local-to-Remote": !!file parts/0025.txt
+  - "Remote-to-Local": !!file parts/0026.txt
+  - "Direct Channels": !!file parts/0027.txt
+  - "Remote-to-Local Handlers": !!file parts/0028.txt
+
+- "Using Proxies":
+  - "Introduction": !!file parts/0029.txt
+  - "HTTP": !!file parts/0030.txt
+  - "SOCKS": !!file parts/0031.txt

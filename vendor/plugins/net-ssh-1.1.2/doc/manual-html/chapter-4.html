@@ -1,0 +1,413 @@
+<html>
+  <head>
+    <title>Net::SSH Manual :: Chapter 4: Executing Commands</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Net::SSH&mdash;</span><br />
+            <span class="tagline">Secure Shell for Ruby</span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Net::SSH Version: <strong>1.1.2</strong><br />
+            Manual Last Updated: <strong>2007-06-18 18:12 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Net::SSH Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">What isn&#8217;t Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Getting Net::SSH</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+                  <li><a href="chapter-1.html#s6">About the Author</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Starting a Session
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Using Net::SSH.start</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Using a Public/Private Key</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Options</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Using Net::SSH::Session</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Channels
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">What are Channels?</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Session.loop</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Channel Types</a></li>
+                
+                  <li><a href="chapter-3.html#s4">Opening a Channel</a></li>
+                
+                  <li><a href="chapter-3.html#s5">Callbacks</a></li>
+                
+                  <li><a href="chapter-3.html#s6">Channel Operations</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-4.html">
+                Executing Commands
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Using Channels</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Using #process.open</a></li>
+                
+                  <li><a href="chapter-4.html#s3">Using #process.popen3</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                User Shells
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Using Channels</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Shell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s4">SyncShell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Terminal Clients</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Port Forwarding
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Local-to-Remote</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Remote-to-Local</a></li>
+                
+                  <li><a href="chapter-6.html#s4">Direct Channels</a></li>
+                
+                  <li><a href="chapter-6.html#s5">Remote-to-Local Handlers</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Using Proxies
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-7.html#s2"><span class="caps">HTTP</span></a></li>
+                
+                  <li><a href="chapter-7.html#s3"><span class="caps">SOCKS</span></a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://net-ssh.rubyforge.org/api/index.html">Net::SSH API</a></li>
+            <li><a href="http://rubyforge.org/tracker/?atid=1842&group_id=274&func=browse">Net::SSH FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-3.html">Previous (3. Channels)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-5.html">Next (5. User Shells)</a>
+  
+</div></div>
+
+<h1>4. Executing Commands</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       4.1. Using Channels
+     </h2>
+
+   
+
+   <div class="section">
+     <p>To run multiple processes in parallel, you can access the channel <span class="caps">API</span> directly, setting up multiple channels and callbacks in order to process the output from the channel.</p>
+
+
+	<p>Suppose, for example, that you wanted to run multiple &#8220;tail&#8221; commands on various logs on the remote machine, combining them all into the output on the client. Something like the following would suffice:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Running "tail" on multiple remote files [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">def </span><span class="method">do_tail</span><span class="punct">(</span> <span class="ident">session</span><span class="punct">,</span> <span class="ident">file</span> <span class="punct">)</span>
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">open_channel</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">channel</span><span class="punct">|</span>
+    <span class="ident">channel</span><span class="punct">.</span><span class="ident">on_data</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">ch</span><span class="punct">,</span> <span class="ident">data</span><span class="punct">|</span>
+      <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">[<span class="expr">#{file}</span>] -&gt; <span class="expr">#{data}</span></span><span class="punct">&quot;</span>
+    <span class="keyword">end</span>
+    <span class="ident">channel</span><span class="punct">.</span><span class="ident">exec</span> <span class="punct">&quot;</span><span class="string">tail -f <span class="expr">#{file}</span></span><span class="punct">&quot;</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="ident">do_tail</span> <span class="ident">session</span><span class="punct">,</span> <span class="punct">&quot;</span><span class="string">/var/log/messages</span><span class="punct">&quot;</span>
+  <span class="ident">do_tail</span> <span class="ident">session</span><span class="punct">,</span> <span class="punct">&quot;</span><span class="string">/var/log/XFree86.0.log</span><span class="punct">&quot;</span>
+  <span class="ident">do_tail</span> <span class="ident">session</span><span class="punct">,</span> <span class="punct">&quot;</span><span class="string">/var/log/tomcat/catalina.log</span><span class="punct">&quot;</span>
+  <span class="ident">do_tail</span> <span class="ident">session</span><span class="punct">,</span> <span class="punct">&quot;</span><span class="string">/var/log/mysql/mysql.err</span><span class="punct">&quot;</span>
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">loop</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>As you can see, four different logs are tailed on four separate channels. Each channel registers an <code>on_data</code> callback (which simply displays the data it recieves, together with the name of the log file it came from). The <code>exec</code> method of the channel is then invoked, which simply sends the request to execute the process to the server, and then returns.</p>
+
+
+	<p>The <code>loop</code> method then blocks while packets and processed and callbacks are invoked, completing the program.</p>
+
+
+	<p>This approach works fine for processing data coming from the server, and with a little work and coordination can work well for sending data <em>to</em> the server as well, by calling the <code>send_data</code> method of the channel at the appropriate times. However, it requires a bit of forethought, since you have to come up with a simple state machine to manage most interactive sessions, and many times that&#8217;s more effort than it is worth.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       4.2. Using #process.open
+     </h2>
+
+   
+
+   <div class="section">
+     <p>The <code>#process.open</code> interface provides a simpler way to manage interactive sessions. It still works via callbacks, and it still requires a kind of state machine in order to process input, but it does simplify things a little bit.</p>
+
+
+	<p>Just open an <span class="caps">SSH</span> session. The <code>#process</code> service of the session manages access to convenience methods for handling and communicating with remote processes. In particular the <code>#open</code> method of the <code>#process</code> service allows you to constuct callbacks for dealing with remote processes, more conveniently than using channels directly.</p>
+
+
+	<p>Consider the &#8220;bc&#8221; command. It is a command-line calculator that accepts expressions on <code>stdin</code> and writes the results to <code>stdout</code>. When it encounters the word <code>quit</code> on the input, it exits. Sounds like a great way to demonstrate the <code>process</code> service&#8230;</p>
+
+
+	<div class='figure'>
+<span class='caption'>Using #process.open [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">process</span><span class="punct">.</span><span class="ident">open</span><span class="punct">(</span> <span class="punct">&quot;</span><span class="string">bc</span><span class="punct">&quot;</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">bc</span><span class="punct">|</span>
+    <span class="ident">dialog</span> <span class="punct">=</span> <span class="punct">[</span> <span class="punct">&quot;</span><span class="string">5+5</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">7*12</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">sqrt(2.000000)</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">quit</span><span class="punct">&quot;</span> <span class="punct">]</span>
+
+    <span class="ident">bc</span><span class="punct">.</span><span class="ident">on_success</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">p</span><span class="punct">|</span>
+      <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">requesting result of <span class="expr">#{dialog.first}</span></span><span class="punct">&quot;</span>
+      <span class="ident">p</span><span class="punct">.</span><span class="ident">puts</span> <span class="ident">dialog</span><span class="punct">.</span><span class="ident">shift</span>
+    <span class="keyword">end</span>
+
+    <span class="ident">bc</span><span class="punct">.</span><span class="ident">on_stdout</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">p</span><span class="punct">,</span><span class="ident">data</span><span class="punct">|</span>
+      <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">--&gt; <span class="expr">#{data}</span></span><span class="punct">&quot;</span>
+      <span class="keyword">unless</span> <span class="ident">dialog</span><span class="punct">.</span><span class="ident">empty?</span>
+        <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">requesting result of <span class="expr">#{dialog.first}</span></span><span class="punct">&quot;</span>
+        <span class="ident">p</span><span class="punct">.</span><span class="ident">puts</span> <span class="ident">dialog</span><span class="punct">.</span><span class="ident">shift</span>
+      <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+ <span class="ident">bc</span><span class="punct">.</span><span class="ident">on_exit</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">p</span><span class="punct">,</span> <span class="ident">status</span><span class="punct">|</span>
+      <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">process finished with exit status: <span class="expr">#{status}</span></span><span class="punct">&quot;</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Notice the progression. First, the session itself is started. Then, while the session is active, the process is invoked (via <code>#process.open</code>). After we have a handle to the process (which is yielded to the block, in this case), we set up the callbacks on the process. These are reminiscent of, but different from, the callbacks that we set up on the channel itself in the previous section.</p>
+
+
+	<p>The following callbacks are defined for a process handle:</p>
+
+
+	<table class="list">
+		<tr>
+			<th>Name </th>
+			<th>Description </th>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_exit</code> </td>
+			<td> This callback is invoked when the process terminates normally. The block should accept two parameters: the process handle itself, and the exit status of the process.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_failure</code> </td>
+			<td> This callback is invoked when the process could not be invoked. It should take two parameters: the process handle itself, and a status string (which currently always <code>nil</code>).</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_success</code> </td>
+			<td> This callback is invoked after the process has been successfully started.  The callback should take a single parameter: the process handle itself.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_stderr</code> </td>
+			<td> This callback is invoked when data is received from the process&#8217;s <code>stderr</code> stream. The callback should have two parameters: the process handle, and the data.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_stdout</code> </td>
+			<td> This callback is invoked when data is received from the process&#8217;s <code>stdout</code> stream. The callback should have two parameters: the process handle, and the data.</td>
+		</tr>
+	</table>
+
+
+
+
+	<p>Sending data to the process is as simple as calling <code>puts</code> on the process handle. If you don&#8217;t want a newline appended to your data, use <code>write</code> instead.</p>
+
+
+	<p>Notice that, when sending a block to <code>#process.open</code>, you do not have to explicitly invoke <code>session.loop</code>. It is implicitly called at the end of the block. If you ever want to set up multiple processes to run in parallel, simply use <code>#process.open</code> without a block. The process handle will be returned, and you will be required to execute <code>session.loop</code> manually.</p>
+
+
+	<p>For more information on the <code>#process.open</code> service, see the <span class="caps">API</span> documentation for <code>Net::SSH::Service::Process::Open</code>.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       4.3. Using #process.popen3
+     </h2>
+
+   
+
+   <div class="section">
+     <p>The last approach to interacting with remote processes is the <code>#popen3</code> method of <code>#process</code> service. It is a <em>synchronous</em> approach, meaning that each method call <em>may</em> (potentially) block until data is received; you can&#8217;t be using other features of the Net::SSH package while using it, but you don&#8217;t have to mess with callbacks.</p>
+
+
+	<p>If you are familiar with the &#8220;popen3&#8221; Ruby module, this will seem familiar. It&#8217;s not a perfect clone of the &#8220;popen3&#8221; module&#8217;s functionality, but it&#8217;s close. What you do is you specify the process to invoke, and then you get three pseudo-IO objects back: the process&#8217;s input stream, it&#8217;s output stream, and it&#8217;s error stream. You can write to the input stream to send data to the process, or read from the output and error streams. Reading from the output or error streams will block until data is available, which makes it very convenient for interacting with a single remote process.</p>
+
+
+	<p>Here&#8217;s the previous &#8220;bc&#8221; example, rewritten to use <code>#popen3</code>:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Using #process.popen3 [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+
+  <span class="ident">input</span><span class="punct">,</span> <span class="ident">output</span><span class="punct">,</span> <span class="ident">error</span> <span class="punct">=</span> <span class="ident">session</span><span class="punct">.</span><span class="ident">process</span><span class="punct">.</span><span class="ident">popen3</span><span class="punct">(</span> <span class="punct">&quot;</span><span class="string">bc</span><span class="punct">&quot;</span> <span class="punct">)</span>
+
+  <span class="punct">[</span> <span class="punct">&quot;</span><span class="string">5+5</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">7*12</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">sqrt(2.000000)</span><span class="punct">&quot;</span> <span class="punct">].</span><span class="ident">each</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">formula</span><span class="punct">|</span>
+    <span class="ident">input</span><span class="punct">.</span><span class="ident">puts</span> <span class="ident">formula</span>
+    <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string"><span class="expr">#{formula}</span>=<span class="expr">#{output.read}</span></span><span class="punct">&quot;</span>
+  <span class="keyword">end</span>
+
+  <span class="ident">input</span><span class="punct">.</span><span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">quit</span><span class="punct">&quot;</span>
+
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Much more concise, isn&#8217;t it? One caveat, though: there is no way to kill the process (unless the process can terminate itself, such as through the use of issuing bc&#8217;s &#8220;quit&#8221; command as used above) without closing the session. To remedy this, there is also a block version of popen3 that provides an explicit scope for the three data streams:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Transactional form of #process.popen3 [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">process</span><span class="punct">.</span><span class="ident">popen3</span><span class="punct">(</span> <span class="punct">&quot;</span><span class="string">bc</span><span class="punct">&quot;</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">input</span><span class="punct">,</span> <span class="ident">output</span><span class="punct">,</span> <span class="ident">error</span><span class="punct">|</span>
+    <span class="punct">[</span> <span class="punct">&quot;</span><span class="string">5+5</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">7*12</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">sqrt(2.000000)</span><span class="punct">&quot;</span> <span class="punct">].</span><span class="ident">each</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">formula</span><span class="punct">|</span>
+      <span class="ident">input</span><span class="punct">.</span><span class="ident">puts</span> <span class="ident">formula</span>
+ <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string"><span class="expr">#{formula}</span>=<span class="expr">#{output.read}</span></span><span class="punct">&quot;</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>The three streams will be closed and process explicitly terminated when the block ends.</p>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-3.html">Previous (3. Channels)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-5.html">Next (5. User Shells)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

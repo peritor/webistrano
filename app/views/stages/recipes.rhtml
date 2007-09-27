@@ -1,0 +1,42 @@
+<h2>Recipes management for stage: <%=h @stage.name %></h2>
+
+
+<% form_for(:stage, :url => recipes_project_stage_path(@project, @stage), :html => { :method => :put }) do |f| %>  
+
+  <fieldset class="fieldset">
+    <legend>Recipes to use</legend>
+    
+    <% if Recipe.count > 0 %>
+    
+      <table class="sortable">
+        <tr>
+          <th width="1%">Use</th>
+          <th width="39%">Name</th>
+          <th width="60%">Description</th>
+        </tr>
+        <% for recipe in Recipe.find(:all, :order => 'name ASC') %>
+          <tr class="<%= cycle :even, :odd, :name => 'recipes'  %>">
+            <td><input type="checkbox" value="<%=h recipe.id %>" name="stage[recipe_ids][]" id="stage_recipe_ids_<%=h recipe.id %>" <%= @stage.recipes.include?(recipe) ? 'checked="checked"' : '' %>/></td>
+            <td><%= link_to h(recipe.name), recipe_path(recipe) %></td>
+            <td><%=h recipe.description %></td>
+          </tr>
+        <% end %>
+      </table>
+      
+      <br />
+      <p>
+        <%= submit_tag "Update used recipes" %>
+      </p>
+      
+    <% else %>
+     No recipes present<br /><br />
+    <% end %>
+  
+  </fieldset>    
+    
+    
+  
+  
+<% end %>
+<br />
+<%= link_to 'Back', project_stage_path(current_project, current_stage), :class => 'arrow_link'  %>

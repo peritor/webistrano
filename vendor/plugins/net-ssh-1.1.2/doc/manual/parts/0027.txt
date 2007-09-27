@@ -1,0 +1,37 @@
+Sometimes it might be nice to programmatically simulate a network connection on a local port and have it forwarded to the remote host. You can do this by means of the @#direct_channel@ method.
+
+The @#direct_channel@ method looks similar to @#local@: the first three parameters are the local port to simulate the connection from, and the remote host and port that the connection should be forwarded to. The fourth parameter, however, is a _handler_, an object that is used as a callback for a variety of different events.
+
+The handler for the @#direct_channel@ method may implement any of the following callbacks (all are optional, though you probably want to implement at least one or two of them):
+
+table(list).
+|_. Callback |_. Description |
+|=^. @confirm@ | This is invoked when the channel has been opened and the remote host has confirmed it. This accepts four parameters: the channel itself, the local port, remote host, and remote port. (In this way, the same handler may be used for multiple forward requests.)|
+|=^. @process@ | After the channel has been confirmed, this is invoked, to process the channel. This callback will be invoked in a new Thread, so that if your handler needs to listen to a socket and then send data received from it over the channel, it can do so without blocking the main loop. The callback accepts a single parameter, the channel handle itself.|
+|=^. @on_close@ | This is called when the channel over which this forwarded connection is being processed has been closed. The callback accepts a single parameter, the channel itself.|
+|=^. @on_eof@ | When the remote machine indicates it will send no more data, this callback will be invoked. It accepts a single parameter, the channel itself.|
+|=^. @on_receive@ | This is invoked when data is received from the remote machine. It accepts two parameters: the channel handle, and the data that was received.|
+
+For example, the following example pretends to be a client that has connected to the local host on a forwarded port:
+
+{{{lang=ruby,number=true,caption=Using a handler object to mimic a forwarded port
+class Handler
+  def on_receive( channel, data )
+    puts "got data: #{data.inspect}"
+    channel.send_data "subsequent request"
+  end
+
+  def process( channel )
+    channel.send_data "initial request"
+  end
+end
+
+Net::SSH.start( 'host' ) do |session|
+  session.forward.direct_channel( 1234, 'somewhere.else.net',
+    4321, Handler.new )
+
+  session.loop
+end
+}}}
+
+The local port number for @#direct_channel@ has no real purpose, other than to report to the SSH server that the "virtual" connection occurred on that port.

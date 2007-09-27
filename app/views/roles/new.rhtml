@@ -1,0 +1,12 @@
+<h2>Add host to <%= link_to h(current_project.name), project_path(current_project) %>/<%= link_to h(current_stage.name), project_stage_path(current_project, current_stage) %></h2>
+
+<% form_tag(project_stage_roles_path(current_project, current_stage), :method => :post) do %>
+  
+  <%= render(:partial => 'form')%>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', project_stage_path(current_project, current_stage), :class => 'arrow_link' %>

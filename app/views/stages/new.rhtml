@@ -1,0 +1,14 @@
+<h2>New stage for <%= link_to h(current_project.name), project_path(current_project)%></h2>
+
+<% flashed_errors(:stage) %>
+
+<% form_for(:stage, :url => project_stages_path(current_project)) do |f| %>
+  
+  <%= render(:partial => 'form' ) %>
+  
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', project_path(current_project), :class => 'arrow_link'  %>

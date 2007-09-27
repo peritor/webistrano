@@ -1,0 +1,19 @@
+<% if @stage.recipes.empty? %>
+  <br/>
+    No recipes configured yet.<br />
+    <%= link_to 'Recipes', recipes_path %> are custom Capistrano tasks and variables that can be used across stages.
+  <br/>
+<% else %>
+  <table class="sortable">
+    <tr>
+      <th width="40%">Name</th>
+      <th width="60%">Description</th>
+    </tr>
+    <% for recipe in @stage.recipes %>
+      <tr class="<%= cycle :even, :odd, :name => 'recipes'  %>">
+        <td><%= link_to h(recipe.name), recipe_path(recipe) %></td>
+        <td><%=h recipe.description %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -1,0 +1,5 @@
+Logging is a pretty common activity in many applications. Because it is so common, Needle provides a powerful framework for logging messages in a consistent manner.
+
+Needle's logging framework is built on top of the standard Ruby @Logger@ library. However, it extends that library to add additional functionality, including customizable message formats and a centralized location for obtaining logger instances.
+
+This centralized location is the LogFactory.

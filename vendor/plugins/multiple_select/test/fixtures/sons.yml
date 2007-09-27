@@ -1,0 +1,30 @@
+son_1_of_father_with_children:
+  id: 1
+  name: Son 1
+  father_id: 2
+
+son_2_of_father_with_children:
+  id: 2
+  name: Son 2
+  father_id: 2
+
+son_3_of_father_with_children:
+  id: 3
+  name: Son 3
+  father_id: 2
+
+son_1_of_father_with_hatbm_children:
+  id: 4
+  name: Son 4
+
+son_2_of_father_with_hatbm_children:
+  id: 5
+  name: Son 5
+
+son_3_of_father_with_habtm_children:
+  id: 6
+  name: Son 6
+
+son_1_of_father_with_toys:
+  id: 7
+  name: Son 7

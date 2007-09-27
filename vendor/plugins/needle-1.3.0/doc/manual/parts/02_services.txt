@@ -1,0 +1,88 @@
+Registering services with a Needle registry is very straightforward. The simplest way to do it is:
+
+{{{lang=ruby,caption=Registering services
+registry.register( :foo ) { Bar.new }
+}}}
+
+The above will register a new service with the registry, naming it @:foo@. When @:foo@ is requested from the registry, a new instance of @Bar@ will be instantiated and returned.
+
+You get services from the registry in either of two ways:
+
+{{{lang=ruby,number=true,caption=Accessing services
+# Treating the registry as a Hash
+svc = registry[:foo]
+
+# Treating the service as a property of the registry
+svc = registry.foo
+}}}
+
+h3. Convenience Methods
+
+Because you will often need to register many services with a registry at once, two convenience methods have been provided to make this use case lean and mean.
+
+The first is @define@. Just pass a block to define that accepts one parameter. This parameter will be a "builder" object that allows you to define services just by sending them as messages to the builder:
+
+{{{lang=ruby,number=true,caption=Defining services
+registry.define do |b|
+  b.foo { Bar.new }
+  b.bar { Foo.new }
+  ...
+end
+}}}
+
+Alternative, you can call @define!@, passing a block that accepts no parameters. This block will be evaluated in the "builder" object's context, with any unrecognized method call being interpreted as a new service registration of that name:
+
+{{{lang=ruby,number=true,caption=Defining services via #define!
+registry.define! do
+  foo { Bar.new }
+  bar { Foo.new }
+  ...
+end
+}}}
+
+Both of the above will register two new services with the registry, @:foo@ and @:bar@.
+
+h3. Default Lifestyle
+
+By default, a service is only instantiated once per registry. This means that (using the above example) if the service @:foo@ were queried twice, the registry would return the same object for both queries:
+
+{{{lang=ruby,number=true,caption=Demonstrating singleton service behavior
+svc1 = registry.foo
+svc2 = registry.foo
+
+p svc1.object_id == svc2.object_id #=> true
+}}}
+
+You can change this behavior, with _service models_. See the chapter on Service Models for more information.
+
+h3. Parameterized Services
+
+Needle also supports _parameterized services_. These are services that, when requested, require contextual information to be passed as a parameter so that the service can be correctly initialized.
+
+Consider the following example, in which some hypothetical @Printer@ class represents any of a number of printers, based on a parameter given to its constructor.
+
+{{{lang=ruby,number=true,caption=Parameterized services
+registry.register( :printer, :model => :multiton ) do |c,p,name|
+  Printer.new( c.log_for( p ), name )
+end
+
+mono  = registry.printer( :monochrome )
+color = registry.printer( :color )
+}}}
+
+There are a few things to note about the above example:
+
+# The @:multiton@ model is explicitly requested. This is necessary because the default service model (@:singleton@) does not allow parameterized services. Most of the time, you'll use the multiton service model with parameterized services, but you don't have to. You could also use any of the prototype models as well.
+
+# The constructor block for the @:printer@ service takes three parameters, @c@, @p@, and @name@. The first two parameters, @c@ and @p@, represent the container and the service point, respectively. Any parameters after those two are the contextual parameters given when the service is requested. In this case, there is only one contextual parameter: the name of the printer.
+
+# Notice the first parameter to the Printer constructor: @c.log_for(p)@. This is itself invoking a parameterized service, named @:log_for@, and passing @p@ as the contextual information. This will return a new logger handle for the service point @p@ (i.e., the current service point).
+
+# See how the printer service is requested on the last two lines. In this case, the @#printer@ message is sent to the registry with a single parameter. You can also request the service in two other ways:
+
+{{{lang=ruby,number=true,caption=Accessing parameterized services
+dot_matrix = registry[ :printer, :dot_matrix ]
+ink_jet    = registry.get( :printer, :ink_jet )
+}}}
+
+Choose the style that works best for you.

@@ -1,0 +1,25 @@
+In addition to the HTTP proxy, Net::SSH also supports SOCKS proxies (both versions 4 and 5). Their usage is almost identical to the HTTP version (except SOCKS4 does not use passwords, just user names):
+
+{{{lang=ruby,number=true,caption=Using SOCKS proxies 
+require 'net/ssh'
+require 'net/ssh/proxy/socks4'
+require 'net/ssh/proxy/socks5'
+
+proxy_host = 'my.proxy.com'
+proxy_port = 1080
+proxy_user = 'my-name'
+proxy_password = 'my-password'
+
+socks4 = Net::SSH::Proxy::SOCKS4.new( proxy_host, proxy_port,
+            :user => proxy_user )
+
+socks5 = Net::SSH::Proxy::SOCKS5.new( proxy_host, proxy_port,
+            :user => proxy_user,
+            :password => proxy_password)
+
+Net::SSH.start( 'host', :proxy => socks4 ) do |session|
+  ...
+end
+}}}
+
+

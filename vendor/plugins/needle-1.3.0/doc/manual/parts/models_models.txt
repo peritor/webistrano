@@ -1,0 +1,39 @@
+Specifying an entire pipeline for every service point can be tedious. For that reason, there are _service models_. A service model is a kind of template that names a pre-configured sequence of pipeline elements. Needle comes preconfigured with many service models.
+
+h3. Standard Service Models:
+
+table(list).
+|_<. Name|_<. Pipeline|_<. Effect|
+|^. @:multiton@|^. @:multiton@|The returned value will be unique for each unique parameter set given to the service.|
+|^. @:multiton_deferred@|^. @:multiton@, @:deferred@|As @:multiton@, but a proxy is returned, deferring the instantiation of the service itself until a method is invoked on it.|
+|^. @:multiton_initialize@|^. @:multiton@, @:initialize@|As @:multiton@, but invoke an initialization method on every service instance as soon as they are created.|
+|^. @:multiton_deferred_initialize@|^. @:multiton@, @:deferred@, @:initialize@|As @:multiton@, but a proxy is returned, deferring the instantiation of the service itself until a method is invoked on it. When the service is instantiated, an initialization method will be invoked on it.|
+|^. @:prototype@|^. (empty)|Immediately instantiate the service, at every request.|
+|^. @:prorotype_deferred@|^. @:deferred@|Return a proxy, that will instantiate the service the first time a method is invoked on the proxy. A new proxy instance will be returned for each request.|
+|^. @:prototype_initialize@|^. @:initialize@|Immediately instantiate the service, and invoke an initialization method, at every request.|
+|^. @:prototype_deferred_initialize@|^. @:deferred@, @:initialize@|Return a proxy, that will instantiate the service and invoke an initialization method the first time a method is invoked on the proxy. A new proxy instance will be returned for each request.|
+|^. @:singleton@|^. @:singleton@|Immediately instantiate the service the first time it is requested, returning a cached instance subsequently.|
+|^. @:singleton_deferred@|^. @:singleton@, @:deferred@|Return a proxy that will instantiate the service the first time a method is requested on the proxy. Subsequent requests for this service will return the same proxy instance.|
+|^. @:singleton_initialize@|^. @:singleton@, @:initialize@|Immediately instantiate a service and invoke an initialization method on it. Subsequent requests for this service will return a cached instance.|
+|^. @:singleton_deferred_initialize@|^. @:singleton@, @:deferred@, @:initialize@|Return a proxy that will instantiate the service and invoke an initialization method on it the first time a method is requested on the proxy. Subsequent requests for this service will return the same proxy instance.|
+|^. @:threaded@|^. @:threaded@|Immediately instantiate the service the first time it is requested from the current thread, returning a cached instance for every subsequent request from the same thread.|
+|^. @:threaded_deferred@|^. @:threaded@, @:deferred@|Return a proxy object that will instantiate the service the first time a method is invoked on the proxy. Subsequent requests for this service from a given thread will return the thread's cached instance.|
+|^. @:threaded_initialize@|^. @:threaded@, @:initialize@|Immediately instantiate the service the first time it is requested from the current thread and invoke an initialization method on it. Subsequent requests for this service from the same thread will return the cached instance.|
+|^. @:threaded_deferred_initialize@|^. @:threaded@, @:deferred@, @:initialize@|Return a proxy object that will instantiate the service and invoke an initialization method on it the first time a method is invoked on the proxy. Subsequent requests for this service from a given thread will return the thread's cached instance.|
+
+h3. Specifying a Service Model
+
+You specify the service model by passing the @:model@ option when you register a service. (You must only specify _either_ the model, _or_ the pipeline, but not both.)
+
+{{{lang=ruby,caption=Specifying a service model
+reg.register( :foo, :model => :singleton_deferred ) {...}
+}}}
+
+h3. Defining New Models
+
+You can create your own service models by adding the corresponding pipelines to the @:service_models@ service:
+
+{{{lang=ruby,number=true,caption=Defining a custom model
+reg.service_models[ :my_service_model ] = [ :singleton, :my_pipeline_element ]
+reg.register( :foo, :model => :my_service_model ) {...}
+}}}

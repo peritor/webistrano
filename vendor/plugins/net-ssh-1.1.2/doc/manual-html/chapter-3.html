@@ -1,0 +1,470 @@
+<html>
+  <head>
+    <title>Net::SSH Manual :: Chapter 3: Channels</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Net::SSH&mdash;</span><br />
+            <span class="tagline">Secure Shell for Ruby</span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Net::SSH Version: <strong>1.1.2</strong><br />
+            Manual Last Updated: <strong>2007-06-18 18:12 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Net::SSH Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">What isn&#8217;t Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Getting Net::SSH</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+                  <li><a href="chapter-1.html#s6">About the Author</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Starting a Session
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Using Net::SSH.start</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Using a Public/Private Key</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Options</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Using Net::SSH::Session</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-3.html">
+                Channels
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">What are Channels?</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Session.loop</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Channel Types</a></li>
+                
+                  <li><a href="chapter-3.html#s4">Opening a Channel</a></li>
+                
+                  <li><a href="chapter-3.html#s5">Callbacks</a></li>
+                
+                  <li><a href="chapter-3.html#s6">Channel Operations</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Executing Commands
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Using Channels</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Using #process.open</a></li>
+                
+                  <li><a href="chapter-4.html#s3">Using #process.popen3</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                User Shells
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Using Channels</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Shell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s4">SyncShell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Terminal Clients</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Port Forwarding
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Local-to-Remote</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Remote-to-Local</a></li>
+                
+                  <li><a href="chapter-6.html#s4">Direct Channels</a></li>
+                
+                  <li><a href="chapter-6.html#s5">Remote-to-Local Handlers</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Using Proxies
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-7.html#s2"><span class="caps">HTTP</span></a></li>
+                
+                  <li><a href="chapter-7.html#s3"><span class="caps">SOCKS</span></a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://net-ssh.rubyforge.org/api/index.html">Net::SSH API</a></li>
+            <li><a href="http://rubyforge.org/tracker/?atid=1842&group_id=274&func=browse">Net::SSH FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-2.html">Previous (2. Starting a Session)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-4.html">Next (4. Executing Commands)</a>
+  
+</div></div>
+
+<h1>3. Channels</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       3.1. What are Channels?
+     </h2>
+
+   
+
+   <div class="section">
+     <p>The <span class="caps">SSH</span> protocol requires that requests for services on a remote machine be made over <em>channels</em>. A single <span class="caps">SSH</span> connection may contain multiple channels, all run simultaneously over that connection.</p>
+
+
+	<p>Each channel, in turn, represents the processing of a single service.  When you invoke a process on the remote host with Net::SSH, a channel is opened for that invocation, and all input and output relevant to that process is sent through that channel. The connection itself simply manages the packets of all of the channels that it has open.</p>
+
+
+	<p>This means that, for instance, over a single <span class="caps">SSH</span> connection you could execute a process, download a file via <span class="caps">SFTP</span>, and forward any number of ports, all (seemingly) at the same time!</p>
+
+
+	<p>Naturally, they do not occur simultaneously, but rather work in a &#8220;time-share&#8221; fashion by sharing the bandwidth of the connection. Nevertheless, the fact that these channels exist make working with the <span class="caps">SSH</span> protocol a bit more challenging than simpler protocols (like <span class="caps">FTP</span>, HTTP, or Telnet).</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       3.2. Session.loop
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Because a session may be composed of multiple simultaneously operating channels, the Net::SSH interface works by means of <em>callbacks</em>. You specify actions that need to occur in response to various events, and when those events occur, the framework invokes the corresonding callbacks.</p>
+
+
+	<p>In order to allow the events to be processed in a continuous manner, you need to be sure to call the <code>loop</code> method of your session handle, after setting up any callbacks that you want to be executed. If you do not call the <code>loop</code> method, your session will terminate as soon as the block is exited, which means none of your carefully laid callbacks will ever be called.</p>
+
+
+	<p>The <code>loop</code> method is easy to invoke:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Session#loop [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">loop</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Incidentally, the <code>loop</code> method accepts an optional block, which if specified should return a &#8220;false&#8221; value when the loop should terminate. In the absense of a block, the loop will continue until there are no more open channels.  Sometimes, however, you only want the loop to continue until some action occurs, at which time you then do some processing and then start the loop again.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       3.3. Channel Types
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Each channel has a <em>type</em>. Usually, you will use &#8220;session&#8221; channels, but there are also &#8220;x11&#8221; channels, &#8220;forwarded-tcpip&#8221; channels, and &#8220;direct-tcpip&#8221; channels.  Net::SSH currently has no support for &#8220;x11&#8221; channels. The &#8220;forwarded-tcpip&#8221; and &#8220;direct-tcpip&#8221; channels are managed internally via the port-forwarding interfaces.</p>
+
+
+	<p>The &#8220;session&#8221; channel type allows for a broad range of actions, including (but not limited to) <span class="caps">SFTP</span> requests and remote process execution.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s4"></a>
+       3.4. Opening a Channel
+     </h2>
+
+   
+
+   <div class="section">
+     <p>The simplest way to open a channel is via the <code>open_channel</code> method of Net::SSH::Session.  By default, the channel will be of type &#8220;session&#8221;, but you can optionally specify the channel type and any extra data to initialize the channel with. You also pass a block to the <code>open_channel</code> invocation. This block will be called after the server has confirmed that the channel is valid and has been opened successfully.</p>
+
+
+	<p>The <code>open_channel</code> method always returns immediately&#8212;all it does is inform the server that a channel needs to be opened and then registers the associated block as the callback to be invoked when the channel is confirmed.</p>
+
+
+	<p>This behavior is typical of most of the methods in the Net::SSH <span class="caps">API</span>; they simply send a request to the server and then (optionally) register a callback. Very few of them actually block (pause) until the server responds.</p>
+
+
+	<p>Here is an example of opening a channel:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Opening a channel [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">open_channel</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">channel</span><span class="punct">|</span>
+    <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">channel successfully opened... closing...</span><span class="punct">&quot;</span>
+    <span class="ident">channel</span><span class="punct">.</span><span class="ident">close</span>
+  <span class="keyword">end</span>
+
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">loop</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Note the use of the <code>close</code> method for the channel. Just like most methods in the Net::SSH <span class="caps">API</span>, it does not immediately close the channel, but instead sends a close request to the server and returns. When the server responds that the channel has been closed, the framework will then call any final callbacks for the channel and then remove it.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s5"></a>
+       3.5. Callbacks
+     </h2>
+
+   
+
+   <div class="section">
+     <p>There are various callbacks that may be registered on a channel. Registering a callback is as simple as invoking the corresponding method on the channel and giving it a block that should be invoked when the named action occurs. The following table describes each callback and how it is used.</p>
+
+
+	<table class="list">
+		<tr>
+			<th>Name </th>
+			<th>Description </th>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_close</code> </td>
+			<td> This callback should accept a single parameter: the channel being closed.  It is called immediately after the channel is removed from the connection. The callback should not send any data through the channel, since at this point the channel is no longer connected to the remote host.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_confirm_failed</code> </td>
+			<td> This callback should accept four parameters: the channel instance, the reason code, a description of why the confirm failed, and the language code for the message.  It is called immediately after the server has indicated that a channel could not be opened.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_confirm_open</code> </td>
+			<td> This callback should accept a single parameter: the channel being opened.  It is called immediately after the server has confirmed that the channel has been opened. This callback is typically set by a block passed to an <code>#open_channel</code> call.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_data</code> </td>
+			<td> This callback is invoked when data is received over the channel from the remote server. This data typically corresponds to the remote process&#8217;s <code>stdout</code> stream. The channel should accept two parameters: the channel itself, and the data being received.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_eof</code> </td>
+			<td> This callback is called when the server indicates that no more data will be sent <em>from the server</em> over this channel. Your program is still welcome to send data to the server, but you are guaranteed at this point that your <code>on_data</code> and <code>on_extended_data</code> callbacks will no longer be called for this channel. The callback should accept a single parameter, the channel itself.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_extended_data</code> </td>
+			<td> This callback is called when <em>extended data</em> is received from the server. There are (potentially) many <em>types</em> of extended data. The callback should accept three parameters: the channel, an integer indicating the type of the data, and the data itself.  Right now, you can pretty much count on the data type being a &#8220;1&#8221;, which corresponds to the remote process&#8217;s <code>stderr</code> stream. Other data types are not defined in the <span class="caps">SSH</span> specification, but that does not mean some <span class="caps">SSH</span> servers won&#8217;t try to invent their own.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_failure</code> </td>
+			<td> When a request is sent over a channel (via the <code>send_request</code> or <code>send_request_string</code> methods), it may either succeed or fail. If it fails, this callback will be invoked. It should take a single parameter: the channel itself.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_request</code> </td>
+			<td> When the server sends a &#8220;channel request&#8221; to the client, this callback will be invoked. Channel requests from the server typically indicate things like the exit status of a process. This callback should take four parameters: the channel, the type of request (as a string, like &#8220;exit-status&#8221;), a boolean (indicating whether or not the server wants an explicit reply to this request), and the data from the request, which will be a buffer object (see the <span class="caps">API</span> documentation for <code>Net::SSH::Util::ReaderBufferImpl</code>).</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_success</code> </td>
+			<td> When a request is sent over a channel (via the <code>send_request</code> or <code>send_request_string</code> methods), it may either succeed or fail. If it succeeds, this callback will be invoked. It should take a single parameter: the channel itself.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>on_window_adjust</code> </td>
+			<td> When the server asks the client to adjust this channel&#8217;s window size, this callback will be invoked. It should accept two parameters: the channel, and the number of bytes to add the channel&#8217;s window size.</td>
+		</tr>
+	</table>
+
+
+
+
+	<p>In general, you will never need to register callbacks for <code>on_failure</code>, <code>on_request</code>, <code>on_success</code>, or <code>on_window_adjust</code>, unless you are needing to implement support for some subservice or piggy-backed protocol (like <span class="caps">SFTP</span>).</p>
+
+
+	<p>Following is an example of registering callbacks on a channel:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Registering callbacks on a channel [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">open_channel</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">channel</span><span class="punct">|</span>
+    <span class="ident">channel</span><span class="punct">.</span><span class="ident">on_close</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">ch</span><span class="punct">|</span>
+      <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">channel closed successfully.</span><span class="punct">&quot;</span>
+    <span class="keyword">end</span>
+    <span class="ident">puts</span> <span class="punct">&quot;</span><span class="string">closing channel...</span><span class="punct">&quot;</span>
+    <span class="ident">channel</span><span class="punct">.</span><span class="ident">close</span>
+  <span class="keyword">end</span>
+
+  <span class="ident">session</span><span class="punct">.</span><span class="ident">loop</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+     <h2>
+       <a name="s6"></a>
+       3.6. Channel Operations
+     </h2>
+
+   
+
+   <div class="section">
+     <p>There are a variety of operations that may be performed on a channel. Some we&#8217;ve already mentioned, like registering callbacks, or closing the channel. Some of the other more common operations are listed (and described) in the following table.</p>
+
+
+	<table class="list">
+		<tr>
+			<th>Operation </th>
+			<th>Description </th>
+		</tr>
+		<tr>
+			<td> <code>#exec</code> </td>
+			<td> Executes a command asynchronously on this channel.</td>
+		</tr>
+		<tr>
+			<td> <code>#request_pty</code> </td>
+			<td> Requests that a pseudo-terminal (pty) be opened for this channel.</td>
+		</tr>
+		<tr>
+			<td> <code>#send_data</code> </td>
+			<td> Sends the given data string to the server via this channel.  This is useful for sending data to a remote process, or sending an <span class="caps">SFTP</span> packet to the <span class="caps">SFTP</span> subsystem.</td>
+		</tr>
+		<tr>
+			<td> <code>#send_eof</code> </td>
+			<td> Tells the server that no further data will be sent from the client to the server. The client must honor this by not sending any more data (either normal or extended) to the server over this channel.</td>
+		</tr>
+		<tr>
+			<td> <code>#send_extended_data</code> </td>
+			<td> Sends a data string to the server, along with an integer describing its type. This is typically used to send <code>stderr</code> data.</td>
+		</tr>
+		<tr>
+			<td> <code>#send_request</code> </td>
+			<td> Sends a named request to the server for this channel. This is primarily used by implementations of protocols and subsystems that run on top of <span class="caps">SSH</span>.</td>
+		</tr>
+		<tr>
+			<td> <code>#send_signal</code> </td>
+			<td> Indicates that the server should send the given signal to the process on the other end of the channel.</td>
+		</tr>
+		<tr>
+			<td> <code>#subsystem</code> </td>
+			<td> Requests that the server start the given subsystem on this channel. This is how (for instance) the <span class="caps">SFTP</span> subsystem is invoked. </td>
+		</tr>
+	</table>
+
+
+
+
+	<p>See the <span class="caps">API</span> documentation for an exhaustive reference of all available channel operations.</p>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-2.html">Previous (2. Starting a Session)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-4.html">Next (4. Executing Commands)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

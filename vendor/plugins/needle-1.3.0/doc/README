@@ -1,0 +1,72 @@
+= Needle Dependency Injection Container
+
+Needle is a Dependency Injection container, similar in goal to
+HiveMind[http://jakarta.apache.org/hivemind],
+Spring[http://www.springframework.org], and
+PicoContainer[http://www.picocontainer.org] (in the Java universe), but vastly
+different in implementation. It takes advantage of the dynamic features in Ruby, especially
+closures and +instance_eval+.
+
+* Project page: http://rubyforge.org/projects/needle
+* User Manual: http://needle.rubyforge.org
+* API Documentation: http://needle.rubyforge.org/api
+* Needle Wiki: http://needle.rubyforge.org/wiki/wiki.pl
+
+For an excellent overview of dependency injection, have a look at "Dependency Injection in Ruby" (link:files/doc/di-in-ruby_rdoc.html).
+
+== Downloading
+
+You may download Needle from Needle's RubyForge project, at http://rubyforge.org/projects/needle.
+Needle is distributed both as a RubyGem[http://rubygems.rubyforge.org], and as a Ruby library.
+It is also available from the RPA[http://rpa-base.rubyforge.org].
+
+== Installation
+
+Needle is distributed as a gem, which makes it extremely easy to download, install, and
+use.  However, it requires that you have RubyGems[http://rubygems.rubyforge.org] installed,
+first.
+
+Assuming you have RubyGems installed, all you have to do is:
+
+  gem --remote-install needle
+
+This will install the latest version of Needle.
+
+Needle is also distributed as a Ruby library.  It's not as easy to install this way,
+but it works.  Simply grab the latest Needle package from the website, untar it, and
+install it by typing:
+
+  ruby setup.rb
+
+Or, if you want a little more control over the installation:
+
+  ruby setup.rb --help
+
+This will show you the options that are available to you, and then you can do each stage
+of the installation manually:
+
+  ruby setup.rb config
+  ruby setup.rb setup
+  ruby setup.rb install
+
+== Manual
+
+For more information about Needle, such as an overview and tutorials, see the Needle
+manual at http://needle.rubyforge.org.
+
+== Credits
+
+Thanks go to:
+
+* Matz, for creating Ruby in the first place.
+* Jim Weirich, for his inspirational blog article "Dependency Injection in Ruby" (http://onestepback.org/index.cgi/Tech/Ruby/DependencyInjectionInRuby.rdoc) that formed the embryo of what Needle has eventually become.
+
+== License
+
+Needle is copyright (c) 2004 Jamis Buck.  It is open-source software, and may be redistributed
+under the terms of the BSD or Ruby licenses. The texts of these licences are included in the
+Needle distribution, under the +doc+ subdirectory.
+
+The Needle manual and all software used to build it are distributed under the
+Attribution-ShareAlike 1.0 Creative Commons license.  Distribute it and modify it all you
+want, but give me credit and distribute your changes under an identical license.

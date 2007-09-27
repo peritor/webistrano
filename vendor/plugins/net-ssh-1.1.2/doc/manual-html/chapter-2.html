@@ -1,0 +1,552 @@
+<html>
+  <head>
+    <title>Net::SSH Manual :: Chapter 2: Starting a Session</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Net::SSH&mdash;</span><br />
+            <span class="tagline">Secure Shell for Ruby</span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Net::SSH Version: <strong>1.1.2</strong><br />
+            Manual Last Updated: <strong>2007-06-18 18:12 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Net::SSH Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">What isn&#8217;t Net::SSH?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Getting Net::SSH</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+                  <li><a href="chapter-1.html#s6">About the Author</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-2.html">
+                Starting a Session
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Using Net::SSH.start</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Using a Public/Private Key</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Options</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Using Net::SSH::Session</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Channels
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">What are Channels?</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Session.loop</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Channel Types</a></li>
+                
+                  <li><a href="chapter-3.html#s4">Opening a Channel</a></li>
+                
+                  <li><a href="chapter-3.html#s5">Callbacks</a></li>
+                
+                  <li><a href="chapter-3.html#s6">Channel Operations</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Executing Commands
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Using Channels</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Using #process.open</a></li>
+                
+                  <li><a href="chapter-4.html#s3">Using #process.popen3</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                User Shells
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Using Channels</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Shell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s4">SyncShell Service</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Terminal Clients</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Port Forwarding
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Local-to-Remote</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Remote-to-Local</a></li>
+                
+                  <li><a href="chapter-6.html#s4">Direct Channels</a></li>
+                
+                  <li><a href="chapter-6.html#s5">Remote-to-Local Handlers</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Using Proxies
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Introduction</a></li>
+                
+                  <li><a href="chapter-7.html#s2"><span class="caps">HTTP</span></a></li>
+                
+                  <li><a href="chapter-7.html#s3"><span class="caps">SOCKS</span></a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://net-ssh.rubyforge.org/api/index.html">Net::SSH API</a></li>
+            <li><a href="http://rubyforge.org/tracker/?atid=1842&group_id=274&func=browse">Net::SSH FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-1.html">Previous (1. Introduction)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-3.html">Next (3. Channels)</a>
+  
+</div></div>
+
+<h1>2. Starting a Session</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       2.1. Using Net::SSH.start
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Before you can do anything with Net::SSH, you need to require the <code>net/ssh</code> module:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Requiring Net::SSH [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">require</span> <span class="punct">'</span><span class="string">net/ssh</span><span class="punct">'</span></pre></div></div></div>
+
+
+	<p>Once you have required the <code>net/ssh</code> module, you can begin an <span class="caps">SSH</span> session by calling <code>Net::SSH.start</code>.  This may be used in one of two ways. If called without a block, it will return a reference to the new session as an instance of a <code>Net::SSH::Session</code>. Used this way, you must explicitly close the session when you are finished with it.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Opening an SSH session [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">session</span> <span class="punct">=</span> <span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">',</span> <span class="punct">'</span><span class="string">user</span><span class="punct">',</span> <span class="punct">'</span><span class="string">passwd</span><span class="punct">'</span> <span class="punct">)</span>
+<span class="punct">...</span>
+<span class="ident">session</span><span class="punct">.</span><span class="ident">close</span></pre></div></td></tr></table></div></div>
+
+
+	<p>The other approach involves attaching a block to the start method. When used this way, the new session is passed to the block, and the session is automatically closed when the block exits.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Opening a transactional SSH session [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">',</span> <span class="punct">'</span><span class="string">user</span><span class="punct">',</span> <span class="punct">'</span><span class="string">passwd</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>If you need to specify a different port on the host to connect to (the default is 22), you can specify it immediately after the <code>host</code> parameter, like so:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Specifying the SSH port [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">',</span> <span class="number">1234</span><span class="punct">,</span> <span class="punct">'</span><span class="string">user</span><span class="punct">',</span> <span class="punct">'</span><span class="string">passwd</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<h3>Using Keyword Arguments</h3>
+
+
+	<p>Some people prefer using keyword arguments for functions with more than a couple of parameters. The <code>start</code> method supports this approach as well, although the <code>host</code> parameter is always positional and always comes first.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Using keyword arguments [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">',</span>
+                <span class="symbol">:password=</span><span class="punct">&gt;'</span><span class="string">passwd</span><span class="punct">',</span> 
+                <span class="symbol">:port=</span><span class="punct">&gt;</span><span class="number">1234</span><span class="punct">,</span>
+                <span class="symbol">:username=</span><span class="punct">&gt;'</span><span class="string">user</span><span class="punct">',</span>
+       <span class="punct">...</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>(More about the &#8220;<code>...</code>&#8221; stuff, later.)</p>
+
+
+	<h3>Failed Authentication</h3>
+
+
+	<p>If the username and/or password given to <code>start</code> are incorrect, authentication will fail. If authentication fails, a <code>Net::SSH::AuthenticationFailed</code> exception will be raised.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       2.2. Using a Public/Private Key
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Just as with the <a href="http://www.openssh.org">OpenSSH</a> version of the <code>ssh</code> utilities, Net::SSH supports authentication using public/private keys.</p>
+
+
+	<h3>I don&#8217;t know what public/private keys are&#8230; Explain, please?</h3>
+
+
+	<p>Public key/private key encryption is just one way of hiding information from prying eyes. The idea is that you have two tokens: a <em>public key</em>, and a <em>private key</em>.  The private key is yours alone&#8212;you never let <em>anyone</em> else see it. The <em>public key</em>, on the other hand, is distributable. You give it to anyone that you want to be able to communicate with you securely.</p>
+
+
+	<p>The remote party uses your public key to encrypt information. Anything encrypted with your public key may only be decrypted with the corresponding private key, and since you have the only copy of that, you can rest easily knowing that no one can easily intercept your communications!</p>
+
+
+	<p>Net::SSH allows you to define a private key, which it will then attempt to use during authentication with the remote server. If the remote server has a copy of the corresponding public key, you will be able to log into that remote server without having to specify a password. Not only is this convenient, but for Ruby scripts, it is much more secure, since you don&#8217;t have to hard-code your password in your script.</p>
+
+
+	<h3>Setting up public/private keys</h3>
+
+
+	<p>Net::SSH, by default, will use the private keys that you have set up for use with ssh. These keys are called &#8220;id_dsa&#8221; and &#8220;id_rsa&#8221;, and are located under your home directory, either in a &#8221;.ssh&#8221; subdirectory, or a &#8221;.ssh2&#8221; subdirectory.</p>
+
+
+	<p>The &#8220;id_dsa&#8221; key is the preferred key (since it uses the stronger <span class="caps">DSA</span> encryption), but both <span class="caps">DSA</span> and <span class="caps">RSA</span> are supported.</p>
+
+
+	<p>To create these keys, you can use the &#8220;ssh-keygen&#8221; utility from <a href="http://www.openssh.org">OpenSSH</a>. Alternatively, if you have the Net::SSH::Utilities package installed, you can use the &#8220;rb-keygen&#8221; utility (which is a pure-Ruby implementation of most of the functionality of ssh-keygen).</p>
+
+
+	<div class='figure'>
+<span class='caption'>Generating an SSH key [shell]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/shell.css' /><div class='shell'><pre>ssh-keygen -t dsa</pre></div></div></div>
+
+
+	<p>(If you would rather use an <span class="caps">RSA</span> key, replace &#8220;dsa&#8221; with &#8220;rsa&#8221; in the command given above.)</p>
+
+
+	<p>Accept all the defaults when prompted. You will also be asked for a passphrase. This passphrase is an additional level of protection, which prevents anyone from being able to use your private key without knowing the passphrase. Unfortunately, it also means that you have to enter the passphrase every time you use your key.  It is up to you what price you want to pay for security, but if you <em>can</em> leave the passphrase blank. In this case, anyone that has a copy of your private key can use it, but it&#8217;s a little more convenient to deal with.</p>
+
+
+	<p>Once you create your keys, you then need to set up your account on each remote server so that it knows about your public key. To do this, log into the remote server and edit (or create) the file (in your home directory) &#8221;.ssh/authorized_keys&#8221;. Just copy the contents of your public key (in your local machine&#8217;s home directory, called &#8221;.ssh/id_dsa.pub&#8221; or &#8221;.ssh/id_rsa.pub&#8221;) into the &#8220;authorized_keys&#8221; file on a line of its own. Then save the file and logout.  Everything <em>should</em> now be set up.</p>
+
+
+	<p>(Note: if you have an <span class="caps">SSH</span> client installed, it will typically have its own key generation utility. You can use that instead, if you prefer.)</p>
+
+
+	<h3>Connecting using public/private keys</h3>
+
+
+	<p>Public/private keys are always tried before the explicit password authentication, even if you provide a password. Thus, if you <em>only</em> want to use public/private key authentication, simply remove the password from the argument list. If you can successfully obtain a session handle, then your keys are set up correctly!</p>
+
+
+	<div class='figure'>
+<span class='caption'>SSH authentication using keys [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">',</span> <span class="punct">'</span><span class="string">user</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Furthermore, if your <code>USER</code> environment variable is set to the username that you want to log into the remote machine as, you can even leave the <code>username</code> parameter off:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Authentication with an implicit user name [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span> <span class="punct">'</span><span class="string">host</span><span class="punct">'</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<h3>Using keys with passphrases</h3>
+
+
+	<p>When you use a private key that was created with a passphrase, you will be prompted to enter the passphrase when the key is loaded. This may make such a key inappropriate for use in automated environments, but it is certainly more secure than the use of unprotected private keys.</p>
+
+
+	<h3>Using an <span class="caps">SSH</span> agent</h3>
+
+
+	<p>Most <span class="caps">SSH</span> clients come with what is called an <em>agent</em>. This is a program that is continually running, and which keeps track of all of a user&#8217;s keys. When an <span class="caps">SSH</span> client needs to perform an operation using one of the user&#8217;s keys, it requests the operation via the agent, rather than performing the operation itself directly with a key.</p>
+
+
+	<p>The benefit of this is what is known as <em>single sign-on</em>. If any of your keys have a passphrase, this allows you to enter the passphrase <em>once</em> (when the key is loaded by the agent), and then any <span class="caps">SSH</span> program you use will never prompt you for that passphrase again.</p>
+
+
+	<p>Net::SSH includes support for interfacing with an <span class="caps">SSH</span> agent. This includes support for the <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/" title="pageant">PuTTY agent</a> on Windows systems.</p>
+
+
+	<p>On Unixish systems, you allow your Net::SSH programs to interface with a running agent by making sure that the <code>SSH_AGENT_SOCK</code> environment variable is set to the location of the Unix domain socket that the agent is listening to. Also, make sure you have added all of your keys to the agent (typically by running the <code>ssh-add</code> utility.</p>
+
+
+	<p>On Windows, the pageant process will be detected automatically, if it is running.</p>
+
+
+	<p>A future version of Net::SSH may include it&#8217;s own agent implementation as well, to make using an agent on a variety of platforms simpler.</p>
+
+
+	<p>Agent forwarding is available, and may be requested with the :forward_agent option to Net::SSH.start. Agents are not forwarded by default.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       2.3. Options
+     </h2>
+
+   
+
+   <div class="section">
+     <p>There are various additional options that you can specify when connecting. These options allow you to specify such things as the cipher algorithm to use, whether or not the data stream will be compressed, or explicit paths to the private keys to use.</p>
+
+
+	<p>Options are specified as a hash in the last parameter to the <code>start</code> method. If using the keyword parameters version of the <code>start</code> method, the options hash is whatever is left after processing the <code>:username</code>, <code>:password</code>, and <code>:port</code> options.</p>
+
+
+	<p>The complete list of available options, and their valid values, is given in the following table.</p>
+
+
+	<table class="list">
+		<tr>
+			<th>Option </th>
+			<th>Description </th>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:auth_methods</code> </td>
+			<td> This is the list of authorization methods to try. It defaults to &#8220;publickey&#8221;, &#8220;hostbased&#8221;, &#8220;password&#8221;, and &#8220;keyboard-interactive&#8221;. (These are also the only authorization methods that are supported.) If you want them to be tried in a different order, or if you don&#8217;t want certain methods to be used, you can specify your own list via this option.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:compression</code> </td>
+			<td> The compression algorithm to use when compressing the data stream. Valid values are <code>none</code> and <code>zlib</code>. The default is <code>none</code>.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:compression_level</code> </td>
+			<td> This is only used when the compression algorithm is <code>zlib</code>. It is an integer value from 0 to 9, representing the quality of the compression. <span class="caps">A 0</span> is no compression, and a 9 is most compression. The default is 6.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:container</code> </td>
+			<td> This is the dependency injection container to use when registering all of the services that Net::SSH uses internally. If unspecified (the default) a new container will be created. This option allows you to reuse a single container for multiple application components.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:crypto_backend</code> </td>
+			<td> This is the cryptography backend to use. It defaults to <code>:ossl</code>, which specifies the OpenSSL cryptography engine. Currently, this is the only supported backend, but in the future others may be provided, and this is how they would be selected.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:encryption</code> </td>
+			<td> This is the cipher algorithm to use when sending/receiving data to/from the remote server. It defaults to <code>3des-cbc</code>. Other valid algorithms supported by Net::SSH are <code>aes128-cbc</code>, <code>blowfish-cbc</code>, <code>aes256-cbc</code>, <code>aes192-cbc</code>, <code>idea-cbc</code>, and <code>none</code>. Note that the values you specify here are only <em>suggestions</em>, and if the server you are contacting cannot use your recommended algorithm, a fallback algorithm will be used (typically chosen in the order the algorithms were listed, above). This option may take an array, if you want to specify the order of the fallback algorithms to try, as well. </td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:forward_agent</code> </td>
+			<td> Set to a true value to request that the local authentication agent be forwarded to the remote host. By default the agent will not be forwarded. </td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:hmac</code> </td>
+			<td> This specifies the &#8220;message authentication code&#8221; (MAC) algorithm to use to ensure that each packet transmitted and recieved is authentic. This defaults to <code>hmac-md5</code>. Other valid algorithms supported by Net::SSH are <code>hmac-sha1</code>, <code>hmac-md5-96</code>, <code>hmac-md5-sha1</code>, and <code>none</code>. Note that the values you specify here are only <em>suggestions</em>, and if the server you are contacting cannot use your recommended algorithm, a fallback algorithm will be used (typically chosen in the order the algorithms were listed, above).  This option may take an array, if you want to specify the order of the fallback algorithms to try, as well. </td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:host_key</code> </td>
+			<td> This specifies the host key type that should be used when negotiating keys with the server. This defaults to <code>ssh-dss</code>, but may also be <code>ssh-rsa</code>. As with some other option types, the value you specify is only a recommendation, not a commandment, and if the server cannot honor the key type you specified, a fallback will be chosen from among the other supported types. If you wish to specify the fallback algorithms to try, you may pass an array as the value of this option, which contains (in order) the key types to try. </td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:host_keys</code> </td>
+			<td> This is an array of file names that contain the private keys which identify the host your script is running on. These default to <code>/etc/ssh/ssh_host_dsa_key</code> and <code>/etc/ssh/ssh_host_rsa_key</code> (which are both typically only readable by root). These keys are only used in hostbased authentication.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:kex</code> </td>
+			<td> This specifies the &#8220;key-exchange&#8221; (KEX) algorithm to use when exchanging keys. Two algorithms are currently supported: <code>diffie-hellman-group-exchange-sha1</code>, and <code>diffie-hellman-group1-sha1</code>. The default is <code>diffie-hellman-group-exchange-sha1</code>.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:keys</code> </td>
+			<td> This specifies the list of private key files to use <em>instead</em> of the defaults (<code>$HOME/.ssh/id_dsa</code>, <code>$HOME/.ssh2/id_dsa</code>, <code>$HOME/.ssh/id_rsa</code>, and <code>$HOME/.ssh2/id_rsa</code>). The value of this option should be an array of strings.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:languages</code> </td>
+			<td> This option specifies the preferred language (or languages) that should be used when communicating error messages. It has no effect on Net::SSH, but may cause the server (if it supports your suggested language) to send errors in the language you request. The default is empty.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:log</code> </td>
+			<td> Specifies either a string or an IO object. If it is a string, it names the file that all log messages should be written to. Otherwise, the messages will be written to the IO object directly. Defaults to <span class="caps">STDERR</span>.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:paranoid</code> </td>
+			<td> Controls how Net::SSH responds to a server key that it does not recognize. The default, <code>true</code>, will result in all keys being accepted the first time they are seen for a particular host, and then an exception being raised if the key ever changes. However, no host key verification will be done if the connection appears to be tunneled over a locally forwarded port. If set to <code>false</code>, no server key verification is done. You can also set this to <code>:very</code>, in which case errors are raised even if the connection appears to be tunneled.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:port</code> </td>
+			<td> This is the port number that should be used to connect to the remote machine. If you wish to specify the port, you are generally better off specifying it as the second parameter to <code>start</code>, rather than as an option, but you <em>can</em> specify it this way, if you prefer.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:registry_options</code> </td>
+			<td> If the <code>:container</code> option is not specified, a new container will be created. This option specifies a hash of additional options that may be used to configure the new container (registry). By default, it is empty.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;text-align:center;"><code>:verbose</code> </td>
+			<td> Specifies how verbose the logging should be. Valid values are <code>:fatal</code>, <code>:error</code>, <code>:warn</code>, <code>:info</code>, and <code>:debug</code>. Defaults to <code>:warn</code>. <span class="caps">WARNING</span>: selecting <code>:debug</code> will result in <span class="caps">LOTS</span> of output! (Further customization of verbosity can be accomplished by specifying which Net::SSH components should have which logging levels, via the <code>:registry_options</code> option.)</td>
+		</tr>
+	</table>
+
+
+
+
+	<p>For example, the following code snippet will connect to the given remote host, and requests that the <code>ssh-rsa</code> host key type be used, with the <code>blowfish-cbc</code> cipher algorithm, and requests that the given private key file be used. Also, the data stream will be compressed.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Specifying options when connecting [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">require</span> <span class="punct">'</span><span class="string">net/ssh</span><span class="punct">'</span>
+<span class="ident">require</span> <span class="punct">'</span><span class="string">logger</span><span class="punct">'</span>
+
+<span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">.</span><span class="ident">start</span><span class="punct">(</span>
+  <span class="punct">'</span><span class="string">host</span><span class="punct">',</span> <span class="punct">'</span><span class="string">user</span><span class="punct">',</span>
+  <span class="symbol">:host_key</span> <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">ssh-rsa</span><span class="punct">&quot;,</span>
+  <span class="symbol">:encryption</span> <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">blowfish-cbc</span><span class="punct">&quot;,</span>
+  <span class="symbol">:keys</span> <span class="punct">=&gt;</span> <span class="punct">[</span> <span class="punct">&quot;</span><span class="string">/tmp/temporary-key</span><span class="punct">&quot;</span> <span class="punct">],</span>
+  <span class="symbol">:compression</span> <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">zlib</span><span class="punct">&quot;</span>
+<span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+     <h2>
+       <a name="s4"></a>
+       2.4. Using Net::SSH::Session
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Alternatively, you can use <code>Net::SSH::Session</code> to start your <span class="caps">SSH</span> sessions. The <code>Net::SSH.start</code> interface described above is simply a convenience for creating a new Session object explicitly.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Using Net::SSH::Session [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">require</span> <span class="punct">'</span><span class="string">net/ssh</span><span class="punct">'</span>
+
+<span class="constant">Net</span><span class="punct">::</span><span class="constant">SSH</span><span class="punct">::</span><span class="constant">Session</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span>
+  <span class="punct">'</span><span class="string">host</span><span class="punct">',</span> <span class="punct">'</span><span class="string">username</span><span class="punct">',</span> <span class="punct">'</span><span class="string">password</span><span class="punct">',</span>
+  <span class="symbol">:compression</span> <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">zlib</span><span class="punct">&quot;</span>
+<span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">session</span><span class="punct">|</span>
+  <span class="punct">...</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Note that <code>Net::SSH::Session#new</code> accepts the same parameters as Net::SSH.start, and may also be called without a block.</p>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-1.html">Previous (1. Introduction)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-3.html">Next (3. Channels)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

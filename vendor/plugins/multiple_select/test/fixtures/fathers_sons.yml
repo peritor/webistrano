@@ -1,0 +1,12 @@
+with_habtm_childre_have_son_1:
+  father_id: 4
+  son_id: 4
+
+with_habtm_childre_have_son_2:
+  father_id: 4
+  son_id: 5
+
+with_habtm_childre_have_son_3:
+  father_id: 4
+  son_id: 6
+

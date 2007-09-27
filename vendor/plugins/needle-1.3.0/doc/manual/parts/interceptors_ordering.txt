@@ -1,0 +1,13 @@
+As was mentioned, a service may have multiple interceptors attached to it. By default, a method will be filtered by the interceptors in the same order that they were attached, with the first interceptor that was attached being the first one to intercept every method call.
+
+You can specify a different ordering of the interceptors by giving each one a _priority_. The priority is a number, where interceptors with a higher priority sort _closer_ to the service, and those with lower priorities sort _further_ from the service.
+
+You can specify the priority as an option when attaching an interceptor:
+
+{{{lang=ruby,number=true,caption=Setting interceptor priorities
+reg.register( :foo ) { ... }
+reg.intercept( :foo ).with { Something }.with_options( :priority => 100 )
+reg.intercept( :foo ).with { SomethingElse }.with_options( :priority => 50 )
+}}}
+
+Without the priorities, when a method of @:foo@ was invoked, Something would be called first, and then SomethingElse. _With_ the priorities (as specified), SomethingElse would be called before Something (since SomethingElse has a lower priority).

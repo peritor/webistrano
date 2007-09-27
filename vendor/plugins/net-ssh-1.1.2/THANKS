@@ -1,0 +1,19 @@
+Net::SSH was originally written by Jamis Buck <jamis@37signals.com>. In
+addition, the following individuals are gratefully acknowledged for their
+contributions:
+
+GOTOU Yuuzou <gotoyuzo@notwork.org>
+  * help and code related to OpenSSL
+
+Guillaume Marçais <guillaume.marcais@free.fr>
+  * support for communicating with the the PuTTY "pageant" process
+
+Daniel Berger <djberg96@yahoo.com>
+  * help getting unit tests to pass in Windows
+
+Chris Andrews <chris@nodnol.org> and Lee Jensen <lee@outerim.com>
+  * support for ssh agent forwarding
+
+If you have contributed to Net::SSH and are not on the above list, please do
+not take offense! Jamis is notoriously forgetful. Instead, just let him know
+what your contribution was, and he'll be only too happy to add you.

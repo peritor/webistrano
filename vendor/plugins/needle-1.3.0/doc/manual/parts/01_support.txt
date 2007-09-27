@@ -1,0 +1,1 @@
+Mailing lists, bug trackers, feature requests, and public forums are available (courtesy of "RubyForge":http://rubyforge.org) at Needle's RubyForge project page. Just direct your browser to "http://rubyforge.org/projects/needle":http://rubyforge.org/projects/needle.

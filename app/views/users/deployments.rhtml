@@ -1,0 +1,9 @@
+<h2>Deployments of User <%= link_to  h(@user.login), user_path(@user) %></h2>
+
+<fieldset class="fieldset">
+  <legend>Complete deployment history</legend>
+  <%= render(:partial => 'deployments')%>
+</fieldset>
+
+<br />
+<%= link_to 'Back', user_path(@user), :class => 'arrow_link' %>

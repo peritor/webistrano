@@ -1,0 +1,25 @@
+<% if @project.configuration_parameters.empty? %>
+  <br/>
+    <strong>No project wide configuration added yet.</strong><br/>
+     Project configuration is overridden by stage configurations. 
+  </p>
+<% else %>
+  <table class="sortable">
+    <tr>
+      <th width="28%">Name</th>
+      <th width="69%">Value</th>
+      <th width="1%">Prompt?</th>
+      <th width="1%"></th>
+      <th width="1%"></th>
+    </tr>
+  <% for config in @project.configuration_parameters %>
+    <tr class="<%= cycle :even, :odd, :name => 'configs' %>">
+      <td><%=h config.name %></td>
+      <td><%=h hide_password_in_value(config) %></td>
+      <td><%= config.prompt_status_in_html %></td>
+      <td><%= link_to 'Edit', edit_project_project_configuration_path(@project, config) %></td>
+      <td><%= link_to 'Delete', project_project_configuration_path(@project, config), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

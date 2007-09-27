@@ -1,0 +1,14 @@
+<h2>Editing stage: <%=h @stage.name %></h2>
+
+<% flashed_errors(:stage) %>
+
+<% form_for(:stage, :url => project_stage_path(@project, @stage), :html => { :method => :put }) do |f| %>
+  
+  <%= render(:partial => 'form' ) %>
+  
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', project_stage_path(@project, @stage) %>

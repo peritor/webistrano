@@ -1,0 +1,7 @@
+Mailing lists, bug trackers, feature requests, and public forums are all available (courtesty of "RubyForge":http://rubyforge.org) at the "Net::SSH project page":http://rubyforge.org/projects/net-ssh.
+
+h3. Mailing Lists
+
+|_. *List Name* |_. -- |_. *Description* |
+|^=. "net-ssh-users":http://rubyforge.org/pipermail/net-ssh-users|^=. "subscribe / unsubscribe":http://rubyforge.org/mailman/listinfo/net-ssh-users| The Net::SSH users list is devoted to the discussion of and questions about the usage of the Net::SSH module. If you can't quite figure out how to get a feature of Net::SSH to work, this is the list you would go to in order to ask your questions.|
+|^=. "net-ssh-devel":http://rubyforge.org/pipermail/net-ssh-devel|^=. "subscribe / unsubscribe":http://rubyforge.org/mailman/listinfo/net-ssh-devel| The Net::SSH developers list is devoted to the discussion of Net::SSH's implementation. If you have created a patch that you would like to discuss, or if you would like to discuss a new feature, this is the list for you.|

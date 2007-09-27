@@ -1,0 +1,146 @@
+Net:SSH
+http://rubyforge.org/projects/net-ssh
+
+[1.1.2] 18 June 2007
+  * Fixed bug #6156 (ruby -w warnings)
+
+  * Fixed bug #11532 (Hang after MSG_CHANNEL_OPEN_FAILURE)
+
+  * Fixed bug #10818 (Exception in split_data_for_packet)
+
+  * Fixed bug #6667 (wrong SOCKS 5 auth version)
+
+  * Fixed bug #11270 (error when server uses some aes ciphers)
+
+  * Fixed bug #11355 (typo in session.rb)
+
+  * Fixed bug #11250 (host key verification problems when an RSA key appears
+    in the known hosts file, but the server has both DSS and RSA keys)
+
+[1.1.1] 9 May 2007
+  * Fixed broken mkdir in host key verification.
+
+  * Fixed problems with Windows users getting "address family for hostname
+    not supported" errors.
+
+[1.1.0] 1 May 2007
+  * Added the missing rb-keygen utility
+
+  * Server key verification (enabled by default, disable with :paranoid => false)
+
+  * Add support for SSH agent forwwarding
+
+[1.0.10] 9 Sep 2006
+  * Experiment with using read instead of sysread, to try and alleviate problems
+    on Windows.
+
+  * Use printf instead of echo -n in the shell service, for compatibility with
+    more unices.
+
+  * Give a sane error message when the user name is nil and cannot be derived
+    from the environment.
+
+  * Add a #connection accessor to the session.
+
+  * Add initial support for server-originated global requests.
+
+[1.0.9] 14 Apr 2006
+  * Fix a bug when used in tandem with edge Rails, due to monkeypatching in Rails.
+
+[1.0.8] 18 Feb 2006
+  * Move connect for forwarded connections outside of thread so errors can be
+    caught
+
+[1.0.7] 27 Jan 2006
+  * Fix intermittent "corrupt mac" bug (finally!)
+
+[1.0.6] 19 Jan 2006
+  * Send NEWKEYS message first, for compatibility with wodSSHServer (which
+    won't send NEWKEYS until recieving it)
+
+  * Do not print the banner message by default on authorization (rarely useful
+    for automated processes anyway)
+
+[1.0.5] 2 Jan 2006
+  * Added connection.ping! and session.ping! for testing the connection
+
+[1.0.4] 24 Dec 2005
+  * Fixed tests broken by changes in Ruby 1.8.4.
+
+  * Fixed references to obsolete contact email address.
+
+[1.0.3] 9 Nov 2005
+  * Fixed for windows so that connections succeed even if pageant process is
+    not running.
+
+[1.0.2] 26 Jul 2005
+  * Fixed channel on_request callback signature.
+
+  * Better thread-safety in the connection driver (fixes some "Bad packet size"
+    errors in multi-threaded apps)
+
+  * Corrected various minor bugs.
+
+[1.0.1] 17 Jun 2005
+  * Added a :timeout option on the transport session
+
+  * Net::SSH works with the Putty Agent now
+
+[1.0.0] 6 Feb 2005
+  * Password can be programmatically specified for the 'keyboard-authentication'
+    method.
+  
+  * All unit tests pass on Windows now.
+
+  * Channels now respect their own local window and maximum packet sizes, and
+    report reasonable values to the server. This fixes a bug that caused
+    problems when large quantities of data were requested of the server and
+    certain server maximums were being exceeded.
+
+  * Client name is determined in a more robust manner.
+
+  * Fixed hostbased bug.
+
+  * Authentication process is now aware of the authentication methods reported
+    by the server as having a chance of succeeded, and no longer attempts
+    those methods that cannot possibly succeed.
+
+[0.9.0] 11 Jan 2005
+  * Added 'shell' and 'sync' services for interacting with users' shells,
+    including a demo script that uses these to implement a simple SSH terminal
+    client.
+
+  * The 'keyboard-interactive' authentication method is implemented correctly
+    now, which means users will receive a prompt to enter a password if one is
+    not given, and is required.
+
+  * The bug that caused the agent to always be used--even if it was
+    unavailable--has been fixed.
+
+  * The user manual now includes links to previous/next chapters, and uses
+    syntax highlighting for the code blocks. Various other style tweaks in the
+    manual.
+
+  * Window sizes and maximum packet sizes are now honored, which should take
+    care of various bugs and make Net::SSH play nicer with older SSH servers.
+
+  * Non-blocking reads are now supported via the
+    Transport::Session#reader_ready? method. The Connection::Driver#process
+    method has been modified to make better use of this.
+
+  * Moved to subversion, from CVS. Repository is now at
+    http://www.jamisbuck.org/svn/net-ssh
+
+[0.6.0] 2 Dec 2004
+  * Added pageant support (thanks to Guillaume Marçais)
+
+  * Added support for external services (like SFTP).
+
+  * Use USERNAME environment variable if USER is not set (like on Windows)
+
+[0.5.0] 23 Nov 2004
+  * Refactored to use Needle.
+
+  * Moved SFTP support into its own library.
+
+  * Moved command-line utilities into their own library.

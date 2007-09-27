@@ -1,0 +1,31 @@
+Using the libraries is as simple as requiring the file that has the service definitions, and then invoking the @#register_services@ module function:
+
+{{{lang=ruby,number=true,caption=Example of using a Needle-enabled library
+require 'needle'
+
+reg = Needle::Registry.new
+reg.define do |b|
+  b.foo { Foo.new }
+
+  require 'crypto/services'
+  Crypto.register_services( reg )
+end
+
+prng = reg.crypto.prng
+}}}
+
+To make this easier, the Container class has a convenience method named @#require@:
+
+{{{lang=ruby,number=true,caption=Example of using Container#require
+require 'needle'
+
+reg = Needle::Registry.new
+reg.define do |b|
+  b.foo { Foo.new }
+  b.require 'crypto/services', "Crypto"
+end
+
+prng = reg.crypto.prng
+}}}
+
+The @Container#require@ method will require the file, and then look for a @#register_services@ method of the named module. It will execute that method, passing the container as an argument.

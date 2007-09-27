@@ -1,0 +1,39 @@
+Creating a registry is as simple as calling @Needle::Registry.new@. This will give you a new registry object, bootstrapped to contain a few general services.
+
+{{{lang=ruby,number=true,caption=Creating a registry
+require 'needle'
+
+registry = Needle::Registry.new
+}}}
+
+Once you have the reference to the registry, you can register services with it, create new namespaces in it, and so forth.
+
+Alternatively, you can pass a block to @#new@:
+
+{{{lang=ruby,number=true,caption=Creating a registry with a block
+registry = Needle::Registry.new do |r|
+  ...
+end
+}}}
+
+The parameter to the block will be a reference to the registry. This allows you to register services with the registry as soon as it is created.
+
+Another convenience method is @#define!@:
+
+{{{lang=ruby,number=true,caption=Creating a registry with #define!
+registry = Needle::Registry.define! do
+  ...
+end
+}}}
+
+This block accepts no parameters, and evaluates the block as if it were passed to @Registry#define!@ (see below).
+
+There can be problems with using @define!@, however, since it uses @instance_eval@ to evaluate the block within the context of another object. If you find yourself running into scoping issues, you might want to consider using @#define@:
+
+{{{lang=ruby,number=true,caption=Creating a registry with #define
+registry = Needle::Registry.define do |b|
+  ...
+end
+}}}
+
+This block accepts a single parameter--a "builder" object to aid in registering services--and evaluates the block as if it were passed to @Registry#define@ (see below).

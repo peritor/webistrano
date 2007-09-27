@@ -1,0 +1,40 @@
+<h2>Deployment history of <%= current_stage_project_description %></h2>
+
+<fieldset class="fieldset">
+  <legend>Complete Deployment history</legend>
+  
+<% if @stage.deployments.empty? %>
+  <br/>
+    This stage was never deployed. 
+  <br/>
+<% else %>
+  <br />
+    This stage was deployed <%=h @stage.deployments.count %> times.
+  <br /><br />
+  <table class="sortable">
+    <tr>
+      <th>Task</th>
+      <th>Started (UTC)</th>
+      <th>Completed (UTC)</th>
+      <th style="width:200px;">Comment</th>
+      <th>User</th>
+      <th>Status</th>
+    </tr>
+  <% for deployment in @stage.deployments %>
+    <tr class="<%= cycle :even, :odd, :name => 'deployments' %>">
+      <td><%= link_to h(deployment.task), project_stage_deployment_path(current_project, current_stage, deployment) %></td>
+      <td><%=h deployment.created_at.to_s(:log)  %></td>
+      <td><%=h deployment.completed_at.to_s(:log) rescue nil %></td>
+      <td><%=h truncate(deployment.comment, 37) %></td>
+      <td><%= user_info(deployment.user) rescue '' %></td>
+      <td><%= image_tag('peritor_theme/'+deployment.status_image)%></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+
+</fieldset>
+
+<br />
+
+<%= link_to "Back", project_stage_path(current_project, current_stage), :class => 'arrow_link' %>

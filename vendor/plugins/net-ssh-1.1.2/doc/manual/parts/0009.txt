@@ -1,0 +1,14 @@
+Alternatively, you can use @Net::SSH::Session@ to start your SSH sessions. The @Net::SSH.start@ interface described above is simply a convenience for creating a new Session object explicitly.
+
+{{{lang=ruby,number=true,caption=Using Net::SSH::Session
+require 'net/ssh'
+
+Net::SSH::Session.new(
+  'host', 'username', 'password',
+  :compression => "zlib"
+) do |session|
+  ...
+end
+}}}
+
+Note that @Net::SSH::Session#new@ accepts the same parameters as Net::SSH.start, and may also be called without a block.

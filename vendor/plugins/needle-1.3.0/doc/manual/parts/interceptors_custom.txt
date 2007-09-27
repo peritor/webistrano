@@ -1,0 +1,25 @@
+Creating your own interceptors is very easy. As was demonstrated earlier, you can always use blocks to implement an interceptor. However, for more complex interceptors, or for interceptors that you want to reuse across multiple services, you can also implement your own interceptor _factories_.
+
+An interceptor factory can be any object, as long as it implements the method @#new@ with two parameters, the _service point_ (service "definition") of the service that the interceptor will be bound to, and a hash of the options that were passed to the interceptor when it was attached to the service. This method should then return a new interceptor instance, which must implement the @#process@ method. The @#process@ method should accept two parameters: an object representing the _chain_ of interceptors, and the invocation _context_.
+
+{{{lang=ruby,number=true,caption=Custom interceptor example
+class MyInterceptorFactory
+  def initialize( point, options )
+    ...
+  end
+
+  def process( chain, context )
+    # context.sym   : the name of the method that was invoked
+    # context.args  : the array of arguments passed to the method
+    # context.block : the block passed to the method, if any
+    # context.data  : a hash that may be used to share data between interceptors
+    return context.process_next( context )
+  end
+end
+}}}
+
+Once you've created your factory, you can attach it to a service:
+
+{{{lang=ruby,caption=Attaching a custom interceptor
+reg.intercept( :foo ).with { MyInterceptorFactory }
+}}}

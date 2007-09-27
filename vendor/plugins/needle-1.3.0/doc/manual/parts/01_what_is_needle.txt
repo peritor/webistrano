@@ -1,0 +1,1 @@
+Needle is a dependency injection (also, inversion of control) container for "Ruby":http://www.ruby-lang.org.

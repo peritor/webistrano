@@ -1,0 +1,30 @@
+You can configure the LogFactory when you create the registry by passing a hash as the @:logs@ option to @Registry.new@. The hash may have the following properties:
+
+|^. @:device@|Should refer to an IO or pseudo-IO object that will receive @#write@ and @#close@ messages.|
+|^. @:filename@|The name of the file to write log messages to.|
+|^. @:roll_age@|The number of days before the log should be rolled.|
+|^. @:roll_frequency@|Either 'daily', 'weekly', or 'monthly', indicating how often the log should be rolled.|
+|^. @:roll_size@|The maximum size that a log file may grow to before it is rolled.|
+|^. @:default_date_format@|A @strftime@-formatted string to use for formatting message dates and times.|
+|^. @:default_message_format@|A printf-styled format string to use when formatting messages. It's format is reminiscent of Log4r, but differs in some options. See the API documentation for Needle::Logger for details.|
+|^. @:default_level@|One of @:debug@, @:info@, @:warn@, @:error@, or @:fatal@, indicating the default level of logging detail to use.|
+|^. @:levels@|Another hash of pattern/level or pattern/hash pairs, where the pattern is a string describing the logger name (or names) that it matches. If the corresponding value of a key is a symbol or a string, then it describes the logging level to use for loggers that match it. If the value is a hash, then it may contain @:level@, @:date_format@, or @:message_format@ keys that apply to matching logs.|
+
+By default, the filename is "./needle.log", and the roll_size is one megabyte. The default level is @:debug@. If you wanted to specify a different filename and default level of @:warn@, you could do:
+
+{{{lang=ruby,number=true,caption=Configuring the loggers
+reg = Needle::Registry.new(
+  :logs => {
+    :filename => "./my-app.log",
+    :default_level => :warn }
+)
+}}}
+
+Alternatively, you can easily put the logging configuration in a YAML file and read it in, like so:
+
+{{{lang=ruby,number=true,caption=Configuring the loggers from a YAML file
+require 'yaml'
+reg = Needle::Registry.new(
+  :logs => YAML.load( File.read( "log-conf.yml" ) )
+)
+}}}

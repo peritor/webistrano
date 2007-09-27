@@ -1,0 +1,7 @@
+A user's _shell_ is the environment in which commands are executed on a remote machine. There are a variety of different shells, including "bash":http://www.gnu.org/software/bash/bash.html, csh, tcsh, "ksh":http://www.kornshell.com/, and many others.
+
+A shell may be executed like any other program, and when run, it (more-or-less) enters a read-execute-prompt cycle in which the user may interactively run commands.
+
+SSH has special support for shells, allowing you to start a shell on a channel and have all subsequent data sent to that channel interpreted as the user's input to the shell. Also, SSH supports pty's (_pseudo-tty_'s, or terminals), which allow the shell to act as if it were running locally on the users own machine.
+
+Because a shell is just a program, you can always start a shell simply by executing it (as described in the previous chapter). However, you can also take advantage of SSH's builtin shell support to execute the user's preferred shell. This chapter will discuss this approach.

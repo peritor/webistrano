@@ -1,0 +1,60 @@
+The _service locator_ pattern makes things a _little_ easier. Instead of instantiating everything in the constructor of the @Application@, you can create a factory method somewhere that returns the new @Application@ instance. Then, inside of this factory method, you assign each new object to collection, and pass that collection to each constructor.
+
+{{{lang=ruby,number=true,caption=Service locator example
+require 'needle'
+
+def create_application
+  locator = Needle::Registry.new
+
+  locator.register( :view ) { View.new(locator) }
+  locator.register( :logger ) { Logger.new(locator) }
+  locator.register( :database ) { Database.new(locator) }
+  locator.register( :authenticator ) {Authenticator.new(locator) }
+  locator.register( :session ) { Session.new(locator) }
+  locator.register( :app ) { Application.new(locator) }
+
+  locator[:app]
+end
+
+class Application
+  def initialize( locator )
+    @view = locator[:view]
+    @logger = locator[:logger]
+    @database = locator[:database]
+    @authenticator = locator[:authenticator]
+    @session = locator[:session]
+  end
+end
+
+class Session
+  def initialize( locator )
+    @database = locator[:database]
+    @logger = locator[:logger]
+  end
+end
+
+...
+}}}
+
+This has the benefit of allowing each object to construct itself _á la carte_ from the objects in the locator. Also, each object no longer cares what class implements each service--it only cares that each object implements the methods it will attempt to invoke on that object.
+
+Also, because Needle defers the instantiation of each service until the service is actually requested, we can actually register each item with the locator in any arbitrary order. All that is happening is the block is associated with the symbol, so that when the service is requested, the corresponding block is invoked. What is more, by default each service is then cached, so that it is only instantiated once.
+
+Thus, when we get the @:app@ service (on the last line), the @Application@ constructor is invoked, passing the locator to the constructor. Inside the constructor, @Application@ retrieves each of its dependencies from the locator, causing each of them to be instantiated in turn. By this means, everything is initialized and constructed when the @create_application@ method returns.
+
+In the interest of brevity, the @create_application@ could have been written like this, using a "builder" object (called @b@ in the example below) to help register the services:
+
+{{{lang=ruby,number=true,caption=Service locator example using #define
+def create_application
+  locator = Needle::Registry.define do |b|
+    b.view { View.new(locator) }
+    b.logger { Logger.new(locator) }
+    b.database { Database.new(locator) }
+    b.authenticator {Authenticator.new(locator) }
+    b.session { Session.new(locator) }
+    b.app { Application.new(locator) }
+  end
+
+  locator[:app]
+end
+}}}

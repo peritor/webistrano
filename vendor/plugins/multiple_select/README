@@ -1,0 +1,185 @@
+= Multiple Select Helper
+
+IMPORTANT: This version is for Rails versions 1.2 or greater. If you want to
+use the plugin with Rails 1.1 download a version of the plugin for your
+version of Rails. More information at
+http://ruido-blanco.net/blog/rails-multiple-select-helper-plugin
+
+IMPORTANT: If you used the plugin prior version 20070407 and you don't want to
+change your code you should stick to use the last stable version 20060918
+(you can found it at
+http://svn.ruido-blanco.net/multiple_select/tags/multiple_select-20060918).
+The easiest way to port your code to the new version is change all call to
++multiple_select+, +collection_multiple_select+ and +tree_multiple_select+ to
+its +*_tag+ versions, but maybe you want to work a bit more and use the new
+"object-method" parameters versions, they simplify the controllers a lot.
+
+Selecting multiple elements in a list is sometimes tricky. You may click
+inadvertably on one item of the list and lost all your previous selection. You
+are forced to use Ctrl (or Command) clicks to select more than one element.
+
+Multiple Select Helper allows you to create easy to use list for multiple
+selections from array, hashes, collections or trees. The list is build using
+checkboxes so you can click easily and you will not lost the elements you
+clicked before. As drawback you lose the use of the keyboard in the "list".
+
+This multiple selections are very useful in many to many relationships
+(+has_and_belongs_to_many+ or <tt>has_many :through</tt> with no obligatory
+fields) where a "add and remove" solution will be cumbersome.
+
+You can download this plugin at:
+
+http://svn.ruido-blanco.net/multiple_select/trunk
+
+You can find this information at:
+
+http://ruido-blanco.net/blog/rails-multiple-select-helper-plugin
+
+== Using Multiple Select Helper
+
+There are 3 tuples of functions that you can use depending of the source of
+your data:
+
+- +multiple_select+ (and +multiple_select_tag+,
+  +checkboxes_for_multiple_select+): With arrays, hashes or your own classes
+  (implementing first and last in them).
+- +collection_multiple_select+ (and +collection_multiple_select_tag+ and
+  +checkboxes_from_collection_for_multiple_select+): With arrays of classes
+  using +text_method+ and +value_method+ to access the data in the instances.
+- +tree_multiple_select+ (and +tree_multiple_select_tag+ and
+  +checkboxes_from_tree_for_multiple_select+): With tree-like structures (like
+  ActiveRecord's +acts_as_tree+) using +text_method+ and +value_method+ to
+  access the data in the instances.
+
+All three posibilites supports the following options in the options hash:
+
+[+outer_class+] Specifies the class of the ul that wraps all the checkboxes.
+[+selected_items+] Specifies an array of items that should be selected when
+                   the list renders (only in the three main methods, the other
+                   three use the +selected_items+ parameter instead).
+                   <tt>:selected_items</tt> array should be an array of values
+                   to be matched with the ones provided by
+                   <tt>value_method</tt>.
+[+inner_class+] Specifies the class of the li that wraps each checkbox.
+[+position+] Determines the position of the label besides the checkbox. The
+             value should be <tt>:right</tt> or <tt>:left</tt>. The default is
+             <tt>:right</tt>.
+[+alternate+] Determines if the class of each of the checkboxes should
+              alternate. The default is not alternating classes.
+[+alternate_class+] Specifies the alternative class that will be used if
+                    +alternate+ option is used. The alternative class will be
+                    added to the +inner_class+ option if it is also specified.
+                    The default alternative class is "alt".
+[+initial_alternate+] Determines if the first element of the list should be
+                      the alternative one or not. The default is that the
+                      first element is not the alternative one.
+[+disabled+] If disabled is +true+ all the checkboxes will be disabled. If
+             disabled is an array only the checkboxes in the array will be
+             disabled. If disabled is +false+ no checkboxes will be disabled.
+             The default is +false+.
+[+disabled+] If disabled is +true+ all the checkboxes will be disabled. If
+             disabled is an array only the checkboxes in the array will be
+             disabled. If disabled is +false+ no checkboxes will be disabled.
+             The default is +false+.
+
+Besides the options above described the two tree methods supports also the
+following options:
+
+[+depth+] Maximum depth the tree will be trasversed. A depth of 0 will only
+          show the nodes of the first level. The default is traverse all the
+          tree.
+[+child_method+] The method that will be send to the node to obtain its
+                 children. This method must only return an array of the direct
+                 children of the node. The default is "children" (valid for
+                 +acts_as_tree+. For +acts_as_nested_set+ use
+                 "direct_children" instead).
+[+level_class+] Specifies the preffix of the class that will be used in each
+                of the divs that wrap each checkbox. The +level_class+ will be
+                suffixed with a incresing number according the level of the
+                actual checkbox. This class will be added to the +inner_class+
+                and the alternative class if they are also specified.
+[+initial_level+] Specifies the first level that will be used as preffix of
+                  +level_class+. The default is 0.
+
+There used to be an option called +include_hidden_field+ but now it is not
+more an option and is always enforced +true+ so you always get a param value
+in your controllers, even when the users check no checkbox.
+
+Since 20060917 version you could establish default option for some of the most
+used parameters (+outer_class+, +inner_class+, +level_class+, +alternate+,
++alternate_class+, and +position+). To set the new default values of this
+variables you can write in your <tt>environment.rb</tt>:
+
+ FightTheMelons::Helpers::FormMultipleSelectHelperConfiguration.outer_class =
+   'myclass'
+
+And every call to every method of the module will use an default +outer_class+
+of +myclass+ (you can always pass a new value in the options hash and it will
+be used instead of the default value).
+
+There is an additional variable that you can not set using the options hash of
+the methods but you can set using a module variable. This variable is call is
++list_tags+ and is an array of two strings that will be used to wrap the
+list and the individual list items, respectively. So if you want your
+checkboxes wrapped by divs like in pre-20060917 versions you can set the
+variable like this:
+
+ FightTheMelons::Helpers::FormMultipleSelectHelperConfiguration.list_tags =
+   ['div', 'div']
+
+Note that this line does NOT produce the exact same results as pre-20060917
+versions of the plugin in the tree methods (collection and normal methods
+produce the same results, as far as I know).
+
+When you want to store your list of checked options in a "habtm" relationship
+you could use something like:
+
+ # In the model
+ class Person < ActiveRecord::Base
+   has_and_belongs_to_many :fruits
+ end
+ 
+ # In the view
+ <%=
+   collection_multiple_select(
+     'person', 'fruit_ids', Fruit.find(:all), :id, :name
+   )
+ %>
+ 
+ # In the controller
+ @person.fruit_ids = params[:person][:fruit_ids]
+
+And you will have all the fruits you have selected linked to the person you
+are editing.
+
+== Version history
+
+- 20070409
+  - The old hidden_field toggled by include_hidden_field is now always
+    included (seems like is really needed in Rails 1.2).
+  - In some situations with the object-method versions of the helpers
+    Rails will fail saying that content_tag expects 3 parameters instead of 2.
+- 20070407
+  - Merge with the "Object Method Parameters" branch.
+  - Old versions of the methods are still accessible in the "_tag" versions.
+  - include_hidden_field removed (not needed in Rails 1.2).
+- 20060918
+  - Changed the hidden_field option to include_hidden_field so it do not clash
+    with Rails hidden_field method.
+  - Moved all the configuration to a new module not included in ActionView.
+- 20060917
+  - Added hidden_field option.
+  - Change the default tags to <ul> and <li>.
+  - Added module-wide variables for most used options.
+- 20060903
+  - Added disabled option.
+  - The ids generated are now HTML 4.01 valid.
+  - The tree version is more efficient now.
+- 20060806
+  - Initial release.
+
+== Authors
+
+- Daniel Rodríguez Troitiño (mailto:drodrigueztroitino@yahoo.es): main
+  programmer.
+- Michael Schuerig (mailto:michael@schuering.de): some ideas.

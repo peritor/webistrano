@@ -1,0 +1,58 @@
+<h2>User: <%=h @user.login %></h2>
+
+<div class="special_box user_box">
+</div>
+
+<div style="float: left; width:380px;">
+  <div class="box_top_left">
+    <div class="box_top_right">
+  	  <div class="box_top">
+	  </div>
+    </div>
+  </div>
+  <div class="box_body" style="min-height: 123px;">
+    <div class="box_box">
+		<% if @user.admin? %>
+		  <p>
+		    <b>Admin User</b>
+		  </p>
+		<% end %>
+	</div>
+    <div>
+		<p>
+			  <b>Login:</b>
+			  <%=h @user.login %>
+			</p>
+
+			<p>
+			  <b>Email:</b>
+			  <%=h @user.email %>
+			</p>
+
+			<p>
+			  <b>#Deployments:</b> <%=h @user.deployments.count %>
+			</p>
+			<br/>
+			<% if current_user.admin? || current_user == @user %>
+			 <%= link_to 'Edit & change password', edit_user_path(@user), :class => 'arrow_link' %> | 
+			 <%= link_to 'Delete', user_path(@user), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %>
+			<% end %>
+			
+	</div>	
+  </div>
+  <div class="box_bottom_left">
+    <div class="box_bottom_right">
+      <div class="box_bottom">  
+  	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>
+<br>
+
+<fieldset class="fieldset">
+  <legend>Recent Deployment History</legend>
+  <%= render(:partial => 'deployments')%>
+</fieldset>
+

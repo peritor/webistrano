@@ -1,0 +1,400 @@
+<html>
+  <head>
+    <title>Needle Manual :: Chapter 7: Logging</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Needle&mdash;</span><br />
+            <span class="tagline">to the point --></span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Needle Version: <strong>1.3.0</strong><br />
+            Manual Last Updated: <strong>2005-12-24 15:20 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Needle Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Needle?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">How Can It Help Me?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Alternatives</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Registry
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Creating</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Services</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Namespaces</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Service Locator
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Conventional Architecture</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Locator Pattern</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Dependency Injection
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Setup</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                Interceptors
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Architecture</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Attaching</a></li>
+                
+                  <li><a href="chapter-5.html#s4">Ordering</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Custom</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Service Models
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Pipelines</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Models</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-7.html">
+                Logging
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-7.html#s2">LogFactory</a></li>
+                
+                  <li><a href="chapter-7.html#s3">Configuration</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-8.html">
+                Service Libraries
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-8.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-8.html#s2">Creating Libraries</a></li>
+                
+                  <li><a href="chapter-8.html#s3">Using Libraries</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-9.html">
+                Customizing Needle
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-9.html#s1">Namespaces</a></li>
+                
+                  <li><a href="chapter-9.html#s2">Interceptors</a></li>
+                
+                  <li><a href="chapter-9.html#s3">Contexts</a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://needle.rubyforge.org/api/index.html">Needle API</a></li>
+            <li><a href="http://needle.rubyforge.org/faq.html">Needle FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-6.html">Previous (6. Service Models)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-8.html">Next (8. Service Libraries)</a>
+  
+</div></div>
+
+<h1>7. Logging</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       7.1. Overview
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Logging is a pretty common activity in many applications. Because it is so common, Needle provides a powerful framework for logging messages in a consistent manner.</p>
+
+
+	<p>Needle&#8217;s logging framework is built on top of the standard Ruby <code>Logger</code> library. However, it extends that library to add additional functionality, including customizable message formats and a centralized location for obtaining logger instances.</p>
+
+
+	<p>This centralized location is the LogFactory.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       7.2. LogFactory
+     </h2>
+
+   
+
+   <div class="section">
+     <p>The LogFactory is available as a service, so that any component that needs a logger instance can gain easy access to one. The factory&#8217;s service name is <code>:logs</code>.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Accessing the LogFactory service [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">factory</span> <span class="punct">=</span> <span class="ident">reg</span><span class="punct">.</span><span class="ident">logs</span></pre></div></div></div>
+
+
+	<p>You obtain logger instances from the factory by passing a logger name to <code>#get</code>:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Getting a named logger instance [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">logger</span> <span class="punct">=</span> <span class="ident">reg</span><span class="punct">.</span><span class="ident">logs</span><span class="punct">.</span><span class="ident">get</span> <span class="punct">&quot;</span><span class="string">a logger name</span><span class="punct">&quot;</span></pre></div></div></div>
+
+
+	<p>Subsequent calls to <code>#get</code> will return the same logger instance for the given logger name.</p>
+
+
+	<h3>Loggers for Services</h3>
+
+
+	<p>Typically, you&#8217;ll use this to assign a logger instance to a service when it is constructed. In that case, the name of the logger is the fully-qualified name of the service:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Getting a logger for a service [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">c</span><span class="punct">,</span><span class="ident">p</span><span class="punct">|</span>
+  <span class="constant">Foo</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span> <span class="ident">c</span><span class="punct">.</span><span class="ident">logs</span><span class="punct">.</span><span class="ident">get</span><span class="punct">(</span> <span class="ident">p</span><span class="punct">.</span><span class="ident">fullname</span> <span class="punct">)</span> <span class="punct">)</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>As a convenience, if the value passed to <code>#get</code> responds to either <code>fullname</code> or <code>name</code>, the return value of that message will be used as the name. Thus, you can do the following:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Getting a logger for a service (simplified) [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">c</span><span class="punct">,</span><span class="ident">p</span><span class="punct">|</span>
+  <span class="constant">Foo</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span> <span class="ident">c</span><span class="punct">.</span><span class="ident">logs</span><span class="punct">.</span><span class="ident">get</span><span class="punct">(</span> <span class="ident">p</span> <span class="punct">)</span> <span class="punct">)</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>As a further convenience, there is a <code>:log_for</code> service that is parameterized. Just pass the name of the log to retreive (or the service point instance) and it will return the log handle directly:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Getting a logger for a service (simplified further) [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">c</span><span class="punct">,</span><span class="ident">p</span><span class="punct">|</span>
+  <span class="constant">Foo</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span> <span class="ident">c</span><span class="punct">.</span><span class="ident">log_for</span><span class="punct">(</span> <span class="ident">p</span> <span class="punct">)</span> <span class="punct">)</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       7.3. Configuration
+     </h2>
+
+   
+
+   <div class="section">
+     <p>You can configure the LogFactory when you create the registry by passing a hash as the <code>:logs</code> option to <code>Registry.new</code>. The hash may have the following properties:</p>
+
+
+	<table>
+		<tr>
+			<td style="vertical-align:top;"><code>:device</code></td>
+			<td>Should refer to an IO or pseudo-IO object that will receive <code>#write</code> and <code>#close</code> messages.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:filename</code></td>
+			<td>The name of the file to write log messages to.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:roll_age</code></td>
+			<td>The number of days before the log should be rolled.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:roll_frequency</code></td>
+			<td>Either &#8216;daily&#8217;, &#8216;weekly&#8217;, or &#8216;monthly&#8217;, indicating how often the log should be rolled.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:roll_size</code></td>
+			<td>The maximum size that a log file may grow to before it is rolled.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:default_date_format</code></td>
+			<td>A <code>strftime</code>-formatted string to use for formatting message dates and times.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:default_message_format</code></td>
+			<td>A printf-styled format string to use when formatting messages. It&#8217;s format is reminiscent of Log4r, but differs in some options. See the <span class="caps">API</span> documentation for Needle::Logger for details.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:default_level</code></td>
+			<td>One of <code>:debug</code>, <code>:info</code>, <code>:warn</code>, <code>:error</code>, or <code>:fatal</code>, indicating the default level of logging detail to use.</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"><code>:levels</code></td>
+			<td>Another hash of pattern/level or pattern/hash pairs, where the pattern is a string describing the logger name (or names) that it matches. If the corresponding value of a key is a symbol or a string, then it describes the logging level to use for loggers that match it. If the value is a hash, then it may contain <code>:level</code>, <code>:date_format</code>, or <code>:message_format</code> keys that apply to matching logs.</td>
+		</tr>
+	</table>
+
+
+
+
+	<p>By default, the filename is &#8221;./needle.log&#8221;, and the roll_size is one megabyte. The default level is <code>:debug</code>. If you wanted to specify a different filename and default level of <code>:warn</code>, you could do:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Configuring the loggers [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span>
+  <span class="symbol">:logs</span> <span class="punct">=&gt;</span> <span class="punct">{</span>
+    <span class="symbol">:filename</span> <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">./my-app.log</span><span class="punct">&quot;,</span>
+    <span class="symbol">:default_level</span> <span class="punct">=&gt;</span> <span class="symbol">:warn</span> <span class="punct">}</span>
+<span class="punct">)</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Alternatively, you can easily put the logging configuration in a <span class="caps">YAML</span> file and read it in, like so:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Configuring the loggers from a YAML file [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">require</span> <span class="punct">'</span><span class="string">yaml</span><span class="punct">'</span>
+<span class="ident">reg</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">new</span><span class="punct">(</span>
+  <span class="symbol">:logs</span> <span class="punct">=&gt;</span> <span class="constant">YAML</span><span class="punct">.</span><span class="ident">load</span><span class="punct">(</span> <span class="constant">File</span><span class="punct">.</span><span class="ident">read</span><span class="punct">(</span> <span class="punct">&quot;</span><span class="string">log-conf.yml</span><span class="punct">&quot;</span> <span class="punct">)</span> <span class="punct">)</span>
+<span class="punct">)</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-6.html">Previous (6. Service Models)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-8.html">Next (8. Service Libraries)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

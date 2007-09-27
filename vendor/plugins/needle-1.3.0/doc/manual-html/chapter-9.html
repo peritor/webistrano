@@ -1,0 +1,370 @@
+<html>
+  <head>
+    <title>Needle Manual :: Chapter 9: Customizing Needle</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Needle&mdash;</span><br />
+            <span class="tagline">to the point --></span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Needle Version: <strong>1.3.0</strong><br />
+            Manual Last Updated: <strong>2005-12-24 15:20 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Needle Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Needle?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">How Can It Help Me?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Alternatives</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Registry
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Creating</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Services</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Namespaces</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Service Locator
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Conventional Architecture</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Locator Pattern</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Dependency Injection
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Setup</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-5.html">
+                Interceptors
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Architecture</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Attaching</a></li>
+                
+                  <li><a href="chapter-5.html#s4">Ordering</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Custom</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Service Models
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Pipelines</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Models</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Logging
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-7.html#s2">LogFactory</a></li>
+                
+                  <li><a href="chapter-7.html#s3">Configuration</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-8.html">
+                Service Libraries
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-8.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-8.html#s2">Creating Libraries</a></li>
+                
+                  <li><a href="chapter-8.html#s3">Using Libraries</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-9.html">
+                Customizing Needle
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-9.html#s1">Namespaces</a></li>
+                
+                  <li><a href="chapter-9.html#s2">Interceptors</a></li>
+                
+                  <li><a href="chapter-9.html#s3">Contexts</a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://needle.rubyforge.org/api/index.html">Needle API</a></li>
+            <li><a href="http://needle.rubyforge.org/faq.html">Needle FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-8.html">Previous (8. Service Libraries)</a> |
+  
+  <a href="index.html">Up</a>
+  
+</div></div>
+
+<h1>9. Customizing Needle</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       9.1. Namespaces
+     </h2>
+
+   
+
+   <div class="section">
+     <p>By default, when you create a namespace in Needle, the namespace is registered as a service. The type of the service is determined by the <code>:namespace_impl_factory</code> service, which (by default) returns the <code>Needle::Container</code> class.</p>
+
+
+	<p>You can specify your own custom implementation for namespaces by registering your own <code>:namespace_impl_factory</code> service. In fact, each namespace can have its own implementation of subnamespaces&#8212;just register a <code>:namespace_impl_factory</code> in each one that you want to be specialized.</p>
+
+
+	<p>Here&#8217;s a contrived example. Suppose you want each namespace to keep track of the precise time that it was created.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Custom namespace implementations [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">class </span><span class="class">TimeTrackerNamespace</span> <span class="punct">&lt;</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Container</span>
+  <span class="ident">attr_reader</span> <span class="symbol">:birth_date</span>
+
+  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span> <span class="punct">*</span><span class="ident">args</span> <span class="punct">)</span>
+    <span class="keyword">super</span>
+    <span class="attribute">@birth_date</span> <span class="punct">=</span> <span class="constant">Time</span><span class="punct">.</span><span class="ident">now</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="ident">reg</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">new</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:namespace_impl_factory</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">TimeTrackerNamespace</span> <span class="punct">}</span>
+
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">namespace</span> <span class="symbol">:hello</span>
+<span class="ident">p</span> <span class="ident">reg</span><span class="punct">.</span><span class="ident">hello</span><span class="punct">.</span><span class="ident">birth_date</span></pre></div></td></tr></table></div></div>
+
+
+	<p>In general, you&#8217;ll be better off having your custom implementation extend <code>Needle::Container</code>, although the only <em>real</em> requirement is that your implementation publish the same interface as the default namespace implementation.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       9.2. Interceptors
+     </h2>
+
+   
+
+   <div class="section">
+     <p>When you attach an interceptor to a service, that new interceptor is wrapped in a definition object that includes various metadata about the interceptor, including its implementation, its priority, its name, and so forth. The implementation of this interceptor definition is determined by the value of the <code>:interceptor_impl_factory</code> service, which by default returns <code>Needle::Interceptor</code>.</p>
+
+
+	<p>It is this wrapper object that allows interceptor definitions to be done using method chaining:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Configuring an interceptor [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">with</span> <span class="punct">{</span> <span class="punct">...</span> <span class="punct">}.</span><span class="ident">with_options</span><span class="punct">(...)</span></pre></div></div></div>
+
+
+	<p>If you wish to add custom, domain-specific functionality to the interceptor wrapper, you can register your own implementation of the <code>:interceptor_impl_factory</code>. Consider the following contrived example, where an &#8220;only_if&#8221; clause is given to determine when the interceptor should be invoked.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Advanced configuration of an interceptor [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br />17<br />18<br />19<br />20<br />21<br />22<br />23<br />24<br />25<br />26<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">class </span><span class="class">OnlyIfInterceptor</span> <span class="punct">&lt;</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Interceptor</span>
+  <span class="keyword">def </span><span class="method">only_if</span><span class="punct">(</span> <span class="punct">&amp;</span><span class="ident">block</span> <span class="punct">)</span>
+    <span class="attribute">@only_if</span> <span class="punct">=</span> <span class="ident">block</span>
+    <span class="constant">self</span>
+  <span class="keyword">end</span>
+
+  <span class="keyword">def </span><span class="method">action</span>
+    <span class="ident">action_proc</span> <span class="punct">=</span> <span class="keyword">super</span>
+    <span class="ident">lambda</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">chain</span><span class="punct">,</span><span class="ident">ctx</span><span class="punct">|</span>
+      <span class="keyword">if</span> <span class="attribute">@only_if</span><span class="punct">.</span><span class="ident">call</span><span class="punct">(</span> <span class="ident">chain</span><span class="punct">,</span> <span class="ident">ctx</span> <span class="punct">)</span>
+        <span class="ident">action_proc</span><span class="punct">.</span><span class="ident">call</span><span class="punct">(</span> <span class="ident">chain</span><span class="punct">,</span> <span class="ident">ctx</span> <span class="punct">)</span>
+      <span class="keyword">else</span>
+        <span class="ident">chain</span><span class="punct">.</span><span class="ident">process_next</span><span class="punct">(</span> <span class="ident">ctx</span> <span class="punct">)</span>
+      <span class="keyword">end</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="ident">reg</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">new</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:interceptor_impl_factory</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">OnlyIfInterceptor</span> <span class="punct">}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">Bar</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span>
+  <span class="ident">with</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">c</span><span class="punct">|</span> <span class="ident">c</span><span class="punct">.</span><span class="ident">logging_interceptor</span> <span class="punct">}.</span>
+  <span class="ident">only_if</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">ch</span><span class="punct">,</span><span class="ident">ctx</span><span class="punct">|</span> <span class="ident">something_is_true</span><span class="punct">(</span> <span class="ident">ch</span><span class="punct">,</span> <span class="ident">ctx</span> <span class="punct">)</span> <span class="punct">}.</span>
+  <span class="ident">with_options</span><span class="punct">(...)</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       9.3. Contexts
+     </h2>
+
+   
+
+   <div class="section">
+     <p>A <em>definition context</em> is used when registering services using any of the <code>#define</code> interfaces. For example, <code>Container#define</code> yields an instance of a definition context to the given block, and <code>Container#define!</code> uses the block in an <code>instance_eval</code> on a definition context.</p>
+
+
+	<p>The default implementation used for definition contexts is defined by the <code>:definition_context_factory</code> service. By default, this service returns <code>Needle::DefinitionContext</code>, but you can specify your own definition context implementations by overriding this service. In fact, each namespace could have its own definition context implementation, if needed.</p>
+
+
+	<p>Consider the following contrived example, where you want to provide a convenient way to register services of type Hash.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Custom DefinitionContext example [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br />14<br />15<br />16<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">class </span><span class="class">MyDefinitionContext</span> <span class="punct">&lt;</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">DefinitionContext</span>
+  <span class="keyword">def </span><span class="method">register_hash</span><span class="punct">(</span> <span class="ident">name</span><span class="punct">,</span> <span class="ident">opts</span><span class="punct">={}</span> <span class="punct">)</span>
+    <span class="ident">this_container</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="ident">name</span><span class="punct">,</span> <span class="ident">opts</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">Hash</span><span class="punct">.</span><span class="ident">new</span> <span class="punct">}</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="ident">reg</span> <span class="punct">=</span> <span class="constant">Needle</span><span class="punct">::</span><span class="constant">Registry</span><span class="punct">.</span><span class="ident">new</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:definition_context_factory</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">MyDefinitionContext</span> <span class="punct">}</span>
+
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">define</span> <span class="keyword">do</span> <span class="punct">|</span><span class="ident">b</span><span class="punct">|</span>
+  <span class="ident">b</span><span class="punct">.</span><span class="ident">register_hash</span><span class="punct">(</span> <span class="symbol">:test1</span> <span class="punct">)</span>
+  <span class="ident">b</span><span class="punct">.</span><span class="ident">register_hash</span><span class="punct">(</span> <span class="symbol">:test2</span> <span class="punct">)</span>
+<span class="keyword">end</span>
+
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">test1</span><span class="punct">[</span><span class="symbol">:key</span><span class="punct">]</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">value</span><span class="punct">&quot;</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">test2</span><span class="punct">[</span><span class="symbol">:foo</span><span class="punct">]</span> <span class="punct">=</span> <span class="punct">&quot;</span><span class="string">bar</span><span class="punct">&quot;</span></pre></div></td></tr></table></div></div>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-8.html">Previous (8. Service Libraries)</a> |
+  
+  <a href="index.html">Up</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

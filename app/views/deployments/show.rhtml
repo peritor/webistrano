@@ -1,0 +1,8 @@
+<h2>Deployment of <%= current_stage_project_description %></h2>
+
+<div id="status_info">
+  <%= render(:partial => 'status')%>
+</div>
+<br />
+
+<%= link_to 'Back', project_stage_path(@project, @stage), :class => 'arrow_link'  %>

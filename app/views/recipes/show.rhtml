@@ -1,0 +1,57 @@
+<h2>Recipe: <%=h @recipe.name %></h2>
+
+<div class="special_box recipe_box">
+</div>
+
+<div style="float: left; width:380px;">
+  <div class="box_top_left">
+    <div class="box_top_right">
+  	  <div class="box_top">
+	  </div>
+    </div>
+  </div>
+  <div class="box_body" style="min-height: 123px;">
+    <div>
+		<p>
+		  <b>Description:</b>
+		  <%=web_friendly_text @recipe.description %>
+		</p>
+		<p>
+		  <b>#Stages:</b>
+		  <%=h @recipe.stages.count %>
+		</p>
+		<br />
+		<%= link_to 'Edit Recipe', edit_recipe_path(@recipe), :class => 'arrow_link' %> |
+		<%= link_to 'Delete', recipe_path(@recipe), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
+	</div>	
+  </div>
+  <div class="box_bottom_left">
+    <div class="box_bottom_right">
+      <div class="box_bottom">  
+  	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>
+<br />
+
+<fieldset class="fieldset">
+  <legend>Used by stage</legend>
+  <%= render(:partial => 'stages')%>
+</fieldset>
+
+<div class="clear"></div>
+<br />
+
+<fieldset class="fieldset">
+  <legend>Body</legend>
+  <div class="log_output">
+    <pre><%=h @recipe.body %></pre>
+  </div>
+</fieldset>
+
+
+
+
+

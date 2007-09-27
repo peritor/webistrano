@@ -1,0 +1,44 @@
+Setting up for DI is very similar to the setup for a service locator, but instead of passing the locator (we'll call it a _registry_ now), we only pass (or set) the dependencies that the service itself needs.
+
+{{{lang=ruby,number=true,caption=Dependency injection example
+require 'needle'
+
+def create_application
+  registry = Needle::Registry.define do |b|
+    b.view          { View.new }
+    b.logger        { Logger.new }
+    b.database      { Database.new( b.logger ) }
+    b.authenticator { Authenticator.new(b.logger, b.database) }
+    b.session       { Session.new(b.logger, b.database) }
+
+    b.app do
+      app = Application.new
+      app.logger = b.logger
+      app.view = b.view
+      app.database = b.database
+      app.authenticator = b.authenticator
+      app.session = b.session
+      app
+    end
+  end
+
+  registry[:app]
+end
+
+class Application
+  attr_writer :view, :logger, :database, :authenticator, :session
+end
+
+class Session
+  def initialize( logger, database )
+    @database = database
+    @logger = logger
+  end
+end
+
+...
+}}}
+
+The @create_application@ method is now (necessarily) a little more complex, since it now contains all of the initialization logic for each service in the application. However, look how much simpler this made the other classes, especially the @Application@ class.
+
+Now, each class no longer even needs to care that it is being initialized via another container. All it knows is that when it is created, it will be given each of its dependencies (either as constructor parameters or as property accessors).

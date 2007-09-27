@@ -1,0 +1,65 @@
+<% flashed_errors(:project) %>
+<p>
+  <b>Name</b><br />
+  <%= text_field 'project', 'name', :style =>'width:330px;' %>
+</p>
+<p>
+  <b>Project Type</b><br />
+  <%= select('project', 'template', @templates, { :include_blank => false }) %>
+</p>
+<p>
+  <b>Description</b><br />
+  <%= text_area 'project', 'description', :style =>'width:330px; height: 100px' %>
+</p>
+
+
+<% content_for(:page_scripts) do %>
+ <script type="text/javascript">
+ 
+    Event.observe(window, 'load', function(){
+      Event.observe('project_template', 'change', show_template_info);
+      
+      // show info for already chosen template
+      show_template_info();
+    });
+ 
+   function show_template_info(){
+     hide_all_infos();
+     var info_to_show = $F('project_template') + '_desc';
+     $(info_to_show).show();
+   }
+   
+   function hide_all_infos(){
+     <% for template in @template_infos %>
+       $('<%=h template.first %>_desc').hide();
+     <% end %>
+   }
+
+ </script>
+<% end %>
+<% content_for(:action_box) do %>
+  <div class="action_box">
+	  <div class="box_top_left">
+	    <div class="box_top_right">
+	  	  <div class="box_top">
+		  </div>
+	    </div>
+	  </div>
+	  <div class="box_body">
+		 <h3>Project Type:</h3>
+
+		   <% for template in @template_infos %>
+		     <div id="<%=h template.first %>_desc" style="display:none;">
+		         <b><%= template.first.to_s.titleize %>:</b><br />
+		         <%= template.last %>
+		     </div>
+		   <% end %>
+	  </div>
+	  <div class="box_bottom_left">
+	    <div class="box_bottom_right">
+	      <div class="box_bottom">  
+	  	  </div>
+	    </div>
+	  </div>
+  </div>
+<% end %>

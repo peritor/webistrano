@@ -1,0 +1,38 @@
+When you attach an interceptor to a service, that new interceptor is wrapped in a definition object that includes various metadata about the interceptor, including its implementation, its priority, its name, and so forth. The implementation of this interceptor definition is determined by the value of the @:interceptor_impl_factory@ service, which by default returns @Needle::Interceptor@.
+
+It is this wrapper object that allows interceptor definitions to be done using method chaining:
+
+{{{lang=ruby,caption=Configuring an interceptor
+reg.intercept( :foo ).with { ... }.with_options(...)
+}}}
+
+If you wish to add custom, domain-specific functionality to the interceptor wrapper, you can register your own implementation of the @:interceptor_impl_factory@. Consider the following contrived example, where an "only_if" clause is given to determine when the interceptor should be invoked.
+
+{{{lang=ruby,number=true,caption=Advanced configuration of an interceptor
+class OnlyIfInterceptor < Needle::Interceptor
+  def only_if( &block )
+    @only_if = block
+    self
+  end
+
+  def action
+    action_proc = super
+    lambda do |chain,ctx|
+      if @only_if.call( chain, ctx )
+        action_proc.call( chain, ctx )
+      else
+        chain.process_next( ctx )
+      end
+    end
+  end
+end
+
+reg = Needle::Registry.new
+reg.register( :interceptor_impl_factory ) { OnlyIfInterceptor }
+reg.register( :foo ) { Bar.new }
+
+reg.intercept( :foo ).
+  with { |c| c.logging_interceptor }.
+  only_if { |ch,ctx| something_is_true( ch, ctx ) }.
+  with_options(...)
+}}}

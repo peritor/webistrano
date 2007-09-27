@@ -1,0 +1,72 @@
+At the lowest level, starting a shell is a matter of sending a "shell" request over a channel.
+
+{{{lang=ruby,caption=Sending a shell request,number=true
+Net::SSH.start( host ) do |session|
+
+  session.open_channel do |channel|
+
+    channel.on_success do
+      puts "shell was started successfully!"
+      channel.send_data "exit\n" # tell the shell to exit
+    end
+    channel.on_failure do
+      puts "shell could not be started!"
+    end
+    channel.on_data do |ch,data|
+      puts "recieved #{data} from shell"
+    end
+    channel.on_close do
+      puts "shell terminated"
+    end
+
+    channel.send_request "shell", nil, true
+
+  end
+
+  session.loop
+
+end
+}}}
+
+The @#send_request@ method accepts three parameters--the name of the request (in this case, "shell"), any additional data to send with the request (none, in this case), and whether or not you want the server to reply with the success or failure of the request. In general, it is a good idea to ask for the server to reply, so that you know when you can start sending data to the shell.
+
+If you want to open a pty before starting the shell, you can use the #request_pty method of the channel:
+
+{{{lang=ruby,number=true,caption=Opening a pty on a channel
+Net::SSH.start( host ) do |session|
+
+  session.open_channel do |channel|
+
+    channel.on_success do
+      puts "pty was requested successfully!"
+
+      channel.on_success do
+        puts "shell was started successfully!"
+        channel.send_data "exit\n" # tell the shell to exit
+      end
+
+      channel.send_request "shell", nil, true
+    end
+
+    channel.on_failure do
+      puts "shell could not be started!"
+    end
+    channel.on_data do |ch,data|
+      puts "recieved #{data} from shell"
+    end
+    channel.on_close do
+      puts "shell terminated"
+    end
+
+    channel.request_pty :want_reply => true
+
+  end
+
+  session.loop
+
+end
+}}}
+
+First, the pty is requested (with an indicator to the server that it should return a "success" or "failure" notification). When the pty is successfully opened, the "on_success" callback is changed, and the shell is then requested.
+
+It's a lot of hoops to jump through, but it gives you the finest-grained control over opening a shell. For most things, though, you can live with less control. For those tasks, there are the _shell_ and _sync_ services.

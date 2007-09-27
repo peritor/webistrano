@@ -1,0 +1,56 @@
+Namespaces allow you to organize your services. The feature has many different applications, including:
+
+# Third-parties may distribute Needle-enabled libraries without worrying about their choice of service names conflicting with the service names of their clients.
+# Developers may organize complex applications into modules, and the service definitions may be stored in the registry to reflect that organization.
+# Services deeper in the hierarchy may override services higher up.
+
+Creating a namespace is as easy as invoking the @#namespace@ method of the registry (or of another namespace):
+
+{{{lang=ruby,caption=Creating a namespace
+registry.namespace :stuff
+}}}
+
+This would create a new namespace in the registry called @:stuff@. The application may then proceed to register services inside that namespace:
+
+{{{lang=ruby,number=true,caption=Registering services in a namespace
+registry.stuff.register( :foo ) { Bar.new }
+...
+svc = registry.stuff.foo
+}}}
+
+Here's a tip: _namespaces are just a special kind of service._ This means that you can access namespaces in the same ways that you can access services:
+
+{{{lang=ruby,caption=Accessing a namespace
+svc = registry[:stuff][:foo]
+}}}
+
+h3. Convenience Methods
+
+Because it is often the case that you will be creating a namespace and then immediately registering services on it, you can pass a block to @namespace@. The block will receive a reference to the new namespace:
+
+{{{lang=ruby,number=true,caption=More registering services in a namespace
+registry.namespace :stuff do |spc|
+  spc.register( :foo ) { Bar.new }
+  ...
+end
+}}}
+
+If you prefer the @define@ approach to registering services, you may like @namespace_define@, which creates the new namespace and immediately calls @define@ on it:
+
+{{{lang=ruby,number=true,caption=Creating namespaces with #namespace_define
+registry.namespace_define :stuff do |b|
+  b.foo { Bar.new }
+  ...
+end
+}}}
+
+And, to mirror the @namespace_define@ method, there is also a @namespace_define!@ method. This method creates a new namespace and then does a @define!@ call on that namespace.
+
+{{{lang=ruby,number=true,caption=Creating namespaces with #namespace_define!
+registry.namespace_define! :stuff do
+  foo { Bar.new }
+  ...
+end
+}}}
+
+The above code would create a new namespace called @:stuff@ in the registry, and would then proceed to register a service called @:foo@ in the new namespace.

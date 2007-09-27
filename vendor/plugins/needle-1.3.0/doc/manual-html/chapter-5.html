@@ -1,0 +1,443 @@
+<html>
+  <head>
+    <title>Needle Manual :: Chapter 5: Interceptors</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/manual.css" />
+  </head>
+  
+  <body>
+    <div id="banner">
+      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+        <tr><td valign='top' align='left'>
+          <div class="title">
+            <span class="product">Needle&mdash;</span><br />
+            <span class="tagline">to the point --></span>
+          </div>
+        </td><td valign='middle' align='right'>
+          <div class="info">
+            Needle Version: <strong>1.3.0</strong><br />
+            Manual Last Updated: <strong>2005-12-24 15:20 UTC</strong>
+          </div>
+        </td></tr>
+      </table>
+    </div>
+
+    <table border='0' width='100%' cellpadding='0' cellspacing='0'>
+      <tr><td valign='top'>
+
+        <div id="navigation">
+          <h1>Needle Manual</h1>
+
+          <h2>Chapters</h2>
+          <ol type="I">
+          
+            <li>
+                <a href="chapter-1.html">
+                Introduction
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-1.html#s1">What is Needle?</a></li>
+                
+                  <li><a href="chapter-1.html#s2">How Can It Help Me?</a></li>
+                
+                  <li><a href="chapter-1.html#s3">Alternatives</a></li>
+                
+                  <li><a href="chapter-1.html#s4">License Information</a></li>
+                
+                  <li><a href="chapter-1.html#s5">Support</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-2.html">
+                Registry
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-2.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-2.html#s2">Creating</a></li>
+                
+                  <li><a href="chapter-2.html#s3">Services</a></li>
+                
+                  <li><a href="chapter-2.html#s4">Namespaces</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-3.html">
+                Service Locator
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-3.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-3.html#s2">Conventional Architecture</a></li>
+                
+                  <li><a href="chapter-3.html#s3">Locator Pattern</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-4.html">
+                Dependency Injection
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-4.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-4.html#s2">Setup</a></li>
+                
+              </ol>
+            </li>
+          
+            <li><strong>
+                <a href="chapter-5.html">
+                Interceptors
+                </a>
+                </strong> <big>&larr;</big>
+              <ol type="1">
+                
+                  <li><a href="chapter-5.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-5.html#s2">Architecture</a></li>
+                
+                  <li><a href="chapter-5.html#s3">Attaching</a></li>
+                
+                  <li><a href="chapter-5.html#s4">Ordering</a></li>
+                
+                  <li><a href="chapter-5.html#s5">Custom</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-6.html">
+                Service Models
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-6.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-6.html#s2">Pipelines</a></li>
+                
+                  <li><a href="chapter-6.html#s3">Models</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-7.html">
+                Logging
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-7.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-7.html#s2">LogFactory</a></li>
+                
+                  <li><a href="chapter-7.html#s3">Configuration</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-8.html">
+                Service Libraries
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-8.html#s1">Overview</a></li>
+                
+                  <li><a href="chapter-8.html#s2">Creating Libraries</a></li>
+                
+                  <li><a href="chapter-8.html#s3">Using Libraries</a></li>
+                
+              </ol>
+            </li>
+          
+            <li>
+                <a href="chapter-9.html">
+                Customizing Needle
+                </a>
+                
+              <ol type="1">
+                
+                  <li><a href="chapter-9.html#s1">Namespaces</a></li>
+                
+                  <li><a href="chapter-9.html#s2">Interceptors</a></li>
+                
+                  <li><a href="chapter-9.html#s3">Contexts</a></li>
+                
+              </ol>
+            </li>
+          
+          </ol>
+
+          <h2>Other Documentation</h2>
+
+          <ul>
+            <li><a href="http://needle.rubyforge.org/api/index.html">Needle API</a></li>
+            <li><a href="http://needle.rubyforge.org/faq.html">Needle FAQ</a></li>
+          </ul>
+
+          <h2>Tutorials</h2>
+          <ol>
+          
+          </ol>
+
+          <p align="center"><strong>More To Come...</strong></p>
+
+          <div class="license">
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/"><img alt="Creative Commons License" border="0" src="http://creativecommons.org/images/public/somerights" /></a><br />
+            This manual is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons License</a>.
+          </div>
+        </div>
+
+      </td><td valign='top' width="100%">
+
+        <div id="content">
+
+           <div class="top"><div class="prevnext">
+  
+    <a href="chapter-4.html">Previous (4. Dependency Injection)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-6.html">Next (6. Service Models)</a>
+  
+</div></div>
+
+<h1>5. Interceptors</h1>
+
+
+
+     <h2>
+       <a name="s1"></a>
+       5.1. Overview
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Interceptors are objects (or blocks) that sit between a client and a service and <em>intercept</em> messages (methods) sent to the service. Each service may have many such interceptors. When control is passed to an interceptor, it may then do something before and after passing control to the next interceptor, possibly even returning instead of passing control. This allows for some simple <acronym title="Aspect-Oriented Programming">AOP</acronym>-like hooks to be placed on your services.</p>
+
+
+	<p>Needle comes with one interceptor, the LoggingInterceptor. This allows you to easily trace the execution of your services by logging method entry and exit, as well as any exceptions that are raised.</p>
+
+
+	<p>You can, of course, implement your own interceptors as well.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s2"></a>
+       5.2. Architecture
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Interceptors are implemented as proxy objects that front the requested service. Thus, if you request a service that has 3 interceptors wrapped around it, you&#8217;re really getting a proxy object back that will invoke the interceptors (in order) before the requested method of the service is invoked.</p>
+
+
+	<p>The interceptors themselves are attached to the service during the execution of its instantiation pipeline (see Service Models). Thus, any action in the pipeline that is situated closer to the service than the interceptor pipeline action will bypass the interceptors altogether. This allows you to attach hooks to your service that can be called without invoking the interceptors on the service.</p>
+
+
+	<p>Another thing to keep in mind is that the interceptors are one-to-one for each service instance. Thus, if your service is a prototype (see the Service Models chapter), you&#8217;ll have one instance of each interceptor for each instance of your service.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s3"></a>
+       5.3. Attaching
+     </h2>
+
+   
+
+   <div class="section">
+     <p>There are two ways to attach interceptors to your services. The first is to implement an interceptor <em>factory</em> that returns new interceptor <em>instances</em>, and attach the factory to your service. The second is to specify a block that implements the required functionality. Both have their uses.</p>
+
+
+	<h3>Interceptor Factories</h3>
+
+
+	<p>Interceptor factories are useful in situations where you want to implement some functionality and have it apply to multiple services. Interceptors from factories are also faster (less overhead) than interceptors from blocks, and so might be appropriate where performance is an issue.</p>
+
+
+	<p>An example is the LoggingInterceptor that ships with Needle. Because it is functionality that could be used on any number of services, it is implemented as a factory.</p>
+
+
+	<p>You can attach interceptor factories to your service using the <code>#interceptor(...).with {...}</code> syntax:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Attaching an interceptor to a service [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{...}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">with</span> <span class="punct">{</span> <span class="constant">MyInterceptorFactory</span> <span class="punct">}</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Note that you could also make the interceptor factory a service:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Attaching an service as an interceptor [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{...}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:my_interceptor</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">MyInterceptorFactory</span> <span class="punct">}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">with</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">c</span><span class="punct">|</span> <span class="ident">c</span><span class="punct">.</span><span class="ident">my_interceptor</span> <span class="punct">}</span></pre></div></td></tr></table></div></div>
+
+
+	<p>And, to make accessing interceptor services even more convenient, you can use the <code>#with!</code> method (which executes its block within the context of the calling container):</p>
+
+
+	<div class='figure'>
+<span class='caption'>Attaching an service as an interceptor via #with! [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{...}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:my_interceptor</span> <span class="punct">)</span> <span class="punct">{</span> <span class="constant">MyInterceptorFactory</span> <span class="punct">}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">with!</span> <span class="punct">{</span> <span class="ident">my_interceptor</span> <span class="punct">}</span></pre></div></td></tr></table></div></div>
+
+
+	<h3>Blocks</h3>
+
+
+	<p>Sometimes creating an entire class to implement an interceptor is overkill. This is particularly the case during debugging or testing, when you might want to attach an interceptor to class to verify that a parameter passed is correct, or a return value is what you expect. To satisfy these conditions, you can using the
+<code>#doing</code> method.  Just give it a block that accepts two parameters (the chain, and context) and you&#8217;re good to go!</p>
+
+
+	<div class='figure'>
+<span class='caption'>Defining interceptors on the fly [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{...}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">doing</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">chain</span><span class="punct">,</span><span class="ident">ctx</span><span class="punct">|</span> <span class="punct">...;</span> <span class="ident">chain</span><span class="punct">.</span><span class="ident">process_next</span><span class="punct">(</span> <span class="ident">ctx</span> <span class="punct">)</span> <span class="punct">}</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Note that this approach is about 40% slower than using an interceptor factory, so it should not be used if performance is an issue.</p>
+
+
+	<h3>Options</h3>
+
+
+	<p>Some interceptors can accept configuration options. For example, the LoggingInterceptor allows clients to specify methods that should and shouldn&#8217;t be intercepted. Options are specified via the <code>#with_options</code> method.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Configuring interceptors [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{...}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span>
+  <span class="ident">with</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">c</span><span class="punct">|</span> <span class="ident">c</span><span class="punct">.</span><span class="ident">logging_interceptor</span> <span class="punct">}.</span>
+  <span class="ident">with_options</span><span class="punct">(</span> <span class="symbol">:exclude</span> <span class="punct">=&gt;</span> <span class="punct">[</span> <span class="punct">&quot;</span><span class="string">method1</span><span class="punct">&quot;,</span> <span class="punct">&quot;</span><span class="string">method2</span><span class="punct">&quot;</span> <span class="punct">]</span> <span class="punct">)</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Options can apply to the blocks given to the <code>#doing</code> method, too. The block may access the options via the <code>#data[:options]</code> member of the context:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Configuring #doing interceptors [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span>
+  <span class="ident">doing</span> <span class="punct">{</span> <span class="punct">|</span><span class="ident">ch</span><span class="punct">,</span><span class="ident">ctx</span><span class="punct">|</span> <span class="punct">...;</span> <span class="ident">p</span> <span class="ident">ctx</span><span class="punct">.</span><span class="ident">data</span><span class="punct">[</span><span class="symbol">:options</span><span class="punct">][</span><span class="symbol">:value</span><span class="punct">];</span> <span class="punct">...</span> <span class="punct">}.</span>
+  <span class="ident">with_options</span><span class="punct">(</span> <span class="symbol">:value</span> <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">hello</span><span class="punct">&quot;</span> <span class="punct">)</span></pre></div></td></tr></table></div></div>
+
+
+	<p>With blocks, of course, the value of such an approach is limited.</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s4"></a>
+       5.4. Ordering
+     </h2>
+
+   
+
+   <div class="section">
+     <p>As was mentioned, a service may have multiple interceptors attached to it. By default, a method will be filtered by the interceptors in the same order that they were attached, with the first interceptor that was attached being the first one to intercept every method call.</p>
+
+
+	<p>You can specify a different ordering of the interceptors by giving each one a <em>priority</em>. The priority is a number, where interceptors with a higher priority sort <em>closer</em> to the service, and those with lower priorities sort <em>further</em> from the service.</p>
+
+
+	<p>You can specify the priority as an option when attaching an interceptor:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Setting interceptor priorities [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">register</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">)</span> <span class="punct">{</span> <span class="punct">...</span> <span class="punct">}</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">with</span> <span class="punct">{</span> <span class="constant">Something</span> <span class="punct">}.</span><span class="ident">with_options</span><span class="punct">(</span> <span class="symbol">:priority</span> <span class="punct">=&gt;</span> <span class="number">100</span> <span class="punct">)</span>
+<span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">with</span> <span class="punct">{</span> <span class="constant">SomethingElse</span> <span class="punct">}.</span><span class="ident">with_options</span><span class="punct">(</span> <span class="symbol">:priority</span> <span class="punct">=&gt;</span> <span class="number">50</span> <span class="punct">)</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Without the priorities, when a method of <code>:foo</code> was invoked, Something would be called first, and then SomethingElse. <em>With</em> the priorities (as specified), SomethingElse would be called before Something (since SomethingElse has a lower priority).</p>
+   </div>
+
+
+
+     <h2>
+       <a name="s5"></a>
+       5.5. Custom
+     </h2>
+
+   
+
+   <div class="section">
+     <p>Creating your own interceptors is very easy. As was demonstrated earlier, you can always use blocks to implement an interceptor. However, for more complex interceptors, or for interceptors that you want to reuse across multiple services, you can also implement your own interceptor <em>factories</em>.</p>
+
+
+	<p>An interceptor factory can be any object, as long as it implements the method <code>#new</code> with two parameters, the <em>service point</em> (service &#8220;definition&#8221;) of the service that the interceptor will be bound to, and a hash of the options that were passed to the interceptor when it was attached to the service. This method should then return a new interceptor instance, which must implement the <code>#process</code> method. The <code>#process</code> method should accept two parameters: an object representing the <em>chain</em> of interceptors, and the invocation <em>context</em>.</p>
+
+
+	<div class='figure'>
+<span class='caption'>Custom interceptor example [ruby]</span>
+<div class='body'><table border='0' cellpadding='0' cellspacing='0'><tr><td class='lineno'>1<br />2<br />3<br />4<br />5<br />6<br />7<br />8<br />9<br />10<br />11<br />12<br />13<br /></td><td width='100%'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="keyword">class </span><span class="class">MyInterceptorFactory</span>
+  <span class="keyword">def </span><span class="method">initialize</span><span class="punct">(</span> <span class="ident">point</span><span class="punct">,</span> <span class="ident">options</span> <span class="punct">)</span>
+    <span class="punct">...</span>
+  <span class="keyword">end</span>
+
+  <span class="keyword">def </span><span class="method">process</span><span class="punct">(</span> <span class="ident">chain</span><span class="punct">,</span> <span class="ident">context</span> <span class="punct">)</span>
+    <span class="comment"># context.sym   : the name of the method that was invoked</span>
+    <span class="comment"># context.args  : the array of arguments passed to the method</span>
+    <span class="comment"># context.block : the block passed to the method, if any</span>
+    <span class="comment"># context.data  : a hash that may be used to share data between interceptors</span>
+    <span class="keyword">return</span> <span class="ident">context</span><span class="punct">.</span><span class="ident">process_next</span><span class="punct">(</span> <span class="ident">context</span> <span class="punct">)</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span></pre></div></td></tr></table></div></div>
+
+
+	<p>Once you&#8217;ve created your factory, you can attach it to a service:</p>
+
+
+	<div class='figure'>
+<span class='caption'>Attaching a custom interceptor [ruby]</span>
+<div class='body'><link rel='stylesheet' type='text/css' href='stylesheets/ruby.css' /><div class='ruby'><pre><span class="ident">reg</span><span class="punct">.</span><span class="ident">intercept</span><span class="punct">(</span> <span class="symbol">:foo</span> <span class="punct">).</span><span class="ident">with</span> <span class="punct">{</span> <span class="constant">MyInterceptorFactory</span> <span class="punct">}</span></pre></div></div></div>
+   </div>
+
+
+
+<div class="bottom"><div class="prevnext">
+  
+    <a href="chapter-4.html">Previous (4. Dependency Injection)</a> |
+  
+  <a href="index.html">Up</a>
+  
+    | <a href="chapter-6.html">Next (6. Service Models)</a>
+  
+</div></div>
+
+
+        </div>
+
+      </td></tr>
+    </table>
+  </body>
+</html>

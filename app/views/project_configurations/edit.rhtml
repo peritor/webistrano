@@ -1,0 +1,13 @@
+<h2>Edit configuration of <%= link_to h(current_project.name), project_path(current_project) %></h2>
+
+<% form_for(:configuration, :url => project_project_configuration_path(@project, @configuration), :html => { :method => :put }) do |f| %>
+
+  <%= render(:partial => 'form')%>
+
+  <p><br />
+    <%= submit_tag "Update" %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', project_path(current_project), :class => 'arrow_link'  %>

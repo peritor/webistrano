@@ -1,0 +1,110 @@
+<h2>Stage: <%=h @stage.name %> (of project <%= link_to current_project.name, project_path(current_project) %>) </h2>
+
+
+<div class="special_box stages_box">
+   <p><%= link_to 'Deploy', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy', :class => 'arrow_link_big' %></p>
+   <p><%= link_to 'Deploy and migrate', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy:migrations', :class => 'arrow_link' %></p>
+   <p><%= link_to 'Restart App Servers', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy:restart', :class => 'arrow_link' %></p>
+   <p><%= link_to 'Rollback to previous', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy:rollback', :class => 'arrow_link' %></p>
+   <p><%= link_to 'Setup', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy:setup', :class => 'arrow_link' %></p>
+</div>
+
+<div style="float: left; width:380px;">
+  <div class="box_top_left">
+    <div class="box_top_right">
+  	  <div class="box_top">
+	  </div>
+    </div>
+  </div>
+  <div class="box_body" style="min-height: 123px;">
+    <div>
+	  <p>
+	    <b>Name:</b>
+		   <%=h @stage.name %>
+		</p>
+		<p>
+		  <b>Project:</b>
+		  <%= link_to h(@stage.project.name), project_url(current_project) %>
+		</p>
+		<p>
+		  <b>Alert on deploy:</b>
+		  <%=h @stage.alert_emails %>
+		</p>
+		<p>
+		  <b>#Hosts:</b>
+		  <%=h @stage.hosts.count %>
+		</p>
+		<br />
+		<%= link_to 'Edit Stage', edit_project_stage_path(current_project, @stage), :class => 'arrow_link' %> | 
+		<%= link_to 'Delete', project_stage_path(current_project, @stage), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %> | 
+		<%= link_to 'Export Capfile', {:action => 'capfile', :project_id => current_project, :id => @stage}, {:onclick => "loadWindow('#{url_for(:action => 'capfile', :project_id => current_project, :id => @stage)}'); return false", :class => 'arrow_link'} %>
+	</div>	
+  </div>
+  <div class="box_bottom_left">
+    <div class="box_bottom_right">
+      <div class="box_bottom">  
+  	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>
+<br>
+
+<fieldset class="fieldset">
+  <legend>Stage specific configuration</legend>
+  <%= render(:partial => 'configs')%>
+  <br />
+  <div id="effective_config" style="display:none;">
+    <%= render(:partial => 'effective_config')%>
+    <br />
+  </div>
+  <%= link_to 'New configuration', new_project_stage_stage_configuration_path(current_project, @stage), :class => 'arrow_link' %> | 
+  <a id="s_e_c" href="#" onclick="show_effective_config(); return false" class="arrow_link">Show effective configuration</a>
+  <a id="h_e_c" href="#" onclick="hide_effective_config(); return false" class="arrow_link" style="display:none;">Hide effective configuration</a>
+</fieldset>
+
+<br /><br />
+
+<fieldset class="fieldset">
+  <legend>Used recipes</legend>
+  <%= render(:partial => 'recipes')%>
+  <br />
+  <%= link_to 'Manage stage recipes', {:action => 'recipes', :project_id => current_project, :id => @stage} , :class => 'arrow_link'%>
+</fieldset>
+
+<br /><br />
+
+<fieldset class="fieldset">
+  <legend>Deployed hosts</legend>
+  <%= render(:partial => 'roles')%>
+  <br />
+  <%= link_to 'Add host', new_project_stage_role_path(current_project, @stage) , :class => 'arrow_link'%>
+</fieldset>
+
+<br /><br />
+
+<fieldset class="fieldset">
+  <legend>Recent deployment history</legend>
+  <%= render(:partial => 'deployments')%>
+</fieldset>
+
+<br />
+<% content_for(:page_scripts) do %>
+ <script type="text/javascript">
+ 
+   function show_effective_config(){
+     $('h_e_c').show();
+     $('s_e_c').hide();
+     $('effective_config').show();
+   }
+   
+   function hide_effective_config(){
+      $('h_e_c').hide();
+      $('s_e_c').show();
+      $('effective_config').hide();
+    }
+ </script>
+<% end %>
+
+
