@@ -1,3 +1,9 @@
+* SVN *
+
+* Distinguish roles also by ssh_port, so that multiple roles with the same IP
+  but different SSH ports will be accepted. Provided by Al Evans.
+
+* Add no_symlink attribute to role. Provided by Al Evans.
 
 1.1
 
