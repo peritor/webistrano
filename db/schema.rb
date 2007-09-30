@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 19) do
+ActiveRecord::Schema.define(:version => 20) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 19) do
     t.datetime "updated_at"
     t.integer  "no_release", :default => 0
     t.integer  "ssh_port"
+    t.integer  "no_symlink", :default => 0
   end
 
   create_table "stage_configurations", :force => true do |t|

@@ -7,9 +7,10 @@ class Role < ActiveRecord::Base
   validates_length_of :name, :maximum => 250
   validates_inclusion_of :primary, :in => 0..1
   validates_inclusion_of :no_release, :in => 0..1
-  validates_uniqueness_of :name, :scope => [:host_id, :stage_id], :message => 'already used with this host.'
+  validates_inclusion_of :no_symlink, :in => 0..1
+  validates_uniqueness_of :name, :scope => [:host_id, :stage_id, :ssh_port], :message => 'already used with this host.'
   
-  attr_accessible :name, :primary, :host_id, :no_release, :ssh_port, :custom_name
+  attr_accessible :name, :primary, :host_id, :no_release, :no_symlink, :ssh_port, :custom_name
   
   attr_accessor :custom_name
   
@@ -61,6 +62,20 @@ class Role < ActiveRecord::Base
     self.no_release = 0
     self.save!
   end
+    
+  def no_symlink?
+    self.no_symlink.to_i == 1
+  end
+  
+  def set_no_symlink!
+    self.no_symlink = 1
+    self.save!
+  end
+  
+  def unset_no_symlink!
+    self.no_symlink = 0
+    self.save!
+  end
   
   # tells if this role had a successful setup
   def setup_done?
@@ -102,6 +117,9 @@ class Role < ActiveRecord::Base
     end
     if self.no_release?
       role_attr[:no_release] = true
+    end
+    if self.no_symlink?
+      role_attr[:no_symlink] = true
     end
     role_attr
   end

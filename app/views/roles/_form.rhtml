@@ -35,8 +35,12 @@
   <%= check_box 'role', 'primary', :style =>'' %>
 </p>
 <p>
-  <b>No release</b> (tick this if you do not wand any checkouts on this host)<br />
+  <b>No release</b> (tick this if you do not want any checkouts on this host)<br />
   <%= check_box 'role', 'no_release', :style =>'' %>
+</p>
+<p>
+  <b>No symlink</b> (tick this if you do not want to update the <i>current</i> symlink)<br />
+  <%= check_box 'role', 'no_symlink', :style =>'' %>
 </p>
 
 <% content_for(:page_scripts) do %>
