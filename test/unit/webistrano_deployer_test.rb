@@ -604,7 +604,16 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal "my_sample_stage_12", $vars_set[:webistrano_stage]
   end
   
-  
+  # test that we do not throw an exception if sudo is used
+  def test_sudo_callback_behaviour
+    # original Capistrano Config
+    assert_not_nil Capistrano::Configuration.default_io_proc
+    assert Capistrano::Configuration.default_io_proc.is_a?(Proc)
+    
+    # Webistrano Config
+    assert_not_nil Webistrano::Configuration.default_io_proc
+    assert Webistrano::Configuration.default_io_proc.is_a?(Proc)
+  end
   
   
   protected
