@@ -76,6 +76,7 @@ ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update(:date_with
 
 require 'open4'
 require 'capistrano/cli'
+require 'syntax/convertors/html'
 
 # load Webistrano configuration
 require "#{RAILS_ROOT}/config/webistrano_config"

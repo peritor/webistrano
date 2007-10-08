@@ -7,7 +7,7 @@
   <div class="box_top_left">
     <div class="box_top_right">
   	  <div class="box_top">
-	  </div>
+	    </div>
     </div>
   </div>
   <div class="box_body" style="min-height: 123px;">
@@ -46,12 +46,7 @@
 
 <fieldset class="fieldset">
   <legend>Body</legend>
-  <div class="log_output">
-    <pre><%=h @recipe.body %></pre>
+  <div class="log_output ruby">
+    <%= Syntax::Convertors::HTML.for_syntax("ruby").convert(@recipe.body) %>
   </div>
 </fieldset>
-
-
-
-
-
