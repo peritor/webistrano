@@ -1,5 +1,7 @@
 * SVN *
 
+* Highlight recipe syntax with syntax gem.
+
 * Distinguish roles also by ssh_port, so that multiple roles with the same IP
   but different SSH ports will be accepted. Provided by Al Evans.
 
