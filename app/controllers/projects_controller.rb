@@ -2,6 +2,16 @@ class ProjectsController < ApplicationController
   
   before_filter :load_templates, :only => [:new, :create, :edit, :update]
   
+  # GET /projects/dashboard
+  def dashboard
+    @user = current_user
+    @deployments = @user.recent_deployments
+
+    respond_to do |format|
+      format.html # dashboard.rhtml
+    end
+  end
+  
   # GET /projects
   # GET /projects.xml
   def index

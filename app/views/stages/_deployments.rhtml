@@ -14,12 +14,13 @@
     </tr>
   <% for deployment in @stage.recent_deployments %>
     <tr class="<%= cycle :even, :odd, :name => 'deployments' %>">
-      <td><%= link_to h(deployment.task), project_stage_deployment_path(@project, @stage, deployment) %></td>
+      <td><%= link_to h(deployment.task), project_stage_deployment_path(current_project, @stage, deployment) %></td>
       <td nowrap><%=h deployment.created_at.to_s(:log)  %></td>
       <td nowrap><%=h deployment.completed_at.to_s(:log) rescue nil %></td>
       <td><%=h truncate(deployment.comment, 37) %></td>
       <td><%= user_info(deployment.user) rescue '' %></td>
       <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/'+deployment.status_image)%></td>
+      <td><%= link_to "repeat", new_project_stage_deployment_path(current_project, @stage) + '?' + h(deployment.task)  %></td>
     </tr>
   <% end %>
   </table>  
@@ -32,5 +33,5 @@
     <%= display_deployment_problems(@stage) %>
   <% end %>
   <% if @stage.deployments.count > 1 %>
-    <%= link_to "Complete deployment history", project_stage_deployments_path(@project, @stage), :class => 'arrow_link' %>
+    <%= link_to "Complete deployment history", project_stage_deployments_path(current_project, @stage), :class => 'arrow_link' %>
   <% end %>
