@@ -22,7 +22,7 @@
       <td><%=h deployment.completed_at.to_s(:log) rescue nil %></td>
       <td><%=h truncate(deployment.comment, 37) %></td>
       <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/'+deployment.status_image)%></td>
-      <td><%= link_to "repeat", new_project_stage_deployment_path(deployment.stage.project, deployment.stage) + '?' + h(deployment.task)  %></td>
+      <td><%= link_to "repeat", new_project_stage_deployment_path(deployment.stage.project, deployment.stage) + '?task=' + h(deployment.task)  %></td>
     </tr>
   <% end %>
   </table>
