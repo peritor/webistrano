@@ -10,7 +10,8 @@ module Webistrano
         The basic (re)start/stop tasks of Capistrano are overrided with NOP tasks.
       EOS
       
-      TASKS =  <<-'EOS'
+      TASKS = Webistrano::Template::Base::TASKS + <<-'EOS'
+      
          namespace :deploy do
            task :restart, :roles => :app, :except => { :no_release => true } do
              # do nothing

@@ -22,7 +22,12 @@ module Webistrano
       EOS
       
       TASKS =  <<-'EOS'
-         
+        # set Net::SSH ssh options through normal variables
+        [:ssh_port, :ssh_keys].each do |ssh_opt|
+          if exists? ssh_opt
+            ssh_options[ssh_opt.to_s.gsub(/ssh_/, '').to_sym] = fetch(ssh_opt)
+          end
+        end
       EOS
     end
   end

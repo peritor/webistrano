@@ -11,7 +11,7 @@ module Webistrano
         for application servers. Uses default Capistrano tasks.
       EOS
       
-      TASKS =  <<-'EOS'
+      TASKS = Webistrano::Template::Base::TASKS + <<-'EOS'
          
       EOS
     

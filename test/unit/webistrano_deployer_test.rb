@@ -176,6 +176,8 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal 'svn+ssh://svn.domain.com/svn', Webistrano::Deployer.type_cast('svn+ssh://svn.domain.com/svn')
     assert_equal 'la le lu 123', Webistrano::Deployer.type_cast('la le lu 123')
     
+    # document that arrays are not cast correct
+    assert_equal '[1, 2, 3, 4]', Webistrano::Deployer.type_cast('[1, 2, 3, 4]')
   end
   
   def test_task_invokation_successful
@@ -613,6 +615,21 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     # Webistrano Config
     assert_not_nil Webistrano::Configuration.default_io_proc
     assert Webistrano::Configuration.default_io_proc.is_a?(Proc)
+  end
+  
+  def test_ssh_options
+    c = @project.configuration_parameters.build(
+      :name => 'ssh_port', 
+      :value => '44'
+    )
+    c.save!
+    
+    
+    deployer = Webistrano::Deployer.new(@deployment)
+    
+    deployer.expects(:execute_requested_actions).returns(nil)
+        
+    deployer.invoke_task!
   end
   
   

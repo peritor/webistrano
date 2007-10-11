@@ -24,7 +24,8 @@ module Webistrano
         Mongrel Cluster instead.
       EOS
       
-      TASKS =  <<-'EOS'
+      TASKS = Webistrano::Template::Base::TASKS + <<-'EOS'
+      
         namespace :webistrano do
           namespace :mongrel do
             [ :stop, :start, :restart ].each do |t|
