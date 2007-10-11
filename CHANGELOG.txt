@@ -1,5 +1,7 @@
 * SVN *
 
+* Add experimental support for ssh_keys and ssh_ports as normal configuration parameter
+
 * Highlight recipe syntax with syntax gem.
 
 * Distinguish roles also by ssh_port, so that multiple roles with the same IP
