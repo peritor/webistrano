@@ -23,6 +23,8 @@ module Webistrano
       
       TASKS =  <<-'EOS'
         # set Net::SSH ssh options through normal variables
+        # at the moment only one SSH key is supported as arrays are not
+        # parsed correctly by Webistrano::Deployer.type_cast (they end up as strings)
         [:ssh_port, :ssh_keys].each do |ssh_opt|
           if exists? ssh_opt
             ssh_options[ssh_opt.to_s.gsub(/ssh_/, '').to_sym] = fetch(ssh_opt)
