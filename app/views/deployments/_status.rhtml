@@ -28,9 +28,12 @@
 	  <b>Started (UTC):</b>
 	  <%=h @deployment.created_at.to_s(:log) %>
 	</p>
-  	<p>
+  <p>
 	  <b>Completed (UTC):</b>
 	  <%=h @deployment.completed_at.to_s(:log) rescue nil %>
+	</p>
+	<p>
+	  <%= link_to "repeat", new_project_stage_deployment_path(current_project, current_stage) + '?task=' + h(@deployment.task)  %>
 	</p>
   </div>
   <div class="box_bottom_left">
