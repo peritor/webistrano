@@ -6,11 +6,9 @@
 <% else %>
   <table class="sortable">
     <tr>
-      <th width="28%">Name</th>
+      <th width="30%">Name</th>
       <th width="69%">Value</th>
       <th width="1%">Prompt?</th>
-      <th width="1%"></th>
-      <th width="1%"></th>
     </tr>
   <% for config in @project.configuration_parameters %>
     <tr class="<%= cycle :even, :odd, :name => 'configs' %>">

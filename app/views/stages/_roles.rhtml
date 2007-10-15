@@ -6,13 +6,11 @@
 <% else %>
   <table class="sortable">
     <tr>
-      <th width="24%">Host</th>
-      <th width="24%">Role</th>
+      <th width="25%">Host</th>
+      <th width="25%">Role</th>
       <th width="24%">SSH Port</th>
       <th width="25%">Attributes</th>
       <th width="1%">Status</th>
-      <th width="1%"></th>
-      <th width="1%"></th>
     </tr>
   <% for role in @stage.roles %>
     <tr class="<%= cycle :even, :odd, :name => 'roles' %>">

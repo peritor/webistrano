@@ -49,17 +49,17 @@
 <br>
 
 <fieldset class="fieldset">
-  <legend>Stages</legend>
-  <%= render(:partial => 'stages')%>
+  <legend>Project configuration</legend>
+  <%= render(:partial => 'configs')%>
   <br />
-  <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
+  <%= link_to 'New configuration', new_project_project_configuration_path(@project), :class => 'arrow_link' %>
 </fieldset>
 
 <br /><br />
 
 <fieldset class="fieldset">
-  <legend>Project configuration</legend>
-  <%= render(:partial => 'configs')%>
+  <legend>Stages</legend>
+  <%= render(:partial => 'stages')%>
   <br />
-  <%= link_to 'New configuration', new_project_project_configuration_path(@project), :class => 'arrow_link' %>
+  <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
 </fieldset>

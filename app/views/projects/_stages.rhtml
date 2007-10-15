@@ -5,11 +5,9 @@
 <% else %>
   <table class="sortable">
     <tr>
-      <th width="33%">Name</th>
+      <th width="34%">Name</th>
       <th width="33%">#Hosts</th>
-      <th width="31%">#Deployments</th>
-      <th width="1%"></th>
-      <th width="1%"></th>
+      <th width="33%">#Deployments</th>
     </tr>
   <% for stage in @project.stages %>
     <tr class="<%= cycle :even, :odd, :name => 'stages' %>">

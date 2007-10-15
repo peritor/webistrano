@@ -11,12 +11,10 @@
 <% else %>
   <table class="sortable">
     <tr>
-      <th width="38%">Name</th>
-      <th width="58%">Description</th>
+      <th width="39%">Name</th>
+      <th width="59%">Description</th>
       <th width="1%">#Stages</th>
       <th width="1%">Created At</th>
-      <th width="1%"></th>
-      <th width="1%"></th>
     </tr>
     <% for recipe in @recipes %>
       <tr class="<%= cycle :even, :odd, :name => 'recipes'  %>">
