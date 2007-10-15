@@ -1,0 +1,43 @@
+= Capistrano
+
+Capistrano is a utility and framework for executing commands in parallel on multiple remote machines, via SSH. It uses a simple DSL (borrowed in part from Rake, http://rake.rubyforge.org/) that allows you to define _tasks_, which may be applied to machines in certain roles. It also supports tunneling connections via some gateway machine to allow operations to be performed behind VPN's and firewalls.
+
+Capistrano was originally designed to simplify and automate deployment of web applications to distributed environments, and originally came bundled with a set of tasks designed for deploying Rails applications. The deployment tasks are now (as of Capistrano 2.0) opt-in and require clients to explicitly put
+"load 'deploy'" in their recipes.
+
+== Dependencies
+
+* Net::SSH and Net::SFTP (http://net-ssh.rubyforge.org)
+* Needle (via Net::SSH)
+* HighLine (http://highline.rubyforge.org)
+
+If you want to run the tests, you'll also need to have the following dependencies installed:
+
+* Mocha (http://mocha.rubyforge.org)
+
+== Assumptions
+
+Capistrano is "opinionated software", which means it has very firm ideas about how things ought to be done, and tries to force those ideas on you. Some of the assumptions behind these opinions are:
+
+* You are using SSH to access the remote servers.
+* You either have the same password to all target machines, or you have public keys in place to allow passwordless access to them.
+
+Do not expect these assumptions to change.
+
+== Usage
+
+In general, you'll use Capistrano as follows:
+
+* Create a recipe file ("capfile" or "Capfile").
+* Use the +cap+ script to execute your recipe.
+
+Use the +cap+ script as follows:
+
+    cap sometask
+
+By default, the script will look for a file called one of +capfile+ or +Capfile+. The +someaction+ text indicates which task to execute. You can do "cap -h" to see all the available options and "cap -T" to see all the available tasks.
+
+== KNOWN ISSUES
+
+* Using "put" to upload a file to two or more hosts when a gateway is in effect has a good chance of crashing with a "corrupt mac detected" error. This is due to a bug in Net::SSH.
+* Running commands may rarely hang inexplicably. This appears to be specific only to certain platforms. Most people will never see this behavior.

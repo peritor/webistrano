@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename($0)} [path]"
+
+  opts.on("-h", "--help", "Displays this help info") do
+    puts opts
+    exit 0
+  end
+
+  begin
+    opts.parse!(ARGV)
+  rescue OptionParser::ParseError => e
+    warn e.message
+    puts opts
+    exit 1
+  end
+end
+
+if ARGV.empty?
+  abort "Please specify the directory to capify, e.g. `#{File.basename($0)} .'"
+elsif !File.exists?(ARGV.first)
+  abort "`#{ARGV.first}' does not exist."
+elsif !File.directory?(ARGV.first)
+  abort "`#{ARGV.first}' is not a directory."
+elsif ARGV.length > 1
+  abort "Too many arguments; please specify only the directory to capify."
+end
+
+def unindent(string)
+  indentation = string[/\A\s*/]
+  string.strip.gsub(/^#{indentation}/, "")
+end
+
+files = {
+  "Capfile" => unindent(<<-FILE),
+    load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+    Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
+    load 'config/deploy'
+  FILE
+
+  "config/deploy.rb" => unindent(<<-FILE),
+    set :application, "set your application name here"
+    set :repository,  "set your repository location here"
+
+    # If you aren't deploying to /u/apps/\#{application} on the target
+    # servers (which is the default), you can specify the actual location
+    # via the :deploy_to variable:
+    # set :deploy_to, "/var/www/\#{application}"
+
+    # If you aren't using Subversion to manage your source code, specify
+    # your SCM below:
+    # set :scm, :subversion
+
+    role :app, "your app-server here"
+    role :web, "your web-server here"
+    role :db,  "your db-server here", :primary => true
+  FILE
+}
+
+base = ARGV.shift
+files.each do |file, content|
+  file = File.join(base, file)
+  if File.exists?(file)
+    warn "[skip] `#{file}' already exists"
+  elsif File.exists?(file.downcase)
+    warn "[skip] `#{file.downcase}' exists, which could conflict with `#{file}'"
+  elsif !File.exists?(File.dirname(file))
+    warn "[skip] directory `#{File.dirname(file)}' does not exist"
+  else
+    puts "[add] writing `#{file}'"
+    File.open(file, "w") { |f| f.write(content) }
+  end
+end
+
+puts "[done] capified!"
