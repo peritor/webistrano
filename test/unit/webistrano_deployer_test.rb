@@ -91,8 +91,8 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     }.times(4)
             
     # roles
-    mock_cap_config.expects(:role).with('www', @host.name + ":22")
-    mock_cap_config.expects(:role).with('app', @host.name + ":22", {:primary => true})
+    mock_cap_config.expects(:role).with('www', @host.name)
+    mock_cap_config.expects(:role).with('app', @host.name, {:primary => true})
     
     # main mock install
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)
@@ -143,7 +143,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     #  
     # now check the roles        
     # 
-    mock_cap_config.expects(:role).with('www', @host.name + ":22", {:primary => true})
+    mock_cap_config.expects(:role).with('www', @host.name, {:primary => true})
     mock_cap_config.expects(:role).with('app', @host.name + ":99", {:no_release => true})
     mock_cap_config.expects(:role).with('db', @host.name + ":44", {:no_release => true, :primary => true})
     

@@ -130,7 +130,8 @@ class Test::Unit::TestCase
       :name => random_string,
       :host => create_new_host,
       :primary => 0,
-      :no_release => 0
+      :no_release => 0,
+      :no_symlink => 0
     }.update(options)
     
     r = Role.new

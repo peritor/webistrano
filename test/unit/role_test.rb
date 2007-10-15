@@ -181,13 +181,13 @@ class RoleTest < Test::Unit::TestCase
     role = create_new_role(:host => host)
     
     assert_nil role.ssh_port
-    assert_equal Role::DEFAULT_SSH_PORT, role.port
-    assert_equal "schaka.com:22", role.hostname_and_port
+    assert_equal "schaka.com", role.hostname_and_port
     
-    role.ssh_port = 2222
-    assert_equal 2222, role.port
-    
+    role.ssh_port = 2222    
     assert_equal "schaka.com:2222", role.hostname_and_port
+    
+    role.ssh_port = nil
+    assert_equal "schaka.com", role.hostname_and_port
   end
   
   def test_custom_name

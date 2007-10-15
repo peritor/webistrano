@@ -3,7 +3,7 @@ class Role < ActiveRecord::Base
   belongs_to :host
   has_and_belongs_to_many :deployments
   
-  validates_presence_of :stage, :name, :host, :no_release, :primary
+  validates_presence_of :stage, :name, :host, :no_release, :primary, :no_symlink
   validates_length_of :name, :maximum => 250
   validates_inclusion_of :primary, :in => 0..1
   validates_inclusion_of :no_release, :in => 0..1
@@ -14,7 +14,6 @@ class Role < ActiveRecord::Base
   
   attr_accessor :custom_name
   
-  DEFAULT_SSH_PORT = 22
   DEFAULT_NAMES = %w(app db www)
   
   before_validation :set_name_from_custom_name
@@ -123,14 +122,13 @@ class Role < ActiveRecord::Base
     end
     role_attr
   end
-  
-  # wrapper around ssh_port that returns DEFAULT_SSH_PORT if ssh_port is not set
-  def port
-    self.ssh_port.blank? ? DEFAULT_SSH_PORT : self.ssh_port
-  end
-  
+    
   def hostname_and_port
-    "#{self.host.name}:#{self.port}"
+    if self.ssh_port.blank?
+      self.host.name
+    else
+      "#{self.host.name}:#{self.ssh_port}"
+    end
   end
   
 end
