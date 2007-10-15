@@ -1,5 +1,7 @@
 * SVN *
 
+* Add Capistrano 2.1.0
+
 * Add experimental support for ssh_keys and ssh_ports as normal configuration parameter.
   Currently only one SSH key is supported.
 
