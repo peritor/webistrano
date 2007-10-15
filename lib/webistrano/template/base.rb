@@ -27,6 +27,7 @@ module Webistrano
         # parsed correctly by Webistrano::Deployer.type_cast (they end up as strings)
         [:ssh_port, :ssh_keys].each do |ssh_opt|
           if exists? ssh_opt
+            logger.important("SSH options: setting #{ssh_opt} to: #{fetch(ssh_opt)}")
             ssh_options[ssh_opt.to_s.gsub(/ssh_/, '').to_sym] = fetch(ssh_opt)
           end
         end
