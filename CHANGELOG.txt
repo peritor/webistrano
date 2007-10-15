@@ -1,6 +1,7 @@
 * SVN *
 
-* Add experimental support for ssh_keys and ssh_ports as normal configuration parameter
+* Add experimental support for ssh_keys and ssh_ports as normal configuration parameter.
+  Currently only one SSH key is supported.
 
 * Highlight recipe syntax with syntax gem.
 
