@@ -57,6 +57,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:trigger)
     mock_cap_config.stubs(:find_and_execute_task)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
     
     # now the interesting part
     # variable setting
@@ -136,6 +137,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:trigger)
     mock_cap_config.stubs(:find_and_execute_task)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
     
     # ignore vars
     mock_cap_config.stubs(:set)
@@ -210,6 +212,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:load)
     mock_cap_config.stubs(:trigger)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # vars
     mock_cap_config.stubs(:set)
@@ -310,6 +313,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:trigger)
     mock_cap_config.stubs(:find_and_execute_task)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # roles
     mock_cap_config.stubs(:role)
@@ -398,6 +402,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:load)
     mock_cap_config.stubs(:trigger)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # vars
     mock_cap_config.stubs(:set)
@@ -447,6 +452,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:logger=)
     mock_cap_config.stubs(:find_and_execute_task)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # vars
     mock_cap_config.stubs(:set)
@@ -493,6 +499,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:logger=)
     mock_cap_config.stubs(:find_and_execute_task)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # vars
     mock_cap_config.stubs(:set)
@@ -531,6 +538,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:logger=)
     mock_cap_config.stubs(:[])
     mock_cap_config.stubs(:load)
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # vars
     mock_cap_config.stubs(:set)
@@ -579,6 +587,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:logger=)
     mock_cap_config.stubs(:find_and_execute_task)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # roles
     mock_cap_config.stubs(:role)
@@ -632,6 +641,38 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     deployer.invoke_task!
   end
   
+  def test_exchange_revision_with_git
+    config = @stage.configuration_parameters.build(:name => 'scm', :value => ':git')
+    config.save!
+    
+    
+    deployer = Webistrano::Deployer.new(@deployment)
+    
+    # check that exchange_real_revision is NOT called with git
+    deployer.expects(:exchange_real_revision).times(0)
+    
+    # mock the main exec
+    deployer.expects(:execute_requested_actions).returns(nil)
+        
+    deployer.invoke_task!
+  end
+  
+  def test_exchange_revision_without_git
+    config = @stage.configuration_parameters.build(:name => 'scm', :value => ':svn')
+    config.save!
+    
+    
+    deployer = Webistrano::Deployer.new(@deployment)
+    
+    # check that exchange_real_revision is called without git
+    deployer.expects(:exchange_real_revision).times(1)
+    
+    # mock the main exec
+    deployer.expects(:execute_requested_actions).returns(nil)
+        
+    deployer.invoke_task!
+  end
+  
   
   protected
   
@@ -651,6 +692,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     mock_cap_config.stubs(:logger=)
     mock_cap_config.stubs(:find_and_execute_task)
     mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
 
     # vars
     mock_cap_config.stubs(:set)
