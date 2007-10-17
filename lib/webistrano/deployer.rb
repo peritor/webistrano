@@ -64,7 +64,7 @@ module Webistrano
         load_project_template_tasks(config)
         load_stage_custom_recipes(config)
         
-        exchange_real_revision(config) unless (config.fetch(:scm) == :git) # git cannot do a local query by default
+        exchange_real_revision(config) unless (config.fetch(:scm).to_s == 'git') # git cannot do a local query by default
       
         config.trigger(:load)
         execute_requested_actions(config)

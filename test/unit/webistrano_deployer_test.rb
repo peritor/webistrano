@@ -642,7 +642,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
   end
   
   def test_exchange_revision_with_git
-    config = @stage.configuration_parameters.build(:name => 'scm', :value => ':git')
+    config = @stage.configuration_parameters.build(:name => 'scm', :value => 'git')
     config.save!
     
     
@@ -658,7 +658,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
   end
   
   def test_exchange_revision_without_git
-    config = @stage.configuration_parameters.build(:name => 'scm', :value => ':svn')
+    config = @stage.configuration_parameters.build(:name => 'scm', :value => 'svn')
     config.save!
     
     
