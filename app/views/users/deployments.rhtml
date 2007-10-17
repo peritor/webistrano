@@ -2,7 +2,7 @@
 
 <fieldset class="fieldset">
   <legend>Complete deployment history</legend>
-  <%= render(:partial => 'deployments')%>
+  <%= render(:partial => 'deployments', :locals => {:deployments => @deployments, :user => @user})%>
 </fieldset>
 
 <br />

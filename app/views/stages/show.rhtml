@@ -1,7 +1,7 @@
 <h2>Stage: <%=h @stage.name %> (of project <%= link_to current_project.name, project_path(current_project) %>) </h2>
 
 
-<div class="special_box stages_box">
+<div class="special_box deployments_box">
    <p><%= link_to 'Deploy', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy', :class => 'arrow_link_big' %></p>
    <p><%= link_to 'Deploy and migrate', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy:migrations', :class => 'arrow_link' %></p>
    <p><%= link_to 'Restart App Servers', new_project_stage_deployment_path(current_project, @stage) + '?task=deploy:restart', :class => 'arrow_link' %></p>

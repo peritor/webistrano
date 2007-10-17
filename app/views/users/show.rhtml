@@ -53,6 +53,6 @@
 
 <fieldset class="fieldset">
   <legend>Recent Deployment History</legend>
-  <%= render(:partial => 'deployments')%>
+  <%= render(:partial => 'deployments', :locals => {:user => @user, :deployments => @deployments})%>
 </fieldset>
 

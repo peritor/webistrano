@@ -4,8 +4,7 @@ class ProjectsController < ApplicationController
   
   # GET /projects/dashboard
   def dashboard
-    @user = current_user
-    @deployments = @user.recent_deployments(5)
+    @deployments = current_user.recent_deployments(5)
 
     respond_to do |format|
       format.html # dashboard.rhtml

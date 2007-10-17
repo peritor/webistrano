@@ -2,5 +2,5 @@
 
 <fieldset class="fieldset">
   <legend>Your Recent Deployments</legend>
-  <%= render(:partial => 'users/deployments')%>
+  <%= render(:partial => 'users/deployments', :locals => {:deployments => @deployments, :user => current_user})%>
 </fieldset>

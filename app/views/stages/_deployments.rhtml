@@ -6,17 +6,15 @@
   <table class="sortable">
     <tr>
       <th width="1%">Task</th>
-      <th width="1%">Started (UTC)</th>
-      <th width="1%">Completed (UTC)</th>
-      <th width="95%">Comment</th>
+      <th width="1%">Started (UTC)<br />Completed (UTC)</th>
+      <th width="96%">Comment</th>
       <th width="1%">User</th>
       <th width="1%">Status</th>
     </tr>
   <% for deployment in @stage.recent_deployments %>
     <tr class="<%= cycle :even, :odd, :name => 'deployments' %>">
       <td><%= link_to h(deployment.task), project_stage_deployment_path(current_project, @stage, deployment) %></td>
-      <td nowrap><%=h deployment.created_at.to_s(:log)  %></td>
-      <td nowrap><%=h deployment.completed_at.to_s(:log) rescue nil %></td>
+      <td nowrap><%=h deployment.created_at.to_s(:log)  %><br /><%=h deployment.completed_at.to_s(:log) rescue '&nbsp;' %></td>
       <td><%=h truncate(deployment.comment, 37) %></td>
       <td><%= user_info(deployment.user) rescue '' %></td>
       <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/'+deployment.status_image)%></td>

@@ -1,4 +1,4 @@
-<h2>Editing host of <%= link_to h(current_project.name), project_path(current_project) %>/<%= link_to h(current_stage.name), project_stage_path(current_project, current_stage) %></h2>
+<h2>Editing host of <%= link_to h(current_stage.name), project_stage_path(current_project, current_stage) %> (of project <%= link_to h(current_project.name), project_path(current_project) %>)</h2>
 
 <% form_tag(project_stage_role_path(current_project, current_stage), :method => :put) do %>
   
