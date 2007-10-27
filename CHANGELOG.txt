@@ -1,5 +1,7 @@
 * SVN *
 
+* A stage can list all available tasks [schacon@gmail.com]
+
 1.2
 
 * By default Webistrano will allocate a pty in contrast to Capistrano 2.1.0
