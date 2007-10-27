@@ -12,7 +12,7 @@ class StagesControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     
-    @project = create_new_project
+    @project = create_new_project(:template => 'mongrel_rails')
     @stage = create_new_stage(:project => @project)
     @user = login
   end
@@ -100,4 +100,11 @@ class StagesControllerTest < Test::Unit::TestCase
     # custom recipes
     assert_match "foobar here", @response.body
   end
+  
+  def test_should_show_stage_tasks
+    get :tasks, :id => @stage.id, :project_id => @project.id
+    assert_response :success
+    assert_match /webistrano:mongrel:start/, @response.body
+  end
+  
 end

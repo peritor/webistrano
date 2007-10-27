@@ -22,6 +22,18 @@ class StagesController < ApplicationController
   def edit
     @stage = current_project.stages.find(params[:id])
   end
+  
+  # GET /projects/1/stages/1/tasks
+  # GET /projects/1/stages/1/tasks.xml
+  def tasks
+    @stage = current_project.stages.find(params[:id])
+    @tasks = @stage.list_tasks
+    
+    respond_to do |format|
+      format.html # tasks.rhtml
+      format.xml  { render :xml => @tasks.to_xml }
+    end
+  end
 
   # POST /projects/1/stages
   # POST /projects/1/stages.xml

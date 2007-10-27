@@ -1,0 +1,14 @@
+<h2>Stage: <%=h @stage.name %> (of project <%= link_to current_project.name, project_path(current_project) %>) </h2>
+
+<fieldset class="fieldset">
+  <legend>All Tasks</legend>
+    <table>
+    <% @tasks.sort.each do |key, value| %>
+	<tr>
+   	<td valign="top"><%= link_to key, new_project_stage_deployment_path(current_project, @stage) + "?task=#{key}"%></td>
+	<td valign="top"><%= simple_format value %></td>
+	</tr>
+    <% end %>
+    </table>
+
+</fieldset>

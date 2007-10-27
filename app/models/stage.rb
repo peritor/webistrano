@@ -116,6 +116,14 @@ class Stage < ActiveRecord::Base
     self.name.underscore.gsub(/[^a-zA-Z0-9\-\_]/, '_')
   end
   
+  # returns a lists of all availabe tasks for this stage
+  def list_tasks
+    d = Deployment.new
+    d.stage = self
+    deployer = Webistrano::Deployer.new(d)
+    deployer.list_tasks.collect { |t| [t.fully_qualified_name, t.description] }
+  end
+  
   protected
   def add_deployment_problem(key, desc)
     @deployment_problems = @deployment_problems || {}

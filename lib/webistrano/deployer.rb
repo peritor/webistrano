@@ -21,9 +21,16 @@ module Webistrano
       }
     
       @deployment = deployment
-      @logger = Webistrano::Logger.new(deployment)
-      @logger.level = Webistrano::Logger::TRACE
-      validate
+      
+      if(@deployment.task && !@deployment.new_record?)
+        # a read deployment
+        @logger = Webistrano::Logger.new(deployment)
+        @logger.level = Webistrano::Logger::TRACE
+        validate
+      else
+        # a fake deployment in order to access tasks
+        @logger = Capistrano::Logger.new
+      end
     end
   
     # validates this instance
@@ -55,14 +62,7 @@ module Webistrano
       status = catch(:abort_called_by_capistrano){
         set_webistrano_logger(config)
         
-        set_pre_vars(config)
-        load_recipes(config)
-
-        set_stage_configuration(config)
-        set_stage_roles(config)
-        set_project_and_stage_names(config)
-        load_project_template_tasks(config)
-        load_stage_custom_recipes(config)
+        set_up_config(config)
         
         exchange_real_revision(config) unless (config.fetch(:scm).to_s == 'git') # git cannot do a local query by default
       
@@ -85,6 +85,18 @@ module Webistrano
     def instantiate_configuration #:nodoc:
       config = Webistrano::Configuration.new
       config.logger = logger
+      config
+    end
+    
+    def set_up_config(config)
+      set_pre_vars(config)
+      load_recipes(config)
+
+      set_stage_configuration(config)
+      set_stage_roles(config)
+      set_project_and_stage_names(config)
+      load_project_template_tasks(config)
+      load_stage_custom_recipes(config)
       config
     end
     
@@ -211,6 +223,16 @@ module Webistrano
         # we did not expect this error, so log the trace
         logger.important(error.message + "\n" + error.backtrace.join("\n"))
       end
+    end
+    
+    # returns a list of all tasks defined for this deployer
+    def list_tasks
+      config = instantiate_configuration
+      config.load 'deploy'
+      
+      set_up_config(config)
+      
+      config.task_list(:all)
     end
   
   end
