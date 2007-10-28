@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
   
-  attr_protected :admin
+  attr_accessible :login, :email, :password, :password_confirmation
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
