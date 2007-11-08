@@ -1,5 +1,7 @@
 * SVN *
 
+* Delete the cached stylesheet on server boot
+
 * A stage can list all available tasks [schacon@gmail.com]
 
 1.2
