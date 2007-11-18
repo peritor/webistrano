@@ -64,19 +64,19 @@ module Webistrano
     
     # replaces deployment passwords in the message by 'XXXXX'
     def hide_passwords(message)
-      scrabbled_message = message
+      scrambled_message = message
       
-      # scrabble non-prompt configs
+      # scramble non-prompt configs
       deployment.stage.non_prompt_configurations.each do |config|
-        scrabbled_message.gsub!(config.value, "XXXXXXXX") if config.name.match(/password/)
+        scrambled_message.gsub!(config.value, "XXXXXXXX") if ( config.name.match(/password/) && !config.value.to_s.strip.blank? )
       end
       
-      # scrabble prompt configs
+      # scramble prompt configs
       deployment.prompt_config.each do |k, v|
-        scrabbled_message.gsub!(v, "XXXXXXXX") if k.to_s.match(/password/)
+        scrambled_message.gsub!(v, "XXXXXXXX") if ( k.to_s.match(/password/) && !v.to_s.strip.blank?)
       end
       
-      scrabbled_message
+      scrambled_message
     end
     
   end
