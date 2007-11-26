@@ -1,5 +1,7 @@
 * SVN *
 
+* Only admins can manage recipes, hosts, and users. Normal users can only view.
+
 * Show also all recent deployments in dashboard
 
 * Rename deployments DB column to description in order to prevent Oracle crash, fix #17

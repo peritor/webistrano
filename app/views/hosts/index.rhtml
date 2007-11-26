@@ -14,14 +14,17 @@
       <td><%= link_to h(host.name), host_path(host) %></td>
       <td><%=h host.stages.count %></td>
       <td><%=h host.roles.count %></td>
-      <td><%= link_to 'Edit', edit_host_path(host) %></td>
-      <td><%= link_to 'Delete', host_path(host), :confirm => 'Are you sure?', :method => :delete %></td>
+      <% if current_user.admin? %>
+        <td><%= link_to 'Edit', edit_host_path(host) %></td>
+        <td><%= link_to 'Delete', host_path(host), :confirm => 'Are you sure?', :method => :delete %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New host', new_host_path, :class => 'arrow_link' %>
+<% if current_user.admin? %>
+  <br />
+  <%= link_to 'New host', new_host_path, :class => 'arrow_link' %>
+<% end %>
 
 </fieldset>

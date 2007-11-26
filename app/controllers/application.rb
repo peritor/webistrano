@@ -30,4 +30,14 @@ class ApplicationController < ActionController::Base
     @project
   end
   
+  def ensure_admin
+    if logged_in? && current_user.admin?
+      return true
+    else
+      flash[:notice] = "Action not allowed"
+      redirect_to home_url
+      return false
+    end
+  end
+  
 end

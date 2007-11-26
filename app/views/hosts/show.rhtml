@@ -23,9 +23,12 @@
 		<p>
 		  <b>#Roles:</b>
 		  <%=h @host.roles.count %>
-		</p><br />
-		<%= link_to 'Edit Host', edit_host_path(@host), :class => 'arrow_link' %> | 
-		<%= link_to 'Delete', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %>
+		</p>
+		<% if current_user.admin? %>
+  		<br />
+	  	<%= link_to 'Edit Host', edit_host_path(@host), :class => 'arrow_link' %> | 
+		  <%= link_to 'Delete', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %>
+		<% end %>
 	</div>	
   </div>
   <div class="box_bottom_left">

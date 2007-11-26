@@ -13,7 +13,16 @@ class UsersControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
   end
 
-  def test_should_allow_signup
+  def test_should_not_allow_for_non_admins_to_create_users
+    login
+    
+    assert_no_difference 'User.count' do
+      create_user
+      assert_response :redirect
+    end
+  end
+
+  def test_should_allow_for_admins_to_create_users
     admin_login
     
     assert_difference 'User.count' do
@@ -75,7 +84,7 @@ class UsersControllerTest < Test::Unit::TestCase
     login(user_1)
     delete :destroy, :id => user_2.id
     assert_equal 4, User.count
-    assert_match 'Only admin', flash[:notice]
+    assert_match 'Action not allowed', flash[:notice]
     
   end
   

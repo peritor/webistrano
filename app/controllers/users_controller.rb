@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
 
   # GET /users
   # GET /users.xml
@@ -72,27 +73,19 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    if current_user.admin?
-      @user = User.find(params[:id])
-      
-      if @user.admin? && User.admin_count == 1
-        message = 'Can not delete last admin user.'
-      else
-        @user.destroy
-        message = 'User was successfully deleted.'
-      end
-
-      respond_to do |format|
-        flash[:notice] = message
-        format.html { redirect_to users_url }
-        format.xml  { head :ok }
-      end
+    @user = User.find(params[:id])
+    
+    if @user.admin? && User.admin_count == 1
+      message = 'Can not delete last admin user.'
     else
-      respond_to do |format|
-        flash[:notice] = 'Only admins can delete users.'
-        format.html { redirect_to users_url }
-        format.xml  { head :forbidden }
-      end
+      @user.destroy
+      message = 'User was successfully deleted.'
+    end
+
+    respond_to do |format|
+      flash[:notice] = message
+      format.html { redirect_to users_url }
+      format.xml  { head :ok }
     end
   end
 

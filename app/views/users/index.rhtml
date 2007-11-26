@@ -32,7 +32,9 @@
   </table>
 <% end %>
 
-<br />
-<%= link_to 'New user', new_user_path, :class => 'arrow_link' %>
+<% if current_user.admin? %>
+  <br />
+  <%= link_to 'New user', new_user_path, :class => 'arrow_link' %>
+<% end %>
 
 </fieldset>

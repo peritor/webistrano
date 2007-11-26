@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
+  
   # GET /recipes
   # GET /recipes.xml
   def index

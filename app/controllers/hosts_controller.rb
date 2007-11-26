@@ -1,4 +1,6 @@
 class HostsController < ApplicationController
+  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
+  
   # GET /hosts
   # GET /hosts.xml
   def index

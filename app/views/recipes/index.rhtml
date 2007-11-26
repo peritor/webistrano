@@ -22,14 +22,18 @@
         <td><%=h recipe.description %></td>
         <td><%=h recipe.stages.count %></td>
         <td><%=h recipe.created_at.to_s(:date_with_day) rescue nil %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Delete', recipe_path(recipe), :confirm => 'Are you sure?', :method => :delete %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+          <td><%= link_to 'Delete', recipe_path(recipe), :confirm => 'Are you sure?', :method => :delete %></td>
+        <% end %>
       </tr>
     <% end %>
   </table>
 <% end %>
 
-<br />
-<%= link_to 'New recipe', new_recipe_path, :class => 'arrow_link' %>
+<% if current_user.admin? %>
+  <br />
+  <%= link_to 'New recipe', new_recipe_path, :class => 'arrow_link' %>
+<% end %>
 
 </fieldset>
