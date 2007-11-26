@@ -4,7 +4,8 @@ class ProjectsController < ApplicationController
   
   # GET /projects/dashboard
   def dashboard
-    @deployments = current_user.recent_deployments(5)
+    @user_deployments = current_user.recent_deployments(3)
+    @deployments = Deployment.find(:all, :limit => 3, :order => 'created_at DESC')
 
     respond_to do |format|
       format.html # dashboard.rhtml
