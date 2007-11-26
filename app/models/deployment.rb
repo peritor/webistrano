@@ -3,11 +3,11 @@ class Deployment < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :roles
   
-  validates_presence_of :task, :stage, :comment, :user
+  validates_presence_of :task, :stage, :description, :user
   validates_length_of :task, :maximum => 250
   validates_inclusion_of :success, :in => 0..1
   
-  attr_accessible :task, :prompt_config, :comment
+  attr_accessible :task, :prompt_config, :description
   
   # given configuration hash on create in order to satisfy prompt configurations
   attr_accessor :prompt_config 

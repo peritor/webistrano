@@ -172,7 +172,7 @@ class Test::Unit::TestCase
       :success => 0,
       :prompt_config => {},
       :roles => [],
-      :comment => random_string,
+      :description => random_string,
       :user => create_new_user
     }.update(options)
     
@@ -182,7 +182,7 @@ class Test::Unit::TestCase
     d.completed_at = options[:completed_at]
     d.success = options[:success]
     d.prompt_config = options[:prompt_config]
-    d.comment = options[:comment]
+    d.description = options[:description]
     d.user = options[:user]
 
     d.roles << options[:roles] unless options[:roles].empty?

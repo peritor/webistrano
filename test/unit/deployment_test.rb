@@ -7,7 +7,7 @@ class DeploymentTest < Test::Unit::TestCase
     @role_app = create_new_role(:name => 'app', :stage => @stage)
     @role_www = create_new_role(:name => 'app', :stage => @stage)
     
-    @deployment = create_new_deployment(:stage => @stage, :roles => [@role_app, @role_www], :comment => 'update code to newest')
+    @deployment = create_new_deployment(:stage => @stage, :roles => [@role_app, @role_www], :description => 'update code to newest')
   end
 
   def test_creation
@@ -18,7 +18,7 @@ class DeploymentTest < Test::Unit::TestCase
     assert_nothing_raised{
       d = Deployment.new(:task => 'deploy:setup') 
       d.stage = @stage
-      d.comment = "Update to newest version"
+      d.description = "Update to newest version"
       d.user = create_new_user
       d.save!
     }
@@ -39,33 +39,33 @@ class DeploymentTest < Test::Unit::TestCase
     assert !d.valid?
     assert_not_nil d.errors.on('task')
     assert_not_nil d.errors.on('stage')
-    assert_not_nil d.errors.on('comment')
+    assert_not_nil d.errors.on('description')
     assert_not_nil d.errors.on('user')
     
     # fix it
     d.stage = @stage
     assert !d.valid?
     assert_not_nil d.errors.on('user')
-    assert_not_nil d.errors.on('comment')
+    assert_not_nil d.errors.on('description')
     assert_not_nil d.errors.on('task')
     assert_nil d.errors.on('stage')
     d.task = 'deploy:setup'
     assert !d.valid?
     assert_not_nil d.errors.on('user')
-    assert_not_nil d.errors.on('comment')
+    assert_not_nil d.errors.on('description')
     assert_nil d.errors.on('task')
     assert_nil d.errors.on('stage')
-    d.comment = 'update to newest'
+    d.description = 'update to newest'
     assert !d.valid?
     assert_not_nil d.errors.on('user')
-    assert_nil d.errors.on('comment')
+    assert_nil d.errors.on('description')
     assert_nil d.errors.on('task')
     assert_nil d.errors.on('stage')
     
     d.user = create_new_user
     assert d.valid?
     assert_nil d.errors.on('user')
-    assert_nil d.errors.on('comment')
+    assert_nil d.errors.on('description')
     assert_nil d.errors.on('task')
     assert_nil d.errors.on('stage')
     
@@ -121,7 +121,7 @@ class DeploymentTest < Test::Unit::TestCase
     
     deployment = Deployment.new(:task => 'shell')
     deployment.stage = stage
-    deployment.comment = 'comment'
+    deployment.description = 'description'
     deployment.user = create_new_user
     deployment.roles << role
     
@@ -151,7 +151,7 @@ class DeploymentTest < Test::Unit::TestCase
     deployment = Deployment.new
     deployment.stage = @stage
     deployment.task = 'deploy'
-    deployment.comment = 'bugfix'
+    deployment.description = 'bugfix'
     deployment.user = create_new_user
     deployment.roles << @stage.roles
     

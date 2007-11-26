@@ -1,5 +1,7 @@
 * SVN *
 
+* Rename deployments DB column to description in order to prevent Oracle crash, fix #17
+
 * Delete the cached stylesheet on server boot
 
 * A stage can list all available tasks [schacon@gmail.com]

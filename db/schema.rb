@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 20) do
+ActiveRecord::Schema.define(:version => 21) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "completed_at"
-    t.text     "comment"
+    t.text     "description"
     t.integer  "user_id"
   end
 

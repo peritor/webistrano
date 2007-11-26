@@ -38,7 +38,7 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     Deployment.delete_all
     assert @stage.deployment_possible?
     
-    post :create, :deployment => { :task => 'deploy:default', :comment => 'update to newest' }, :project_id => @project.id, :stage_id => @stage.id
+    post :create, :deployment => { :task => 'deploy:default', :description => 'update to newest' }, :project_id => @project.id, :stage_id => @stage.id
     assert_equal 1, Deployment.count
     assert_equal @user, Deployment.find(:all).last.user
     
@@ -50,7 +50,7 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     assert !@stage.deployment_possible?
     
     old_count = Deployment.count
-    post :create, :deployment => { :task => 'deploy:default', :comment => 'update to newest' }, :project_id => @project.id, :stage_id => @stage.id
+    post :create, :deployment => { :task => 'deploy:default', :description => 'update to newest' }, :project_id => @project.id, :stage_id => @stage.id
     assert_equal old_count, Deployment.count
     
     assert_redirected_to project_stage_path(@project, @stage)
@@ -83,12 +83,12 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     assert_match /password/, @response.body
     
     # test that we need to enter this parameters
-    post :create, :deployment => { :task => 'deploy:default', :comment => 'update to newest', :prompt_config => {} }, :project_id => @project.id, :stage_id => @stage.id
+    post :create, :deployment => { :task => 'deploy:default', :description => 'update to newest', :prompt_config => {} }, :project_id => @project.id, :stage_id => @stage.id
     assert_response :success
     assert_equal 0, Deployment.count
     
     # now give the missing config
-    post :create, :deployment => { :task => 'deploy:default', :comment => 'update to newest', :prompt_config => {:password => 'abc'} }, :project_id => @project.id, :stage_id => @stage.id
+    post :create, :deployment => { :task => 'deploy:default', :description => 'update to newest', :prompt_config => {:password => 'abc'} }, :project_id => @project.id, :stage_id => @stage.id
     assert_response :redirect
     assert_equal 1, Deployment.count
   end
