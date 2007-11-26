@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
       return true
     else
       flash[:notice] = "Action not allowed"
-      redirect_to home_url
+      redirect_to home_path
       return false
     end
   end
