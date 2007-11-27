@@ -25,11 +25,11 @@
 	  <%= user_info(@deployment.user) rescue '' %>
 	</p>
 	<p>
-	  <b>Started (UTC):</b>
+	  <b>Started:</b>
 	  <%=h @deployment.created_at.to_s(:log) %>
 	</p>
   <p>
-	  <b>Completed (UTC):</b>
+	  <b>Completed:</b>
 	  <%=h @deployment.completed_at.to_s(:log) rescue nil %>
 	</p>
 	<% if @deployment.completed? %>

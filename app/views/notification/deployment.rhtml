@@ -4,9 +4,9 @@ Task: <%= @deployment.task %>
 
 Status: <%= @deployment.status %>
 
-Started (UTC): <%= @deployment.created_at.to_s(:log) %>
+Started (UTC): <%= @deployment.created_at.utc.to_s(:log) %>
 
-Completed (UTC): <%= @deployment.completed_at.to_s(:log) rescue nil %>
+Completed (UTC): <%= @deployment.completed_at.utc.to_s(:log) rescue nil %>
 
 
 Deployed by: <%= @deployment.user.login %>
