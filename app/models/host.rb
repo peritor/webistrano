@@ -8,6 +8,8 @@ class Host < ActiveRecord::Base
   
   attr_accessible :name
   
+  tz_time_attributes :created_at, :updated_at
+  
   before_validation :strip_whitespace
   
   def strip_whitespace

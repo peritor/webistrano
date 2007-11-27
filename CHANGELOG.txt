@@ -1,5 +1,7 @@
 * SVN *
 
+* Add tztime and give each user a time zone
+
 * Introduce a 5 second sleep between mongrel stop and start while restarting'
 
 * Only admins can manage recipes, hosts, and users. Normal users can only view.

@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 21) do
+ActiveRecord::Schema.define(:version => 22) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 21) do
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
     t.integer  "admin",                                   :default => 0
+    t.string   "time_zone",                               :default => "UTC"
   end
 
 end

@@ -6,4 +6,6 @@ class Recipe < ActiveRecord::Base
   validates_length_of :name, :maximum => 250
   
   attr_accessible :name, :body, :description
+  
+  tz_time_attributes :created_at, :updated_at
 end

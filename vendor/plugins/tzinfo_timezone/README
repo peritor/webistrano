@@ -1,0 +1,20 @@
+TZInfo Timezone
+===============
+
+This plugin installs a replacement for the TimeZone class. The replacement
+uses the TZInfo library (http://tzinfo.rubyforge.org) to do the time zone
+conversions, and thus takes into account daylight saving, for free.
+
+It is not a 100%-compatible replacement, however. If you use TimeZone#unadjust
+anywhere, you'll need to replace those calls, possibly with #local_to_utc.
+Also, the #adjust method is deprecated--it is better (and easier to read) if
+you use the #utc_to_local method instead.
+
+Note that you will need to have the tzinfo library installed separately--it is
+not bundled with this plugin. You can easily install tzinfo as a gem:
+
+  gem install tzinfo
+
+---------------
+Copyright (c) 2006 Jamis Buck (jamis@37signals.com)
+released under the MIT license

@@ -6,6 +6,8 @@ class ConfigurationParameter < ActiveRecord::Base
   
   before_validation :empty_value_if_deploy_is_set
   
+  tz_time_attributes :created_at, :updated_at
+  
   def validate
     self.errors.add('value', 'must be empty if prompt on deploy is set') if (self.prompt? && !self.value.blank?)
   end

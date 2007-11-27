@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   before_filter :login_from_cookie, :login_required
+  around_filter :set_timezone
   
   # Pick a unique cookie name to distinguish our session data from others'
   session :session_key => '_webistrano_session_id'
@@ -13,6 +14,15 @@ class ApplicationController < ActionController::Base
   helper_method :current_stage, :current_project
   
   protected
+  
+  def set_timezone
+    # default timezone is UTC (Edinburgh)
+    TzTime.zone = logged_in? ? current_user.tz : TimeZone['Edinburgh']
+    yield
+    TzTime.reset!
+    TzTime.zone = TimeZone['Edinburgh']
+  end
+  
   def load_project
     @project = Project.find(params[:project_id])
   end
