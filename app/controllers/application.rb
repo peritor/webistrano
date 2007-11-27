@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   
   def set_timezone
     # default timezone is UTC (Edinburgh)
-    TzTime.zone = logged_in? ? current_user.tz : TimeZone['Edinburgh']
+    TzTime.zone = logged_in? ? ( current_user.tz rescue TimeZone['Edinburgh']): TimeZone['Edinburgh']
     yield
     TzTime.reset!
     TzTime.zone = TimeZone['Edinburgh']
