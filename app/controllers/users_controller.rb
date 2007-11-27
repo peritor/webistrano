@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
+  before_filter :ensure_admin, :only => [:new, :destroy, :create]
+  before_filter :ensure_admin_or_my_entry, :only => [:edit, :update]
 
   # GET /users
   # GET /users.xml
@@ -98,6 +99,16 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # deployments.rhtml
       format.xml  { render :xml => @user.deployments.to_xml }
+    end
+  end
+  
+  protected
+  def ensure_admin_or_my_entry
+    if current_user.admin? || current_user.id == User.find(params[:id]).id
+      return true
+    else
+      redirect_to home_url
+      return false
     end
   end
 

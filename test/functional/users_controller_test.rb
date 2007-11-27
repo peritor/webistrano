@@ -168,6 +168,29 @@ class UsersControllerTest < Test::Unit::TestCase
     
   end
   
+  def test_user_can_edit_themselfs
+    user = login
+    
+    get :edit, :id => user.id
+    assert_response :success
+    
+    post :update, :id => user.id, :user => {:login => 'foobarrr'}
+    user.reload
+    assert_equal 'foobarrr', user.login
+  end
+  
+  def test_user_not_can_edit_other
+    user = login
+    other = create_new_user
+    
+    get :edit, :id => other.id
+    assert_response :redirect
+    
+    post :update, :id => other.id, :user => {:login => 'foobarrr'}
+    other.reload
+    assert_not_equal 'foobarrr', other.login
+  end
+  
 
   protected
     def create_user(options = {})
