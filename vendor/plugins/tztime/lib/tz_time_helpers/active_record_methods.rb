@@ -18,18 +18,12 @@ module TzTimeHelpers
               time
             end
           end
-        end
-        
-        protected
-          def fix_timezone
-            tz_time_attributes.each do |attribute|
-              time  = read_attribute(attribute)
-              fixed = (time.acts_like?(:time) || time.acts_like?(:date)) ? TzTime.at(time) : nil
-              write_attribute(attribute, fixed)
-            end
+          define_method "#{attribute}=" do |local_time|
+            fixed = (local_time.acts_like?(:time) || local_time.acts_like?(:date)) ? TzTime.at(local_time) : nil
+            write_attribute(attribute, fixed)
           end
+        end
       end
-      before_validation :fix_timezone
     end
   end
 end

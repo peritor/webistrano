@@ -27,14 +27,18 @@ module TzTimeHelpers
     end
     
     def test_should_access_utc_time_as_local_with_getter_method
-      @record.due_on = Time.utc(2006, 1, 1)
+      @record.instance_variable_set(:@due_on, Time.utc(2006, 1, 1))
       assert_equal @record.due_on, TzTime.local(2005, 12, 31, 18)
     end
     
     def test_should_fix_timezones
       @record.due_on = Time.utc(2006, 1, 1)
-      @record.send :fix_timezone
       assert_equal @record.due_on, TzTime.local(2006, 1, 1)
+    end
+    
+    def test_should_only_fix_timezones_that_have_been_written
+      @record.instance_variable_set(:@due_on, Time.utc(2006, 1, 1))
+      assert_equal TzTime.utc(2006, 1, 1), @record.due_on
     end
   end
 end
