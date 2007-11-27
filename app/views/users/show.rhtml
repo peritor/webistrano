@@ -28,7 +28,10 @@
 			  <b>Email:</b>
 			  <%=h @user.email %>
 			</p>
-
+      
+			<p>
+			  <b>Timezone:</b> <%=h @user.tz.to_s %>
+			</p>
 			<p>
 			  <b>#Deployments:</b> <%=h @user.deployments.count %>
 			</p>
