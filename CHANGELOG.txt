@@ -4,7 +4,7 @@
 
 * Introduce a 5 second sleep between mongrel stop and start while restarting'
 
-* Only admins can manage recipes, hosts, and users. Normal users can only view.
+* Only admins can manage projects, recipes, hosts, and users. Normal users can only view.
 
 * Show also all recent deployments in dashboard
 

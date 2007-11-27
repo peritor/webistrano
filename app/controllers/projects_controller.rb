@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   
   before_filter :load_templates, :only => [:new, :create, :edit, :update]
+  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
   
   # GET /projects/dashboard
   def dashboard
