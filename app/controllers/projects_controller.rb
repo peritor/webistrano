@@ -53,8 +53,8 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         flash[:notice] = 'Project was successfully created.'
-        format.html { redirect_to project_path(@project) }
-        format.xml  { head :created, :location => project_path(@project) }
+        format.html { redirect_to project_url(@project) }
+        format.xml  { head :created, :location => project_url(@project) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @project.errors.to_xml }
@@ -70,7 +70,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update_attributes(params[:project])
         flash[:notice] = 'Project was successfully updated.'
-        format.html { redirect_to project_path(@project) }
+        format.html { redirect_to project_url(@project) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -87,7 +87,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = 'Project was successfully deleted.'
-      format.html { redirect_to projects_path }
+      format.html { redirect_to projects_url }
       format.xml  { head :ok }
     end
   end

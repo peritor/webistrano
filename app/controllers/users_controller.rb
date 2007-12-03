@@ -22,8 +22,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         flash[:notice] = "Account created"
-        format.html { redirect_to user_path(@user) }
-        format.xml  { head :created, :location => user_path(@user) }
+        format.html { redirect_to user_url(@user) }
+        format.xml  { head :created, :location => user_url(@user) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors.to_xml }
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to user_path(@user) }
+        format.html { redirect_to user_url(@user) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = message
-      format.html { redirect_to users_path }
+      format.html { redirect_to users_url }
       format.xml  { head :ok }
     end
   end
@@ -107,7 +107,7 @@ class UsersController < ApplicationController
     if current_user.admin? || current_user.id == User.find(params[:id]).id
       return true
     else
-      redirect_to home_path
+      redirect_to home_url
       return false
     end
   end

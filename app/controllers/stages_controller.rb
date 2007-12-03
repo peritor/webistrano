@@ -43,8 +43,8 @@ class StagesController < ApplicationController
     respond_to do |format|
       if @stage.save
         flash[:notice] = 'Stage was successfully created.'
-        format.html { redirect_to project_stage_path(current_project, @stage) }
-        format.xml  { head :created, :location => project_stage_path(current_project, @stage) }
+        format.html { redirect_to project_stage_url(current_project, @stage) }
+        format.xml  { head :created, :location => project_stage_url(current_project, @stage) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @stage.errors.to_xml }
@@ -60,7 +60,7 @@ class StagesController < ApplicationController
     respond_to do |format|
       if @stage.update_attributes(params[:stage])
         flash[:notice] = 'Stage was successfully updated.'
-        format.html { redirect_to project_stage_path(current_project, @stage) }
+        format.html { redirect_to project_stage_url(current_project, @stage) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -77,7 +77,7 @@ class StagesController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = 'Stage was successfully deleted.'
-      format.html { redirect_to project_path(current_project) }
+      format.html { redirect_to project_url(current_project) }
       format.xml  { head :ok }
     end
   end
@@ -100,7 +100,7 @@ class StagesController < ApplicationController
     if request.put?
       @stage.recipe_ids = params[:stage][:recipe_ids] rescue []
       flash[:notice] = "Stage recipes successfully updated."
-      redirect_to project_stage_path(current_project, @stage)
+      redirect_to project_stage_url(current_project, @stage)
     else
       respond_to do |format|
         format.html { render }

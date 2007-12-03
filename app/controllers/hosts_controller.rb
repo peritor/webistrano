@@ -42,8 +42,8 @@ class HostsController < ApplicationController
     respond_to do |format|
       if @host.save
         flash[:notice] = 'Host was successfully created.'
-        format.html { redirect_to host_path(@host) }
-        format.xml  { head :created, :location => host_path(@host) }
+        format.html { redirect_to host_url(@host) }
+        format.xml  { head :created, :location => host_url(@host) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @host.errors.to_xml }
@@ -59,7 +59,7 @@ class HostsController < ApplicationController
     respond_to do |format|
       if @host.update_attributes(params[:host])
         flash[:notice] = 'Host was successfully updated.'
-        format.html { redirect_to host_path(@host) }
+        format.html { redirect_to host_url(@host) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +76,7 @@ class HostsController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = 'Host was successfully deleted.'
-      format.html { redirect_to hosts_path }
+      format.html { redirect_to hosts_url }
       format.xml  { head :ok }
     end
   end

@@ -32,8 +32,8 @@ class RolesController < ApplicationController
     respond_to do |format|
       if @role.save
         flash[:notice] = 'Role was successfully created.'
-        format.html { redirect_to project_stage_path(@project, @stage) }
-        format.xml  { head :created, :location => project_stage_path(@project, @stage) }
+        format.html { redirect_to project_stage_url(@project, @stage) }
+        format.xml  { head :created, :location => project_stage_url(@project, @stage) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @role.errors.to_xml }
@@ -49,7 +49,7 @@ class RolesController < ApplicationController
     respond_to do |format|
       if @role.update_attributes(params[:role])
         flash[:notice] = 'Role was successfully updated.'
-        format.html { redirect_to project_stage_path(@project, @stage) }
+        format.html { redirect_to project_stage_url(@project, @stage) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -66,7 +66,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = 'Role was successfully deleted.'
-      format.html { redirect_to project_stage_path(@project, @stage) }
+      format.html { redirect_to project_stage_url(@project, @stage) }
       format.xml  { head :ok }
     end
   end
