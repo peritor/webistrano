@@ -44,7 +44,7 @@ class DeploymentsController < ApplicationController
         
         @deployment.deploy_in_background!
 
-        format.html { redirect_to project_stage_deployment_url(@project, @stage, @deployment)}
+        format.html { redirect_to project_stage_deployment_path(@project, @stage, @deployment)}
         format.xml  { head :created, :location => project_stage_deployment_url(@project, @stage, @deployment) }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class DeploymentsController < ApplicationController
     else
       respond_to do |format|  
         flash[:notice] = 'A deployment is currently not possible.'
-        format.html { redirect_to project_stage_url(@project, @stage) }
+        format.html { redirect_to project_stage_path(@project, @stage) }
         format.xml  { render :xml => current_stage.deployment_errors.to_xml }
         false
       end

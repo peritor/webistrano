@@ -41,8 +41,8 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.save
         flash[:notice] = 'Recipe was successfully created.'
-        format.html { redirect_to recipe_url(@recipe) }
-        format.xml  { head :created, :location => recipe_url(@recipe) }
+        format.html { redirect_to recipe_path(@recipe) }
+        format.xml  { head :created, :location => recipe_path(@recipe) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @recipe.errors.to_xml }
@@ -58,7 +58,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.update_attributes(params[:recipe])
         flash[:notice] = 'Recipe was successfully updated.'
-        format.html { redirect_to recipe_url(@recipe) }
+        format.html { redirect_to recipe_path(@recipe) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -75,7 +75,7 @@ class RecipesController < ApplicationController
     flash[:notice] = 'Recipe was successfully deleted.'
     
     respond_to do |format|
-      format.html { redirect_to recipes_url }
+      format.html { redirect_to recipes_path }
       format.xml  { head :ok }
     end
   end

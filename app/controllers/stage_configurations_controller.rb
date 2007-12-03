@@ -31,8 +31,8 @@ class StageConfigurationsController < ApplicationController
     respond_to do |format|
       if @configuration.save
         flash[:notice] = 'StageConfiguration was successfully created.'
-        format.html { redirect_to project_stage_url(@project, @stage) }
-        format.xml  { head :created, :location => project_stage_url(@project, @stage) }
+        format.html { redirect_to project_stage_path(@project, @stage) }
+        format.xml  { head :created, :location => project_stage_path(@project, @stage) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @configuration.errors.to_xml }
@@ -48,7 +48,7 @@ class StageConfigurationsController < ApplicationController
     respond_to do |format|
       if @configuration.update_attributes(params[:configuration])
         flash[:notice] = 'StageConfiguration was successfully updated.'
-        format.html { redirect_to project_stage_url(@project, @stage) }
+        format.html { redirect_to project_stage_path(@project, @stage) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -65,7 +65,7 @@ class StageConfigurationsController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = 'StageConfiguration was successfully deleted.'
-      format.html { redirect_to project_stage_url(@project, @stage) }
+      format.html { redirect_to project_stage_path(@project, @stage) }
       format.xml  { head :ok }
     end
   end

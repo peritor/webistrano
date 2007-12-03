@@ -31,8 +31,8 @@ class ProjectConfigurationsController < ApplicationController
     respond_to do |format|
       if @configuration.save
         flash[:notice] = 'ProjectConfiguration was successfully created.'
-        format.html { redirect_to project_url(current_project) }
-        format.xml  { head :created, :location => project_url(current_project) }
+        format.html { redirect_to project_path(current_project) }
+        format.xml  { head :created, :location => project_path(current_project) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @project_configuration.errors.to_xml }
@@ -48,7 +48,7 @@ class ProjectConfigurationsController < ApplicationController
     respond_to do |format|
       if @configuration.update_attributes(params[:configuration])
         flash[:notice] = 'ProjectConfiguration was successfully updated.'
-        format.html { redirect_to project_url(current_project) }
+        format.html { redirect_to project_path(current_project) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -65,7 +65,7 @@ class ProjectConfigurationsController < ApplicationController
 
     respond_to do |format|
       flash[:notice] = 'ProjectConfiguration was successfully deleted.'
-      format.html { redirect_to project_url(current_project) }
+      format.html { redirect_to project_path(current_project) }
       format.xml  { head :ok }
     end
   end
