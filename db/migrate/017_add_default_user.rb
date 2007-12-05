@@ -1,3 +1,4 @@
+require "#{RAILS_ROOT}/app/models/user"
 
 class AddDefaultUser < ActiveRecord::Migration
   def self.up
