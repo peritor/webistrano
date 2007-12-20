@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+################################################################################
+#
+# Copyright (C) 2007 pmade inc. (Peter J Jones <pjones@pmade.com>)
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+################################################################################
+require 'optparse'
+require 'ostruct'
+
+################################################################################
+options = OpenStruct.new
+options.environment = 'production'
+options.username    = 'admin'
+options.task        = 'deploy'
+options.description = 'Automated deployment from the command line.'
+
+webistrano_project = nil
+webistrano_stage   = nil
+
+################################################################################
+OptionParser.new do |optparser|
+  optparser.banner = "Usage: deploy [options] project stage"
+
+  optparser.on('-h', '--help', "This message") do
+    puts optparser
+    exit
+  end
+
+  optparser.on('-e', '--environment=ENV', "RAILS_ENV for Webistrano (default: #{options.environment})") do |env|
+    options.environment = env
+  end
+  
+  optparser.on('-u', '--username=NAME', "Webistrano username to use (default: #{options.username})") do |user|
+    options.username = user
+  end
+
+  optparser.on('-t', '--task=NAME', "Capistrano task to invoke (default: #{options.task})") do |task|
+    options.task = task
+  end
+  
+  optparser.on('-d', '--description=TEXT', "Deployment comment for Webistrano records") do |cmt|
+    options.description = cmt
+  end
+  
+  webistrano_project, webistrano_stage = optparser.permute!(ARGV)
+  
+  if webistrano_project.nil? or webistrano_stage.nil?
+    puts optparser
+    exit(1)
+  end
+end
+
+################################################################################
+# now it's time to make the connection to Webistrano
+ENV['RAILS_ENV']  ||= options.environment
+ENV['RAILS_ROOT'] ||= File.expand_path(File.dirname(__FILE__) + '/..')
+Dir.chdir(ENV['RAILS_ROOT']) # required by Webistrano
+require ENV['RAILS_ROOT'] + '/config/environment'
+
+################################################################################
+begin
+  user    = User.find_by_login(options.username) or raise "no such user: #{options.username}"
+  project = Project.find_by_name(webistrano_project) or raise "no such project: #{webistrano_project}"
+  stage   = project.stages.find_by_name(webistrano_stage) or raise "no such stage: #{webistrano_stage}"
+  
+  unless stage.prompt_configurations.empty?
+    raise "this stage requires prompted configuration, which is not yet implemented in deploy"
+  end
+  
+  deployment = stage.deployments.build(:task => options.task, :description => options.description)
+  deployment.user = user
+  deployment.save or raise "failed to create deployment record: #{deployment.errors.full_messages}"
+
+  deployer = Webistrano::Deployer.new(deployment)
+  deployer.invoke_task! or raise "deployment failed"
+
+rescue Exception => e
+  $stderr.puts("deploy: #{e}")
+  exit(1)
+end

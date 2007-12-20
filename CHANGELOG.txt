@@ -1,5 +1,7 @@
 * SVN *
 
+* Add script/deploy Ruby script to deploy from the command line, provided by Peter J Jones <pjones@pmade.com>
+
 * Update included Rails version to 2.0.2
 
 * Add tztime and give each user a time zone
