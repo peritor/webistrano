@@ -1,5 +1,7 @@
 * SVN *
 
+* Update included Rails version to 2.0.2
+
 * Add tztime and give each user a time zone
 
 * Introduce a 5 second sleep between mongrel stop and start while restarting'
