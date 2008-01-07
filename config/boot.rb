@@ -24,6 +24,7 @@ module Rails
       File.exist?("#{RAILS_ROOT}/vendor/rails")
     end
 
+    # FIXME : Ruby 1.9
     def preinitialize
       load(preinitializer_path) if File.exists?(preinitializer_path)
     end
@@ -93,7 +94,7 @@ module Rails
       end
 
       def parse_gem_version(text)
-        $1 if text =~ /^[^#]*RAILS_GEM_VERSION\s*=\s*'([!~<>=]*\s*[\d.]+)'/
+        $1 if text =~ /^[^#]*RAILS_GEM_VERSION\s*=\s*["']([!~<>=]*\s*[\d.]+)["']/
       end
 
       private
