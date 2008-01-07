@@ -67,7 +67,7 @@
   <script type="text/javascript">
     
     function update_status(){
-      new Ajax.Updater('status_info','<%=h project_stage_deployment_path(@project, @stage, @deployment) %>',{
+      new Ajax.Updater('status_info','<%=h project_stage_deployment_path(@project, @stage, @deployment) %>.js',{
         method: 'get',
         evalScripts: true,
         parameters: {

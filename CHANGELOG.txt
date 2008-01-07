@@ -1,4 +1,11 @@
+
 * SVN *
+
+* Used template naming conventions of Rails 2.x: 
+    *.rhtml => *.html.erb
+    *.rjs => *.js.rjs 
+    
+* Updated to Prototype 1.6
 
 * Add script/deploy Ruby script to deploy from the command line, provided by Peter J Jones <pjones@pmade.com>
 

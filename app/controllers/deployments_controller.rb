@@ -22,7 +22,7 @@ class DeploymentsController < ApplicationController
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @deployment.to_xml }
-      format.js { render :partial => 'status' }
+      format.js { render :partial => 'status.html.erb' }
     end
   end
 

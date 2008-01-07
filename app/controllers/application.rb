@@ -5,13 +5,15 @@ class ApplicationController < ActionController::Base
   
   before_filter :login_from_cookie, :login_required
   around_filter :set_timezone
-  
-  # Pick a unique cookie name to distinguish our session data from others'
-  session :session_key => '_webistrano_session_id'
-  
+
   layout 'application'
   
+  helper :all # include all helpers, all the time
   helper_method :current_stage, :current_project
+
+  # See ActionController::RequestForgeryProtection for details
+  # Uncomment the :secret if you're not using the cookie session store
+  protect_from_forgery :secret => '34$$adea99357513604a2fcac57912a908e5-092:@#$8hsmne5390' 
   
   protected
   
