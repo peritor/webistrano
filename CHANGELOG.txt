@@ -1,7 +1,7 @@
 
 * SVN *
 
-* Used template naming conventions of Rails 2.x: 
+* Used template naming conventions of Rails 2.x: Provided by kosmas.schuetz@gmx.com
     *.rhtml => *.html.erb
     *.rjs => *.js.rjs 
     
