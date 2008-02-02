@@ -31,7 +31,8 @@ module Webistrano
             [ :stop, :start, :restart ].each do |t|
               desc "#{t.to_s.capitalize} mongrel"
               task t, :roles => :app, :except => { :no_release => true } do
-                invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_config} --clean", :via => run_method
+                as = fetch(:runner, "app")
+                invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_config} --clean", :via => run_method, :as => as
               end
             end
           end
