@@ -61,10 +61,10 @@
   <div id="footer">
 	<div id="footer_logged">
 	  <% if logged_in? %>
-	   Logged in as <%= link_to h(current_user.login), user_path(current_user) %> | <%= link_to 'Logout', '/logout' %> 
+	   Logged in as <%= link_to h(current_user.login), user_path(current_user) %> | <%= link_to 'Logout', logout_path %> 
 	  <% end %>
     </div>
-    Copyright &copy; 2007 | Version <%=h WEBISTRANO_VERSION %> | <a href="http://labs.peritor.com/webistrano" target="_blank">http://labs.peritor.com/webistrano</a>
+    Copyright &copy; 2007, 2008 | Version <%=h WEBISTRANO_VERSION %> | <a href="http://labs.peritor.com/webistrano" target="_blank">http://labs.peritor.com/webistrano</a>
   </div>
 
 
