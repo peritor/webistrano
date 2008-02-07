@@ -1,6 +1,8 @@
 
 * SVN *
 
+* Better handling of `repeat` task by also repeating the description
+
 * Moved ActionController session key to webistrano_config.rb
 
 * Used template naming conventions of Rails 2.x: Provided by kosmas.schuetz@gmx.com

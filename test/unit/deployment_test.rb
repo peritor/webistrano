@@ -217,4 +217,13 @@ class DeploymentTest < Test::Unit::TestCase
     assert_equal 2, emails.size
   end
   
+  def test_repeat
+    original = create_new_deployment(:stage => @stage, :description => 'this is foo', :task => 'foo:bar')
+    
+    repeater = original.repeat
+    
+    assert_equal original.task, repeater.task
+    assert_equal "Repetition of deployment #{original.id}:\n\n#{original.description}", repeater.description
+  end
+  
 end

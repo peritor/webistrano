@@ -101,4 +101,14 @@ class Deployment < ActiveRecord::Base
       system("sh -c \"cd #{RAILS_ROOT} && ruby script/runner -e #{RAILS_ENV} ' deployment = Deployment.find(#{self.id}); deployment.prompt_config = #{self.prompt_config.inspect.gsub('"', '\"')} ; Webistrano::Deployer.new(deployment).invoke_task! ' >> #{RAILS_ROOT}/log/#{RAILS_ENV}.log 2>&1\" &")
     end
   end
+  
+  # returns an unsaved, new deployment with the same task/stage/description
+  def repeat
+    returning Deployment.new do |d|
+      d.stage = self.stage
+      d.task = self.task
+      d.description = "Repetition of deployment #{self.id}:\n\n" 
+      d.description += self.description
+    end
+  end
 end

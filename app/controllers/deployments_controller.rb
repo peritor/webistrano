@@ -30,6 +30,11 @@ class DeploymentsController < ApplicationController
   def new
     @deployment = @stage.deployments.new
     @deployment.task = params[:task]
+    
+    if params[:repeat]
+      @original = @stage.deployments.find(params[:repeat])
+      @deployment = @original.repeat
+    end
   end
 
   # POST /projects/1/stages/1/deployments
