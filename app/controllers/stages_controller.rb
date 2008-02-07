@@ -93,8 +93,8 @@ class StagesController < ApplicationController
     end
   end
   
-  # GET /projects/1/stages/1/capfile
-  # GET /projects/1/stages/1/capifile.xml
+  # GET | PUT /projects/1/stages/1/recipes
+  # GET /projects/1/stages/1/recipes.xml
   def recipes
     @stage = current_project.stages.find(params[:id])
     if request.put?
