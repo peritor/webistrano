@@ -26,6 +26,11 @@
       <td><%=h truncate(deployment.description, 37) %></td>
       <td><%= user_info(deployment.user) rescue '' %></td>
       <td><%= image_tag('peritor_theme/'+deployment.status_image)%></td>
+      <td>
+        <% if deployment.completed? %>
+          <%= link_to "Repeat", new_project_stage_deployment_path(deployment.stage.project, deployment.stage) + '?repeat=' + h(deployment.id) %>
+      	<% end %>
+      </td>
     </tr>
   <% end %>
   </table>
