@@ -10,6 +10,9 @@ RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# load Webistrano configuration
+require "#{RAILS_ROOT}/config/webistrano_config"
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -38,7 +41,7 @@ Rails::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :session_key => '_webistrano_session',
-    :secret      => '4a850072e0e38kvi8#e3abcbf3e0702f0c0cfab35c7e29cbee5e6f267cd8b652ffa24jkasjdh78jk3-0a9:~&@90fb7759e073f0f6ba4b0607bc10324c'
+    :secret      => WebistranoConfig[:session_secret]
   }
 
   # Use the database for sessions instead of the cookie-based default,
@@ -81,9 +84,6 @@ ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update(:date_with
 require 'open4'
 require 'capistrano/cli'
 require 'syntax/convertors/html'
-
-# load Webistrano configuration
-require "#{RAILS_ROOT}/config/webistrano_config"
 
 ActionMailer::Base.delivery_method = WebistranoConfig[:smtp_delivery_method] 
 ActionMailer::Base.smtp_settings = WebistranoConfig[:smtp_settings] 
