@@ -6,6 +6,7 @@ class StagesController < ApplicationController
   # GET /projects/1/stages/1.xml
   def show
     @stage = current_project.stages.find(params[:id])
+    @task_list = [['All tasks: ', '']] + @stage.list_tasks.collect{|x| [x.first, x.first]}.sort
 
     respond_to do |format|
       format.html # show.rhtml

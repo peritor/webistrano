@@ -5,10 +5,14 @@
     <table>
     <% @tasks.sort.each do |key, value| %>
 	<tr>
-   	<td valign="top"><%= link_to key, new_project_stage_deployment_path(current_project, @stage) + "?task=#{key}"%></td>
-	<td valign="top"><%= simple_format value %></td>
+   	<td valign="top"><%= link_to key, new_project_stage_deployment_path(current_project, @stage) + "?task=#{key}", :class => 'arrow_link', :name => h(key)%></td>
+   	<td>&nbsp;&nbsp;</td>
+	  <td valign="top"><%= simple_format value %></td>
 	</tr>
     <% end %>
     </table>
 
 </fieldset>
+
+<br />
+<%= link_to 'Back', project_stage_path(@project, @stage), :class => 'arrow_link'  %>
