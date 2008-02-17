@@ -6,7 +6,7 @@
 WebistranoConfig = {
 
   # secret password for session HMAC
-  :session_secret => 'please choose a long random string, min. 30 characters'
+  :session_secret => 'please choose a long random string, min. 30 characters',
   
   # SMTP settings for outgoing email
   :smtp_delivery_method => :sendmail,
