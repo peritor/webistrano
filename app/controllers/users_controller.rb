@@ -18,6 +18,9 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    if current_user.admin?
+      @user.admin = params[:user][:admin].to_i rescue 0
+    end
     
     respond_to do |format|
       if @user.save
