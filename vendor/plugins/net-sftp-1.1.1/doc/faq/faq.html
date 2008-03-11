@@ -1,0 +1,298 @@
+<html>
+  <head>
+    <title>Net::SFTP FAQ</title>
+    <style type="text/css">
+      a, a:visited, a:active {
+        color: #00F;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .faq-list {
+        color: #000;
+        font-family: vera-sans, verdana, arial, sans-serif;
+      }
+
+      .faq-title {
+        background: #007;
+        color: #FFF;
+        font-family: vera-sans, verdana, arial, sans-serif;
+        padding-left: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        font-weight: bold;
+        font-size: large;
+        border: 1px solid #000;
+      }
+
+      .faq-answer {
+        margin-left: 1em;
+        color: #000;
+        font-family: vera-sans, verdana, arial, sans-serif;
+      }
+
+      .faq-answer pre {
+        margin-left: 1em;
+        color: #000;
+        background: #FFE;
+        font-size: normal;
+        border: 1px dotted #CCC;
+        padding: 1em;
+      }
+
+      h1 {
+        background: #005;
+        color: #FFF;
+        font-family: vera-sans, verdana, arial, sans-serif;
+        padding-left: 1em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        font-weight: bold;
+        font-size: x-large;
+        border: 1px solid #00F;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Net::SFTP FAQ</h1>
+  <div class="faq-list">
+<ul>
+<li><a href='#3145900'>What is Net::SFTP?</a></li>
+<li>How do I&#8230;
+<ul>
+<li>...connect to an <span class="caps">SFTP</span> server?
+<ul>
+<li><a href='#3145750'>I&#8217;d like to connect without first getting a Net::SSH connection&#8230;</a></li>
+<li><a href='#3145670'>I already have an open Net::SSH connection&#8230;</a></li>
+</ul>
+</li>
+<li>...upload data?
+<ul>
+<li><a href='#3145440'>I want to upload an entire file on disk&#8230;</a></li>
+<li><a href='#3145310'>I want to upload bytes from a string or other object&#8230;</a></li>
+</ul>
+</li>
+<li>...download data?
+<ul>
+<li><a href='#3145130'>I want to download directly to a local file&#8230;</a></li>
+<li><a href='#3142470'>I want to download to a string in memory&#8230;</a></li>
+<li><a href='#3142380'>I want to be notified of the progress of the download&#8230;</a></li>
+</ul>
+</li>
+<li>...manage file permissions?
+<ul>
+<li><a href='#3142190'>I want to query a file&#8217;s permissions&#8230;</a></li>
+<li><a href='#3142110'>I want to change a file&#8217;s permissions&#8230;</a></li>
+<li><a href='#3142040'>I already have an open handle for the remote file&#8230;</a></li>
+</ul>
+</li>
+<li>...manage directories?
+<ul>
+<li><a href='#3141850'>I want to query the contents of a directory&#8230;</a></li>
+<li><a href='#3141770'>I want to create a directory&#8230;</a></li>
+<li><a href='#3141690'>I want to remove a directory&#8230;</a></li>
+</ul>
+</li>
+<li><a href='#3141560'>...delete a file?</a></li>
+<li><a href='#3141480'>...rename a file?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<a name='3145900'></a>
+<div class='faq-title'>What is Net::SFTP?</div>
+<div class='faq-answer'><p>Net::SFTP is a pure-Ruby implementation of the <span class="caps">SFTP</span> protocol. That&#8217;s
+&#8220;SFTP&#8221; as in &#8220;Secure File Transfer Protocol&#8221;, as defined as an adjuct to the
+<span class="caps">SSH</span> specification. <em>Not</em> &#8220;SFTP&#8221; as in &#8220;Secure <span class="caps">FTP</span>&#8221; (a <em>completely</em> different
+beast). Nor is it an implementation of the &#8220;Simple File Transfer Protocol&#8221; 
+(which is in no way secure).</p></div>
+<a name='3145750'></a>
+<div class='faq-title'>How do I&#8230; ...connect to an <span class="caps">SFTP</span> server? I&#8217;d like to connect without first getting a Net::SSH connection&#8230;</div>
+<div class='faq-answer'><p>Something like this:</p>
+
+
+<code><pre>
+  require 'net/sftp'
+
+  Net::SFTP.start(host, user, password) do |sftp|
+    ...
+  end
+</pre></code>
+
+	<p><code>Net::SFTP.start</code> accepts the same parameters as <code>Net::SSH.start</code>,
+so I&#8217;ll direct you to that documentation for all the particulars.</p></div>
+<a name='3145670'></a>
+<div class='faq-title'>How do I&#8230; ...connect to an <span class="caps">SFTP</span> server? I already have an open Net::SSH connection&#8230;</div>
+<div class='faq-answer'><p>You can piggy-back an <span class="caps">SFTP</span> connection on an existing Net::SSH
+connection, which can be useful if you&#8217;ve already got an <span class="caps">SSH</span>
+connection that you&#8217;re using for port forwarding or whatever.</p>
+
+
+<code><pre>
+  require 'net/ssh'
+  require 'net/sftp'
+
+  Net::SSH.start(host, user, password) do |ssh|
+    ...
+    ssh.sftp.connect do |sftp|
+      ...
+    end
+    ...
+  end
+</pre></code></div>
+<a name='3145440'></a>
+<div class='faq-title'>How do I&#8230; ...upload data? I want to upload an entire file on disk&#8230;</div>
+<div class='faq-answer'><p>Assuming you already have an <span class="caps">SFTP</span> connection:</p>
+
+
+<code><pre>
+  sftp.put_file "/path/to/local.file", "/path/to/remote.file" 
+</pre></code></div>
+<a name='3145310'></a>
+<div class='faq-title'>How do I&#8230; ...upload data? I want to upload bytes from a string or other object&#8230;</div>
+<div class='faq-answer'><p>Assuming you already have an <span class="caps">SFTP</span> connection, and your data is stored
+in a string named <code>data</code>:</p>
+
+
+<code><pre>
+  sftp.open_handle("/path/to/remote.file", "w") do |handle|
+    result = sftp.write(handle, data)
+    puts result.code # the result of the operation
+  end
+</pre></code>
+
+	<p>If (for whatever reason) you&#8217;d rather not use blocks, you can do
+without, but be sure to call <code>close_handle</code> when you&#8217;re done:</p>
+
+
+<code><pre>
+  handle = sftp.open_handle("/path/to/remote.file", "w")
+  result = sftp.write(handle, data)
+  puts result.code # the result of the operation
+  sftp.close_handle(handle)
+</pre></code></div>
+<a name='3145130'></a>
+<div class='faq-title'>How do I&#8230; ...download data? I want to download directly to a local file&#8230;</div>
+<div class='faq-answer'><p>Assuming you already have an <span class="caps">SFTP</span> connection:</p>
+
+
+<code><pre>
+  sftp.get_file "/path/to/remote.file", "/path/to/local.file" 
+</pre></code></div>
+<a name='3142470'></a>
+<div class='faq-title'>How do I&#8230; ...download data? I want to download to a string in memory&#8230;</div>
+<div class='faq-answer'><p>Assuming you already have an <span class="caps">SFTP</span> connection:</p>
+
+
+<code><pre>
+  data = nil
+  sftp.open_handle("/path/to/remote.file") do |handle|
+    data = sftp.read(handle)
+  end
+</pre></code></div>
+<a name='3142380'></a>
+<div class='faq-title'>How do I&#8230; ...download data? I want to be notified of the progress of the download&#8230;</div>
+<div class='faq-answer'><p>You can specify both a &#8220;chunk size&#8221; and a &#8220;progress callback&#8221;. The
+callback will be invoked for every &#8220;chunk size&#8221; bytes that are
+received:</p>
+
+
+<code><pre>
+  sftp.open_handle("/path/to/remote.file") do |handle|
+    begin
+      STDOUT.sync = true
+      data = sftp.read(handle, :chunk_size =&gt; 4096,
+        :progress_callback =&gt; lambda { |data| print "." })
+      puts
+    ensure
+      STDOUT.sync = false
+    end
+  end
+</pre></code></div>
+<a name='3142190'></a>
+<div class='faq-title'>How do I&#8230; ...manage file permissions? I want to query a file&#8217;s permissions&#8230;</div>
+<div class='faq-answer'><p>File permissions are one of the <code>stat</code> attributes of files and
+directories:</p>
+
+
+<code><pre>
+  p sftp.stat("/path/to/remote.file").permissions
+</pre></code></div>
+<a name='3142110'></a>
+<div class='faq-title'>How do I&#8230; ...manage file permissions? I want to change a file&#8217;s permissions&#8230;</div>
+<div class='faq-answer'><p>Just use <code>setstat</code> to change the permissions of an existing file:</p>
+
+
+<code><pre>
+  sftp.setstat("/path/to/remote.file", :permissions =&gt; 0644)
+</pre></code></div>
+<a name='3142040'></a>
+<div class='faq-title'>How do I&#8230; ...manage file permissions? I already have an open handle for the remote file&#8230;</div>
+<div class='faq-answer'><p>If you have a handle for the remote file, you can use <code>fstat</code> and
+<code>fsetstat</code> to query and set the permissions:</p>
+
+
+<code><pre>
+  sftp.open_handle("/path/to/remote.file") do |handle|
+    permissions = sftp.fstat(handle)
+    sftp.fsetstat(handle, :permissions =&gt; permissions | 0444)
+  end
+</pre></code></div>
+<a name='3141850'></a>
+<div class='faq-title'>How do I&#8230; ...manage directories? I want to query the contents of a directory&#8230;</div>
+<div class='faq-answer'><p>You query the contents of a directory by calling <code>opendir</code> to obtain
+a handle to the directory, and then using <code>readdir</code> on the handle to
+obtain a list of directory entries. Be sure to close the handle when
+you&#8217;re done:</p>
+
+
+<code><pre>
+  handle = sftp.opendir("/usr/lib")
+  items = sftp.readdir(handle)
+  items.each do |item|
+    puts item.filename
+    puts item.longname
+    p item.attributes # permissions, atime, etc.
+  end
+  sftp.close_handle(handle)
+</pre></code></div>
+<a name='3141770'></a>
+<div class='faq-title'>How do I&#8230; ...manage directories? I want to create a directory&#8230;</div>
+<div class='faq-answer'><p>Use <code>mkdir</code>:</p>
+
+
+<code><pre>
+  sftp.mkdir("/path/to/remote/dir", :permissions =&gt; 0500)
+</pre></code></div>
+<a name='3141690'></a>
+<div class='faq-title'>How do I&#8230; ...manage directories? I want to remove a directory&#8230;</div>
+<div class='faq-answer'><p>Use <code>rmdir</code>:</p>
+
+
+<code><pre>
+  sftp.rmdir("/path/to/remote/dir")
+</pre></code></div>
+<a name='3141560'></a>
+<div class='faq-title'>How do I&#8230; ...delete a file?</div>
+<div class='faq-answer'><p>Use <code>remove</code>:</p>
+
+
+<code><pre>
+  sftp.remove("/path/to/remote.file")
+</pre></code></div>
+<a name='3141480'></a>
+<div class='faq-title'>How do I&#8230; ...rename a file?</div>
+<div class='faq-answer'><p>Use <code>rename</code>:</p>
+
+
+<code><pre>
+  sftp.rename("/path/to/remote.file", "/path/to/new.file")
+</pre></code>
+
+	<p>It should be noted that <code>rename</code> is only supported by version 2 or
+later of the <span class="caps">SFTP</span> protocol, so if you&#8217;re using an older <span class="caps">SFTP</span> server you
+might not be able to use this operation.</p></div>
+</body></html>

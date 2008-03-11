@@ -1,6 +1,8 @@
 
 * SVN *
 
+* Update Capistrano to 2.2.0 and Net::SFTP to 1.1.1
+
 * Better handling of `repeat` task by also repeating the description
 
 * Moved ActionController session key to webistrano_config.rb
