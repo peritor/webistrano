@@ -79,4 +79,16 @@ class RecipesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def preview
+    @recipe = Recipe.new(params[:recipe])
+    respond_to do |format|
+      format.js { 
+        render :update do |page|
+          page.replace_html :preview, :partial => "preview", :locals => {:recipe => @recipe}
+          page.show :preview_fieldset
+        end
+      }
+    end
+  end
 end

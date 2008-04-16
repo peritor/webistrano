@@ -48,7 +48,5 @@
 
 <fieldset class="fieldset">
   <legend>Body</legend>
-  <div class="log_output ruby">
-    <%= Syntax::Convertors::HTML.for_syntax("ruby").convert(@recipe.body) %>
-  </div>
+  <%= render :partial => 'preview', :locals => {:recipe => @recipe} %>
 </fieldset>
