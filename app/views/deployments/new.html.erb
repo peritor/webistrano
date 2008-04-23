@@ -24,8 +24,95 @@
   <% end %>
   
   <p>
+    <b>Deployment Options</b><br />
+    <a id="s_e_h" href="#" onclick="show_disable_hosts(); return false" class="arrow_link">Show Manage Deployed Hosts</a>
+    <a id="h_e_h" href="#" onclick="hide_disable_hosts(); return false" class="arrow_link" style="display:none;">Hide Manage Deployed Hosts</a>
+    <div id="excluded_hosts" style="display:none;">
+      <% if @stage.roles.count > 0 %>
+        <table class="sortable" style="width: 410px;">
+          <tr>
+            <th width="1%">Status</th>
+            <th width="99%">Host</th>
+          </tr>
+          <% for host in @stage.hosts %>
+            <tr class="<%= cycle :even, :odd, :name => 'hosts'  %> <%= if_disabled_host?(host,'disabled_host') %>">
+              <td style="padding:3px 0px 0px 0px;" valign="middle" align="center">
+                <%= image_tag('peritor_theme/host_on.png', 
+                              :id => "host_#{host.id}_on", 
+                              :class => 'exlcude_host_trigger_on',
+                              :style => if_disabled_host?(host,'display:none;') + 'cursor:pointer;')%>
+                <%= image_tag('peritor_theme/host_off.png', 
+                              :id => "host_#{host.id}_off", 
+                              :class => 'exlcude_host_trigger_off',
+                              :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
+                <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
+              <td><%= link_to h(host.name), host_path(host) %></td>
+            </tr>
+          <% end %>
+        </table>
+
+      <% else %>
+       No hosts for this stage!<br /><br />
+      <% end %>
+      <br />
+    </div>
+  </p>
+  <p>
     <%= submit_tag "Start Deployment" %>
   </p>
 <% end %>
 
 <%= link_to 'Back', project_stage_path(@project, @stage), :class => 'arrow_link'  %>
+
+<% content_for(:page_scripts) do %>
+  <script type="text/javascript">
+ 
+    function show_disable_hosts(){
+      $('h_e_h').show();
+      $('s_e_h').hide();
+      $('excluded_hosts').show();
+    }
+   
+    function hide_disable_hosts(){
+      $('h_e_h').hide();
+      $('s_e_h').show();
+      $('excluded_hosts').hide();
+    }
+    
+    function disable_host(){
+      var own_id = /host_(\d)_on/.exec(this.id)[1];
+      var other_id = "host_" + own_id + '_off';
+      console.log('in diable host ' + own_id + '. other: ' + other_id);
+      $(this).hide();
+      $(other_id).show();
+      $('deployment_excluded_host_ids_' + own_id).writeAttribute('checked', 'checked');
+      $(this).up('tr').removeClassName('enabled_host');
+      $(this).up('tr').addClassName('disabled_host');
+    }
+    
+    function enable_host(){
+      var own_id = /host_(\d)_off/.exec(this.id)[1];
+      var other_id = "host_" + own_id + '_on';
+      console.log('in enable host ' + own_id + '. other: ' + other_id);
+      $(this).hide();
+      $(other_id).show();
+      $('deployment_excluded_host_ids_' + own_id).writeAttribute('checked', false);
+      $(this).up('tr').removeClassName('disabled_host');
+      $(this).up('tr').addClassName('enabled_host');
+    }
+    
+    Event.observe(window, 'load', function(){
+      <% unless @deployment.excluded_host_ids.blank? %>
+        show_disable_hosts();
+      <% end %>
+      
+      $$('img.exlcude_host_trigger_on').each(function(el){
+        el.observe('click', disable_host);
+      });
+      
+      $$('img.exlcude_host_trigger_off').each(function(el){
+        el.observe('click', enable_host);
+      })
+    });
+  </script>
+<% end %>

@@ -32,6 +32,7 @@ class Deployment < ActiveRecord::Base
         errors.add('base', "Please fill out the parameter '#{conf.name}'") unless !prompt_config.blank? && !prompt_config[conf.name.to_sym].blank?
       end
       
+      ensure_not_all_hosts_excluded
     end
   end
   
@@ -125,8 +126,8 @@ class Deployment < ActiveRecord::Base
   # returns a list of roles that this deployment
   # will deploy to. This computed out of the list
   # of given roles and the excluded hosts
-  def deploy_to_roles
-    self.roles.delete_if{|role| self.excluded_hosts.include?(role.host) }
+  def deploy_to_roles(base_roles=self.roles)
+    base_roles.dup.delete_if{|role| self.excluded_hosts.include?(role.host) }
   end
   
   # a list of all excluded hosts for this deployment
@@ -145,6 +146,15 @@ class Deployment < ActiveRecord::Base
   
   def excluded_host_ids=(val)
     val = [val] unless val.is_a?(Array)
-    self.write_attribute('excluded_host_ids', val)
+    self.write_attribute('excluded_host_ids', val.map(&:to_i))
+  end
+  
+  protected
+  def ensure_not_all_hosts_excluded
+    unless self.stage.blank? || self.excluded_host_ids.blank?
+      if deploy_to_roles(self.stage.roles).blank?
+        errors.add('base', "You cannot exclude all hosts.")
+      end
+    end
   end
 end

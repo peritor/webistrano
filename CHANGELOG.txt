@@ -1,6 +1,8 @@
 
 * SVN *
 
+* Ability to disable host per deloy. This way host that are down do not block a deployment
+
 * Check syntax of recipes. Provided by Mathias Meyer
 
 * Ajax-Preview on recipe edit. Provided by Mathias Meyer

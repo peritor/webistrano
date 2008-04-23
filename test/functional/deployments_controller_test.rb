@@ -92,5 +92,20 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     assert_response :redirect
     assert_equal 1, Deployment.count
   end
+  
+  def test_excluded_hosts
+    Deployment.delete_all
+    host_down = create_new_host
+    down_role = create_new_role(:stage => @stage, :name => 'foo', :host => host_down)
+    
+    assert_equal 2, @stage.roles.count
+    
+    post :create, :deployment => { :excluded_host_ids => [host_down.id],:task => 'deploy:default', :description => 'update to newest', :prompt_config => {} }, :project_id => @project.id, :stage_id => @stage.id
+    
+    assert_equal 1, Deployment.count
+    deployment = Deployment.find(:first)
+    assert_equal [host_down], deployment.excluded_hosts
+    assert_equal [@role], deployment.deploy_to_roles
+  end
 
 end

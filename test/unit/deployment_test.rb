@@ -233,7 +233,7 @@ class DeploymentTest < Test::Unit::TestCase
     assert_equal [host.id], deployment.excluded_host_ids
     assert_equal [host], deployment.excluded_hosts
     
-    deployment.excluded_host_ids = host.id
+    deployment.excluded_host_ids = host.id.to_s
     assert_equal [host.id], deployment.excluded_host_ids
   end
   
@@ -245,6 +245,8 @@ class DeploymentTest < Test::Unit::TestCase
     role_www = create_new_role(:name => 'www', :stage => stage, :host => host_2)
     role_db = create_new_role(:name => 'db', :stage => stage, :host => host_2)
     
+    stage.reload
+    assert_equal 3, stage.roles.count
     deployment = create_new_deployment(
                   :stage => stage, 
                   :excluded_host_ids => [host_1.id])
@@ -256,6 +258,21 @@ class DeploymentTest < Test::Unit::TestCase
     assert_equal [role_www, role_db].map(&:id).sort, deployment.deploy_to_roles.map(&:id).sort
   end
   
+  def test_cannot_exclude_all_hosts
+    stage = create_new_stage
+    host = create_new_host
+    role_app = create_new_role(:name => 'app', :stage => stage, :host => host)
+    
+    d = Deployment.new
+    d.task = 'foo'
+    d.stage = stage
+    d.description = 'foo bar'
+    d.excluded_host_ids = role_app.host.id
+    d.user = create_new_user
+
+    assert !d.valid?
+    assert d.errors.on('base')
+  end
   
   
 end
