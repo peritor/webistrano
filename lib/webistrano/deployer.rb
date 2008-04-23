@@ -176,7 +176,7 @@ module Webistrano
   
     # sets the roles on the Capistrano configuration
     def set_stage_roles(config)
-      deployment.roles.each do |r|
+      deployment.deploy_to_roles.each do |r|
         
         # create role attributes hash
         role_attr = r.role_attribute_hash

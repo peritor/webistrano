@@ -157,6 +157,61 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     deployer.invoke_task!
   end
   
+  def test_excluded_hosts
+    # prepare stage + roles
+    @stage = create_new_stage
+    dead_host = create_new_host
+    
+    www_role = @stage.roles.build(:name => 'www', :host_id => @host.id)
+    www_role.save!
+    
+    app_role = @stage.roles.build(:name => 'app', :host_id => @host.id)
+    app_role.save!
+    
+    db_role = @stage.roles.build(:name => 'db', :host_id => dead_host.id)
+    db_role.save!    
+
+    @stage.reload
+
+    deployment = create_new_deployment(:stage => @stage, :excluded_host_ids => [dead_host.id])
+    assert_equal [www_role, app_role].map(&:id).sort, deployment.deploy_to_roles.map(&:id).sort
+    # prepare Mocks
+    #
+    
+    # Logger stubing
+    mock_cap_logger = mock
+    mock_cap_logger.expects(:level=).with(3)
+    
+    # config stubbing
+    mock_cap_config = mock
+    mock_cap_config.stubs(:logger).returns(mock_cap_logger)
+    mock_cap_config.stubs(:logger=)
+    mock_cap_config.stubs(:load)
+    mock_cap_config.stubs(:trigger)
+    mock_cap_config.stubs(:find_and_execute_task)
+    mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
+    
+    # ignore vars
+    mock_cap_config.stubs(:set)
+      
+    #  
+    # now check the roles        
+    # 
+    
+    #mock_cap_config.expects(:role).with('db', @host.name)
+    mock_cap_config.expects(:role).with('www', @host.name)
+    mock_cap_config.expects(:role).with('app', @host.name)
+    
+    
+    # main mock install
+    Webistrano::Configuration.expects(:new).returns(mock_cap_config)
+    
+    # get things started
+    deployer = Webistrano::Deployer.new( deployment )
+    deployer.invoke_task!
+  end
+  
   def test_invoke_task
     assert_correct_task_called('deploy:setup')
     assert_correct_task_called('deploy:update')

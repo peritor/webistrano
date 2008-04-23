@@ -173,7 +173,8 @@ class Test::Unit::TestCase
       :prompt_config => {},
       :roles => [],
       :description => random_string,
-      :user => create_new_user
+      :user => create_new_user,
+      :excluded_host_ids => []
     }.update(options)
     
     d = Deployment.new
@@ -183,6 +184,7 @@ class Test::Unit::TestCase
     d.success = options[:success]
     d.prompt_config = options[:prompt_config]
     d.description = options[:description]
+    d.excluded_host_ids = options[:excluded_host_ids]
     d.user = options[:user]
 
     d.roles << options[:roles] unless options[:roles].empty?

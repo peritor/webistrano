@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 22) do
+ActiveRecord::Schema.define(:version => 23) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -25,13 +25,14 @@ ActiveRecord::Schema.define(:version => 22) do
   create_table "deployments", :force => true do |t|
     t.string   "task"
     t.text     "log"
-    t.integer  "success",      :default => 0
+    t.integer  "success",           :default => 0
     t.integer  "stage_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "completed_at"
     t.text     "description"
     t.integer  "user_id"
+    t.string   "excluded_host_ids"
   end
 
   create_table "deployments_roles", :id => false, :force => true do |t|

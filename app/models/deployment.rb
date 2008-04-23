@@ -7,7 +7,9 @@ class Deployment < ActiveRecord::Base
   validates_length_of :task, :maximum => 250
   validates_inclusion_of :success, :in => 0..1
   
-  attr_accessible :task, :prompt_config, :description
+  serialize :excluded_host_ids
+  
+  attr_accessible :task, :prompt_config, :description, :excluded_host_ids
   
   tz_time_attributes :created_at, :updated_at, :completed_at
   
@@ -110,5 +112,39 @@ class Deployment < ActiveRecord::Base
       d.description = "Repetition of deployment #{self.id}:\n\n" 
       d.description += self.description
     end
+  end
+  
+  # returns a list of hosts that this deployment
+  # will deploy to. This computed out of the list
+  # of given roles and the excluded hosts
+  def deploy_to_hosts
+    all_hosts = self.roles.map(&:host).uniq
+    return all_hosts - self.excluded_hosts
+  end
+  
+  # returns a list of roles that this deployment
+  # will deploy to. This computed out of the list
+  # of given roles and the excluded hosts
+  def deploy_to_roles
+    self.roles.delete_if{|role| self.excluded_hosts.include?(role.host) }
+  end
+  
+  # a list of all excluded hosts for this deployment
+  # see excluded_host_ids
+  def excluded_hosts
+    res = []
+    self.excluded_host_ids.each do |h_id|
+      res << (Host.find(h_id) rescue nil)
+    end
+    res.compact
+  end
+  
+  def excluded_host_ids
+    self.read_attribute('excluded_host_ids').blank? ? [] : self.read_attribute('excluded_host_ids')
+  end
+  
+  def excluded_host_ids=(val)
+    val = [val] unless val.is_a?(Array)
+    self.write_attribute('excluded_host_ids', val)
   end
 end
