@@ -1,5 +1,7 @@
 
-* SVN *
+SVN
+
+1.3
 
 * Ability to disable host per deloy. This way host that are down do not block a deployment
 
