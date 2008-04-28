@@ -10,7 +10,7 @@ class DeploymentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.rhtml
-      format.xml  { render :xml => @deployment.to_xml }
+      format.xml  { render :xml => @deployments.to_xml }
     end
   end
 
