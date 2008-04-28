@@ -1,6 +1,14 @@
 class StagesController < ApplicationController
 
   before_filter :load_project
+  
+  # GET /projects/1/stages.xml
+  def index
+    @stages = current_project.stages
+    respond_to do |format|
+      format.xml  { render :xml => @stages.to_xml }
+    end
+  end
 
   # GET /projects/1/stages/1
   # GET /projects/1/stages/1.xml

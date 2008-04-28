@@ -13,14 +13,13 @@ class StagesControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
     
     @project = create_new_project(:template => 'mongrel_rails')
-    @stage = create_new_stage(:project => @project)
+    @stage = create_new_stage(:project => @project, :name => 'my_stage')
     @user = login
   end
 
-  def test_should_not_get_index
-    assert_raise(ActionController::UnknownAction){
-      get :index, :project_id => @project.id 
-    }
+  def test_should_get_index
+    get :index, :project_id => @project.id 
+    assert_response :success
   end
 
   def test_should_get_new
@@ -105,6 +104,16 @@ class StagesControllerTest < Test::Unit::TestCase
     get :tasks, :id => @stage.id, :project_id => @project.id
     assert_response :success
     assert_match /webistrano:mongrel:start/, @response.body
+  end
+  
+  def test_index
+    get :index, :project_id => @project.id, :format => 'xml'
+    assert_response :success
+    assert_select 'stages' do |elements|
+      elements.each do |el|
+        assert_select 'stage>name', 'my_stage' 
+      end
+    end
   end
   
 end
