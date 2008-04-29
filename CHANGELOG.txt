@@ -3,6 +3,8 @@ SVN
 
 1.3
 
+* Add support for mod_rails / Phusion Passenger. Use mod_rails as project type.
+
 * Ability to disable host per deloy. This way host that are down do not block a deployment
 
 * Check syntax of recipes. Provided by Mathias Meyer

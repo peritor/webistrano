@@ -7,6 +7,7 @@ class ProjectConfigurationTest < Test::Unit::TestCase
     assert_not_nil ProjectConfiguration.templates['rails']
     assert_not_nil ProjectConfiguration.templates['mongrel_rails']
     assert_not_nil ProjectConfiguration.templates['pure_file']
+    assert_not_nil ProjectConfiguration.templates['mod_rails']
   end
   
   def test_uniqiness_of_name
