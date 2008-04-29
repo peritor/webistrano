@@ -34,7 +34,7 @@
             <th width="1%">Status</th>
             <th width="99%">Host</th>
           </tr>
-          <% for host in @stage.hosts %>
+          <% for host in @stage.hosts.sort_by{|x| x.name} %>
             <tr class="<%= cycle :even, :odd, :name => 'hosts'  %> <%= if_disabled_host?(host,'disabled_host') %>">
               <td style="padding:3px 0px 0px 0px;" valign="middle" align="center">
                 <%= image_tag('peritor_theme/host_on.png', 
