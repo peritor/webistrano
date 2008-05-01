@@ -1,3 +1,18 @@
+2008-02-26 07:54  jamis
+
+	* Fix invalid use of socket.send (closes #17857, thanks to
+	  Zbigniew Zemła)
+
+2007-07-11 09:52  jamis
+
+	* nevermind
+
+2007-07-11 08:57  jamis
+
+	* Make sure packets are split in such a way as to preserve a
+	  minimum packet size, to prevent hmacs being split and
+	  causing grief
+
 2007-06-18 12:07  jamis
 
 	* version bump

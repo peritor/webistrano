@@ -111,7 +111,16 @@ module Net
 
             encrypted_data = @cipher.update( unencrypted_data ) << @cipher.final
             message = encrypted_data + mac
-            @socket.send message, 0
+            
+	    # send package, in case package was only partially transferred, retry
+	    counter = message.size
+	    while counter > 0
+		begin
+		    counter -= @socket.send message[(message.size-counter)..message.size], 0
+		rescue Errno::EINTR
+		    retry
+		end
+	    end
 
             increment_sequence_number
           end
@@ -195,13 +204,17 @@ module Net
 
         def read( length )
           if IO === @socket
-            data = ""
-            while data.length < length
-              break if @socket.closed?
-              if ( IO.select([@socket],nil,nil,0.01) rescue nil )
-                data << @socket.read(length-data.length)
+    	    data = ""
+            begin
+	      while data.length < length
+                break if @socket.closed?
+                if ( IO.select([@socket],nil,nil,0.01) rescue nil )
+	          data << @socket.read(length-data.length)
+                end
               end
-            end
+	    rescue Error::EINTR
+		retry
+	    end
           else
             data = @socket.recv(length)
           end

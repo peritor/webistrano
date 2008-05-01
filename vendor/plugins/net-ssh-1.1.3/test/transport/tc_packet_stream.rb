@@ -106,6 +106,7 @@ module PacketStream_Mock
 
     def send( text, arg )
       @send_buffer << text
+      text.length
     end
   end
 
