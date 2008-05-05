@@ -36,7 +36,8 @@ module Webistrano
             desc "restart mod_rails"
             task :restart, :roles => :app, :except => { :no_release => true } do
               as = fetch(:runner, "app")
-              invoke_command "touch #{mod_rails_restart_file}", :via => run_method, :as => as
+              restart_file = fetch(:mod_rails_restart_file, "#{deploy_to}/current/tmp/restart.txt")
+              invoke_command "touch #{restart_file}", :via => run_method, :as => as
             end
           end
         end
