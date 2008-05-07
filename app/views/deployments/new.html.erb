@@ -82,7 +82,6 @@
     function disable_host(){
       var own_id = /host_(\d)_on/.exec(this.id)[1];
       var other_id = "host_" + own_id + '_off';
-      console.log('in diable host ' + own_id + '. other: ' + other_id);
       $(this).hide();
       $(other_id).show();
       $('deployment_excluded_host_ids_' + own_id).writeAttribute('checked', 'checked');
@@ -93,7 +92,6 @@
     function enable_host(){
       var own_id = /host_(\d)_off/.exec(this.id)[1];
       var other_id = "host_" + own_id + '_on';
-      console.log('in enable host ' + own_id + '. other: ' + other_id);
       $(this).hide();
       $(other_id).show();
       $('deployment_excluded_host_ids_' + own_id).writeAttribute('checked', false);
