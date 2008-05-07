@@ -41,7 +41,7 @@ module Webistrano
         namespace :deploy do
           task :restart, :roles => :app, :except => { :no_release => true } do
             webistrano.mongrel.stop
-            sleep(3)
+            sleep(5)
             webistrano.mongrel.start
           end
           
