@@ -752,7 +752,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal 24, deployer.list_tasks.size
     assert_equal 22, @stage.list_tasks.size # filter shell and invoke
     assert_equal 1, deployer.list_tasks.delete_if{|t| t.fully_qualified_name != 'foo:bar'}.size
-    assert_equal 1, @stage.list_tasks.delete_if{|t| t[0] != 'foo:bar'}.size
+    assert_equal 1, @stage.list_tasks.delete_if{|t| t[:name] != 'foo:bar'}.size
   end
   
   

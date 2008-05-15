@@ -1,6 +1,8 @@
 
 SVN
 
+* Fix XML output of stage tasks. Provided by Mathias Meyer
+
 * Add version info XML action. Provided by Mathias Meyer
 
 * Update Net::SSH to 1.1.3

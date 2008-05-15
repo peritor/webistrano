@@ -123,7 +123,7 @@ class Stage < ActiveRecord::Base
     d = Deployment.new
     d.stage = self
     deployer = Webistrano::Deployer.new(d)
-    deployer.list_tasks.collect { |t| [t.fully_qualified_name, t.description] }.delete_if{|x| x.first == 'shell' || x.first == 'invoke'}
+    deployer.list_tasks.collect { |t| {:name => t.fully_qualified_name, :description => t.description} }.delete_if{|t| t[:name] == 'shell' || t[:name] == 'invoke'}
   end
   
   protected

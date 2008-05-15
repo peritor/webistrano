@@ -10,11 +10,17 @@ class StagesController < ApplicationController
     end
   end
 
+  def index
+    @stages = current_project.stages.find(:all)
+    respond_to do |format|
+      format.xml { render :xml => @stages.to_xml}
+    end
+  end
   # GET /projects/1/stages/1
   # GET /projects/1/stages/1.xml
   def show
     @stage = current_project.stages.find(params[:id])
-    @task_list = [['All tasks: ', '']] + @stage.list_tasks.collect{|x| [x.first, x.first]}.sort
+    @task_list = [['All tasks: ', '']] + @stage.list_tasks.collect{|task| [task[:name], task[:name]]}.sort()
 
     respond_to do |format|
       format.html # show.rhtml

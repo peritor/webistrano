@@ -3,11 +3,11 @@
 <fieldset class="fieldset">
   <legend>All Tasks</legend>
     <table>
-    <% @tasks.sort.each do |key, value| %>
+    <% @tasks.sort{|a, b| a[:name] <=> b[:name]}.each do |task| %>
 	<tr>
-   	<td valign="top"><%= link_to key, new_project_stage_deployment_path(current_project, @stage) + "?task=#{key}", :class => 'arrow_link', :name => h(key)%></td>
+   	<td valign="top"><%= link_to task[:name], new_project_stage_deployment_path(current_project, @stage) + "?task=#{task[:name]}", :class => 'arrow_link', :name => h(task[:name])%></td>
    	<td>&nbsp;&nbsp;</td>
-	  <td valign="top"><%= simple_format value %></td>
+	  <td valign="top"><%= simple_format task[:description] %></td>
 	</tr>
     <% end %>
     </table>

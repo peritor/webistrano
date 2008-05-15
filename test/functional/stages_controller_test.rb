@@ -106,6 +106,12 @@ class StagesControllerTest < Test::Unit::TestCase
     assert_match /webistrano:mongrel:start/, @response.body
   end
   
+  def test_should_render_xml_for_stage_tasks
+    get :tasks, :id => @stage.id, :project_id => @project.id, :format => "xml"
+    assert_response :success
+    assert_match /webistrano:mongrel:start/, @response.body
+  end
+  
   def test_index
     get :index, :project_id => @project.id, :format => 'xml'
     assert_response :success
