@@ -74,6 +74,14 @@ class SessionsControllerTest < Test::Unit::TestCase
     assert !@controller.send(:logged_in?)
   end
 
+  def test_should_render_the_version_xml
+    get :version
+    assert_select "application" do |element|
+      assert_select 'name', :text => "Webistrano"
+      assert_select 'version', :text => WEBISTRANO_VERSION
+    end
+  end
+  
   protected
     def auth_token(token)
       CGI::Cookie.new('name' => 'auth_token', 'value' => token)

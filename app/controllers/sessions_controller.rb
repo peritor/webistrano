@@ -29,4 +29,11 @@ class SessionsController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_back_or_default( home_path )
   end
+  
+  def version
+    app = OpenStruct.new(:name => "Webistrano", :version => WEBISTRANO_VERSION)
+    respond_to do |format|
+      format.xml { render :layout => false }
+    end
+  end
 end
