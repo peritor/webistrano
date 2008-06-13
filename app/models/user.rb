@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   attr_accessor :password
   
   attr_accessible :login, :email, :password, :password_confirmation, :time_zone, :tz
-  composed_of :tz, :class_name => 'TZInfo::Timezone', :mapping => %w( time_zone time_zone )
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
@@ -17,9 +16,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
-  
-  tz_time_attributes :created_at, :updated_at
-  
+    
   def validate_on_update
     if User.find(self.id).admin? && !self.admin?
       errors.add('admin', 'status can no be revoked as there needs to be one admin left.') if User.admin_count == 1
@@ -47,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def remember_token?
-    remember_token_expires_at && TzTime.now < remember_token_expires_at
+    remember_token_expires_at && Time.now < remember_token_expires_at
   end
 
   # These create and unset the fields required for remembering users between browser closes
@@ -97,7 +94,7 @@ class User < ActiveRecord::Base
     # before filter 
     def encrypt_password
       return if password.blank?
-      self.salt = Digest::SHA1.hexdigest("--#{TzTime.now.to_s}--#{login}--") if new_record?
+      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
       self.crypted_password = encrypt(password)
     end
     

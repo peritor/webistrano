@@ -10,9 +10,7 @@ class Deployment < ActiveRecord::Base
   serialize :excluded_host_ids
   
   attr_accessible :task, :prompt_config, :description, :excluded_host_ids
-  
-  tz_time_attributes :created_at, :updated_at, :completed_at
-  
+    
   # given configuration hash on create in order to satisfy prompt configurations
   attr_accessor :prompt_config 
   
@@ -77,7 +75,7 @@ class Deployment < ActiveRecord::Base
   def complete_with_error!
     raise 'cannot complete a second time' if self.completed?
     self.success = 0
-    self.completed_at = TzTime.now
+    self.completed_at = Time.now
     self.save!
     
     self.stage.emails.each do |email|
@@ -88,7 +86,7 @@ class Deployment < ActiveRecord::Base
   def complete_successfully!
     raise 'cannot complete a second time' if self.completed?
     self.success = 1
-    self.completed_at = TzTime.now
+    self.completed_at = Time.now
     self.save!
     
     self.stage.emails.each do |email|

@@ -11,7 +11,7 @@ class Notification < ActionMailer::Base
     @body       = {:deployment => deployment}
     @recipients = email
     @from       = @@webistrano_sender_address
-    @sent_on    = TzTime.now
+    @sent_on    = Time.now
     @headers    = {}
   end
 end

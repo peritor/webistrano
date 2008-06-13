@@ -7,12 +7,9 @@ class Recipe < ActiveRecord::Base
   
   attr_accessible :name, :body, :description
   
-  tz_time_attributes :created_at, :updated_at
-  
- 
- def validate
-   check_syntax
- end
+  def validate
+    check_syntax
+  end
  
   def check_syntax
    return if self.body.blank?

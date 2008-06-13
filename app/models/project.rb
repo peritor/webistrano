@@ -12,8 +12,6 @@ class Project < ActiveRecord::Base
   
   attr_accessible :name, :description, :template
   
-  tz_time_attributes :created_at, :updated_at
-  
   # creates the default configuration parameters based on the template
   def create_template_defaults
     unless template.blank?

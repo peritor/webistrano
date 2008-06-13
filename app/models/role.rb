@@ -14,8 +14,6 @@ class Role < ActiveRecord::Base
   
   attr_accessor :custom_name
   
-  tz_time_attributes :created_at, :updated_at
-  
   DEFAULT_NAMES = %w(app db www)
   
   before_validation :set_name_from_custom_name
