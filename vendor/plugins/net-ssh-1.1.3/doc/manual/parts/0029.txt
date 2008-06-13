@@ -1,1 +1,0 @@
-Many times, you may find yourself behind a firewall, unable to SSH out. In such instances, you can often take advantage of your existing proxies to tunnel an SSH connection through your firewall.

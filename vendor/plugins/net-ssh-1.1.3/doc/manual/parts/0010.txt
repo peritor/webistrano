@@ -1,7 +1,0 @@
-The SSH protocol requires that requests for services on a remote machine be made over _channels_. A single SSH connection may contain multiple channels, all run simultaneously over that connection.
-
-Each channel, in turn, represents the processing of a single service.  When you invoke a process on the remote host with Net::SSH, a channel is opened for that invocation, and all input and output relevant to that process is sent through that channel. The connection itself simply manages the packets of all of the channels that it has open.
-
-This means that, for instance, over a single SSH connection you could execute a process, download a file via SFTP, and forward any number of ports, all (seemingly) at the same time!
-
-Naturally, they do not occur simultaneously, but rather work in a "time-share" fashion by sharing the bandwidth of the connection. Nevertheless, the fact that these channels exist make working with the SSH protocol a bit more challenging than simpler protocols (like FTP, HTTP, or Telnet).

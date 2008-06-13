@@ -1,7 +1,0 @@
-Net::SSH is copyrighted free software by Jamis Buck <jamis@37signals.com>.
-The reader is hereby granted permission to redistribute and/or modify it
-under the terms of the BSD license, the Ruby license, or (by association
-with the Ruby license) the GPL, at the reader's option.
-
-Look in the "doc" subdirectory, and see the LICENSE-BSD, LICENSE-RUBY and
-LICENSE-GPL files for the text of these licenses.

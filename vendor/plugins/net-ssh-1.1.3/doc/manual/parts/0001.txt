@@ -1,3 +1,0 @@
-Net::SSH is only a _client_ implementation, not a server. Given sufficient motivation and encouragement from the community, perhaps it will someday include an SSH server, but as of right now, it does not.
-
-Furthermore, it is only an _SSH2_ client. This means that it cannot connect to SSH servers that only understand the older SSH1 protocol.
