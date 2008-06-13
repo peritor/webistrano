@@ -108,4 +108,13 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     assert_equal [@role], deployment.deploy_to_roles
   end
 
+  def test_latest_deployment
+    Deployment.delete_all
+    host_down = create_new_host
+    down_role = create_new_role(:stage => @stage, :name => 'foo', :host => host_down)
+    post :create, :deployment => { :task => 'deploy:default', :description => 'update to newest', :prompt_config => {} }, :project_id => @project.id, :stage_id => @stage.id
+    get :latest, :project_id => @project.id, :stage_id => @stage.id
+    assert_response :success
+    assert_equal "deploy:default", assigns(:deployment).task
+  end
 end

@@ -58,6 +58,16 @@ class DeploymentsController < ApplicationController
     end
   end
 
+  # GET /projects/1/stages/1/deployments/latest
+  def latest
+    @deployment = @stage.deployments.find(:first, :order => "created_at desc")
+
+    respond_to do |format|
+      format.html { render :action => "show"}
+      format.xml  { render :xml => @deployment.to_xml }
+    end
+  end
+  
   protected
   def ensure_deployment_possible
     if current_stage.deployment_possible?
