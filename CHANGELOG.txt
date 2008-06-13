@@ -1,6 +1,8 @@
 
 SVN
 
+* Update to Capistrano 2.4.0
+
 * Update to Rails 2.1
 
 * Add /projects/1/stages/1/deployments/latest. Provided by Mathias Meyer

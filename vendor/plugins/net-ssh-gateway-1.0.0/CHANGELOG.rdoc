@@ -1,0 +1,7 @@
+=== 1.0.0 / 1 May 2008
+
+* (no changes since the preview release)
+
+=== 1.0 Preview Release 1 (0.99.0) / 10 Apr 2008
+
+* First release of Net::SSH::Gateway
