@@ -167,4 +167,24 @@ class ConfigurationParameterTest < Test::Unit::TestCase
     
   end
   
+  def test_should_not_be_valid_when_name_starts_with_colon
+    c = @project.configuration_parameters.build(
+      :name => ':password_2', 
+      :value => 'abc',
+      :prompt_on_deploy => 0
+    )
+    c.valid?
+    assert_equal "can't contain a colon", c.errors.on(:name)
+  end
+
+  def test_should_not_be_valid_when_name_starts_with_spaces_and_colon
+    c = @project.configuration_parameters.build(
+      :name => '   :password_2', 
+      :value => 'abc',
+      :prompt_on_deploy => 0
+    )
+    c.valid?
+    assert_equal "can't contain a colon", c.errors.on(:name)
+  end
+  
 end
