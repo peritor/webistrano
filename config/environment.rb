@@ -58,7 +58,7 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
 
   # Make Active Record use UTC-base instead of local time
-  config.active_record.default_timezone = :utc
+  config.time_zone = 'UTC'
 end
 
 # Add new inflection rules using the following format 
@@ -99,4 +99,4 @@ File.delete("#{RAILS_ROOT}/public/stylesheets/application.css") if File.exists?(
 
 # set default time_zone to UTC
 ENV['TZ'] = 'UTC'
-TzTime.zone = TimeZone['Edinburgh']
+Time.zone = TimeZone['Edinburgh']

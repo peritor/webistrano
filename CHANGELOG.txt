@@ -1,6 +1,8 @@
 
 SVN
 
+* Update to Rails 2.1
+
 * Add /projects/1/stages/1/deployments/latest. Provided by Mathias Meyer
 
 * Fix XML output of stage tasks. Provided by Mathias Meyer
