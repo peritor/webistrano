@@ -26,11 +26,11 @@
 	</p>
 	<p>
 	  <b>Started:</b>
-	  <%=h @deployment.created_at.to_s(:log) %>
+	  <%=h @deployment.created_at.to_s(:log) %> (<%=h current_user.time_zone rescue 'UTC' %>)
 	</p>
   <p>
 	  <b>Completed:</b>
-	  <%=h @deployment.completed_at.to_s(:log) rescue nil %>
+	  <%=h "#{@deployment.completed_at.to_s(:log)} (#{current_user.time_zone})" rescue nil %>
 	</p>
 	<% if @deployment.completed? %>
   	<p>

@@ -18,10 +18,10 @@ class ApplicationController < ActionController::Base
   protected
   
   def set_timezone
-    # default timezone is UTC (Edinburgh)
-    Time.zone = logged_in? ? ( current_user.tz rescue TimeZone['Edinburgh']): TimeZone['Edinburgh']
+    # default timezone is UTC
+    Time.zone = logged_in? ? ( current_user.time_zone rescue 'UTC'): 'UTC'
     yield
-    Time.zone = TimeZone['Edinburgh']
+    Time.zone = 'UTC'
   end
   
   def load_project
