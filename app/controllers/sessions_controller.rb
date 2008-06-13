@@ -31,7 +31,6 @@ class SessionsController < ApplicationController
   end
   
   def version
-    app = OpenStruct.new(:name => "Webistrano", :version => WEBISTRANO_VERSION)
     respond_to do |format|
       format.xml { render :layout => false }
     end
