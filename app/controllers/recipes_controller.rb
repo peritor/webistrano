@@ -15,8 +15,8 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.xml
   def show
-    @recipe = Recipe.find(params[:id])
-
+    find_recipe_with_version
+    
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @recipe.to_xml }
@@ -30,13 +30,13 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1;edit
   def edit
-    @recipe = Recipe.find(params[:id])
+    find_recipe_with_version
   end
 
   # POST /recipes
   # POST /recipes.xml
   def create
-    @recipe = Recipe.new(params[:recipe])
+    @recipe = Recipe.new((params[:recipe] || {}).merge(:user_id => current_user.id))
 
     respond_to do |format|
       if @recipe.save
@@ -56,7 +56,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
 
     respond_to do |format|
-      if @recipe.update_attributes(params[:recipe])
+      if @recipe.update_attributes((params[:recipe] || {}).merge(:user_id => current_user.id))
         flash[:notice] = 'Recipe was successfully updated.'
         format.html { redirect_to recipe_url(@recipe) }
         format.xml  { head :ok }
@@ -89,6 +89,16 @@ class RecipesController < ApplicationController
           page.show :preview_fieldset
         end
       }
+    end
+  end
+  
+  private
+  def find_recipe_with_version
+    @recipe = Recipe.find(params[:id])
+    
+    unless params[:version].blank?
+      recipe_version = @recipe.find_version(params[:version])
+      @recipe.attributes = @recipe.find_version(params[:version]).attributes if recipe_version
     end
   end
 end

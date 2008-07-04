@@ -117,4 +117,12 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_equal "deploy:default", assigns(:deployment).task
   end
+  
+  def test_latest_with_no_deployment
+    Deployment.delete_all
+    host_down = create_new_host
+    down_role = create_new_role(:stage => @stage, :name => 'foo', :host => host_down)
+    get :latest, :project_id => @project.id, :stage_id => @stage.id, :format => "xml"
+    assert_response 404
+  end
 end

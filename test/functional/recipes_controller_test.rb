@@ -125,5 +125,30 @@ class RecipesControllerTest < Test::Unit::TestCase
     xhr :get, :preview, :recipe => {:body => @recipe.body}
     assert_select_rjs :replace_html, "preview"
   end
+
+  def test_show_with_version_should_show_the_specified_version
+    @user = admin_login
+    
+    @recipe.update_attributes!(:body => "do_something :else")
+    @recipe.update_attributes!(:body => "do_something :other_than => :else")
+    get :show, :id => @recipe.id, :version => 2
+    assert_equal "do_something :else", assigns["recipe"].body
+  end
   
+  def test_edit_with_version_should_load_the_specified_version
+    @user = admin_login
+    @recipe.update_attributes!(:body => "do_something :else")
+    @recipe.update_attributes!(:body => "do_something :other_than => :else")
+    get :edit, :id => @recipe.id, :version => 2
+    assert_equal "do_something :else", assigns["recipe"].body
+  end
+  
+  def test_show_should_ignore_illegal_versions
+    @user = admin_login
+    
+    @recipe.update_attributes!(:body => "do_something :else")
+    @recipe.update_attributes!(:body => "do_something :other_than => :else")
+    get :show, :id => @recipe.id, :version => @recipe.version + 1
+    assert_equal "do_something :other_than => :else", assigns["recipe"].body
+  end
 end

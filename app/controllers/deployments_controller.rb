@@ -64,7 +64,13 @@ class DeploymentsController < ApplicationController
 
     respond_to do |format|
       format.html { render :action => "show"}
-      format.xml  { render :xml => @deployment.to_xml }
+      format.xml do
+        if @deployment
+          render :xml => @deployment.to_xml
+        else
+          render :status => 404, :nothing => true
+        end
+      end
     end
   end
   

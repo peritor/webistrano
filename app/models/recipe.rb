@@ -4,8 +4,14 @@ class Recipe < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :name, :body
   validates_length_of :name, :maximum => 250
+
+  attr_accessor :user_id
   
-  attr_accessible :name, :body, :description
+  attr_accessible :name, :body, :description, :user_id
+  
+  version_fu do
+    belongs_to :user, :class_name => "::User"
+  end
   
   def validate
     check_syntax

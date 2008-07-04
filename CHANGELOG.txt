@@ -1,6 +1,8 @@
 
 SVN
 
+* Add Recipe versioning with version_fu. Provided by Mathias Meyer
+
 * Update to Capistrano 2.4.0
 
 * Update to Rails 2.1

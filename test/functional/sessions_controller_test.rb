@@ -75,6 +75,7 @@ class SessionsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_render_the_version_xml
+    login_as :quentin
     get :version
     assert_select "application" do |element|
       assert_select 'name', :text => "Webistrano"
