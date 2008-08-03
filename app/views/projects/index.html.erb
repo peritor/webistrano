@@ -25,6 +25,7 @@
         <td><%=h project.deployments.count %></td>
         <td><%=h project.created_at.to_s(:date_with_day) %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Clone', clone_form_path(project) %></td>
         <td><%= link_to 'Delete', project_path(project), :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>
     <% end %>
