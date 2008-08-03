@@ -128,9 +128,9 @@ class ProjectsControllerTest < Test::Unit::TestCase
       get :new, :clone => @project.id
       assert_response :success
       assert_select "h2", "Clone project"
-      post :new, :clone => @project.id, :project => { :name => 'MyClone' }
+      post :create, :clone => @project.id, :project => { :name => 'Project Alpha', :template => 'mongrel_rails'}
+      assert_response :redirect
     end
-    assert_equal "mod_rails". Project.last.template
   end
   
 end
