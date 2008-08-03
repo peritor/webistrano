@@ -1,6 +1,8 @@
 
 SVN
 
+* Allow to clone a project. Stages and configuration is cloned for now. Closes #85
+
 * Update to Capistrano 2.4.3
 
 * Add Recipe versioning with version_fu. Provided by Mathias Meyer

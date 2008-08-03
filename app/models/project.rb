@@ -35,5 +35,38 @@ class Project < ActiveRecord::Base
   def webistrano_project_name
     self.name.underscore.gsub(/[^a-zA-Z0-9\-\_]/, '_')
   end
+  
+  def prepare_cloning(other)
+    self.name = "Clone of #{other.name}"
+    self.description = "Clone of #{other.name}: #{other.description}"
+    self.template = other.template
+  end
+  
+  def clone(other)  
+    self.stages.destroy_all
+    self.configuration_parameters.destroy_all
+      
+    other.configuration_parameters.each do |conf|
+      self.configuration_parameters << ProjectConfiguration.new(:name => conf.name, :value => conf.value, :prompt_on_deploy => conf.prompt_on_deploy)
+    end
+    
+    other.stages.each do |stage|
+      new_stage = Stage.new
+      new_stage.project = self
+      new_stage.name = stage.name
+      new_stage.alert_emails = stage.alert_emails
+      new_stage.save!
+      
+      stage.configuration_parameters.each do |conf|
+        new_stage.configuration_parameters << StageConfiguration.new(:name => conf.name, :value => conf.value, :prompt_on_deploy => conf.prompt_on_deploy)
+      end
+      
+      stage.recipes.each do |recipe|
+        new_stage.recipes << recipe
+      end
+    end
+    
+    self.reload
+  end
     
 end

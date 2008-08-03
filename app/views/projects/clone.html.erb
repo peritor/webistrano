@@ -1,0 +1,12 @@
+<h2>Clone project</h2>
+
+<% form_for(:project, :url => clone_path(@original)) do |f| %>
+
+  <%= render(:partial => 'form')%>
+  
+  <p>
+    <%= submit_tag "Clone" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', projects_path %>

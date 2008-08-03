@@ -42,11 +42,13 @@ class Test::Unit::TestCase
   def create_new_project(options = {})
     options = {
       :name => random_string,
+      :description => random_string,
       :template => 'rails'
     }.update(options)
     
     p = Project.new
     p.name = options[:name]
+    p.description = options[:description]
     p.template = options[:template]
     p.save!
     

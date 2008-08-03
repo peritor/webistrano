@@ -38,6 +38,10 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    if load_clone_original
+      @project.prepare_cloning(@original)
+      render :action => 'clone' and return
+    end
   end
 
   # GET /projects/1;edit
@@ -49,14 +53,23 @@ class ProjectsController < ApplicationController
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
-
+    
+    if load_clone_original
+      action_to_render = 'clone'  
+    else
+      action_to_render = 'new'  
+    end
+      
     respond_to do |format|
       if @project.save
+        
+        @project.clone(@original) if load_clone_original
+        
         flash[:notice] = 'Project was successfully created.'
         format.html { redirect_to project_url(@project) }
         format.xml  { head :created, :location => project_url(@project) }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => action_to_render }
         format.xml  { render :xml => @project.errors.to_xml }
       end
     end
@@ -100,6 +113,14 @@ class ProjectsController < ApplicationController
     
     @template_infos = ProjectConfiguration.templates.collect do |k,v|
       [k.to_s, v::DESC]
+    end
+  end
+  
+  def load_clone_original
+    if params[:clone]
+      @original = Project.find(params[:clone])
+    else
+      false
     end
   end
 end

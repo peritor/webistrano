@@ -120,4 +120,17 @@ class ProjectsControllerTest < Test::Unit::TestCase
     assert_redirected_to projects_path
   end
   
+  def test_clone
+    @user = admin_login
+    @project.template = "mod_rails"
+    @project.save!
+    assert_difference "Project.count", 1 do
+      get :new, :clone => @project.id
+      assert_response :success
+      assert_select "h2", "Clone project"
+      post :new, :clone => @project.id, :project => { :name => 'MyClone' }
+    end
+    assert_equal "mod_rails". Project.last.template
+  end
+  
 end
