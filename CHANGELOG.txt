@@ -1,6 +1,8 @@
 
 SVN
 
+* Update to Capistrano 2.4.3
+
 * Add Recipe versioning with version_fu. Provided by Mathias Meyer
 
 * Update to Capistrano 2.4.0

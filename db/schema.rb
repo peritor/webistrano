@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080621203016) do
+ActiveRecord::Schema.define(:version => 20080621205235) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20080621203016) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "version",     :limit => 11, :default => 1
   end
 
   create_table "recipes_stages", :id => false, :force => true do |t|

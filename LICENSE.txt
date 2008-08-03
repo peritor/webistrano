@@ -2,7 +2,7 @@ This license applies only to the source code and not to the images.
 See README.txt
 
 /*
- * Copyright (c) 2007 Jonathan Weiss <jw@innerewut.de>
+ * Copyright (c) 2007-2008 Jonathan Weiss <jw@innerewut.de>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
