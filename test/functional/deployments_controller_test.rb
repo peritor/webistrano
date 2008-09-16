@@ -14,7 +14,7 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     
     @project = create_new_project(:name => 'Project X')
     @stage = create_new_stage(:name => 'Prod', :project => @project)
-    @role = create_new_role(:name => 'www', :stage => @stage)
+    @role = create_new_role(:name => 'web', :stage => @stage)
     @deployment = create_new_deployment(:task => 'deploy:setup', :stage => @stage)
     
     @user = login

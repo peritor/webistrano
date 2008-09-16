@@ -14,7 +14,7 @@ class Role < ActiveRecord::Base
   
   attr_accessor :custom_name
   
-  DEFAULT_NAMES = %w(app db www)
+  DEFAULT_NAMES = %w(app db web)
   
   before_validation :set_name_from_custom_name
   

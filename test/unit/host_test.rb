@@ -51,7 +51,7 @@ class HostTest < Test::Unit::TestCase
   def test_validation_of_name_if_domain_name
     # some valid domain names
     assert valid_host_name('map.example.com')
-    assert valid_host_name('www12.example.com')
+    assert valid_host_name('web12.example.com')
     assert valid_host_name('localhost')
     
     # some invalid domains
@@ -64,11 +64,11 @@ class HostTest < Test::Unit::TestCase
     host = create_new_host
     
     stage_1 = create_new_stage
-      role_1 = create_new_role(:name => 'www', :stage => stage_1, :host => host)
+      role_1 = create_new_role(:name => 'web', :stage => stage_1, :host => host)
       role_2 = create_new_role(:name => 'app', :stage => stage_1, :host => host)
       
     stage_2 = create_new_stage
-      role_3 = create_new_role(:name => 'www', :stage => stage_2, :host => host)
+      role_3 = create_new_role(:name => 'web', :stage => stage_2, :host => host)
       role_4 = create_new_role(:name => 'app', :stage => stage_2, :host => host)  
       
     assert_equal 4, host.roles.count

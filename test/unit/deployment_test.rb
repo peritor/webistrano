@@ -5,9 +5,9 @@ class DeploymentTest < Test::Unit::TestCase
   def setup
     @stage = create_new_stage
     @role_app = create_new_role(:name => 'app', :stage => @stage)
-    @role_www = create_new_role(:name => 'app', :stage => @stage)
+    @role_web = create_new_role(:name => 'app', :stage => @stage)
     
-    @deployment = create_new_deployment(:stage => @stage, :roles => [@role_app, @role_www], :description => 'update code to newest')
+    @deployment = create_new_deployment(:stage => @stage, :roles => [@role_app, @role_web], :description => 'update code to newest')
   end
 
   def test_creation
@@ -24,10 +24,10 @@ class DeploymentTest < Test::Unit::TestCase
     }
     
     assert_equal 1, Deployment.count
-    assert_equal [d], Role.find(@role_www.id).deployments
+    assert_equal [d], Role.find(@role_web.id).deployments
     assert_equal [d], Role.find(@role_app.id).deployments
     assert_equal [d], Stage.find(@stage.id).deployments
-    assert_equal [@role_app.id, @role_www.id].sort, Deployment.find(d.id).roles.collect(&:id).sort
+    assert_equal [@role_app.id, @role_web.id].sort, Deployment.find(d.id).roles.collect(&:id).sort
     
     assert !d.completed?
     assert_equal 'running', d.status
@@ -242,7 +242,7 @@ class DeploymentTest < Test::Unit::TestCase
     host_2 = create_new_host
     stage = create_new_stage
     role_app = create_new_role(:name => 'app', :stage => stage, :host => host_1)
-    role_www = create_new_role(:name => 'www', :stage => stage, :host => host_2)
+    role_web = create_new_role(:name => 'web', :stage => stage, :host => host_2)
     role_db = create_new_role(:name => 'db', :stage => stage, :host => host_2)
     
     stage.reload
@@ -255,7 +255,7 @@ class DeploymentTest < Test::Unit::TestCase
     assert_equal [host_1], deployment.excluded_hosts
                   
     assert_equal [host_2], deployment.deploy_to_hosts
-    assert_equal [role_www, role_db].map(&:id).sort, deployment.deploy_to_roles.map(&:id).sort
+    assert_equal [role_web, role_db].map(&:id).sort, deployment.deploy_to_roles.map(&:id).sort
   end
   
   def test_cannot_exclude_all_hosts

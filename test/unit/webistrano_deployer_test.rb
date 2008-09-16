@@ -7,7 +7,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     @stage = create_new_stage(:project => @project)
     @host = create_new_host
     
-    @role = create_new_role(:stage => @stage, :host => @host, :name => 'www')
+    @role = create_new_role(:stage => @stage, :host => @host, :name => 'web')
     
     assert @stage.prompt_configurations.empty?
     
@@ -92,7 +92,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     }.times(4)
             
     # roles
-    mock_cap_config.expects(:role).with('www', @host.name)
+    mock_cap_config.expects(:role).with('web', @host.name)
     mock_cap_config.expects(:role).with('app', @host.name, {:primary => true})
     
     # main mock install
@@ -107,10 +107,10 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     # prepare stage + roles
     @stage = create_new_stage
     
-    www_role = @stage.roles.build(:name => 'www', :host_id => @host.id, :primary => 1, :no_release => 0)
-    www_role.save!
-    assert !www_role.no_release?
-    assert www_role.primary?
+    web_role = @stage.roles.build(:name => 'web', :host_id => @host.id, :primary => 1, :no_release => 0)
+    web_role.save!
+    assert !web_role.no_release?
+    assert web_role.primary?
     
     app_role = @stage.roles.build(:name => 'app', :host_id => @host.id, :primary => 0, :no_release => 1, :ssh_port => '99')
     app_role.save!
@@ -145,7 +145,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     #  
     # now check the roles        
     # 
-    mock_cap_config.expects(:role).with('www', @host.name, {:primary => true})
+    mock_cap_config.expects(:role).with('web', @host.name, {:primary => true})
     mock_cap_config.expects(:role).with('app', @host.name + ":99", {:no_release => true})
     mock_cap_config.expects(:role).with('db', @host.name + ":44", {:no_release => true, :primary => true})
     
@@ -162,8 +162,8 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     @stage = create_new_stage
     dead_host = create_new_host
     
-    www_role = @stage.roles.build(:name => 'www', :host_id => @host.id)
-    www_role.save!
+    web_role = @stage.roles.build(:name => 'web', :host_id => @host.id)
+    web_role.save!
     
     app_role = @stage.roles.build(:name => 'app', :host_id => @host.id)
     app_role.save!
@@ -174,7 +174,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     @stage.reload
 
     deployment = create_new_deployment(:stage => @stage, :excluded_host_ids => [dead_host.id])
-    assert_equal [www_role, app_role].map(&:id).sort, deployment.deploy_to_roles.map(&:id).sort
+    assert_equal [web_role, app_role].map(&:id).sort, deployment.deploy_to_roles.map(&:id).sort
     # prepare Mocks
     #
     
@@ -200,7 +200,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     # 
     
     #mock_cap_config.expects(:role).with('db', @host.name)
-    mock_cap_config.expects(:role).with('www', @host.name)
+    mock_cap_config.expects(:role).with('web', @host.name)
     mock_cap_config.expects(:role).with('app', @host.name)
     
     
@@ -228,7 +228,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal false, Webistrano::Deployer.type_cast('false')
     assert_equal :sym, Webistrano::Deployer.type_cast(':sym')
     assert_equal 'abc', Webistrano::Deployer.type_cast('abc')
-    assert_equal '/usr/local/www', Webistrano::Deployer.type_cast('/usr/local/www')
+    assert_equal '/usr/local/web', Webistrano::Deployer.type_cast('/usr/local/web')
     assert_equal 'https://svn.domain.com', Webistrano::Deployer.type_cast('https://svn.domain.com')
     assert_equal 'svn+ssh://svn.domain.com/svn', Webistrano::Deployer.type_cast('svn+ssh://svn.domain.com/svn')
     assert_equal 'la le lu 123', Webistrano::Deployer.type_cast('la le lu 123')
@@ -402,7 +402,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     stage = create_new_stage(:project => @project)
     host = create_new_host(:name => '127.0.0.1')
     app_role = create_new_role(:name => 'app', :host => host, :stage => stage)
-    www_role = create_new_role(:name => 'www', :host => host, :stage => stage)
+    web_role = create_new_role(:name => 'web', :host => host, :stage => stage)
     db_role = create_new_role(:name => 'db', :host => host, :stage => stage, :primary => 1)
     
     # mock Open4 to return an error
@@ -424,7 +424,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     stage = create_new_stage(:project => @project)
     host = create_new_host(:name => '127.0.0.1')
     app_role = create_new_role(:name => 'app', :host => host, :stage => stage)
-    www_role = create_new_role(:name => 'www', :host => host, :stage => stage)
+    web_role = create_new_role(:name => 'web', :host => host, :stage => stage)
     db_role = create_new_role(:name => 'db', :host => host, :stage => stage, :primary => 1)
     
     # set the scm_command to something bogus in order to throw an error

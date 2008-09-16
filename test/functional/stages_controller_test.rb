@@ -68,7 +68,7 @@ class StagesControllerTest < Test::Unit::TestCase
     @project.configuration_parameters.build(:name => 'mongrel_port', :value => '99').save!
     @project.configuration_parameters.build(:name => 'bool_conf', :value => 'true').save!
     
-    www_role = create_new_role(:stage => @stage, :name => 'www')
+    web_role = create_new_role(:stage => @stage, :name => 'web')
     app_role = create_new_role(:stage => @stage, :name => 'app', :primary => 1)
     db_role = create_new_role(:stage => @stage, :name => 'db', :no_release => 1)
   
@@ -89,7 +89,7 @@ class StagesControllerTest < Test::Unit::TestCase
     assert_match "set :webistrano_stage, \"123_name\"", @response.body
     
     # check roles
-    assert_match "role :www, \"#{www_role.hostname_and_port}\"", @response.body
+    assert_match "role :web, \"#{web_role.hostname_and_port}\"", @response.body
     assert_match "role :app, \"#{app_role.hostname_and_port}\", {:primary=>true}", @response.body
     assert_match "role :db, \"#{db_role.hostname_and_port}\", {:no_release=>true}", @response.body
     

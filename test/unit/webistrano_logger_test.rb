@@ -8,7 +8,7 @@ class Webistrano::LoggerTest < Test::Unit::TestCase
     @host = create_new_host
     
     @stage_with_role = create_new_stage(:project => @project)
-    @role = create_new_role(:stage => @stage_with_role, :name => 'www', :host => @host)
+    @role = create_new_role(:stage => @stage_with_role, :name => 'web', :host => @host)
 
   end
   

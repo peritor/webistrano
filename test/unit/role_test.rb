@@ -12,7 +12,7 @@ class RoleTest < Test::Unit::TestCase
     assert_equal 0, Role.count
     
     assert_nothing_raised{
-      r = Role.new(:name => 'www') 
+      r = Role.new(:name => 'web') 
       r.stage = @stage
       r.host = @host
       r.save!
@@ -28,7 +28,7 @@ class RoleTest < Test::Unit::TestCase
   end
   
   def test_validation
-    r = Role.new(:name => 'www') 
+    r = Role.new(:name => 'web') 
     
     # stage is missing
     assert !r.valid?
@@ -61,13 +61,13 @@ class RoleTest < Test::Unit::TestCase
   
   # test that a host should only have a role once
   def test_only_once_per_role_per_host_per_stage
-    r = Role.new(:name => 'www')
+    r = Role.new(:name => 'web')
     r.host = @host
     r.stage = @stage
     assert r.save
     
     # now try another role for this host
-    r = Role.new(:name => 'www')
+    r = Role.new(:name => 'web')
     r.host = @host
     r.stage = @stage
     assert !r.valid?
