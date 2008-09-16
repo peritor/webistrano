@@ -1,6 +1,8 @@
 
 SVN
 
+* Update Capistrano to 2.5.0
+
 * Update to Rails 2.1.1
 
 * Allow to clone a project. Stages and configuration is cloned for now. Closes #85
