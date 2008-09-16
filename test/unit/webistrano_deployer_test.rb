@@ -232,9 +232,11 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal 'https://svn.domain.com', Webistrano::Deployer.type_cast('https://svn.domain.com')
     assert_equal 'svn+ssh://svn.domain.com/svn', Webistrano::Deployer.type_cast('svn+ssh://svn.domain.com/svn')
     assert_equal 'la le lu 123', Webistrano::Deployer.type_cast('la le lu 123')
-    
-    # document that arrays are not cast correct
-    assert_equal '[1, 2, 3, 4]', Webistrano::Deployer.type_cast('[1, 2, 3, 4]')
+  end
+  
+  def test_type_cast_arrays
+    assert_equal ['foo', :bar, 'bam'], Webistrano::Deployer.type_cast("[foo, :bar, 'bam']")
+    assert_equal ['1', '2', '3', '4'], Webistrano::Deployer.type_cast('[1, 2, 3, 4]')
   end
   
   def test_task_invokation_successful

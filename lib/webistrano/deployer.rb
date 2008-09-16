@@ -200,15 +200,24 @@ module Webistrano
     def self.type_cast(val)
       return nil if val.nil?
       
-      case val.strip
+      val.strip!
+      case val
       when 'true'
         true
       when 'false'
         false
       when 'nil'
         nil
+      when /\[(.*)\]/
+        $1.split(',').map{|subval| type_cast(subval)}
       else # symbol or string
-        (val.index(':') == 0) ? val.slice(1, val.size).to_sym : val
+        if val.index(':') == 0
+          val.slice(1, val.size).to_sym
+        elsif match = val.match(/'(.*)'/) || val.match(/"(.*)"/)
+          match[1]
+        else
+          val
+        end
       end
     end
     
