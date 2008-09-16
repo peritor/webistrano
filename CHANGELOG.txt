@@ -1,6 +1,8 @@
 
 SVN
 
+* Update to Rails 2.1.1
+
 * Allow to clone a project. Stages and configuration is cloned for now. Closes #85
 
 * Update to Capistrano 2.4.3
