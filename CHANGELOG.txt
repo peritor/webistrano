@@ -1,6 +1,8 @@
 
 SVN
 
+* Track deployed revisions
+
 * Rename 'www' role to 'web' to match Capistrano, #91 by sergio@entrecables.com
 
 * Support array values for configuration paramters, #93 by paradise

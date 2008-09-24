@@ -13,6 +13,7 @@
         <th>Task</th>
         <th>Started<br />Completed<br /></th>
         <th style="width:200px;">Comment</th>
+        <th>Revision</th>
         <th>User</th>
         <th>Status</th>
       </tr>
@@ -24,7 +25,8 @@
         </td>
         <td><%= link_to h(deployment.task), project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %></td>
         <td ><%=h deployment.created_at.to_s(:log)  %><br /><%=h deployment.completed_at.to_s(:log) rescue '&nbsp;' %></td>
-        <td><%=h truncate(deployment.description, 37) %></td>
+        <td title="<%=h deployment.description %>"><%=h truncate(deployment.description, 37) %></td>
+        <td title="<%=h deployment.revision %>"><%=h truncate(deployment.revision, 10) %></td>
         <td><%= link_to h(deployment.user.login), user_path(deployment.user) %></td>
         <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/' + deployment.status_image, :title => deployment.status)%></td>
         <td>

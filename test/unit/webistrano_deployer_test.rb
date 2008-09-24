@@ -100,6 +100,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     
     # get things started
     deployer = Webistrano::Deployer.new( create_new_deployment(:stage => @stage) )
+    deployer.stubs(:save_revision)
     deployer.invoke_task!
   end
   
@@ -320,6 +321,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     
     # do a random deploy
     deployer = Webistrano::Deployer.new(@deployment)
+    deployer.stubs(:save_revision)
     deployer.invoke_task!
     
     # the log in the DB should not be empty
@@ -386,7 +388,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
       else
         [:password, :application, :repository, :real_revision, :webistrano_stage, :webistrano_project].include?(x)
       end
-    }.times(7)
+    }.times(8)
 
     # main mock install
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)
@@ -694,7 +696,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     deployer = Webistrano::Deployer.new(@deployment)
     
     deployer.expects(:execute_requested_actions).returns(nil)
-        
+    deployer.stubs(:save_revision)    
     deployer.invoke_task!
   end
   
@@ -710,6 +712,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     
     # mock the main exec
     deployer.expects(:execute_requested_actions).returns(nil)
+    deployer.stubs(:save_revision)
         
     deployer.invoke_task!
   end
@@ -757,6 +760,22 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal 1, @stage.list_tasks.delete_if{|t| t[:name] != 'foo:bar'}.size
   end
   
+  def test_deployer_sets_revision   
+    config = prepare_config_mocks   
+    
+    deployer = Webistrano::Deployer.new(@deployment)
+    
+    deployer.expects(:exchange_real_revision).returns('4943').times(1)
+    config.expects(:fetch).with(:real_revision).returns('4943').times(2)
+    
+    # mock the main exec
+    deployer.expects(:execute_requested_actions).returns(nil)
+     
+    deployer.invoke_task!
+    
+    assert_equal "4943", deployer.deployment.reload.revision
+  end
+  
   
   protected
   
@@ -786,6 +805,8 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
 
     # main mock install
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)
+    
+    mock_cap_config
   end
   
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080917194020) do
+ActiveRecord::Schema.define(:version => 20080924201241) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20080917194020) do
     t.text     "description"
     t.integer  "user_id"
     t.string   "excluded_host_ids"
+    t.string   "revision"
   end
 
   create_table "deployments_roles", :id => false, :force => true do |t|

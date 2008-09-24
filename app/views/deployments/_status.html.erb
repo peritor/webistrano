@@ -25,6 +25,10 @@
 	  <%= user_info(@deployment.user) rescue '' %>
 	</p>
 	<p>
+	  <b>Revision:</b> 
+	  <%= @deployment.revision %>
+	</p>
+	<p>
 	  <b>Started:</b>
 	  <%=h @deployment.created_at.to_s(:log) %> (<%=h current_user.time_zone rescue 'UTC' %>)
 	</p>

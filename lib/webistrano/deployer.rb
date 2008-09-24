@@ -65,7 +65,8 @@ module Webistrano
         set_up_config(config)
         
         exchange_real_revision(config) unless (config.fetch(:scm).to_s == 'git') # git cannot do a local query by default
-      
+        save_revision(config)
+        
         config.trigger(:load)
         execute_requested_actions(config)
         config.trigger(:exit)
@@ -79,6 +80,16 @@ module Webistrano
     rescue Exception => error
       handle_error(error)     
       return false
+    end
+    
+    # save the revision in the DB if possible
+    def save_revision(config)
+      if config.fetch(:real_revision)
+        @deployment.revision = config.fetch(:real_revision)
+        @deployment.save!
+      end
+    rescue => e
+      logger.important "Could not save revision: #{e.message}"
     end
     
     # override in order to use DB logger
