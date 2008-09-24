@@ -17,7 +17,7 @@
       <td nowrap><%=h deployment.created_at.to_s(:log)  %><br /><%=h deployment.completed_at.to_s(:log) rescue '&nbsp;' %></td>
       <td><%=h truncate(deployment.description, 37) %></td>
       <td><%= user_info(deployment.user) rescue '' %></td>
-      <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/'+deployment.status_image)%></td>
+      <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/'+deployment.status_image, :title => deployment.status)%></td>
       <td>
         <% if deployment.completed? %>
           <%= link_to "Repeat", new_project_stage_deployment_path(current_project, @stage) + '?repeat=' + h(deployment.id)  %>
