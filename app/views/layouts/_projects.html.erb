@@ -1,7 +1,7 @@
 <div id="projects_open_content" style="<%=h show_if_opened(status) %>">
   <% if Project.count > 0 %>
     <% for project in Project.find(:all, :order => "name ASC") %>
-      <a href="<%= project_path(project) %>" class="menu_link <%=h active_link_class(project) %>">
+      <a href="<%= project_path(project) %>" class="menu_link <%=h active_link_class(project) %>" title="<%=h project.name %>">
 		    <div class="menu_icons">
 		  
 		  <%= image_tag('peritor_theme/arrow_menu_right.gif', :width => '20', :height => '20', :border => '0', :style => "#{h( do_not_show_stages_of_project(project))}", :id => "#{h(dom_id(project))}_arrow_right", :onclick => "open_menu('#{h( dom_id(project))}'); return false;" )%>
@@ -14,7 +14,7 @@
       <div id="<%=h dom_id(project) %>_stages" style="<%=h show_stages_of_project(project) %>">
 	    <% if project.stages.count > 0 %>
         <% for stage in project.stages %>
-          <a href="<%= project_stage_path(project, stage) %>" class="menu_link <%=h active_link_class(stage) %>">
+          <a href="<%= project_stage_path(project, stage) %>" class="menu_link <%=h active_link_class(stage) %>" title="<%=h stage.name %>">
 	          <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px"><%=h stage.name %></div>
 			    </a>
         <% end %>

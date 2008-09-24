@@ -1,7 +1,7 @@
 <div id="hosts_open_content" style="<%=h show_if_opened(status) %>">
   <% if Host.count > 0 %>
     <% for host in Host.find(:all, :order => "name ASC") %>
-      <a href="<%= host_path(host) %>" class="menu_link <%=h active_link_class(host) %>">
+      <a href="<%= host_path(host) %>" class="menu_link <%=h active_link_class(host) %>" title="<%=h host.name %>">
   	    <div class="menu_link_title">
   	      <%=h host.name %>
   	    </div>

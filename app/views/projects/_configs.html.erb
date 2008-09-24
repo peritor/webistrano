@@ -13,7 +13,7 @@
   <% for config in @project.configuration_parameters %>
     <tr class="<%= cycle :even, :odd, :name => 'configs' %>">
       <td><%=h config.name %></td>
-      <td><%=h hide_password_in_value(config) %></td>
+      <td title="<%=h config.value %>"><%=h hide_password_in_value(config) %></td>
       <td><%= config.prompt_status_in_html %></td>
       <td><%= link_to 'Edit', edit_project_project_configuration_path(@project, config) %></td>
       <td><%= link_to 'Delete', project_project_configuration_path(@project, config), :confirm => 'Are you sure?', :method => :delete %></td>
