@@ -1,22 +1,22 @@
 
 <%= render(:partial => 'layouts/menu_box', :locals => {
                                              :box_type => 'projects', 
-                                             :status => controller_in_use_or(ProjectsController, :open), 
+                                             :status => controller_in_use_or(ProjectsController, :open, Project), 
                                              :path => projects_path } )%>
 
 <%= render(:partial => 'layouts/menu_box', :locals => {
                                              :box_type => 'hosts', 
-                                             :status => controller_in_use_or(HostsController, :open), 
+                                             :status => controller_in_use_or(HostsController, :open, Host), 
                                              :path => hosts_path } )%>
 
 <%= render(:partial => 'layouts/menu_box', :locals => {
                                              :box_type => 'recipes', 
-                                             :status => controller_in_use_or(RecipesController, :closed), 
+                                             :status => controller_in_use_or(RecipesController, :closed, Recipe), 
                                              :path => recipes_path } )%>
 
 <%= render(:partial => 'layouts/menu_box', :locals => {
                                              :box_type => 'users', 
-                                             :status => controller_in_use_or(UsersController, :closed), 
+                                             :status => controller_in_use_or(UsersController, :closed, User), 
                                              :path => users_path } )%>
 
 
