@@ -35,6 +35,10 @@
         <% unless flash[:notice].blank? %>
 			    <%= nice_flash(flash[:notice]) %>
         <% end %>
+
+        <% unless flash[:error].blank? %>
+			    <%= error_flash(flash[:error]) %>
+        <% end %>
         
         <%= yield :flash_content %>
       

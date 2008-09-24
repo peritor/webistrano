@@ -4,6 +4,10 @@ module ApplicationHelper
   def nice_flash(text)
     render(:partial => 'layouts/flash', :locals => {:text => text})
   end
+
+  def error_flash(text)
+    render(:partial => 'layouts/flash_error', :locals => {:text => text})
+  end
   
   def flashed_errors(object_name)
     obj = instance_variable_get("@#{object_name}")
@@ -18,7 +22,7 @@ module ApplicationHelper
                        )
     
     content_for(:flash_content) do                   
-      nice_flash(html)
+      error_flash(html)
     end
   end
   

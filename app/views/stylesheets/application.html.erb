@@ -48,6 +48,10 @@ input:focus, textarea:focus {
 	border: 1px solid #666666;
 }
 
+.noframe {
+  border: none;
+}
+
 /* FIELDSETS */
 
 fieldset {
@@ -308,7 +312,8 @@ a.arrow_link_big {
 */
 
 .box_body {
-	height: auto;
+  min-height: 123px;
+	*height: 123px;
 	padding: 0px 20px 0px 20px;
 	background-color: #EEEEEE;
 }
@@ -340,9 +345,20 @@ a.arrow_link_big {
 /* FLASHBOX */
 
 #flash {
-	padding: 5px;
-	color: #A40008;
+	padding: 0px;
 	font-weight: bold;
+}
+
+.flash_text_info {
+	color: #00AA00;
+	padding: 5px 5px 5px 30px;
+	background: url(<%= image_path('peritor_theme/info.gif')%>) left center no-repeat;
+}
+
+.flash_text_error {
+	color: #A40008;
+	padding: 5px 5px 5px 30px;
+	background: url(<%= image_path('peritor_theme/warning.gif')%>) left center no-repeat;
 }
 
 .flashbox_top {
@@ -452,6 +468,7 @@ div.log_output {
   background-color: #EEEEEE;
   overflow: auto;
   width: 600px;
+  *width: 610px;
 }
 
 div.action_box{
@@ -464,33 +481,50 @@ div.action_box{
 div.special_box{
   float: right;
   margin-top: -10px;
-  height: 150px;
+  background: url(<%= image_path('peritor_theme/box_status.gif')%>) center no-repeat;
+}
+
+div.special_box_top {
+  height: 30px;
+  width: 270px;
+  background: url(<%= image_path('peritor_theme/box_status.gif')%>) top no-repeat;
+}
+
+div.special_box_middle{
+  padding: 0px 10px 0px 30px;
   width: 230px;
-  padding:30px 10px 10px 30px;
+  min-height: 123px;
+  *height: 123px;
+}
+
+div.special_box_bottom {
+  height: 30px;
+  width: 270px;
+  background: url(<%= image_path('peritor_theme/box_status.gif')%>) bottom no-repeat;
 }
 
 div.status_box{
-  background: url(<%= image_path('peritor_theme/box_status.gif')%>) no-repeat;
+  background: url(<%= image_path('peritor_theme/box_status.gif')%>) center no-repeat;
 }
 
 div.stages_box{
-  background: url(<%= image_path('peritor_theme/box_stages.gif')%>) no-repeat;
+  background: url(<%= image_path('peritor_theme/box_stages.gif')%>) center no-repeat;
 }
 
 div.deployments_box{
-  background: url(<%= image_path('peritor_theme/box_deployments.gif')%>) no-repeat;
+  background: url(<%= image_path('peritor_theme/box_deployments.gif')%>) center no-repeat;
 }
 
 div.host_box{
-  background: url(<%= image_path('peritor_theme/box_host.gif')%>) no-repeat;
+  background: url(<%= image_path('peritor_theme/box_host.gif')%>) center no-repeat;
 }
 
 div.recipe_box{
-  background: url(<%= image_path('peritor_theme/box_recipe.gif')%>) no-repeat;
+  background: url(<%= image_path('peritor_theme/box_recipe.gif')%>) center no-repeat;
 }
 
 div.user_box{
-  background: url(<%= image_path('peritor_theme/box_user.gif')%>) no-repeat;
+  background: url(<%= image_path('peritor_theme/box_user.gif')%>) center no-repeat;
 }
 
 .role_status_deployed{

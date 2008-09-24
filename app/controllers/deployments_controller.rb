@@ -80,7 +80,7 @@ class DeploymentsController < ApplicationController
         true
     else
       respond_to do |format|  
-        flash[:notice] = 'A deployment is currently not possible.'
+        flash[:error] = 'A deployment is currently not possible.'
         format.html { redirect_to project_stage_url(@project, @stage) }
         format.xml  { render :xml => current_stage.deployment_problems.to_xml }
         false

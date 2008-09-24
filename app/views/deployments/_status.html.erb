@@ -1,8 +1,13 @@
-<div class="special_box status_box">
-	<div style="padding:0px 0px 0px 30px;">
+<div class="special_box">
+  <div class="special_box_top"></div>
+  <div class="special_box_middle">
+  	<div style="padding:0px 0px 0px 30px;">
       <%= image_tag('peritor_theme/status_' + @deployment.status + '.gif', :title => @deployment.status) %>
     </div>
+  </div>
+  <div class="special_box_bottom"></div>
 </div>
+
 
 <div style="float: left; width:380px">
   <div class="box_top_left">
@@ -11,7 +16,7 @@
 	  </div>
     </div>
   </div>
-  <div class="box_body" style="height: 123px;">
+  <div class="box_body">
 	<p>
       <b>Task:</b>
 	  <%=h @deployment.task %>
@@ -62,6 +67,7 @@
 
 <fieldset class="fieldset">
   <legend>Log</legend>
+<div style="float:right; padding: 0px 5px 10px 0px; *padding: 0px"><input type="checkbox" class="noframe"><a href="javascript:alert('WWW')">auto scroll</a></div>
 	<div class="log_output">
   		<pre><%=h @deployment.log.gsub('\n', "\n") rescue '' %></pre>
 	</div>
