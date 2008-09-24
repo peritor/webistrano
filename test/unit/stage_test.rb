@@ -171,4 +171,23 @@ class StageTest < Test::Unit::TestCase
     assert_equal '_my__pro_ject', stage.webistrano_stage_name
   end
   
+  def test_handle_corrupt_recipes
+    stage = create_new_stage
+    
+    # create a recipe with invalid code
+    recipe = create_new_recipe(:body => <<-'EOS'
+      namescape do
+        task :foo do
+          run 'ls'
+        end
+      end
+      EOS
+    )
+    
+    assert_nothing_raised do
+      stage.recipes << recipe
+      stage.list_tasks
+    end
+  end
+  
 end
