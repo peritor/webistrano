@@ -1,6 +1,8 @@
 
 SVN
 
+* Show recent deployments on the project page
+
 * A deployment is no longer required, it is optional from now on
 
 * Track deployed revisions

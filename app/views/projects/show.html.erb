@@ -69,3 +69,11 @@
   <br />
   <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
 </fieldset>
+
+<br /><br />
+
+<fieldset class="fieldset">
+  <legend>Recent Deployments</legend>
+  <%= render(:partial => 'deployments')%>
+  <br />
+</fieldset>

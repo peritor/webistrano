@@ -134,4 +134,24 @@ class ProjectTest < Test::Unit::TestCase
     assert_equal [recipe], cloned_stage_1.recipes
   end
   
+  def test_recent_deployments
+    project = create_new_project
+    
+    stage_1 = create_new_stage(:project => project)
+    role = create_new_role(:stage => stage_1)
+    5.times do 
+      deployment = create_new_deployment(:stage => stage_1)
+    end
+    
+    stage_2 = create_new_stage(:project => project)
+    role = create_new_role(:stage => stage_2)
+    5.times do 
+      deployment = create_new_deployment(:stage => stage_2)
+    end
+    
+    assert_equal 10, project.deployments.count
+    assert_equal 3, project.recent_deployments.size
+    assert_equal 2, project.recent_deployments(2).size
+  end
+  
 end

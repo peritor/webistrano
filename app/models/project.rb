@@ -36,6 +36,10 @@ class Project < ActiveRecord::Base
     self.name.underscore.gsub(/[^a-zA-Z0-9\-\_]/, '_')
   end
   
+  def recent_deployments(limit=3)
+    self.deployments.find(:all, :limit => limit, :order => 'created_at DESC')
+  end
+  
   def prepare_cloning(other)
     self.name = "Clone of #{other.name}"
     self.description = "Clone of #{other.name}: #{other.description}"
