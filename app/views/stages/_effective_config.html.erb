@@ -9,13 +9,13 @@
   <table class="sortable">
     <tr>
       <th width="1%">Name</th>
-      <th width="1%">Value</th>
+      <th width="98%">Value</th>
       <th width="1%">Prompt</th>
     </tr>
   <% @stage.effective_configuration.each do |conf| %>
     <tr class="<%= cycle :even, :odd, :name => 'effective_conf' %>">
       <td title="<%=h conf.name %>"><%= truncate(h(conf.name), 25) %></td>
-      <td title="<%=h conf.value %>"><%=h truncate(hide_password_in_value(conf), 40) %></td>
+      <td title="<%=h conf.value %>"><%=h truncate(hide_password_in_value(conf), 45) %></td>
       <td><%= conf.prompt_status_in_html %></td>
     </tr>
   <% end %>

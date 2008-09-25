@@ -6,14 +6,14 @@
 <% else %>
   <table class="sortable">
     <tr>
-      <th width="30%">Name</th>
-      <th width="69%">Value</th>
+      <th width="1%">Name</th>
+      <th width="98%">Value</th>
       <th width="1%">Prompt?</th>
     </tr>
   <% for config in @project.configuration_parameters %>
     <tr class="<%= cycle :even, :odd, :name => 'configs' %>">
       <td title="<%=h config.name %>"><%= truncate(h(config.name), 25) %></td>
-      <td title="<%=h config.value %>"><%=h truncate(hide_password_in_value(config), 40) %></td>
+      <td title="<%=h config.value %>"><%=h truncate(hide_password_in_value(config), 45) %></td>
       <td><%= config.prompt_status_in_html %></td>
       <td><%= link_to 'Edit', edit_project_project_configuration_path(@project, config) %></td>
       <td><%= link_to 'Delete', project_project_configuration_path(@project, config), :confirm => 'Are you sure?', :method => :delete %></td>

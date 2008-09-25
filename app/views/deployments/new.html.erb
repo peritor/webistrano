@@ -20,38 +20,12 @@
     <% end %>
   <% end %>
   
-  <b>Deployment Options<b>
-  <div id="s_e_h" style="padding-top: 5px;"><a href="#" onclick="show_disable_hosts(); return false" class="arrow_link">Show Manage Deployed Hosts</a></div>
-  <div id="excluded_hosts" style="display:none;">
-    <% if @stage.roles.count > 0 %>
-      <table class="sortable" style="width: 410px;">
-        <tr>
-          <th width="1%">Status</th>
-          <th width="99%">Host</th>
-        </tr>
-        <% for host in @stage.hosts.sort_by{|x| x.name} %>
-          <tr class="<%= cycle :even, :odd, :name => 'hosts'  %> <%= if_disabled_host?(host,'disabled_host') %>">
-            <td style="padding:3px 0px 0px 0px;" valign="middle" align="center">
-              <%= image_tag('peritor_theme/host_on.png', 
-                            :id => "host_#{host.id}_on", 
-                            :class => 'exlcude_host_trigger_on',
-                            :style => if_disabled_host?(host,'display:none;') + 'cursor:pointer;')%>
-              <%= image_tag('peritor_theme/host_off.png', 
-                            :id => "host_#{host.id}_off", 
-                            :class => 'exlcude_host_trigger_off',
-                            :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
-              <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
-            <td><%= link_to h(host.name), host_path(host) %></td>
-          </tr>
-        <% end %>
-      </table>
-     <% else %>
-     No hosts for this stage!<br /><br />
-    <% end %>
-    <br />
-  </div>
-  <div id="h_e_h" style="display:none;"><a href="#" onclick="hide_disable_hosts(); return false" class="arrow_link">Hide Manage Deployed Hosts</a><br></div>
-  <br>
+  <!-- hidden ids of hosts to exlude -->
+  <% for host in @stage.hosts.sort_by{|x| x.name} %>
+    <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
+  <% end %>
+  
+  <br />
   <p>
     <%= submit_tag "Start Deployment" %>
   </p>
@@ -61,18 +35,6 @@
 
 <% content_for(:page_scripts) do %>
   <script type="text/javascript">
- 
-    function show_disable_hosts(){
-      $('h_e_h').show();
-      $('s_e_h').hide();
-      $('excluded_hosts').show();
-    }
-   
-    function hide_disable_hosts(){
-      $('h_e_h').hide();
-      $('s_e_h').show();
-      $('excluded_hosts').hide();
-    }
     
     function disable_host(){
       var own_id = /host_(\d)_on/.exec(this.id)[1];
@@ -94,11 +56,7 @@
       $(this).up('tr').addClassName('enabled_host');
     }
     
-    Event.observe(window, 'load', function(){
-      <% unless @deployment.excluded_host_ids.blank? %>
-        show_disable_hosts();
-      <% end %>
-      
+    Event.observe(window, 'load', function(){    
       $$('img.exlcude_host_trigger_on').each(function(el){
         el.observe('click', disable_host);
       });
@@ -115,8 +73,30 @@
 <div class="small_box">
   <div class="small_box_top"></div>
   <div class="small_box_middle">
-		 <h3>Effective configuration:</h3>
-		  Hosts<br><br>Recipies<br><br>Config<br><br>Bla
+		 <h3>Deploying hosts</h3>
+		  <% if @stage.roles.count > 0 %>
+		    <form name="excluded_hosts_form" id="excluded_hosts_form">
+          <table style="width: 210px;">
+            <% for host in @stage.hosts.sort_by{|x| x.name} %>
+              <tr class="<%= if_disabled_host?(host,'disabled_host') %>">
+                <td style="padding:3px 0px 0px 0px;" valign="middle" align="center">
+                  <%= image_tag('peritor_theme/checkbox_on.gif', 
+                                :id => "host_#{host.id}_on", 
+                                :class => 'exlcude_host_trigger_on',
+                                :style => if_disabled_host?(host,'display:none;') + 'cursor:pointer;')%>
+                  <%= image_tag('peritor_theme/checkbox_off.gif', 
+                                :id => "host_#{host.id}_off", 
+                                :class => 'exlcude_host_trigger_off',
+                                :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
+                </td>
+                <td><%= link_to h(host.name), host_path(host) %></td>
+              </tr>
+            <% end %>
+          </table>
+        </form>
+       <% else %>
+       No hosts for this stage!<br /><br />
+      <% end %>
   </div>
   <div class="small_box_bottom"></div>
 </div>
