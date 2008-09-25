@@ -68,5 +68,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Recipe #{h(@recipe.name)}" %>
-  <h2>Recipe <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
+  <h2><span class="h2_light">Recipe</span> <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
 <% end %>

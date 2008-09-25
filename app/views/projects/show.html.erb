@@ -85,5 +85,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Project #{h(current_project.name)}" %>
-  <h2>Project <%= link_to h(current_project.name), project_path(current_project) %></h2>
+  <h2><span class="h2_light">Project</span> <%= link_to h(current_project.name), project_path(current_project) %></h2>
 <% end %>

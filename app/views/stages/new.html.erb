@@ -20,5 +20,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "New stage for project #{h(current_project.name)}" %>
-  <h2>New stage for <%= link_to h(current_project.name), project_path(current_project) %></h2>
+  <h2><span class="h2_light">New</span> stage for <%= link_to h(current_project.name), project_path(current_project) %></h2>
 <% end %>

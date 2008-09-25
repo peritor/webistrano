@@ -70,5 +70,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "User #{h(@user.login)}" %>
-  <h2>User <%= user_info(@user)%></h2>
+  <h2><span class="h2_light">User</span> <%= user_info(@user)%></h2>
 <% end %>
