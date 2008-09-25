@@ -75,38 +75,27 @@ legend {
 
 /* LAYOUT APPLICATION */
 
-#container_left {
+#app_top {
 	margin: 0 auto;
 	width: 950px;
-	background: url(<%= image_path('peritor_theme/bg_left.png')%>) left repeat-y;
+	background: url(<%= image_path('peritor_theme/background_app.png')%>) top no-repeat;
 }
 
-#container_right {
+#app_bottom {
+	margin: 0 auto;
 	width: 950px;
-	background: url(<%= image_path('peritor_theme/bg_right.png')%>) right repeat-y;
+  height: 50px;
+	background: url(<%= image_path('peritor_theme/background_app.png')%>) bottom no-repeat;
 }
 
-#header_top {
+#header {
+	margin: 0 auto;
 	width: 890px;
 	height: 88px;
-	background: url(<%= image_path('peritor_theme/bg_top.png')%>) repeat-x;
-	border-bottom: 1px solid #AAAAAA;
+	border-bottom: 1px solid #BBBBBB;
 }
 
-#header_left {
-	width: 920px;
-	height: 89px;
-	padding: 0px 0px 0px 30px;
-	background: url(<%= image_path('peritor_theme/bg_left_top.png')%>) left top no-repeat;
-}
-
-#header_right {
-	height: 89px;
-	padding: 0px 30px 0px 0px;
-	background: url(<%= image_path('peritor_theme/bg_right_top.png')%>) right top no-repeat;
-}
-
-#sub_header {
+#header_claim {
 	text-align: right;
 	float: right;
 	font-weight: bold;
@@ -115,6 +104,7 @@ legend {
 	padding-right: 10px;
 	padding-top: 59px;
 }
+
 #main_content {
 	margin: 0px 20px;
 	padding: 30px 20px 20px 20px;
@@ -122,30 +112,11 @@ legend {
 	min-height: 350px;
 } 
 
-#main_content_bottom {
-	width: 890px;
-	height: 30px;
-	background: url(<%= image_path('peritor_theme/bg_bottom.png')%>) repeat-x;
-}
-
-#main_content_bottom_left {
-	width: 920px;
-	height: 30px;
-	padding: 0px 0px 0px 30px;
-	background: url(<%= image_path('peritor_theme/bg_left_bottom.png')%>) left top no-repeat;
-}
-
-#main_content_bottom_right {
-	height: 30px;
-	padding: 0px 30px 0px 0px;
-	background: url(<%= image_path('peritor_theme/bg_right_bottom.png')%>) right top no-repeat;
-}
-
 #footer {
 	width:870px;
 	font-size: 11px;
 	font-weight: bold;
-	margin: 0px auto
+	margin: 3px auto 20px auto;
 }
 
 #footer_logged {
@@ -298,12 +269,6 @@ a.arrow_link_big {
 }
 
 /* BOX grey*/ 
-/*
-.box_top, .box_bottom {
-	height: 20px;
-	background-color: #EEEEEE;
-}
-*/
 
 div.box {
   margin-top: 18px;
@@ -330,7 +295,7 @@ div.box_bottom {
 }
 
 
-/* BOX small grey*/ 
+/* BOX small grey */ 
 
 div.small_box {
   margin-top: 18px;
@@ -339,13 +304,13 @@ div.small_box {
 
 div.small_box_top {
   height: 20px;
-  width: 287px;
+  width: 252px;
   background: url(<%= image_path('peritor_theme/box_small.gif')%>) top no-repeat;
 }
 
 div.small_box_middle {
-  padding: 0px 10px 0px 25px;
-  width: 252px;
+  padding: 0px 10px 0px 20px;
+  width: 222px;
   min-height: 113px;
   *height: 113px;
   background: url(<%= image_path('peritor_theme/box_small.gif')%>) center no-repeat;
@@ -353,7 +318,7 @@ div.small_box_middle {
 
 div.small_box_bottom {
   height: 20px;
-  width: 287px;
+  width: 252px;
   background: url(<%= image_path('peritor_theme/box_small.gif')%>) bottom no-repeat;
 }
 
@@ -366,14 +331,16 @@ div.small_box_bottom {
 
 .flash_text_info {
 	color: #00AA00;
-	padding: 5px 5px 5px 50px;
+	padding: 15px 5px 12px 70px;
 	background: url(<%= image_path('peritor_theme/info.gif')%>) left center no-repeat;
+  background-position: 20px 0px;
 }
 
 .flash_text_error {
 	color: #A40008;
-	padding: 5px 5px 5px 50px;
+	padding: 15px 5px 12px 70px;
 	background: url(<%= image_path('peritor_theme/warning.gif')%>) left center no-repeat;
+  background-position: 20px 0px;
 }
 
 div.flash_box{
@@ -381,29 +348,87 @@ div.flash_box{
   margin-left: -10px;
   margin-bottom: 15px;
   width: 690px;
-  background: url(<%= image_path('peritor_theme/flashbox.gif')%>) center no-repeat;
+  background: url(<%= image_path('peritor_theme/box_flash.gif')%>) center no-repeat;
   background-position: 0px 0px;
 }
 
 div.flash_box_top {
-  height: 20px;
+  height: 18px;
   width: 690px;
-  background: url(<%= image_path('peritor_theme/flashbox.gif')%>) top no-repeat;
+  background: url(<%= image_path('peritor_theme/box_flash.gif')%>) top no-repeat;
 }
 
 div.flash_box_middle{
   padding: 10px 10px 0px 30px;
   width: 690px;
-  min-height: 13px;
-  *height: 13px;
+  min-height: 40px;
+  *height: 40px;
 }
 
 div.flash_box_bottom {
-  height: 20px;
+  height: 15px;
   width: 690px;
-  background: url(<%= image_path('peritor_theme/flashbox.gif')%>) bottom no-repeat;
+  background: url(<%= image_path('peritor_theme/box_flash.gif')%>) bottom no-repeat;
 }
 
+/* BOX Special */ 
+
+
+div.action_box{
+  float: right;
+  width: 274px;
+  margin-left: 10px;
+  margin-top: 0px; 
+}
+
+div.special_box{
+  float: right;
+  margin-top: -10px;
+  background: url(<%= image_path('peritor_theme/box_light.gif')%>) center no-repeat;
+}
+
+div.special_box_top {
+  height: 20px;
+  width: 270px;
+  background: url(<%= image_path('peritor_theme/box_light.gif')%>) top no-repeat;
+}
+
+div.special_box_middle{
+  padding: 10px 10px 0px 30px;
+  width: 230px;
+  min-height: 133px;
+  *height: 133px;
+}
+
+div.special_box_bottom {
+  height: 20px;
+  width: 270px;
+  background: url(<%= image_path('peritor_theme/box_light.gif')%>) bottom no-repeat;
+}
+
+div.status_box{
+  background: url(<%= image_path('peritor_theme/box_status.gif')%>) center no-repeat;
+}
+
+div.stages_box{
+  background: url(<%= image_path('peritor_theme/box_stages.gif')%>) center no-repeat;
+}
+
+div.deployments_box{
+  background: url(<%= image_path('peritor_theme/box_deployments.gif')%>) center no-repeat;
+}
+
+div.host_box{
+  background: url(<%= image_path('peritor_theme/box_host.gif')%>) center no-repeat;
+}
+
+div.recipe_box{
+  background: url(<%= image_path('peritor_theme/box_recipe.gif')%>) center no-repeat;
+}
+
+div.user_box{
+  background: url(<%= image_path('peritor_theme/box_user.gif')%>) center no-repeat;
+}
 
 /* TEXT */
 
@@ -474,62 +499,6 @@ div.log_output {
   overflow: auto;
   width: 600px;
   *width: 610px;
-}
-
-div.action_box{
-  float: right;
-  width: 274px;
-  margin-left: 10px;
-  margin-top: 0px; 
-}
-
-div.special_box{
-  float: right;
-  margin-top: -10px;
-  background: url(<%= image_path('peritor_theme/box_light.gif')%>) center no-repeat;
-}
-
-div.special_box_top {
-  height: 20px;
-  width: 270px;
-  background: url(<%= image_path('peritor_theme/box_light.gif')%>) top no-repeat;
-}
-
-div.special_box_middle{
-  padding: 10px 10px 0px 30px;
-  width: 230px;
-  min-height: 133px;
-  *height: 133px;
-}
-
-div.special_box_bottom {
-  height: 20px;
-  width: 270px;
-  background: url(<%= image_path('peritor_theme/box_light.gif')%>) bottom no-repeat;
-}
-
-div.status_box{
-  background: url(<%= image_path('peritor_theme/box_status.gif')%>) center no-repeat;
-}
-
-div.stages_box{
-  background: url(<%= image_path('peritor_theme/box_stages.gif')%>) center no-repeat;
-}
-
-div.deployments_box{
-  background: url(<%= image_path('peritor_theme/box_deployments.gif')%>) center no-repeat;
-}
-
-div.host_box{
-  background: url(<%= image_path('peritor_theme/box_host.gif')%>) center no-repeat;
-}
-
-div.recipe_box{
-  background: url(<%= image_path('peritor_theme/box_recipe.gif')%>) center no-repeat;
-}
-
-div.user_box{
-  background: url(<%= image_path('peritor_theme/box_user.gif')%>) center no-repeat;
 }
 
 .role_status_deployed{

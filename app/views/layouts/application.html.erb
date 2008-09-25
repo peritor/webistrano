@@ -12,66 +12,44 @@
 </head>
 
 <body>
-
-
-<div id="container_left">
-  <div id="container_right">
-
-    <div id="header_left">
-	  <div id="header_right">
-	  	<div id="header_top">
-	  		<div id="sub_header">Capistrano deployment the easy way</div>
-	 		<a href="<%= home_path %>"><%= image_tag('peritor_theme/webistrano_logo.gif', :border => '0')%></a>
-		</div>
-      </div>
+  <div id="app_top">
+    <div id="header">
+      <div id="header_claim">Capistrano deployment the easy way</div>
+      <a href="<%= home_path %>"><%= image_tag('peritor_theme/webistrano_logo.gif', :border => '0')%></a>
     </div>
-
     <div id="main_content">
-     <div class="menu">
-	    <%= render(:partial => 'layouts/menu') if logged_in? %>
-	  </div>
+      <div class="menu">
+        <%= render(:partial => 'layouts/menu') if logged_in? %>
+      </div>
       <div class="content">
-      
         <% unless flash[:notice].blank? %>
-			    <%= nice_flash(flash[:notice]) %>
+          <%= nice_flash(flash[:notice]) %>
         <% end %>
 
         <% unless flash[:error].blank? %>
-			    <%= error_flash(flash[:error]) %>
+          <%= error_flash(flash[:error]) %>
         <% end %>
         
         <%= yield :breadcrumb %>
         <%= yield :flash_content %>
         <%= yield :page_title %>
-	      <%= yield :action_box %>
-	      
+        <%= yield :action_box %>
+        
         <%= yield  %>
-      
       </div>
-
-
-    <div class="clear"></div>
-  </div>
-
-  <div id="main_content_bottom_left">
-	  <div id="main_content_bottom_right">
-	  	<div id="main_content_bottom"></div>
+      <div class="clear"></div>
     </div>
   </div>
-</div>
-</div>
+  <div id="app_bottom"></div>
 
   <div id="footer">
-	<div id="footer_logged">
-	  <% if logged_in? %>
-	   Logged in as <%= link_to h(current_user.login), user_path(current_user) %> | <%= link_to 'Logout', logout_path %> 
-	  <% end %>
+    <div id="footer_logged">
+      <% if logged_in? %>
+       Logged in as <%= link_to h(current_user.login), user_path(current_user) %> | <%= link_to 'Logout', logout_path %> 
+      <% end %>
     </div>
     Copyright &copy; 2007, 2008 | Version <%=h WEBISTRANO_VERSION %> | <a href="http://labs.peritor.com/webistrano" target="_blank">http://labs.peritor.com/webistrano</a>
   </div>
-
-
-
 </body>
 
 </html>
