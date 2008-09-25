@@ -280,6 +280,7 @@ a.menu_link_create {
 
 a.arrow_link {
 	background: url(<%= image_path('peritor_theme/arrow_content.gif')%>) left no-repeat;	
+	background-position: 0px 2px;
 	padding-left: 14px;
 }
 
@@ -310,6 +311,7 @@ a.arrow_link_big {
 	border: 1px solid #AAAAAA;
 }
 */
+
 
 .box_body {
   min-height: 123px;
@@ -411,6 +413,13 @@ a.arrow_link_big {
 
 /* TEXT */
 
+.breadcrumb {
+  background: #FFFFFF; 
+  border: 1px solid #CCCCCC; 
+  color: #A40008; 
+  padding:3px 15px;
+}
+
 #header h1 {
 	margin-bottom: 0px;
 	font-size: 28px;
@@ -418,13 +427,18 @@ a.arrow_link_big {
 	color: #A40008
 }
 .content h2 {
-	margin-top: 0px;
+	margin: 15px 0px 15px 15px;
 	font-size: 24px;
 	line-height: 30px;
 	font-weight: bold;
 	text-align: left;
 	color: #A40008
 }
+
+.content .h2_light {
+  color: #666666;
+}
+
 .content h3 {
 	margin-top: 0px;
 	font-size: 18px;
@@ -475,7 +489,7 @@ div.action_box{
   float: right;
   width: 274px;
   margin-left: 10px;
-  margin-top: 37px; 
+  margin-top: 0px; 
 }
 
 div.special_box{
@@ -493,12 +507,12 @@ div.special_box_top {
 div.special_box_middle{
   padding: 0px 10px 0px 30px;
   width: 230px;
-  min-height: 123px;
-  *height: 123px;
+  min-height: 133px;
+  *height: 133px;
 }
 
 div.special_box_bottom {
-  height: 30px;
+  height: 20px;
   width: 270px;
   background: url(<%= image_path('peritor_theme/box_status.gif')%>) bottom no-repeat;
 }

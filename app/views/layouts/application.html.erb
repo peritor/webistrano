@@ -45,6 +45,11 @@
 	      <% unless @page_title.blank? %>
           <h2><%=h @page_title %></h2>
 	      <% end %>
+
+        <div class="breadcrumb">
+          <b><%= yield :breadcrumb %></b>
+        </div>
+
 	      <%= yield :action_box %>
         <%= yield  %>
       

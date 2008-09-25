@@ -1,62 +1,61 @@
-<h2>Deploy <%= current_stage_project_description %></h2>
+<h3 style="float:right"><span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> <span class="h2_light">Stage</span> <%=h @stage.name %></h3>
+<h2 style="">Deploy</h2>
+
 
 <% flashed_errors(:deployment) %>
 
 <% form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
   <p>
     <b>Task</b><br />
-    <%= f.text_field :task, :style => 'width:200px;' %>
+    <%= f.text_field :task, :style => 'width:330px;' %>
   </p>
   
   <p>
     <b>Comment</b><br />
-    <%= f.text_area :description, :style => 'width:410px;height:65px;' %>
+    <%= f.text_area :description, :style => 'width:330px;height:80px;' %>
   </p>
   
   <% unless @stage.prompt_configurations.empty? %>
-    <p>Please enter the following config parameters:</p>
     <% @stage.prompt_configurations.each do |conf| %>
       <p>
-        <b><%=h conf.name %></b><br />
-        <input type="<%=h input_type(conf.name) %>" id="deployment_prompt_config_<%=h conf.name %>" name="deployment[prompt_config][<%=h conf.name %>]" style="width:200px;" value="<%=h @deployment.prompt_config[conf.name.to_sym]%>" />
+        <b>Config: <%=h conf.name %></b><br />
+        <input type="<%=h input_type(conf.name) %>" id="deployment_prompt_config_<%=h conf.name %>" name="deployment[prompt_config][<%=h conf.name %>]" style="width:330px;" value="<%=h @deployment.prompt_config[conf.name.to_sym]%>" />
       </p>
     <% end %>
   <% end %>
   
-  <p>
-    <b>Deployment Options</b><br />
-    <a id="s_e_h" href="#" onclick="show_disable_hosts(); return false" class="arrow_link">Show Manage Deployed Hosts</a>
-    <a id="h_e_h" href="#" onclick="hide_disable_hosts(); return false" class="arrow_link" style="display:none;">Hide Manage Deployed Hosts</a>
-    <div id="excluded_hosts" style="display:none;">
-      <% if @stage.roles.count > 0 %>
-        <table class="sortable" style="width: 410px;">
-          <tr>
-            <th width="1%">Status</th>
-            <th width="99%">Host</th>
+  <b>Deployment Options<b>
+  <div id="s_e_h" style="padding-top: 5px;"><a href="#" onclick="show_disable_hosts(); return false" class="arrow_link">Show Manage Deployed Hosts</a></div>
+  <div id="excluded_hosts" style="display:none;">
+    <% if @stage.roles.count > 0 %>
+      <table class="sortable" style="width: 410px;">
+        <tr>
+          <th width="1%">Status</th>
+          <th width="99%">Host</th>
+        </tr>
+        <% for host in @stage.hosts.sort_by{|x| x.name} %>
+          <tr class="<%= cycle :even, :odd, :name => 'hosts'  %> <%= if_disabled_host?(host,'disabled_host') %>">
+            <td style="padding:3px 0px 0px 0px;" valign="middle" align="center">
+              <%= image_tag('peritor_theme/host_on.png', 
+                            :id => "host_#{host.id}_on", 
+                            :class => 'exlcude_host_trigger_on',
+                            :style => if_disabled_host?(host,'display:none;') + 'cursor:pointer;')%>
+              <%= image_tag('peritor_theme/host_off.png', 
+                            :id => "host_#{host.id}_off", 
+                            :class => 'exlcude_host_trigger_off',
+                            :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
+              <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
+            <td><%= link_to h(host.name), host_path(host) %></td>
           </tr>
-          <% for host in @stage.hosts.sort_by{|x| x.name} %>
-            <tr class="<%= cycle :even, :odd, :name => 'hosts'  %> <%= if_disabled_host?(host,'disabled_host') %>">
-              <td style="padding:3px 0px 0px 0px;" valign="middle" align="center">
-                <%= image_tag('peritor_theme/host_on.png', 
-                              :id => "host_#{host.id}_on", 
-                              :class => 'exlcude_host_trigger_on',
-                              :style => if_disabled_host?(host,'display:none;') + 'cursor:pointer;')%>
-                <%= image_tag('peritor_theme/host_off.png', 
-                              :id => "host_#{host.id}_off", 
-                              :class => 'exlcude_host_trigger_off',
-                              :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
-                <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
-              <td><%= link_to h(host.name), host_path(host) %></td>
-            </tr>
-          <% end %>
-        </table>
-
-      <% else %>
-       No hosts for this stage!<br /><br />
-      <% end %>
-      <br />
-    </div>
-  </p>
+        <% end %>
+      </table>
+     <% else %>
+     No hosts for this stage!<br /><br />
+    <% end %>
+    <br />
+  </div>
+  <div id="h_e_h" style="display:none;"><a href="#" onclick="hide_disable_hosts(); return false" class="arrow_link">Hide Manage Deployed Hosts</a><br></div>
+  <br>
   <p>
     <%= submit_tag "Start Deployment" %>
   </p>
@@ -113,4 +112,26 @@
       })
     });
   </script>
+<% end %>
+
+<% content_for(:action_box) do %>
+  <div class="action_box" style="clear:left">
+	  <div class="box_top_left">
+	    <div class="box_top_right">
+	  	  <div class="box_top">
+		  </div>
+	    </div>
+	  </div>
+	  <div class="box_body">
+		 <h3>Effective configuration:</h3>
+
+		  Hosts<br><br>Recipies<br><br>Config<br><br>Bla
+	  </div>
+	  <div class="box_bottom_left">
+	    <div class="box_bottom_right">
+	      <div class="box_bottom">  
+	  	  </div>
+	    </div>
+	  </div>
+  </div>
 <% end %>

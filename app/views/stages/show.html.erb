@@ -1,4 +1,4 @@
-<h2>Stage: <%=h @stage.name %> (of project <%= link_to current_project.name, project_path(current_project) %>) </h2>
+<h2><span class="h2_light">Stage</span> <%=h @stage.name %></h2>
 
 
 <div class="special_box">
@@ -119,4 +119,8 @@
  </script>
 <% end %>
 
+<% content_for(:breadcrumb) do %>
+  <a class="arrow_link" style="float:right">Manage projects</a>
+  <span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> <span class="h2_light">> Stage</span> <%=h @stage.name %>
+<% end %>
 
