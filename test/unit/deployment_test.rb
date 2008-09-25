@@ -39,20 +39,20 @@ class DeploymentTest < Test::Unit::TestCase
     assert !d.valid?
     assert_not_nil d.errors.on('task')
     assert_not_nil d.errors.on('stage')
-    assert_not_nil d.errors.on('description')
+    assert_nil d.errors.on('description')
     assert_not_nil d.errors.on('user')
     
     # fix it
     d.stage = @stage
     assert !d.valid?
     assert_not_nil d.errors.on('user')
-    assert_not_nil d.errors.on('description')
+    assert_nil d.errors.on('description')
     assert_not_nil d.errors.on('task')
     assert_nil d.errors.on('stage')
     d.task = 'deploy:setup'
     assert !d.valid?
     assert_not_nil d.errors.on('user')
-    assert_not_nil d.errors.on('description')
+    assert_nil d.errors.on('description')
     assert_nil d.errors.on('task')
     assert_nil d.errors.on('stage')
     d.description = 'update to newest'
@@ -223,7 +223,7 @@ class DeploymentTest < Test::Unit::TestCase
     repeater = original.repeat
     
     assert_equal original.task, repeater.task
-    assert_equal "Repetition of deployment #{original.id}:\n\n#{original.description}", repeater.description
+    assert_equal "Repetition of deployment #{original.id}: #{original.description}", repeater.description
   end
   
   def test_excluded_hosts_accessor

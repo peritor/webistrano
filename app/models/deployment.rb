@@ -3,7 +3,7 @@ class Deployment < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :roles
   
-  validates_presence_of :task, :stage, :description, :user
+  validates_presence_of :task, :stage, :user
   validates_length_of :task, :maximum => 250
   validates_inclusion_of :success, :in => 0..1
   
@@ -108,7 +108,7 @@ class Deployment < ActiveRecord::Base
     returning Deployment.new do |d|
       d.stage = self.stage
       d.task = self.task
-      d.description = "Repetition of deployment #{self.id}:\n\n" 
+      d.description = "Repetition of deployment #{self.id}: " 
       d.description += self.description
     end
   end
