@@ -5,7 +5,6 @@ class Deployment < ActiveRecord::Base
   
   validates_presence_of :task, :stage, :user
   validates_length_of :task, :maximum => 250
-  validates_inclusion_of :success, :in => 0..1
   
   serialize :excluded_host_ids
   
@@ -16,9 +15,15 @@ class Deployment < ActiveRecord::Base
   
   after_create :add_stage_roles
   
-  DEPLOY_TASKS = ['deploy', 'deploy:default', 'deploy:migrations']
-  SETUP_TASKS = ['deploy:setup']
+  DEPLOY_TASKS    = ['deploy', 'deploy:default', 'deploy:migrations']
+  SETUP_TASKS     = ['deploy:setup']
+  STATUS_CANCELED = "canceled"
+  STATUS_FAILED   = "failed"
+  STATUS_SUCCESS  = "success"
+  STATUS_RUNNING  = "running"
+  STATUS_VALUES   = [STATUS_SUCCESS, STATUS_FAILED, STATUS_CANCELED, STATUS_RUNNING]
   
+  validates_inclusion_of :status, :in => STATUS_VALUES
     
   # check (on on creation ) that the stage is ready
   # his has to done only on creation as later DB logging MUST always work
@@ -49,12 +54,20 @@ class Deployment < ActiveRecord::Base
     !self.completed_at.blank?
   end
   
-  def status
-    if !self.completed?
-      'running'
-    else
-      self.success? ? 'success' : 'failed'
-    end
+  def success?
+    self.status == STATUS_SUCCESS
+  end
+  
+  def failed?
+    self.status == STATUS_FAILED
+  end
+  
+  def canceled?
+    self.status == STATUS_CANCELED
+  end
+  
+  def running?
+    self.status == STATUS_RUNNING
   end
   
   def status_in_html
@@ -69,12 +82,14 @@ class Deployment < ActiveRecord::Base
       'status_failed_small.png'
     when 'success'
       'status_success_small.png'
+    when 'canceled'
+      'status_canceled_small.png'
     end
   end
   
   def complete_with_error!
     raise 'cannot complete a second time' if self.completed?
-    self.success = 0
+    self.status = STATUS_FAILED
     self.completed_at = Time.now
     self.save!
     
@@ -85,7 +100,18 @@ class Deployment < ActiveRecord::Base
   
   def complete_successfully!
     raise 'cannot complete a second time' if self.completed?
-    self.success = 1
+    self.status = STATUS_SUCCESS
+    self.completed_at = Time.now
+    self.save!
+    
+    self.stage.emails.each do |email|
+      Notification.deliver_deployment(self, email)
+    end
+  end
+  
+  def complete_canceled!
+    raise 'cannot complete a second time' if self.completed?
+    self.status = STATUS_CANCELED
     self.completed_at = Time.now
     self.save!
     
@@ -145,6 +171,20 @@ class Deployment < ActiveRecord::Base
   def excluded_host_ids=(val)
     val = [val] unless val.is_a?(Array)
     self.write_attribute('excluded_host_ids', val.map(&:to_i))
+  end
+  
+  def cancelling_possible?
+    !self.pid.blank? && !completed?
+  end
+  
+  def cancel!
+    raise "Canceling not possible: Either no PID or already completed" unless cancelling_possible?
+    
+    Process.kill("SIGINT", self.pid)
+    sleep 2
+    Process.kill("SIGKILL", self.pid) rescue nil # handle the case that we killed the process the first time
+    
+    complete_canceled!
   end
   
   protected

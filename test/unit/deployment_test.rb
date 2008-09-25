@@ -69,13 +69,13 @@ class DeploymentTest < Test::Unit::TestCase
     assert_nil d.errors.on('task')
     assert_nil d.errors.on('stage')
     
-    # try success values
-    d.success = 3
+    # try status values
+    d.status = 'bla'
     assert !d.valid?
-    assert_not_nil d.errors.on('success')
-    d.success = 1
+    assert_not_nil d.errors.on('status')
+    d.status = 'failed'
     assert d.valid?
-    assert_nil d.errors.on('success')
+    assert_nil d.errors.on('status')
   end
   
   def test_completed_and_status_on_error
@@ -274,5 +274,54 @@ class DeploymentTest < Test::Unit::TestCase
     assert d.errors.on('base')
   end
   
+  def test_cancelling_possible
+    deployment = create_new_deployment(:pid => nil, :stage => create_stage_with_role, :completed_at => nil)
+    assert !deployment.cancelling_possible?
+    
+    deployment.pid = 123
+    assert deployment.cancelling_possible?
+    
+    deployment.complete_with_error!
+    assert !deployment.cancelling_possible?
+  end
+  
+  def test_cancel
+    deployment = create_new_deployment(:pid => 5542, :stage => create_stage_with_role, :completed_at => nil)
+    assert deployment.cancelling_possible?, deployment.inspect
+    
+    Process.expects(:kill).with("SIGINT", 5542)
+    Process.expects(:kill).with("SIGKILL", 5542)
+    #Kernel.expects(:sleep).with(2).returns(true)
+    
+    deployment.cancel!
+    
+    assert deployment.completed?
+    assert_equal "canceled", deployment.status
+  end
+  
+  def test_cancel_handles_pid_gone
+    deployment = create_new_deployment(:pid => 5542, :stage => create_stage_with_role, :completed_at => nil)
+    assert deployment.cancelling_possible?, deployment.inspect
+    
+    Process.expects(:kill).with("SIGINT", 5542)
+    Process.expects(:kill).with("SIGKILL", 5542).raises("No such PID")
+
+    assert_nothing_raised do    
+      deployment.cancel!
+    end
+    
+    assert deployment.completed?
+    assert_equal "canceled", deployment.status
+  end
+  
+  
+  protected
+  
+  def create_stage_with_role
+    stage = create_new_stage
+    host = create_new_host
+    role_app = create_new_role(:name => 'app', :stage => stage, :host => host)
+    stage
+  end
   
 end

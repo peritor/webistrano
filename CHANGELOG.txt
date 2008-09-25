@@ -1,6 +1,8 @@
 
 SVN
 
+* Ability to cancel running deployments. Refactor deployment status.
+
 * Show recent deployments on the project page
 
 * A deployment is no longer required, it is optional from now on

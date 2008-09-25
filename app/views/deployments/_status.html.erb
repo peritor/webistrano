@@ -3,6 +3,9 @@
   <div class="special_box_middle">
   	<div style="padding:0px 0px 0px 30px;">
       <%= image_tag('peritor_theme/status_' + @deployment.status + '.gif', :title => @deployment.status) %>
+      <% if @deployment.cancelling_possible? %>
+        <%= link_to "Cancel", cancel_project_stage_deployment_path(current_project, current_stage, @deployment), :confirm => "Are you sure? Killing this deployment will not cleanup and rollback.", :method => "post" %>
+      <% end %>
     </div>
   </div>
   <div class="special_box_bottom"></div>

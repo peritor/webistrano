@@ -776,6 +776,22 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal "4943", deployer.deployment.reload.revision
   end
   
+  def test_deployer_sets_pid
+    config = prepare_config_mocks   
+    
+    deployer = Webistrano::Deployer.new(@deployment)
+    
+    deployer.stubs(:exchange_real_revision)
+    config.stubs(:save_revision)
+    
+    # mock the main exec
+    deployer.expects(:execute_requested_actions).returns(nil)
+     
+    deployer.invoke_task!
+    
+    assert_equal $$, deployer.deployment.reload.pid
+  end
+  
   
   protected
   

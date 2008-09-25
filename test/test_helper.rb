@@ -171,11 +171,13 @@ class Test::Unit::TestCase
       :stage => create_new_stage,
       :task => random_string,
       :completed_at => nil,
-      :success => 0,
+      :status => 'running',
       :prompt_config => {},
       :roles => [],
       :description => random_string,
       :user => create_new_user,
+      :revision => "392",
+      :pid => nil,
       :excluded_host_ids => []
     }.update(options)
     
@@ -183,11 +185,13 @@ class Test::Unit::TestCase
     d.task = options[:task]
     d.stage = options[:stage]
     d.completed_at = options[:completed_at]
-    d.success = options[:success]
+    d.status = options[:status]
     d.prompt_config = options[:prompt_config]
     d.description = options[:description]
     d.excluded_host_ids = options[:excluded_host_ids]
     d.user = options[:user]
+    d.pid = options[:pid]
+    d.revision = options[:revision]
 
     d.roles << options[:roles] unless options[:roles].empty?
     d.save!

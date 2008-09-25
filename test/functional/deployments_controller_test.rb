@@ -125,4 +125,32 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     get :latest, :project_id => @project.id, :stage_id => @stage.id, :format => "xml"
     assert_response 404
   end
+  
+  def test_cancel_doenst_respond_to_get
+    @deployment.pid = 123
+    @deployment.save!
+    assert @deployment.running?
+    assert @deployment.cancelling_possible?, @deployment.inspect
+    get :cancel, :project_id => @project.id, :stage_id => @stage.id, :deployment_id => @deployment.id
+    assert_response :redirect
+    assert_redirected_to "/"
+    @deployment.reload
+    assert @deployment.running?
+  end
+  
+  def test_cancel
+    @deployment.pid = 123
+    @deployment.save!
+    assert @deployment.running?
+    assert @deployment.cancelling_possible?, @deployment.inspect
+    
+    Process.expects(:kill).returns(true).times(2)
+    
+    post :cancel, :project_id => @project.id, :stage_id => @stage.id, :deployment_id => @deployment.id
+    assert_response :redirect
+    assert_redirected_to project_stage_deployment_path(@project, @stage, @deployment)
+    @deployment.reload
+    assert @deployment.canceled?, flash[:error]
+  end
+  
 end

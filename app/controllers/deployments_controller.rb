@@ -74,6 +74,29 @@ class DeploymentsController < ApplicationController
     end
   end
   
+  # POST /projects/1/stages/1/deployments/1/cancel
+  def cancel
+    redirect_to "/" and return unless request.post?
+    @deployment = @stage.deployments.find(:first, :order => "created_at desc")
+
+    respond_to do |format|
+      begin
+        @deployment.cancel!
+        
+        flash[:notice] = "Cancelled deployment by killing it"
+        format.html { redirect_to project_stage_deployment_url(@project, @stage, @deployment)}
+        format.xml  { head :ok }
+      rescue => e
+        flash[:error] = "Cancelling failed: #{e.message}"
+        format.html { redirect_to project_stage_deployment_url(@project, @stage, @deployment)}
+        format.xml  do
+          @deployment.errors.add("base", e.message)
+          render :xml => @deployment.errors.to_xml 
+        end
+      end
+    end
+  end
+  
   protected
   def ensure_deployment_possible
     if current_stage.deployment_possible?

@@ -66,6 +66,7 @@ module Webistrano
         
         exchange_real_revision(config) unless (config.fetch(:scm).to_s == 'git') # git cannot do a local query by default
         save_revision(config)
+        save_pid
         
         config.trigger(:load)
         execute_requested_actions(config)
@@ -90,6 +91,13 @@ module Webistrano
       end
     rescue => e
       logger.important "Could not save revision: #{e.message}"
+    end
+    
+    # saves the process ID of this running deployment in order
+    # to be able to kill it
+    def save_pid
+      @deployment.pid = Process.pid
+      @deployment.save!
     end
     
     # override in order to use DB logger

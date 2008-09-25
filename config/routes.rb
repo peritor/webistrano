@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
     projects.resources :stages, :member => {:capfile => :get, :recipes => :any, :tasks => :get} do |stages|
       stages.resources :stage_configurations
       stages.resources :roles
-      stages.resources :deployments, :collection => {:latest => :get}
+      stages.resources :deployments, :collection => {:latest => :get}, :member => {:cancel => :post}
     end
   end
   
