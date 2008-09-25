@@ -18,7 +18,8 @@ class DeploymentsController < ApplicationController
   # GET /projects/1/stages/1/deployments/1.xml
   def show
     @deployment = @stage.deployments.find(params[:id])
-
+    set_auto_scroll
+    
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @deployment.to_xml }
@@ -108,6 +109,14 @@ class DeploymentsController < ApplicationController
         format.xml  { render :xml => current_stage.deployment_problems.to_xml }
         false
       end
+    end
+  end
+  
+  def set_auto_scroll
+    if params[:auto_scroll].to_s == "false"
+      @auto_scroll = false
+    else
+      @auto_scroll = true
     end
   end
   

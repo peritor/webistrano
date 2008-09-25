@@ -70,7 +70,7 @@
 
 <fieldset class="fieldset">
   <legend>Log</legend>
-<div style="float:right; padding: 0px 5px 10px 0px; *padding: 0px"><input type="checkbox" class="noframe"><a href="javascript:alert('WWW')">auto scroll</a></div>
+<div style="float:right; padding: 0px 5px 10px 0px; *padding: 0px"><input type="checkbox" class="noframe" id="auto_scroll_log" <%=h @auto_scroll ? 'checked="checked"' : ''%> >auto scroll</div>
 	<div class="log_output">
   		<pre><%=h @deployment.log.gsub('\n', "\n") rescue '' %></pre>
 	</div>
@@ -84,12 +84,13 @@
         method: 'get',
         evalScripts: true,
         parameters: {
-          random_differentiator: Math.floor(Math.random()*50000) // work around IE caching bug
+          random_differentiator: Math.floor(Math.random()*50000), // work around IE caching bug
+          auto_scroll: $('auto_scroll_log').checked
         }
       });
     }
     
     setTimeout(update_status, 3000);
-    
+    check_auto_scroll_log();
   </script>
 <% end %>

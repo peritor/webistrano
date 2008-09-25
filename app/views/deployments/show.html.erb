@@ -3,7 +3,7 @@
 </div>
 <br />
 
-<%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link'  %>
+<%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link', :id => 'back_link_at_the_bottom' %>
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
@@ -16,4 +16,21 @@
 <% content_for(:page_title) do %>
   <% @page_title = "Deployment of stage #{h(current_stage.name)} of project #{h(current_project.name)}" %>
   <h2>Deployment: <%=h @deployment.task %></h2>
+<% end %>
+
+<% content_for(:page_scripts) do %>
+
+  <script type="text/javascript">
+    
+    function check_auto_scroll_log(){
+      var scroller = $("auto_scroll_log");
+      var bottom_marker = $('back_link_at_the_bottom');
+      
+      if(scroller && scroller.checked && bottom_marker){
+        bottom_marker.scrollTo();
+      }
+    }
+    
+  </script>
+
 <% end %>
