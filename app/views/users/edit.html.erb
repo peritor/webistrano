@@ -11,12 +11,14 @@
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
-    <%= link_to "Manage users", users_path, :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">User</span> <%= link_to @user.login, user_path(@user) %> 
+    <%= link_to "Back to user", user_path(@user), :style => "float:right", :class => "arrow_link" %>
+    <%= link_to "Users", users_path %> &gt; 
+    User <%= link_to @user.login, user_path(@user) %> &gt; 
+    Edit user <%= link_to @user.login, user_path(@user) %> 
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Edit user #{h(@user.login)}" %>
-  <h2><span class="h2_light">Edit</span> <%= user_info(@user)%></h2>
+  <h2>Edit user <%= user_info(@user)%></h2>
 <% end %>

@@ -4,16 +4,9 @@
   <div class="special_box_bottom"></div>
 </div>
 
-
-<div style="float: left; width:380px;">
-  <div class="box_top_left">
-    <div class="box_top_right">
-  	  <div class="box_top">
-	    </div>
-    </div>
-  </div>
-  <div class="box_body" style="min-height: 123px;">
-    <div>
+<div class="box">
+  <div class="box_top"></div>
+  <div class="box_middle">
 		<p>
 		  <b>Description:</b>
 		  <%=web_friendly_text @recipe.description %>
@@ -33,14 +26,8 @@
 	  	<%= link_to 'Edit Recipe', edit_recipe_path(@recipe), :class => 'arrow_link' %> |
 	  	<%= link_to 'Delete', recipe_path(@recipe), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
 	  <% end %>
-	</div>	
   </div>
-  <div class="box_bottom_left">
-    <div class="box_bottom_right">
-      <div class="box_bottom">  
-  	  </div>
-    </div>
-  </div>
+  <div class="box_bottom"></div>
 </div>
 
 <div class="clear"></div>
@@ -62,11 +49,12 @@
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%= link_to "Manage recipes", recipes_path, :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">Recipe</span> <%= link_to @recipe.name, recipe_path(@recipe) %> 
+    <%= link_to "Recipes", recipes_path %> &gt; 
+    Recipe <%= link_to @recipe.name, recipe_path(@recipe) %> 
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Recipe #{h(@recipe.name)}" %>
-  <h2><span class="h2_light">Recipe</span> <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
+  <h2>Recipe <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
 <% end %>

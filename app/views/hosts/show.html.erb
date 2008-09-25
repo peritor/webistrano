@@ -4,15 +4,9 @@
   <div class="special_box_bottom"></div>
 </div>
 
-<div style="float: left; width:380px;">
-  <div class="box_top_left">
-    <div class="box_top_right">
-  	  <div class="box_top">
-	  </div>
-    </div>
-  </div>
-  <div class="box_body">
-    <div>
+<div class="box">
+  <div class="box_top"></div>
+  <div class="box_middle">
 		<p>
 		  <b>Name:</b>
 		  <%=h @host.name %>
@@ -30,14 +24,8 @@
 	  	<%= link_to 'Edit Host', edit_host_path(@host), :class => 'arrow_link' %> | 
 		  <%= link_to 'Delete', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %>
 		<% end %>
-	</div>	
   </div>
-  <div class="box_bottom_left">
-    <div class="box_bottom_right">
-      <div class="box_bottom">  
-  	  </div>
-    </div>
-  </div>
+  <div class="box_bottom"></div>
 </div>
 
 <div class="clear"></div>
@@ -51,11 +39,12 @@
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%= link_to "Manage hosts", hosts_path, :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">Host</span> <%= link_to @host.name, host_path(@host) %> 
+    <%= link_to "Hosts", hosts_path %> &gt; 
+    Host <%= link_to @host.name, host_path(@host) %> 
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
-  <% @page_title = "Host: #{h(@host.name)}" %>
-  <h2><span class="h2_light">Host</span> <%=h @host.name %></h2>
+  <% @page_title = "Host #{h(@host.name)}" %>
+  <h2>Host <%=h @host.name %></h2>
 <% end %>

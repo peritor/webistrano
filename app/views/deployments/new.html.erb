@@ -135,12 +135,14 @@
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%= link_to "Back to stage", project_stage_path(current_project, current_stage), :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> 
-    <span class="h2_light"> Stage</span> <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %>
+    <%= link_to "Projects", projects_path %> &gt; 
+    Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
+    Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %> &gt; 
+    Deployment
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Deploy stage #{h(current_stage.name)} of project #{h(current_project.name)}" %>
-  <h2>Deploy</h2>
+  <h2>Deployment</h2>
 <% end %>

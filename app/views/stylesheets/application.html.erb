@@ -20,11 +20,16 @@ form p {
 	padding: 0px 0px 15px 0px;
 }
 
+label {
+  cursor: pointer;
+}
+
 a {
 	color: #A40008;
 	font-weight: bold;
 	text-decoration: none
 }
+
 a:hover {
 	color: #A40008;
 	font-weight: bold;
@@ -290,58 +295,64 @@ a.arrow_link_big {
 	font-size: 17px;
 }
 
-/* BOX */ 
-
+/* BOX grey*/ 
+/*
 .box_top, .box_bottom {
 	height: 20px;
 	background-color: #EEEEEE;
 }
-
-/*.box_box {
-	float:right;
-	margin-left: 20px;
-}
-
-.recipes_box {
-	width: 300px;
-	height: 83px;
-	margin-top: 5px;
-	padding: 5px;
-	overflow: auto;
-	border: 1px solid #AAAAAA;
-}
 */
 
-
-.box_body {
-  min-height: 123px;
-	*height: 123px;
-	padding: 0px 20px 0px 20px;
-	background-color: #EEEEEE;
+div.box {
+  margin-top: 18px;
 }
 
-.box_top_left {
-	height: 20px;
-	padding-left:10px;
-	background: url(<%= image_path('peritor_theme/box_left_top.gif')%>) left no-repeat;
+div.box_top {
+  height: 20px;
+  width: 387px;
+  background: url(<%= image_path('peritor_theme/box_grey.gif')%>) top no-repeat;
 }
 
-.box_top_right {
-	height: 20px;
-	padding-right:10px;
-	background: url(<%= image_path('peritor_theme/box_right_top.gif')%>)  right no-repeat;
+div.box_middle {
+  padding: 0px 10px 0px 25px;
+  width: 352px;
+  min-height: 113px;
+  *height: 113px;
+  background: url(<%= image_path('peritor_theme/box_grey.gif')%>) center no-repeat;
 }
 
-.box_bottom_left {
-	height: 20px;
-	padding-left:10px;
-	background: url(<%= image_path('peritor_theme/box_left_bottom.gif')%>) left no-repeat;
+div.box_bottom {
+  height: 20px;
+  width: 387px;
+  background: url(<%= image_path('peritor_theme/box_grey.gif')%>) bottom no-repeat;
 }
 
-.box_bottom_right {
-	height: 20px;
-	padding-right:10px;
-	background: url(<%= image_path('peritor_theme/box_right_bottom.gif')%>)  right no-repeat;
+
+/* BOX small grey*/ 
+
+div.small_box {
+  margin-top: 18px;
+  float: right;
+}
+
+div.small_box_top {
+  height: 20px;
+  width: 287px;
+  background: url(<%= image_path('peritor_theme/box_small.gif')%>) top no-repeat;
+}
+
+div.small_box_middle {
+  padding: 0px 10px 0px 25px;
+  width: 252px;
+  min-height: 113px;
+  *height: 113px;
+  background: url(<%= image_path('peritor_theme/box_small.gif')%>) center no-repeat;
+}
+
+div.small_box_bottom {
+  height: 20px;
+  width: 287px;
+  background: url(<%= image_path('peritor_theme/box_small.gif')%>) bottom no-repeat;
 }
 
 /* FLASHBOX */
@@ -416,7 +427,7 @@ a.arrow_link_big {
 .breadcrumb {
   background: #FFFFFF; 
   border: 1px solid #CCCCCC; 
-  color: #A40008; 
+  color: #666666; 
   padding:3px 15px;
 }
 
@@ -426,17 +437,14 @@ a.arrow_link_big {
 	font-weight: bold;
 	color: #A40008
 }
+
 .content h2 {
-	margin: 15px 0px 15px 15px;
+	margin: 15px 0px 15px 0px;
 	font-size: 24px;
 	line-height: 30px;
 	font-weight: bold;
 	text-align: left;
-	color: #A40008
-}
-
-.content .h2_light {
-  color: #666666;
+	color: #666666;
 }
 
 .content h3 {

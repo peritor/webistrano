@@ -18,15 +18,9 @@
   <div class="special_box_bottom"></div>
 </div>
 
-<div style="float: left; width:380px;">
-  <div class="box_top_left">
-    <div class="box_top_right">
-  	  <div class="box_top">
-	  </div>
-    </div>
-  </div>
-  <div class="box_body">
-    <div>
+<div class="box">
+  <div class="box_top"></div>
+  <div class="box_middle">
 	  <p>
 	    <b>Name:</b>
 		   <%=h @stage.name %>
@@ -48,14 +42,9 @@
 		<%= link_to 'Delete', project_stage_path(current_project, @stage), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %> | 
 		<%= link_to 'Export Capfile', {:action => 'capfile', :project_id => current_project, :id => @stage}, {:onclick => "loadWindow('#{url_for(:action => 'capfile', :project_id => current_project, :id => @stage)}'); return false", :class => 'arrow_link'} %>
 	</div>	
-  </div>
-  <div class="box_bottom_left">
-    <div class="box_bottom_right">
-      <div class="box_bottom">  
-  	  </div>
-    </div>
-  </div>
+  <div class="box_bottom"></div>
 </div>
+
 
 <div class="clear"></div>
 <br>
@@ -119,13 +108,14 @@
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%= link_to "Manage projects", projects_path, :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> 
-    <span class="h2_light"> Stage</span> <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %>
+    <%= link_to "Projects", projects_path %> &gt; 
+    Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
+    Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %>
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Project #{h(current_project.name)} - Stage #{h(@stage.name)}"%>
-  <h2><span class="h2_light">Stage</span> <%=h @stage.name %></h2>
+  <h2>Stage <%=h @stage.name %></h2>
 <% end %>
 

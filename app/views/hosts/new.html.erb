@@ -11,12 +11,13 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', hosts_path, :class => 'arrow_link'  %>
+<%= link_to 'Back to hosts', hosts_path, :class => 'arrow_link' %>
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%= link_to "Manage hosts", hosts_path, :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">&nbsp;</span>
+    <%= link_to "Hosts", hosts_path %> &gt; 
+    New host
   <% end %>
 <% end %>
 

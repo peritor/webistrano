@@ -7,7 +7,15 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Back to projects', projects_path, :class => 'arrow_link' %>
+
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Manage Projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <%= link_to "Projects", projects_path %> &gt; 
+    New project
+  <% end %>
+<% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "New project" %>

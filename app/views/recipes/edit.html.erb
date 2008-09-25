@@ -12,11 +12,13 @@
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%= link_to "Back to recipe", recipe_path(@recipe), :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">Recipe</span> <%= link_to @recipe.name, recipe_path(@recipe) %> 
+    <%= link_to "Recipes", recipes_path %> &gt; 
+    Recipe <%= link_to @recipe.name, recipe_path(@recipe) %>  &gt; 
+    Edit recipe <%= link_to @recipe.name, recipe_path(@recipe) %>
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Edit recipe #{h(@recipe.name)}" %>
-  <h2>Edit <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
+  <h2>Edit recipe <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
 <% end %>

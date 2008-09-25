@@ -5,22 +5,14 @@
 </div>
 
 
-<div style="float: left; width:380px;">
-  <div class="box_top_left">
-    <div class="box_top_right">
-  	  <div class="box_top">
-	  </div>
-    </div>
-  </div>
-  <div class="box_body">
-    <div class="box_box">
+<div class="box">
+  <div class="box_top"></div>
+  <div class="box_middle">
 		<% if @user.admin? %>
 		  <p>
 		    <b>Admin User</b>
 		  </p>
 		<% end %>
-	</div>
-    <div>
 		<p>
 			  <b>Login:</b>
 			  <%=h @user.login %>
@@ -42,15 +34,8 @@
 			 <%= link_to 'Edit & change password', edit_user_path(@user), :class => 'arrow_link' %> | 
 			 <%= link_to 'Delete', user_path(@user), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %>
 			<% end %>
-			
-	</div>	
   </div>
-  <div class="box_bottom_left">
-    <div class="box_bottom_right">
-      <div class="box_bottom">  
-  	  </div>
-    </div>
-  </div>
+  <div class="box_bottom"></div>
 </div>
 
 <div class="clear"></div>
@@ -64,11 +49,12 @@
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%= link_to "Manage users", users_path, :style => "float:right", :class => "arrow_link" %>
-    <span class="h2_light">User</span> <%= link_to @user.login, user_path(@user) %> 
+    <%= link_to "Users", users_path %> &gt; 
+    User <%= link_to @user.login, user_path(@user) %> 
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "User #{h(@user.login)}" %>
-  <h2><span class="h2_light">User</span> <%= user_info(@user)%></h2>
+  <h2>User <%= user_info(@user)%></h2>
 <% end %>

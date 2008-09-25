@@ -12,14 +12,9 @@
 </div>
 
 
-<div style="float: left; width:380px">
-  <div class="box_top_left">
-    <div class="box_top_right">
-  	  <div class="box_top">
-	  </div>
-    </div>
-  </div>
-  <div class="box_body">
+<div class="box">
+  <div class="box_top"></div>
+  <div class="box_middle">
 	<p>
     <b>Task:</b>
 	  <%=h @deployment.task %>
@@ -50,12 +45,7 @@
   	</p>
 	<% end %>
   </div>
-  <div class="box_bottom_left">
-    <div class="box_bottom_right">
-      <div class="box_bottom">  
-  	  </div>
-    </div>
-  </div>
+  <div class="box_bottom"></div>
 </div>
 
 <div class="clear"></div>
@@ -70,10 +60,10 @@
 
 <fieldset class="fieldset">
   <legend>Log</legend>
-<div style="float:right; padding: 0px 5px 10px 0px; *padding: 0px"><input type="checkbox" class="noframe" id="auto_scroll_log" <%=h @auto_scroll ? 'checked="checked"' : ''%> >auto scroll</div>
+  <div style="float:right; padding: 0px 5px 10px 0px; *padding: 0px"><input type="checkbox" class="noframe" id="auto_scroll_log" <%=h @auto_scroll ? 'checked="checked"' : ''%> ><label for="auto_scroll_log">auto scroll</label></div>
 	<div class="log_output">
-  		<pre><%=h @deployment.log.gsub('\n', "\n") rescue '' %></pre>
-	</div>
+		<pre><%=h @deployment.log.gsub('\n', "\n") rescue '' %></pre>
+  </div>
 </fieldset>
 
 <% unless @deployment.completed? %>
