@@ -40,9 +40,8 @@
 			    <%= error_flash(flash[:error]) %>
         <% end %>
         
-        <%= yield :flash_content %>
-      
         <%= yield :breadcrumb %>
+        <%= yield :flash_content %>
         <%= yield :page_title %>
 	      <%= yield :action_box %>
 	      

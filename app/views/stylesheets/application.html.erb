@@ -1,7 +1,9 @@
 /* GENERAL */
 
 body {
-	background-color: #CACACA;
+	background-color: #F0F0F0;
+	background: url(<%= image_path('peritor_theme/background.gif')%>) repeat;
+  background-attachment: fixed;
 	font-family: "Trebuchet MS", Verdana, serif;
 	line-height: 16px;
 }
@@ -364,63 +366,44 @@ div.small_box_bottom {
 
 .flash_text_info {
 	color: #00AA00;
-	padding: 5px 5px 5px 30px;
+	padding: 5px 5px 5px 50px;
 	background: url(<%= image_path('peritor_theme/info.gif')%>) left center no-repeat;
 }
 
 .flash_text_error {
 	color: #A40008;
-	padding: 5px 5px 5px 30px;
+	padding: 5px 5px 5px 50px;
 	background: url(<%= image_path('peritor_theme/warning.gif')%>) left center no-repeat;
 }
 
-.flashbox_top {
-	height: 20px;
-	background: url(<%= image_path('peritor_theme/flashbox_top.gif')%>) repeat-x;
+div.flash_box{
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-bottom: 15px;
+  width: 690px;
+  background: url(<%= image_path('peritor_theme/flashbox.gif')%>) center no-repeat;
+  background-position: 0px 0px;
 }
 
-.flashbox_bottom {
-	height: 20px;
-	background: url(<%= image_path('peritor_theme/flashbox_bottom.gif')%>) repeat-x;
+div.flash_box_top {
+  height: 20px;
+  width: 690px;
+  background: url(<%= image_path('peritor_theme/flashbox.gif')%>) top no-repeat;
 }
 
-.flashbox_body_left {
-	height: auto;
-	padding: 0px 0px 0px 20px;
-	background-color: #EEEEEE;
-	background: url(<%= image_path('peritor_theme/flashbox_left.gif')%>) left repeat-y;
+div.flash_box_middle{
+  padding: 10px 10px 0px 30px;
+  width: 690px;
+  min-height: 13px;
+  *height: 13px;
 }
 
-.flashbox_body_right {
-	height: auto;
-	padding: 0px 20px 0px 0px;
-	background-color: #EEEEEE;
-	background: url(<%= image_path('peritor_theme/flashbox_right.gif')%>) right repeat-y;
+div.flash_box_bottom {
+  height: 20px;
+  width: 690px;
+  background: url(<%= image_path('peritor_theme/flashbox.gif')%>) bottom no-repeat;
 }
 
-.flashbox_top_left {
-	height: 20px;
-	padding-left:20px;
-	background: url(<%= image_path('peritor_theme/flashbox_left_top.gif')%>) left no-repeat;
-}
-
-.flashbox_top_right {
-	height: 20px;
-	padding-right:20px;
-	background: url(<%= image_path('peritor_theme/flashbox_right_top.gif')%>) right no-repeat;
-}
-
-.flashbox_bottom_left {
-	height: 20px;
-	padding-left:20px;
-	background: url(<%= image_path('peritor_theme/flashbox_left_bottom.gif')%>) left no-repeat;
-}
-
-.flashbox_bottom_right {
-	height: 20px;
-	padding-right:20px;
-	background: url(<%= image_path('peritor_theme/flashbox_right_bottom.gif')%>) right no-repeat;
-}
 
 /* TEXT */
 
