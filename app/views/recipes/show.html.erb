@@ -1,5 +1,3 @@
-<h2>Recipe: <%=h @recipe.name %></h2>
-
 <div class="special_box">
   <div class="special_box_top"></div>
   <div class="special_box_middle recipe_box"></div>
@@ -60,3 +58,15 @@
   <legend>Body</legend>
   <%= render :partial => 'preview', :locals => {:recipe => @recipe} %>
 </fieldset>
+
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Manage recipes", recipes_path, :style => "float:right", :class => "arrow_link" %>
+    <span class="h2_light">Recipe</span> <%= link_to @recipe.name, recipe_path(@recipe) %> 
+  <% end %>
+<% end %>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Recipe #{h(@recipe.name)}" %>
+  <h2>Recipe <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
+<% end %>

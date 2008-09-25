@@ -1,5 +1,3 @@
-<h2>Users</h2>
-
 <fieldset class="fieldset">
   <legend> <%=h pluralize(User.count, 'User')%> listed</legend>
 
@@ -38,3 +36,8 @@
 <% end %>
 
 </fieldset>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Users" %>
+  <h2>Users</h2>
+<% end %>

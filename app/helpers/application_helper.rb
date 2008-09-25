@@ -120,4 +120,12 @@ module ApplicationHelper
     end
   end
   
+  def breadcrumb_box(&block)
+    out = "<div class='breadcrumb'><b>"
+    out << capture(&block) if block
+    out << "</b></div>"
+    
+    block ? concat(out, block.binding) : out
+  end
+  
 end

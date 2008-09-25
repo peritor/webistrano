@@ -1,5 +1,3 @@
-<h2>Stage: <%=h @stage.name %> (of project <%= link_to current_project.name, project_path(current_project) %>) </h2>
-
 <fieldset class="fieldset">
   <legend>All Tasks</legend>
     <table>
@@ -15,4 +13,17 @@
 </fieldset>
 
 <br />
-<%= link_to 'Back', project_stage_path(@project, @stage), :class => 'arrow_link'  %>
+<%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link'  %>
+
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Manage projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> 
+    <span class="h2_light"> Stage</span> <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %>
+  <% end %>
+<% end %>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Task list for stage: #{h @stage.name}"%>
+  <h2>Task list</h2>
+<% end %>

@@ -1,7 +1,3 @@
-<h3 style="float:right"><span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> <span class="h2_light">Stage</span> <%=h @stage.name %></h3>
-<h2 style="">Deploy</h2>
-
-
 <% flashed_errors(:deployment) %>
 
 <% form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
@@ -134,4 +130,17 @@
 	    </div>
 	  </div>
   </div>
+<% end %>
+
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Back to stage", project_stage_path(current_project, current_stage), :style => "float:right", :class => "arrow_link" %>
+    <span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> 
+    <span class="h2_light"> Stage</span> <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %>
+  <% end %>
+<% end %>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Deploy stage #{h(current_stage.name)} of project #{h(current_project.name)}" %>
+  <h2>Deploy</h2>
 <% end %>

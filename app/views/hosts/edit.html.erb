@@ -1,5 +1,3 @@
-<h2>Editing host: <%=h @host.name %></h2>
-
 <% flashed_errors(:host) %>
 
 <% form_for(:host, :url => host_path(@host), :html => { :method => :put }) do |f| %>
@@ -15,3 +13,15 @@
 
 <%= link_to 'Show', host_path(@host), :class => 'arrow_link'  %> |
 <%= link_to 'Back', hosts_path, :class => 'arrow_link'  %>
+
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Manage hosts", hosts_path, :style => "float:right", :class => "arrow_link" %>
+    <span class="h2_light">Host</span> <%= link_to @host.name, host_path(@host) %> 
+  <% end %>
+<% end %>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Editing host: #{h(@host.name)}" %>
+  <h2>Editing host: <%=h @host.name %></h2>
+<% end %>

@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <meta name="description" content="Peritor Webistrano - Capristrano Deployment the easy way" />
   <meta name="keywords" content="rubyonrails ruby rails capistrano deployment" />
-  <title>Peritor Webistrano</title>
+  <title>Peritor Webistrano - <%=h @page_title %></title>
   <link rel="shortcut icon" href="/favicon.ico"></link>
   <%= javascript_include_tag :defaults %>
   <%= stylesheet_link_tag 'application' %>
@@ -42,15 +42,10 @@
         
         <%= yield :flash_content %>
       
-	      <% unless @page_title.blank? %>
-          <h2><%=h @page_title %></h2>
-	      <% end %>
-
-        <div class="breadcrumb">
-          <b><%= yield :breadcrumb %></b>
-        </div>
-
+        <%= yield :breadcrumb %>
+        <%= yield :page_title %>
 	      <%= yield :action_box %>
+	      
         <%= yield  %>
       
       </div>

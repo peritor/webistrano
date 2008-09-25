@@ -10,12 +10,6 @@ class StagesController < ApplicationController
     end
   end
 
-  def index
-    @stages = current_project.stages.find(:all)
-    respond_to do |format|
-      format.xml { render :xml => @stages.to_xml}
-    end
-  end
   # GET /projects/1/stages/1
   # GET /projects/1/stages/1.xml
   def show

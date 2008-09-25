@@ -1,5 +1,3 @@
-<h2>Welcome to Webistrano</h2>
-
 <fieldset class="fieldset">
   <legend>Recent Deployments</legend>
   <% if @deployments.empty? %>
@@ -46,3 +44,8 @@
   <legend>Your Recent Deployments</legend>
   <%= render(:partial => 'users/deployments', :locals => {:deployments => @user_deployments, :user => current_user})%>
 </fieldset>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Welcome to Webistrano" %>
+  <h2>Welcome to Webistrano</h2>
+<% end %>

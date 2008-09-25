@@ -1,6 +1,3 @@
-<h2><span class="h2_light">Stage</span> <%=h @stage.name %></h2>
-
-
 <div class="special_box">
   <div class="special_box_top"></div>
   <div class="special_box_middle deployments_box">
@@ -120,7 +117,15 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <a class="arrow_link" style="float:right">Manage projects</a>
-  <span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> <span class="h2_light">> Stage</span> <%=h @stage.name %>
+  <% breadcrumb_box do %>
+    <%= link_to "Manage projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <span class="h2_light">Project</span> <%= link_to current_project.name, project_path(current_project) %> 
+    <span class="h2_light"> Stage</span> <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %>
+  <% end %>
+<% end %>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Project #{h(current_project.name)} - Stage #{h(@stage.name)}"%>
+  <h2><span class="h2_light">Stage</span> <%=h @stage.name %></h2>
 <% end %>
 

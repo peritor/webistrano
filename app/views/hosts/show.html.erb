@@ -1,5 +1,3 @@
-<h2>Host: <%=h @host.name %></h2>
-
 <div class="special_box">
   <div class="special_box_top"></div>
   <div class="special_box_middle host_box"></div>
@@ -50,4 +48,14 @@
   <%= render(:partial => 'stages')%>
 </fieldset>
 
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Manage hosts", hosts_path, :style => "float:right", :class => "arrow_link" %>
+    <span class="h2_light">Host</span> <%= link_to @host.name, host_path(@host) %> 
+  <% end %>
+<% end %>
 
+<% content_for(:page_title) do %>
+  <% @page_title = "Host: #{h(@host.name)}" %>
+  <h2>Host: <%=h @host.name %></h2>
+<% end %>

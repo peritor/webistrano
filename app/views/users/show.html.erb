@@ -1,5 +1,3 @@
-<h2>User: <%=h @user.login %></h2>
-
 <div class="special_box">
   <div class="special_box_top"></div>
   <div class="special_box_middle user_box"></div>
@@ -63,3 +61,14 @@
   <%= render(:partial => 'deployments', :locals => {:user => @user, :deployments => @deployments})%>
 </fieldset>
 
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Manage users", users_path, :style => "float:right", :class => "arrow_link" %>
+    <span class="h2_light">User</span> <%= link_to @user.login, user_path(@user) %> 
+  <% end %>
+<% end %>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "User #{h(@user.login)}" %>
+  <h2>User <%= user_info(@user)%></h2>
+<% end %>
