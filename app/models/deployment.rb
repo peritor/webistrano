@@ -88,36 +88,18 @@ class Deployment < ActiveRecord::Base
   end
   
   def complete_with_error!
-    raise 'cannot complete a second time' if self.completed?
-    self.status = STATUS_FAILED
-    self.completed_at = Time.now
-    self.save!
-    
-    self.stage.emails.each do |email|
-      Notification.deliver_deployment(self, email)
-    end
+    save_completed_status!(STATUS_FAILED)
+    notify_per_mail
   end
   
   def complete_successfully!
-    raise 'cannot complete a second time' if self.completed?
-    self.status = STATUS_SUCCESS
-    self.completed_at = Time.now
-    self.save!
-    
-    self.stage.emails.each do |email|
-      Notification.deliver_deployment(self, email)
-    end
+    save_completed_status!(STATUS_SUCCESS)
+    notify_per_mail
   end
   
   def complete_canceled!
-    raise 'cannot complete a second time' if self.completed?
-    self.status = STATUS_CANCELED
-    self.completed_at = Time.now
-    self.save!
-    
-    self.stage.emails.each do |email|
-      Notification.deliver_deployment(self, email)
-    end
+    save_completed_status!(STATUS_CANCELED)
+    notify_per_mail
   end
   
   # deploy through Webistrano::Deployer in background (== other process)
@@ -193,6 +175,19 @@ class Deployment < ActiveRecord::Base
       if deploy_to_roles(self.stage.roles).blank?
         errors.add('base', "You cannot exclude all hosts.")
       end
+    end
+  end
+  
+  def save_completed_status!(status)
+    raise 'cannot complete a second time' if self.completed?
+    self.status = status
+    self.completed_at = Time.now
+    self.save!
+  end
+  
+  def notify_per_mail
+    self.stage.emails.each do |email|
+      Notification.deliver_deployment(self, email)
     end
   end
 end
