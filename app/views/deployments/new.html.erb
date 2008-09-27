@@ -25,13 +25,12 @@
     <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
   <% end %>
   
-  <br />
   <p>
     <%= submit_tag "Start Deployment" %>
   </p>
 <% end %>
 
-<%= link_to 'Back', project_stage_path(@project, @stage), :class => 'arrow_link'  %>
+<%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link' %>
 
 <% content_for(:page_scripts) do %>
   <script type="text/javascript">
@@ -76,10 +75,10 @@
 		 <h3>Deploying hosts</h3>
 		  <% if @stage.roles.count > 0 %>
 		    <form name="excluded_hosts_form" id="excluded_hosts_form">
-          <table style="width: 210px;">
+          <table border="0" width="210">
             <% for host in @stage.hosts.sort_by{|x| x.name} %>
               <tr class="<%= if_disabled_host?(host,'disabled_host') %>">
-                <td style="padding:3px 0px 0px 0px;" valign="middle" align="center">
+                <td width="1%" style="padding:3px 0px 0px 0px;" valign="middle" align="center">
                   <%= image_tag('peritor_theme/checkbox_on.gif', 
                                 :id => "host_#{host.id}_on", 
                                 :class => 'exlcude_host_trigger_on',
@@ -89,7 +88,7 @@
                                 :class => 'exlcude_host_trigger_off',
                                 :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
                 </td>
-                <td><%= link_to h(host.name), host_path(host) %></td>
+                <td width="99%" title="<%=h h(host.name) %>"><div style="overflow: hidden; padding-left: 5px; width: 180px; white-space: nowrap;"><%= link_to h(host.name), host_path(host) %></div></td>
               </tr>
             <% end %>
           </table>

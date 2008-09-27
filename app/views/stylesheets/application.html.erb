@@ -26,6 +26,10 @@ label {
   cursor: pointer;
 }
 
+.redtext {
+	color: #A40008;
+}
+
 a {
 	color: #A40008;
 	font-weight: bold;
@@ -130,6 +134,14 @@ legend {
 	padding: 0px 0px 0px 30px;
 	*padding: 0px;
 	font-size: 12px;
+}
+
+.deployment_status {
+  width: 212px; 
+  border-top: 1px solid #CCCCCC; 
+  margin-top: 20px; 
+  padding: 10px 0px 0px 0px; 
+  text-align: center;
 }
 
 /* MENU */
@@ -271,10 +283,11 @@ a.arrow_link_big {
 /* BOX grey*/ 
 
 div.box {
-  margin-top: 18px;
+  float: left;
 }
 
 div.box_top {
+  margin-top: 6px;
   height: 20px;
   width: 387px;
   background: url(<%= image_path('peritor_theme/box_grey.gif')%>) top no-repeat;
@@ -295,6 +308,67 @@ div.box_bottom {
 }
 
 
+/* BOX Special */ 
+
+
+div.action_box{
+  float: right;
+  width: 274px;
+  margin-left: 10px;
+  margin-top: 0px; 
+}
+
+div.special_box{
+  float: right;
+  margin-right: -6px;
+  *margin-right: 0px;
+  background: url(<%= image_path('peritor_theme/box_light.gif')%>) center no-repeat;
+}
+
+div.special_box_top {
+  height: 12px;
+  width: 270px;
+  background: url(<%= image_path('peritor_theme/box_light.gif')%>) top no-repeat;
+
+}
+
+div.special_box_middle{
+  padding: 10px 10px 0px 30px;
+  width: 230px;
+  min-height: 133px;
+  *height: 120px;
+}
+
+div.special_box_bottom {
+  height: 12px;
+  width: 270px;
+  background: url(<%= image_path('peritor_theme/box_light.gif')%>) bottom no-repeat;
+}
+
+div.status_box{
+  background: url(<%= image_path('peritor_theme/box_status.gif')%>) center no-repeat;
+}
+
+div.stages_box{
+  background: url(<%= image_path('peritor_theme/box_stages.gif')%>) center no-repeat;
+}
+
+div.deployments_box{
+  background: url(<%= image_path('peritor_theme/box_deployments.gif')%>) center no-repeat;
+}
+
+div.host_box{
+  background: url(<%= image_path('peritor_theme/box_host.gif')%>) center no-repeat;
+}
+
+div.recipe_box{
+  background: url(<%= image_path('peritor_theme/box_recipe.gif')%>) center no-repeat;
+}
+
+div.user_box{
+  background: url(<%= image_path('peritor_theme/box_user.gif')%>) center no-repeat;
+}
+
 /* BOX small grey */ 
 
 div.small_box {
@@ -311,8 +385,8 @@ div.small_box_top {
 div.small_box_middle {
   padding: 0px 10px 0px 20px;
   width: 222px;
-  min-height: 113px;
-  *height: 113px;
+  min-height: 100px;
+  *height: 109px;
   background: url(<%= image_path('peritor_theme/box_small.gif')%>) center no-repeat;
 }
 
@@ -344,23 +418,29 @@ div.small_box_bottom {
 }
 
 div.flash_box{
-  margin-top: -10px;
+  clear: both;
+  margin-top: 0px;
   margin-left: -10px;
-  margin-bottom: 15px;
+ *margin-left: 0px;
+  margin-bottom: 10px;
   width: 690px;
+ *width: 667px;
   background: url(<%= image_path('peritor_theme/box_flash.gif')%>) center no-repeat;
-  background-position: 0px 0px;
+  *background: url(<%= image_path('peritor_theme/box_flash_ie.gif')%>) center no-repeat;
 }
 
 div.flash_box_top {
   height: 18px;
   width: 690px;
+ *width: 667px;
   background: url(<%= image_path('peritor_theme/box_flash.gif')%>) top no-repeat;
+  *background: url(<%= image_path('peritor_theme/box_flash_ie.gif')%>) top no-repeat;
 }
 
 div.flash_box_middle{
   padding: 10px 10px 0px 30px;
   width: 690px;
+ *width: 667px;
   min-height: 40px;
   *height: 40px;
 }
@@ -368,67 +448,11 @@ div.flash_box_middle{
 div.flash_box_bottom {
   height: 15px;
   width: 690px;
+ *width: 667px;
   background: url(<%= image_path('peritor_theme/box_flash.gif')%>) bottom no-repeat;
+  *background: url(<%= image_path('peritor_theme/box_flash_ie.gif')%>) bottom no-repeat;
 }
 
-/* BOX Special */ 
-
-
-div.action_box{
-  float: right;
-  width: 274px;
-  margin-left: 10px;
-  margin-top: 0px; 
-}
-
-div.special_box{
-  float: right;
-  margin-top: -10px;
-  background: url(<%= image_path('peritor_theme/box_light.gif')%>) center no-repeat;
-}
-
-div.special_box_top {
-  height: 20px;
-  width: 270px;
-  background: url(<%= image_path('peritor_theme/box_light.gif')%>) top no-repeat;
-}
-
-div.special_box_middle{
-  padding: 10px 10px 0px 30px;
-  width: 230px;
-  min-height: 133px;
-  *height: 133px;
-}
-
-div.special_box_bottom {
-  height: 20px;
-  width: 270px;
-  background: url(<%= image_path('peritor_theme/box_light.gif')%>) bottom no-repeat;
-}
-
-div.status_box{
-  background: url(<%= image_path('peritor_theme/box_status.gif')%>) center no-repeat;
-}
-
-div.stages_box{
-  background: url(<%= image_path('peritor_theme/box_stages.gif')%>) center no-repeat;
-}
-
-div.deployments_box{
-  background: url(<%= image_path('peritor_theme/box_deployments.gif')%>) center no-repeat;
-}
-
-div.host_box{
-  background: url(<%= image_path('peritor_theme/box_host.gif')%>) center no-repeat;
-}
-
-div.recipe_box{
-  background: url(<%= image_path('peritor_theme/box_recipe.gif')%>) center no-repeat;
-}
-
-div.user_box{
-  background: url(<%= image_path('peritor_theme/box_user.gif')%>) center no-repeat;
-}
 
 /* TEXT */
 
@@ -462,6 +486,7 @@ div.user_box{
 	text-align: left;
 	color: #A40008
 }
+
 .clear {
 	display: block;
 	clear: both;

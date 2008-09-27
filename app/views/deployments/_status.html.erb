@@ -1,20 +1,25 @@
 <div class="special_box">
   <div class="special_box_top"></div>
-  <div class="special_box_middle">
-  	<div style="padding:0px 0px 0px 30px;">
-      <%= image_tag('peritor_theme/status_' + @deployment.status + '.gif', :title => @deployment.status) %>
-      <% if @deployment.cancelling_possible? %>
-        <%= link_to "Cancel", cancel_project_stage_deployment_path(current_project, current_stage, @deployment), :confirm => "Are you sure? Killing this deployment will not cleanup and rollback.", :method => "post" %>
-      <% end %>
-    </div>
+  <div class="special_box_middle" style="min-height: 175px; height: 163px;">
+  	<div style="padding: 7px 50px 0px 50px; *padding: 0px 50px;"><%= image_tag('peritor_theme/status_' + @deployment.status + '.gif', :title => @deployment.status) %></div>
+      <div class="deployment_status">
+        <b>Status:</b> <%=h @deployment.status %>
+        <% if @deployment.cancelling_possible? %>
+          &nbsp; &nbsp;
+          <%= link_to "Cancel", cancel_project_stage_deployment_path(current_project, current_stage, @deployment), :confirm => "Are you sure? Killing this deployment will not cleanup and rollback.", :method => "post", :class => 'arrow_link' %>
+        <% end %>
+    	  <% if @deployment.completed? %>
+          &nbsp; &nbsp;
+      	  <%= link_to "Repeat", new_project_stage_deployment_path(current_project, current_stage) + '?repeat=' + h(@deployment.id), :class => 'arrow_link'  %>
+        <% end %>
+      </div>
   </div>
   <div class="special_box_bottom"></div>
 </div>
 
-
 <div class="box">
   <div class="box_top"></div>
-  <div class="box_middle">
+  <div class="box_middle" style="height: 156px;">
 	<p>
     <b>Task:</b>
 	  <%=h @deployment.task %>
@@ -39,11 +44,6 @@
 	  <b>Completed:</b>
 	  <%=h "#{@deployment.completed_at.to_s(:log)} (#{current_user.time_zone})" rescue nil %>
 	</p>
-	<% if @deployment.completed? %>
-  	<p>
-  	  <%= link_to "Repeat", new_project_stage_deployment_path(current_project, current_stage) + '?repeat=' + h(@deployment.id), :class => 'arrow_link'  %>
-  	</p>
-	<% end %>
   </div>
   <div class="box_bottom"></div>
 </div>
@@ -60,7 +60,7 @@
 
 <fieldset class="fieldset">
   <legend>Log</legend>
-  <div style="float:right; padding: 0px 5px 10px 0px; *padding: 0px"><input type="checkbox" class="noframe" id="auto_scroll_log" <%=h @auto_scroll ? 'checked="checked"' : ''%> ><label for="auto_scroll_log">auto scroll</label></div>
+  <div style="float:right; padding: 0px 5px 10px 0px; *padding: 0px"><input type="checkbox" class="noframe" id="auto_scroll_log" <%=h @auto_scroll ? 'checked="checked"' : ''%> > <label for="auto_scroll_log" class="redtext"><b>auto scroll</b></label></div>
 	<div class="log_output">
 		<pre><%=h @deployment.log.gsub('\n', "\n") rescue '' %></pre>
   </div>
