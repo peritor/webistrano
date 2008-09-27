@@ -16,15 +16,17 @@
 		  <%=h @recipe.stages.count %>
 		</p>
 		<p>
-		  <b>Versions:</b>
+		  <b>Version:</b>
+		  <%=h @recipe.version %> (ML: THIS VERSION)
+		</p>
+    <p>
 		  <%= select_tag "version", options_for_select(all_recipe_versions, params[:version]), :id => "recipe_version" %>
 		  <%= link_to_function "Show", "location.href='#{recipe_path(@recipe)}?version=' + $F('recipe_version')", :class => "arrow_link" %>
 		  <%= link_to "Rollback", edit_recipe_path(@recipe, :version => params[:version]), :class => "arrow_link" if not_latest_version and current_user.admin? %>
     </p>
 		<% if current_user.admin? %>
-  		<br />
-	  	<%= link_to 'Edit Recipe', edit_recipe_path(@recipe), :class => 'arrow_link' %> |
-	  	<%= link_to 'Delete', recipe_path(@recipe), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
+	  	<%= link_to 'Edit latest version', edit_recipe_path(@recipe), :class => 'arrow_link' %> |
+	  	<%= link_to 'Delete all versions', recipe_path(@recipe), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
 	  <% end %>
   </div>
   <div class="box_bottom"></div>
