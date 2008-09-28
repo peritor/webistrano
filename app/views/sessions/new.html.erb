@@ -1,8 +1,6 @@
-<h2>Welcome to Webistrano</h2>
-
 <% form_tag sessions_path do -%>
 
-  <fieldset class="fieldset">
+  <fieldset class="fieldset" style="margin-left:270px; width:225px;">
     <legend>Webistrano login</legend>
     <p><label for="login">Login</label><br/>
     <%= text_field_tag 'login' %></p>
@@ -18,3 +16,8 @@
     </p>
   </fieldset>
 <% end -%>
+
+<% content_for(:page_title) do %>
+  <% @page_title = "Login" %>
+  <h2 style="margin: 0px 0px 20px 270px; color: #A40008; ">Welcome to Webistrano</h2>
+<% end %>

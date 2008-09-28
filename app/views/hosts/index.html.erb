@@ -22,6 +22,12 @@
   <% end %>
 </table>
 
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Hosts", hosts_path %>
+  <% end %>
+<% end %>
+
 <% if current_user.admin? %>
   <br />
   <%= link_to 'New host', new_host_path, :class => 'arrow_link' %>

@@ -36,6 +36,12 @@
 
 </fieldset>
 
+<% content_for(:breadcrumb) do %>
+  <% breadcrumb_box do %>
+    <%= link_to "Projects", projects_path %>
+  <% end %>
+<% end %>
+
 <% content_for(:page_title) do %>
   <% @page_title = "Projects" %>
   <h2>Projects</h2>

@@ -6,17 +6,20 @@
 
 <p>
   <b>Description</b><br />
-  <%= text_area 'recipe', 'description', :style =>'width:600px; height: 100px;' %>
+  <%= text_area 'recipe', 'description', :style =>'width:663px; height: 100px;' %>
 </p>
 
 <p>
   <b>Body</b><br />
-  <%= text_area 'recipe', 'body', :style =>'width:600px; height: 400px;' %>
+  <%= text_area 'recipe', 'body', :style =>'width:663px; height: 400px;' %>
 </p>
 
 <%= observe_field "recipe_body", :frequency => 2.5, :with => "Form.Element.serialize('recipe_body')", :url => preview_recipes_url%>
+<div id="preview_fieldset" style="display:none;">
+  <fieldset class="fieldset" style="width:560px;">
+    <legend>Code-Preview</legend>
+    <div id="preview" style="display"></div>
+  </fieldset>
+<br/>
+</div>
 
-<fieldset class="fieldset" id="preview_fieldset" style="display:none">
-  <legend>Code-Preview</legend>
-  <div id="preview" style="display"></div>
-</fieldset>

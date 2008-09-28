@@ -25,12 +25,12 @@
     <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
   <% end %>
   
+  <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link ontheright', :style => 'margin-right: 80px' %>
+
   <p>
-    <%= submit_tag "Start Deployment" %>
+    <%= submit_tag "Start deployment" %>
   </p>
 <% end %>
-
-<%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link' %>
 
 <% content_for(:page_scripts) do %>
   <script type="text/javascript">
@@ -80,7 +80,7 @@
 
 <div class="small_box">
   <div class="small_box_top"></div>
-  <div class="small_box_middle">
+  <div class="small_box_middle" style="min-height: 140px; *height: 160px;">
 		 <h3>Deploying hosts</h3>
 		  <% if @stage.roles.count > 0 %>
 		    <form name="excluded_hosts_form" id="excluded_hosts_form">

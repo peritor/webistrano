@@ -3,15 +3,15 @@
 <% form_for(:host, :url => hosts_path) do |f| %>
   <p>
     <b>Name (DNS name or IP address)</b><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :style => 'width: 330px' %>
   </p>
+
+  <%= link_to 'Back to hosts', hosts_path, :class => 'arrow_link ontheright', :style => 'margin-right: 330px' %>
 
   <p>
-    <%= submit_tag "Create" %>
+    <%= submit_tag "Create host" %>
   </p>
 <% end %>
-
-<%= link_to 'Back to hosts', hosts_path, :class => 'arrow_link' %>
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>

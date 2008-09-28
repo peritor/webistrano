@@ -26,6 +26,11 @@ label {
   cursor: pointer;
 }
 
+pre {
+  margin: 0px;
+  padding: 0px;
+}
+
 .redtext {
 	color: #A40008;
 }
@@ -142,6 +147,18 @@ legend {
   margin-top: 20px; 
   padding: 10px 0px 0px 0px; 
   text-align: center;
+}
+
+.deployment_block {
+  background: url(<%= image_path('peritor_theme/deployment_block.gif')%>) top no-repeat;
+  padding: 12px;
+  height: 85px;
+  margin-top: 10px;
+}
+
+.deployment_block td {
+  line-height: 14px;
+  padding: 0px 2px;
 }
 
 /* MENU */
@@ -467,7 +484,7 @@ div.flash_box_bottom {
 	margin-bottom: 0px;
 	font-size: 28px;
 	font-weight: bold;
-	color: #A40008
+	color: #A40008;
 }
 
 .content h2 {
@@ -495,6 +512,10 @@ div.flash_box_bottom {
 	overflow:hidden;
 }
 
+.ontheright {
+  margin-top: 5px;
+  float: right;
+}
 /*
 .quote {
 	margin: 20px;
@@ -517,13 +538,16 @@ table.sortable th { padding: 4px; white-space: nowrap;}
 /* MISC */
 
 div.log_output {
-  margin: 10px 0px;
-  padding: 10px;
+	font-family: Courier, "Courier New", monospace;
+  font-size: 11px;
+  line-height: 16px;
+  margin: 5px 0px;
+  padding: 17px 10px 16px 40px;
+  width: 574px;
   color: #333333;
-  background-color: #EEEEEE;
+  background: #EEEEEE url(<%= image_path('peritor_theme/code_grid.gif')%>) top repeat;
+  background-position: 0px 0px;
   overflow: auto;
-  width: 600px;
-  *width: 610px;
 }
 
 .role_status_deployed{

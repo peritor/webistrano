@@ -1,8 +1,10 @@
 <% form_for :user, :url => users_path do |f| -%>
   <%= render(:partial => 'form')%>
 
+  <%= link_to 'Back to users', users_path, :class => 'arrow_link ontheright', :style => 'margin-right: 330px' %>
+
   <p>
-    <%= submit_tag "Create Account" %>
+    <%= submit_tag "Create user" %>
   </p>
 <% end -%>
 

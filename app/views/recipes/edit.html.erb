@@ -2,12 +2,13 @@
 
   <%= render(:partial => 'form')%>
 
+  <%= link_to 'Back to recipe', recipe_path(@recipe), :class => 'arrow_link ontheright'%>
+
   <p>
     <%= submit_tag "Update" %>
   </p>
 <% end %>
 
-<%= link_to 'Back to recipe', recipe_path(@recipe), :class => 'arrow_link' %>
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>

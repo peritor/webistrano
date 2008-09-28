@@ -1,13 +1,14 @@
 <% form_for(:project, :url => project_path(@project), :html => { :method => :put }) do |f| %>
   
   <%= render(:partial => 'form')%>
+
+  <%= link_to 'Back to project', project_path(@project), :class => 'arrow_link ontheright', :style => 'margin-right: 80px' %>
+
   <p>
     <%= submit_tag "Update" %>
   </p>
 
 <% end %>
-
-<%= link_to 'Back to project', project_path(@project), :class => 'arrow_link' %>
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>

@@ -27,6 +27,6 @@
 <% if logged_in? && current_user.admin? -%>
   <p>
     <b>Admin?</b><br />
-    <%= check_box 'user', 'admin' %>
+    <%= check_box 'user', 'admin', :class => 'noframe' %>
   </p>
 <% end -%>

@@ -4,12 +4,13 @@
   
   <%= render(:partial => 'project_configurations/form')%>
   <br/>
+
+  <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link ontheright', :style => 'margin-right: 330px' %>
+
   <p>
     <%= submit_tag "Update" %>
   </p>
 <% end %>
-
-<%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link' %>
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>

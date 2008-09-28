@@ -29,9 +29,9 @@
     <b>#Deployments:</b>
 	  <%=h @project.deployments.count %>
  		</p><br />
-  	<%= link_to 'Edit Project', edit_project_path(@project), :class => 'arrow_link' %> | 
-	  <%= link_to 'Clone Project', clone_form_path(@project), :class => 'arrow_link' %> | 
- 		<%= link_to 'Delete', project_path(@project), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
+  	<%= link_to 'Edit project', edit_project_path(@project), :class => 'arrow_link' %> | 
+	  <%= link_to 'Clone project', clone_form_path(@project), :class => 'arrow_link' %> | 
+ 		<%= link_to 'Delete project', project_path(@project), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
   </div>
   <div class="box_bottom"></div>
 </div>

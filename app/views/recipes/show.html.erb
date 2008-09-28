@@ -8,17 +8,14 @@
   <div class="box_top"></div>
   <div class="box_middle">
 		<p>
-		  <b>Description:</b>
-		  <%=web_friendly_text @recipe.description %>
-		</p>
-		<p>
 		  <b>#Stages:</b>
 		  <%=h @recipe.stages.count %>
 		</p>
 		<p>
-		  <b>Version:</b>
+		  <b>#Versions:</b>
 		  <%=h @recipe.version %>
 		</p>
+    <br/>
     <p>
 		  <%= select_tag "version", options_for_select(all_recipe_versions, params[:version]), :id => "recipe_version" %>
 		  <%= link_to_function "Show", "location.href='#{recipe_path(@recipe)}?version=' + $F('recipe_version')", :class => "arrow_link" %>
@@ -35,10 +32,20 @@
 <div class="clear"></div>
 <br />
 
+<fieldset class="fieldset" style="width: 212px; margin-left: 28px; float: right;">
+  <legend>Description</legend>
+  <p>
+    <%=web_friendly_text @recipe.description %>
+ 	</p>
+  <%= link_to 'Edit', edit_recipe_path(@recipe), :class => 'arrow_link' %>
+</fieldset>
+
 <fieldset class="fieldset">
   <legend>Used by stage</legend>
   <%= render(:partial => 'stages')%>
 </fieldset>
+
+<div class="clear"></div>
 
 <div class="clear"></div>
 <br />
