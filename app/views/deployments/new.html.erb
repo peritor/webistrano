@@ -35,33 +35,42 @@
 <% content_for(:page_scripts) do %>
   <script type="text/javascript">
     
-    function disable_host(){
-      var own_id = /host_(\d)_on/.exec(this.id)[1];
-      var other_id = "host_" + own_id + '_off';
-      $(this).hide();
-      $(other_id).show();
-      $('deployment_excluded_host_ids_' + own_id).writeAttribute('checked', 'checked');
-      $(this).up('tr').removeClassName('enabled_host');
-      $(this).up('tr').addClassName('disabled_host');
+    function toggle_host(){
+      var host_id = /host_(\d)/.exec(this.id)[1];
+      var checked = $('deployment_excluded_host_ids_' + host_id).getAttribute('checked');
+
+      if( checked == 'checked' ){
+        enable_host(host_id);
+      }else{
+        disable_host(host_id);
+      }
     }
     
-    function enable_host(){
-      var own_id = /host_(\d)_off/.exec(this.id)[1];
-      var other_id = "host_" + own_id + '_on';
-      $(this).hide();
-      $(other_id).show();
-      $('deployment_excluded_host_ids_' + own_id).writeAttribute('checked', false);
-      $(this).up('tr').removeClassName('disabled_host');
-      $(this).up('tr').addClassName('enabled_host');
+    function disable_host(host_id){
+      var on = $("host_" + host_id + "_on");
+      var off = $("host_" + host_id + "_off");
+      
+      on.hide();
+      off.show();
+      $('deployment_excluded_host_ids_' + host_id).writeAttribute('checked', 'checked');
+      on.up('tr').removeClassName('enabled_host');
+      on.up('tr').addClassName('disabled_host');
+    }
+    
+    function enable_host(host_id){
+      var on = $("host_" + host_id + "_on");
+      var off = $("host_" + host_id + "_off");
+      
+      off.hide();
+      on.show();
+      $('deployment_excluded_host_ids_' + host_id).writeAttribute('checked', false);
+      on.up('tr').addClassName('enabled_host');
+      on.up('tr').removeClassName('disabled_host');
     }
     
     Event.observe(window, 'load', function(){    
-      $$('img.exlcude_host_trigger_on').each(function(el){
-        el.observe('click', disable_host);
-      });
-      
-      $$('img.exlcude_host_trigger_off').each(function(el){
-        el.observe('click', enable_host);
+      $$('tr.toggle_host').each(function(el){
+        el.observe('click', toggle_host);
       })
     });
   </script>
@@ -77,18 +86,18 @@
 		    <form name="excluded_hosts_form" id="excluded_hosts_form">
           <table border="0" width="210">
             <% for host in @stage.hosts.sort_by{|x| x.name} %>
-              <tr class="<%= if_disabled_host?(host,'disabled_host') %>">
+              <tr class="toggle_host <%= if_disabled_host?(host,'disabled_host') %> <%= if_enabled_host?(host,'enabled_host') %>" id="host_<%=h host.id %>">
                 <td width="1%" style="padding:3px 0px 0px 0px;" valign="middle" align="center">
                   <%= image_tag('peritor_theme/checkbox_on.gif', 
                                 :id => "host_#{host.id}_on", 
-                                :class => 'exlcude_host_trigger_on',
                                 :style => if_disabled_host?(host,'display:none;') + 'cursor:pointer;')%>
                   <%= image_tag('peritor_theme/checkbox_off.gif', 
                                 :id => "host_#{host.id}_off", 
-                                :class => 'exlcude_host_trigger_off',
                                 :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
                 </td>
-                <td width="99%" title="<%=h h(host.name) %>"><div style="overflow: hidden; padding-left: 5px; width: 180px; white-space: nowrap;"><%= link_to h(host.name), host_path(host) %></div></td>
+                <td width="99%" title="<%=h h(host.name) %>" class="toggle_host" id="toggle_host_<%=h host.id %>">
+                  <div style="overflow: hidden; padding-left: 5px; width: 180px; white-space: nowrap; cursor: pointer;"><%=h host.name %></div>
+                </td>
               </tr>
             <% end %>
           </table>
