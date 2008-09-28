@@ -17,7 +17,7 @@
 		</p>
 		<p>
 		  <b>Version:</b>
-		  <%=h @recipe.version %> (ML: THIS VERSION)
+		  <%=h @recipe.version %>
 		</p>
     <p>
 		  <%= select_tag "version", options_for_select(all_recipe_versions, params[:version]), :id => "recipe_version" %>

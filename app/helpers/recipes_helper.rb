@@ -4,8 +4,8 @@ module RecipesHelper
   end
   
   def all_recipe_versions
-    versions = @recipe.versions.collect{|v| [v.version.to_s, v.version.to_s]}.reverse
-    versions[0] = ["Latest", ""]
+    versions = @recipe.versions.collect{|v| ["Version #{v.version}", v.version.to_s]}.reverse
+    versions[0] = ["Latest version", ""]
     versions
   end
   
