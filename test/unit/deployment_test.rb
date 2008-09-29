@@ -223,7 +223,7 @@ class DeploymentTest < Test::Unit::TestCase
     repeater = original.repeat
     
     assert_equal original.task, repeater.task
-    assert_equal "Repetition of deployment #{original.id}: #{original.description}", repeater.description
+    assert_equal "Repetition of deployment #{original.id}: \n#{original.description}", repeater.description
   end
   
   def test_excluded_hosts_accessor
