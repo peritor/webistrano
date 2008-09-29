@@ -15,10 +15,12 @@
 </p>
 
 <%= observe_field "recipe_body", :frequency => 2.5, :with => "Form.Element.serialize('recipe_body')", :url => preview_recipes_url%>
-<div id="preview_fieldset" style="display:none;">
+<div id="preview_fieldset">
   <fieldset class="fieldset" style="width:560px;">
     <legend>Code-Preview</legend>
-    <div id="preview" style="display"></div>
+    <div id="preview">
+      <%= render(:partial => 'preview', :locals => {:recipe => @recipe}) %>
+    </div>
   </fieldset>
 <br/>
 </div>

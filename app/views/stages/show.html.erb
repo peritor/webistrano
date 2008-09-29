@@ -116,6 +116,6 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Project #{h(current_project.name)} - Stage #{h(@stage.name)}"%>
-  <h2>Stage <%=h @stage.name %></h2>
+  <h2>Stage <%= link_to h(@stage.name), project_stage_path(current_project, @stage) %></h2>
 <% end %>
 

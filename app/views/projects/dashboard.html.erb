@@ -5,36 +5,9 @@
       This user has never deployed any stages. 
     <br/>
   <% else %>
-    <table class="sortable">
-      <tr>
-        <th>Project/Stage</th>
-        <th>Task</th>
-        <th>Started<br />Completed<br /></th>
-        <th style="width:200px;">Comment</th>
-        <th>Revision</th>
-        <th>User</th>
-        <th>Status</th>
-      </tr>
-    <% for deployment in @deployments %>
-      <tr class="<%= cycle :even, :odd, :name => 'deployments' %>">
-        <td>
-          <%= link_to h(deployment.stage.project.name), project_path(deployment.stage.project) %>/<br />
-          <%= link_to h(deployment.stage.name), project_stage_path(deployment.stage.project, deployment.stage) %>
-        </td>
-        <td><%= link_to h(deployment.task), project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %></td>
-        <td ><%=h deployment.created_at.to_s(:log)  %><br /><%=h deployment.completed_at.to_s(:log) rescue '&nbsp;' %></td>
-        <td title="<%=h deployment.description %>"><%=h truncate(deployment.description, 37) %></td>
-        <td title="<%=h deployment.revision %>"><%=h truncate(deployment.revision, 10) %></td>
-        <td><%= link_to h(deployment.user.login), user_path(deployment.user) %></td>
-        <td style="padding:3px 0px 0px 0px;" valign="middle" align="center"><%= image_tag('peritor_theme/' + deployment.status_image, :title => deployment.status)%></td>
-        <td>
-          <% if deployment.completed? %>
-            <%= link_to "Repeat", new_project_stage_deployment_path(deployment.stage.project, deployment.stage) + '?repeat=' + h(deployment.id)  %>
-          <% end %>
-        </td>
-      </tr>
+    <% @deployments.each do |deployment| %>
+      <%= render(:partial => 'deployments/list_item', :locals => {:deployment => deployment}) %>
     <% end %>
-    </table>
   <% end %>
 </fieldset>
 
