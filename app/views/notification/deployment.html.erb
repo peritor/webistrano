@@ -2,6 +2,8 @@ Deployment of <%= @deployment.stage.project.name %> / <%= @deployment.stage.name
 
 Task: <%= @deployment.task %>
 
+Revision: <%= @deployment.revision %>
+
 Status: <%= @deployment.status %>
 
 Started (UTC): <%= @deployment.created_at.utc.to_s(:log) %>
