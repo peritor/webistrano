@@ -16,11 +16,11 @@
     <%= link_to "Back to project", project_path(current_project), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> &gt;  
-    New stage
+    New
   <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "New stage for project #{h(current_project.name)}" %>
-  <h2>New stage for <%= link_to h(current_project.name), project_path(current_project) %></h2>
+  <h2>New stage</h2>
 <% end %>

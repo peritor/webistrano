@@ -14,7 +14,8 @@
     <%= link_to "Back to stage", project_stage_path(current_project, current_stage), :style => "float:right", :class => "arrow_link" %>
     Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
     Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %> &gt; 
-    Role <%=h @role.name %> 
+    Role <%=h @role.name %> &gt;
+    Edit
   <% end %>
 <% end %>
 
