@@ -7,7 +7,7 @@ SVN
 
 * Show recent deployments on the project page
 
-* A deployment is no longer required, it is optional from now on
+* A deployment comment is no longer required, it is optional from now on
 
 * Track deployed revisions
 
@@ -21,13 +21,7 @@ SVN
 
 * Allow to clone a project. Stages and configuration is cloned for now. Closes #85
 
-* Update to Capistrano 2.4.3
-
 * Add Recipe versioning with version_fu. Provided by Mathias Meyer
-
-* Update to Capistrano 2.4.0
-
-* Update to Rails 2.1
 
 * Add /projects/1/stages/1/deployments/latest. Provided by Mathias Meyer
 
