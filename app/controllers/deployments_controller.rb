@@ -113,10 +113,10 @@ class DeploymentsController < ApplicationController
   end
   
   def set_auto_scroll
-    if params[:auto_scroll].to_s == "false"
-      @auto_scroll = false
-    else
+    if params[:auto_scroll].to_s == "true"
       @auto_scroll = true
+    else
+      @auto_scroll = false
     end
   end
   
