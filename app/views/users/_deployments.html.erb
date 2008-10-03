@@ -3,11 +3,13 @@
     This user has never deployed any stages. 
   <br/>
 <% else %>
+
   <% deployments.each do |deployment| %>
     <%= render(:partial => 'deployments/list_item', :locals => {:deployment => deployment}) %>
   <% end %>
 <% end %>
 <% if deployments.size != user.deployments.count %>
-  <br />
+<div class="fieldset_bottom">
   <%= link_to "Complete deployment history", deployments_user_path(user), :class => 'arrow_link' %>
+</div>
 <% end %>
