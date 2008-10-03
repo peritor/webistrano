@@ -8,7 +8,7 @@
     <td><%=h deployment.created_at.to_s(:log) %></td>
     <td width="1" rowspan="3"><%= image_tag('peritor_theme/pixel_grey.gif', :width => '1', :height => '50') %></td>
     <td width="80" rowspan="2" align="center">
-      <a href="<%= project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %>">
+      <a href="<%= project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %>" title="<%=h deployment.status %>">
         <%= image_tag("peritor_theme/status_#{deployment.status}_small.gif", :width => '53', :height => '40', :border => '0') %>
       </a>
     </td>
