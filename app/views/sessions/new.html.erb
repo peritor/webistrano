@@ -1,6 +1,6 @@
 <% form_tag sessions_path do -%>
 
-  <fieldset class="fieldset" style="margin-left:270px; width:225px; *margin-left:135px; width:225px;">
+  <fieldset class="fieldset" style="margin-left:180px; width:225px; *margin-left:135px; width:225px;">
     <legend>Webistrano login</legend>
     <p><label for="login">Login</label><br/>
     <%= text_field_tag 'login' %></p>
@@ -19,5 +19,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Login" %>
-  <h2 style="margin: 0px 0px 20px 270px; margin: 0px 0px 20px 135px; color: #A40008; ">Welcome to Webistrano</h2>
+  <h2 style="margin: 0px 0px 20px 180px; *margin: 0px 0px 20px 135px; color: #A40008; ">Welcome to Webistrano</h2>
 <% end %>

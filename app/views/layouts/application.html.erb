@@ -18,9 +18,13 @@
       <a href="<%= home_path %>"><%= image_tag('peritor_theme/webistrano_logo.gif', :border => '0')%></a>
     </div>
     <div id="main_content">
-      <div class="menu">
-        <%= render(:partial => 'layouts/menu') if logged_in? %>
-      </div>
+      <% if logged_in? %>
+        <div class="menu">
+          <%= render(:partial => 'layouts/menu') %>
+        </div>
+      <% else %>
+        <div style="width:80px; float:left;">&nbsp;</div>
+      <% end %>
       <div class="content">
         <%= yield :breadcrumb %>
         <%= yield :flash_content %>
