@@ -1,6 +1,7 @@
 <% flashed_errors(:deployment) %>
 
 <% form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
+<div style="width:330px;">
   <p>
     <b>Task</b><br />
     <%= f.text_field :task, :style => 'width:330px;' %>
@@ -25,11 +26,12 @@
     <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
   <% end %>
   
-  <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link ontheright', :style => 'margin-right: 80px' %>
+  <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link ontheright' %>
 
   <p>
     <%= submit_tag "Start deployment" %>
   </p>
+</div>
 <% end %>
 
 <% content_for(:page_scripts) do %>
