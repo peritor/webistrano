@@ -1,12 +1,14 @@
 <% form_for(:project, :url => projects_path) do |f| %>
+<div style="width:335px;">
 
   <%= render(:partial => 'form')%>
   
-  <%= link_to 'Back to projects', projects_path, :class => 'arrow_link ontheright', :style => 'margin-right: 80px' %>
+  <%= link_to 'Back to projects', projects_path, :class => 'arrow_link ontheright' %>
 
   <p>
     <%= submit_tag "Create" %>
   </p>
+</div>
 <% end %>
 
 
