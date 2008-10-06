@@ -73,20 +73,7 @@ class Deployment < ActiveRecord::Base
   def status_in_html
     "<span class='deployment_status_#{self.status.gsub(/ /, '_')}'>#{self.status}</span>"
   end
-  
-  def status_image
-    case self.status
-    when 'running'
-      'status_running_small.gif'
-    when 'failed'
-      'status_failed_small.png'
-    when 'success'
-      'status_success_small.png'
-    when 'canceled'
-      'status_canceled_small.png'
-    end
-  end
-  
+
   def complete_with_error!
     save_completed_status!(STATUS_FAILED)
     notify_per_mail

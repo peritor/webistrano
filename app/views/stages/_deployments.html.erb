@@ -8,12 +8,12 @@
   <% end %>
 <% end %>
 <br />
-  <% if @stage.deployment_possible? %>
-    <%= link_to 'New deployment', new_project_stage_deployment_path(current_project, @stage), :class => 'arrow_link' %> <%= (@stage.deployments.count > 1) ? '|' : '' %>
-  <% else %>
-    A deployment is currently not possible:<br />
-    <%= display_deployment_problems(@stage) %>
-  <% end %>
-  <% if @stage.deployments.count > 1 %>
-    <%= link_to "Complete deployment history", project_stage_deployments_path(current_project, @stage), :class => 'arrow_link' %>
-  <% end %>
+<% if @stage.deployment_possible? %>
+  <%= link_to 'New deployment', new_project_stage_deployment_path(current_project, @stage), :class => 'arrow_link' %> <%= (@stage.deployments.count > 1) ? '|' : '' %>
+<% else %>
+  A deployment is currently not possible:<br />
+  <%= display_deployment_problems(@stage) %>
+<% end %>
+<% if @stage.deployments.count > 1 %>
+  <%= link_to "Complete deployment history", project_stage_deployments_path(current_project, @stage), :class => 'arrow_link' %>
+<% end %>
