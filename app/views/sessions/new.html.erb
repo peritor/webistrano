@@ -1,23 +1,25 @@
 <% form_tag sessions_path do -%>
 
-  <fieldset class="fieldset" style="margin-left:180px; width:225px; *margin-left:135px; width:225px;">
+  <fieldset class="fieldset">
     <legend>Webistrano login</legend>
-    <p><label for="login">Login</label><br/>
-    <%= text_field_tag 'login' %></p>
-
-    <p><label for="password">Password</label><br/>
-    <%= password_field_tag 'password' %></p>
-
-    <p><%= check_box_tag 'remember_me', '1', {}, :class => 'noframe' %>
-    <label for="remember_me">Remember me</label></p>
-
-    <p>
-    <%= submit_tag 'Log in' %>
-    </p>
+    <div style="float: right; padding: 20px;">
+      <%= image_tag('peritor_theme/webistrano_logo_large.png', :border => '0', :width => '400', :height => '130')%>
+    </div>
+    <div>
+      <p><label for="login">Login</label><br/>
+      <%= text_field_tag 'login' %></p>
+      <p><label for="password">Password</label><br/>
+      <%= password_field_tag 'password' %></p>
+      <p><%= check_box_tag 'remember_me', '1', {}, :class => 'noframe' %>
+      <label for="remember_me">Remember me</label></p>
+      <p>
+      <%= submit_tag 'Log in' %>
+      </p>
+    </div>
   </fieldset>
 <% end -%>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Login" %>
-  <h2 style="margin: 0px 0px 20px 180px; *margin: 0px 0px 20px 135px; color: #A40008; ">Welcome to Webistrano</h2>
+  <h2 style="color: #A40008; ">Welcome to Webistrano</h2>
 <% end %>
