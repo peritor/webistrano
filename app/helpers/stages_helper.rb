@@ -17,6 +17,8 @@ module StagesHelper
       val.inspect
     elsif casted_val == Symbol
       val.to_s
+    elsif casted_val == Array
+      val.to_s
     elsif (casted_val == TrueClass ) || (casted_val == FalseClass)
       val
     elsif casted_val == NilClass
