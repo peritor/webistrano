@@ -1,0 +1,288 @@
+= RubyCAS-Client
+
+Author::    Matt Zukowski <matt AT roughest DOT net>; inspired by code by Ola Bini <ola.bini AT ki DOT se> and Matt Walker <mwalker AT tamu DOT edu>
+Copyright:: (c) 2008 Urbacon Ltd.
+License::   GNU Lesser General Public License v2.1 (LGPL 2.1)
+Website::   http://code.google.com/p/rubycas-client and http://rubyforge.org/projects/rubycas-client
+
+
+=== RubyCAS-Client is a Ruby client library for Yale's Central Authentication Service (CAS) protocol.
+
+CAS provides a secure single sign on solution for web-based applications. The user logs in to your
+organization's CAS server, and is automatically authenticated for all other CAS-enabled applications.
+
+For general information about the open CAS protocol, please have a look at http://www.ja-sig.org/products/cas.
+
+If your organization does not already have a CAS server, you may be interested in RubyCAS-Client's sister project,
+RubyCAS-Server[http://code.google.com/p/rubycas-server/].
+
+
+== Getting help and reporting problems
+
+If you need help, try posting to the RubyCAS discussion group at http://groups.google.com/group/rubycas-server.
+
+To report problems, please use the Google Code issue tracker at http://code.google.com/p/rubycas-client/issues/list.
+
+
+== Installation
+
+You can download the latest version of RubyCAS-Client from the project's rubyforge page at 
+http://rubyforge.org/projects/rubycas-client.
+
+However, it is easier to install the CAS client into a Ruby on Rails app as a plugin:
+
+  cd <your rails app>
+  ./script/plugin install http://rubycas-client.googlecode.com/svn/trunk/rubycas-client
+
+Alternatively, the library is also installable as a RubyGem[http://rubygems.org]:
+
+  gem install rubycas-client
+  
+If your Rails application is under Subversion control, you can also install the plugin as an svn:external, ensuring that
+you always have the latest bleeding-edge version of RubyCAS-Client:
+
+  ./script/plugin install -x http://rubycas-client.googlecode.com/svn/trunk/rubycas-client
+
+
+== Usage Examples
+
+Although RubyCAS-Client can be used with other web Frameworks (for example Camping), the following examples
+are aimed at {Ruby on Rails}[http://rubyonrails.org].
+
+==== Using RubyCAS-Client in Rails controllers
+
+<i>Note that from this point on we are assuming that you have a working CAS server up and running!</i>
+
+After installing RubyCAS-Client as a plugin (see above), add the following to your app's <tt>config/environment.rb</tt>
+(make sure that you put it at the bottom of the file, *after* the Rails Initializer):
+  
+  CASClient::Frameworks::Rails::Filter.configure(
+    :cas_base_url => "https://cas.example.foo/"
+  )
+  
+(Change the <tt>:cas_base_url</tt> value to your CAS server's base URL; also note that many CAS servers are configured
+with a base URL that looks more like "https://cas.example.foo/cas".)
+
+Then, in your <tt>app/controllers/application.rb</tt> (or in whichever controller you want to add the CAS filter for):
+
+  before_filter CASClient::Frameworks::Rails::Filter
+  
+That's it. You should now find that you are redirected to your CAS login page whenever you try to access any action
+in your protected controller. You can of course qualify the <tt>before_filter</tt> as you would with any other ActionController
+filter. For example: 
+
+  before_filter CASClient::Frameworks::Rails::Filter, :except => [ :unprotected_action, :another_unprotected_action ]
+
+<b>Once the user has been authenticated, their authenticated username is available under <tt>session[:cas_user]</tt>,</b>
+If you want to do something with this username (for example load a user record from the database), you can append another 
+filter method that checks for this value and does whatever you need it to do.
+
+<b>Note:</b> If Rails complains about missing constants, try adding this before the CASClient configuration:
+
+  require 'casclient'
+  require 'casclient/frameworks/rails/filter'
+
+
+==== A more complicated example
+
+Here is a more complicated configuration showing most of the configuration options along with their default values
+(this does not show proxy options, which are covered in the next section):
+
+  # enable detailed CAS logging
+  cas_logger = CASClient::Logger.new(RAILS_ROOT+'/log/cas.log')
+  cas_logger.level = Logger::DEBUG
+
+  CASClient::Frameworks::Rails::Filter.configure(
+    :cas_base_url  => "https://cas.example.foo/",
+    :login_url     => "https://cas.example.foo/login",
+    :logout_url    => "https://cas.example.foo/logout",
+    :validate_url  => "https://cas.example.foo/proxyValidate",
+    :username_session_key => :cas_user,
+    :extra_attributes_session_key => :cas_extra_attributes
+    :logger => cas_logger,
+    :authenticate_on_every_request => true
+  )
+
+Note that normally it is not necessary to specify <tt>:login_url</tt>, <tt>:logout_url</tt>, and <tt>:validate_url</tt>.
+These values are automatically set to standard CAS defaults based on the given <tt>:cas_base_url</tt>.
+
+The <tt>:username_session_key</tt> value determines the key under which you can find the CAS username in the Rails session hash.
+
+Any additional info that the CAS server might have supplied about the user during authentication will be found under the
+<tt>:extra_attributes_session_key</tt> value in the Rails session hash (i.e. given the above configuration, you would find this
+info under <tt>session[:cas_extra_attributes]</tt>).
+
+An arbitrary Logger instance can be given as the :logger parameter. In the example above we log all CAS activity to a 
+<tt>log/cas.log</tt> file in your Rails app's directory.
+
+==== Re-authenticating on every request (i.e. the "single sign-out problem")
+
+By default, the Rails filter will only authenticate with the CAS server when no session[:cas_user] value exists. Once the user 
+has been authenticated, no further CAS forwarding is done until the user's session is wiped. This saves you
+the trouble of having to do this check yourself (since in most cases it is not advisable to go through the CAS server
+on every request -- this is slow and would potentially lead to problems, for example for AJAX requests). However,
+the disadvantage is that the filter no longer checks to make sure that the user's CAS session is still actually open.
+In other words it is possible for the user's authentication session to be closed on the CAS server without the
+client application knowing about it.
+
+In the future RubyCAS-Client will support the new "Single Sign-Out" functionality in CAS 3.1, allowing the server to 
+notify the client application that the CAS session is closed, but for now it is up to you  to handle this by, for example, 
+by wiping the local <tt>session[:cas_user]</tt> value periodically to force a CAS re-check.
+ 
+Alternatively, it is possible to disable this authentication persistence behaviour by setting the <tt>:authenticate_on_every_request</tt>
+configuration option to true as in the example above.
+
+
+==== Defining a 'logout' action
+
+Your Rails application's controller(s) will probably have some sort of logout function. Here you can do any necessary local
+cleanup, and then call <tt>CASClient::Frameworks::Rails::Filter.logout(controller)</tt>. For example:
+
+  class ApplicationController < ActionController::Base
+    
+    # ...
+  
+    def logout
+      # optionally do some local cleanup here
+      # ...
+      
+      CASClient::Frameworks::Rails::Filter.logout(self)
+    end
+  end
+
+By default, the logout method will clear the local Rails session, do some local CAS cleanup, and redirect to the CAS
+logout page. Additionally, the <tt>request.referer</tt> value from the <tt>controller</tt> instance is passed to the
+CAS server as a 'destination' parameter. This allows RubyCAS server to provide a follow-up login page allowing
+the user to log back in to the service they just logged out from using a different username and password. Other
+CAS server implemenations may use this 'destination' parameter in different ways. 
+
+==== Gatewayed (i.e. optional) authentication
+
+"Gatewaying" essentially allows for optional CAS authentication. Users who already have a pre-existing CAS SSO session 
+will be automatically authenticated for the gatewayed service, while those who do not will be allowed to access the service 
+without authentication. This is useful for example when you want to show some additional private content on a homepage to 
+authenticated users, but also want anonymous users to be able to access the page without first logging in.
+
+To allow users to access a page without authenticatin, simply use <tt>CASClient::Frameworks::Rails::GatewayFilter</tt>
+in place of <tt>CASClient::Frameworks::Rails::Filter</tt> in your controller. For example, you may want to require
+CAS authentication for all actions in a controller except the index action:
+
+  class ExampleController < ApplicationController
+    before_filter CASClient::Frameworks::Rails::GatewayFilter, :only => :index
+    before_filter CASClient::Frameworks::Rails::Filter, :except => :index
+    
+    # ...
+  end
+  
+
+==== How to act as a CAS proxy
+
+CAS 2.0 has a built-in mechanism that allows a CAS-authenticated application to pass on its authentication to other applications.
+An example where this is useful might be a portal site, where the user logs in to a central website and then gets forwarded to
+various other sites that run independently of the portal system (but are always accessed via the portal). The exact mechanism
+behind this is rather complicated so I won't go over it here. If you wish to learn more about CAS proxying, a great walkthrough
+is available at http://www.ja-sig.org/wiki/display/CAS/Proxy+CAS+Walkthrough.
+
+RubyCAS-Client fully supports proxying, so a CAS-protected Rails application can act as a CAS proxy.
+
+Additionally, RubyCAS-Client comes with a controller that can act as a CAS proxy callback receiver. This is necessary because
+when your application requests to act as a CAS proxy, the CAS server must contact your application to deposit the proxy-granting-ticket
+(PGT). Note that in this case the CAS server CONTACTS YOU, rather than you contacting the CAS server (as in all other CAS operations).
+
+Confused? Don't worry, you don't really have to understand this to use it. To enable your Rails app to act as a CAS proxy, 
+all you need to do is this:
+
+In your <tt>config/environment.rb</tt>:
+
+  # enable detailed CAS logging for easier troubleshooting
+  cas_logger = CASClient::Logger.new(RAILS_ROOT+'/log/cas.log')
+  cas_logger.level = Logger::DEBUG
+
+  CASClient::Frameworks::Rails::Filter.configure(
+    :cas_base_url => "https://cas.example.foo/",
+    :proxy_retrieval_url => "https://cas-proxy-callback.example.foo/cas_proxy_callback/retrieve_pgt",
+    :proxy_callback_url => "https://cas-proxy-callback.example.foo/cas_proxy_callback/receive_pgt",
+    :logger => cas_logger
+  )
+  
+In <tt>config/routes.rb</tt> make sure that you have a route that will allow requests to /cas_proxy_callback/:action to be routed to the
+CasProxyCallbackController. This should work as-is with the standard Rails routes setup, but if you have disabled the default
+route, you should add the following:
+
+  map.cas_proxy_callback 'cas_proxy_callback/:action', :controller => 'cas_proxy_callback'
+  
+Now here's a big giant caveat: <b>your CAS callback application and your CAS proxy application must run on separate Rails servers</b>.
+In other words, if you want a Rails app to act as a CAS ticket-granting proxy, the cas_proxy_callback controller
+must run on a different server. This is because Rails does not properly support handling of concurrent requests. The CAS proxy mechanism
+acts in such a way that if your proxy application and your callback controller were on the same server
+you would end up with a deadlock (the CAS server would be waiting for its callback to be accepted by your Rails server,
+but your Rails server wouldn't respond to the CAS server's callback until the CAS server responded back first).
+
+The simplest workaround is this:
+
+1. Create an empty rails app (i.e. something like <tt>rails cas_proxy_callback</tt>)
+2. Make sure that you have the CAS plugin installed. If you installed it as a gem, you don't have to do anything since
+   it is already installed. If you want to install as a plugin, see the instructions in the "Installing" section above.
+3. Make sure that the server is up and running, and configure your proxy_callback_url and proxy_retrieval_url to point
+   to the new server as described above (or rather, make Pound point to the new server, if that's how you're handling https).
+   
+That's it. The proxy_callback_controller doesn't require any additional configuration. It doesn't access the database
+or anything of that sort.
+
+Once your user logs in to CAS via your application, you can do the following to obtain a service ticket that can then be used
+to authenticate another application:
+
+  service_uri = "http://some-other-application.example.foo"
+  proxy_granting_ticket = session[:cas_pgt]
+  ticket = CASClient::Frameworks::Rails::Filter.client.request_proxy_ticket(service_uri, proxy_granting_ticket).ticket
+  
+<tt>ticket</tt> should now contain a valid service ticket. You can use it to authenticate other services by sending it and 
+the service URI as parameters to your target application:
+
+  http://some-other-application.example.foo?service=#{CGI.encode(ticket.target_service)}&ticket=#{ticket.proxy_ticket}
+  
+This is of course assuming that http://some-other-application.example.foo is also protected by the CAS filter. 
+Note that you should always URI-encode your service parameter inside URIs!
+
+Note that #request_proxy_ticket returns a CASClient::ProxyTicket object, which is why we need to call #ticket on it 
+to retrieve the actual service ticket string.
+
+===== Additional proxying notes and caveats
+
+<b>The proxy url must be an https address.</b> Otherwise CAS will refuse to communicate with it. This means that if you are using
+the bundled cas_proxy_callback controller, you will have to host your application on an https-enabled server. This can be a bit
+tricky with Rails. WEBrick's SSL support is difficult to configure, and Mongrel doesn't support SSL at all. One workaround is to
+use a reverse proxy like Pound[http://www.apsis.ch/pound/], which will accept https connections and locally re-route them
+to your Rails application. Also, note that <i>self-signed SSL certificates likely won't work</i>. You will probably need to use
+a real certificate purchased from a trusted CA authority (there are ways around this, but good luck :)
+
+
+== SSL Support
+
+Make sure you have the Ruby OpenSSL library installed. Otherwise you may get errors like:
+
+  no such file to load -- net/https
+
+To install the library on an Debian/Ubuntu system:
+
+  sudo apt-get install libopenssl-ruby
+
+For other platforms you'll have to figure it out yourself.
+
+
+
+== License
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program (see the file called LICENSE); if not, write to the
+Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA

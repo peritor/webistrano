@@ -1,0 +1,138 @@
+= RubyCAS-Client Changelog
+
+== Version 2.1.0 :: In Progress...
+
+* Implemented single-sign-out functionality. The client will now intercept
+  single-sign-out requests and deal with them appropriately if the
+  :enable_single_sign_out config option is set to true. This is currently
+  disabled by default.
+* Added logout method to Rails adapter to simplify the logout process. The
+  logout method resets the local Rails session and redirects to the CAS
+  logout page.
+* The 'service' parameter in the logout method has been renamed to
+  'destination' to better match the behaviour of other CAS clients. So for
+  example, when you call logout_url("http://foo.example"), the method will
+  now return "https://cas.example?destination=https%3A%2F%2Ffoo.example"
+  instead of the old "https://cas.example?service=https%3A%2F%2Ffoo.example".
+  RubyCAS-Server has been modified to deal with this as of version 0.6.0.
+* Some behind-the-scenes change to the way previous authentication info is
+  reused by the Rails filter in subsequent requests (see the note below 
+  in the 2.0.1 release). From the user's and integrator's point of view 
+  there shouldn't be any obvious difference from 2.0.1.
+* Redirection loop interception: The client now logs a warning message when it 
+  believes that it is stuck in a redirection loop with the CAS server. If more 
+  than three of these redirects occur within one second, the client will
+  redirect back to the login page with renew=1, forcing the user to try
+  authenticating again. 
+* Fixed bug where the the service/destination parameter in the logout url
+  would retain the 'ticket' value. The ticket is now automatically stripped
+  from the logout url.
+* Extra user attributes are now automatically unserialized if the incoming data 
+  is in YAML format.
+
+== Version 2.0.1 :: 2008-02-27
+
+* The Rails filter no longer by default redirects to the CAS server on 
+  every request. This restores the behaviour of RubyCAS-Client 1.x.
+  In other words, if a session[:cas_user] value exists, the filter
+  will assume that the user is authenticated without going through the
+  CAS server. This behaviour can be disabled (so that a CAS re-check is 
+  done on every request) by setting the 'authenticate_on_every_request' 
+  option to true. See the "Re-authenticating on every request" section 
+  in the README.txt for details. 
+
+== Version 2.0.0 :: 2008-02-14
+
+* COMPLETE RE-WRITE OF THE ENTIRE CLIENT FROM THE GROUND UP. Oh yes.
+* Core client has been abstracted out of the Rails adapter. It should now
+  be possible to use the client in other frameworks (e.g. Camping).
+* Configuration syntax has completely changed. In other words, your old
+  rubycas-client-1.x configuration will no longer work. See the README
+  for details.
+* Added support for reading extra attributes from the CAS response (i.e. in
+  addition to just the username). However currently this is somewhat useless
+  since RubyCAS-Server does not yet provide a method for adding extra
+  attributes to the responses it generates.
+
+------------------------------------------------------------------------------
+
+== Version 1.1.0 :: 2007-12-21
+
+* Fixed serious bug having to do with logouts. You can now end the
+  CAS session on the client-side (i.e. force the client to re-authenticate)
+  by setting session[:casfilteruser] = nil.
+* Added new GatewayFilter. This is identical to the normal Filter but
+  has the gateway option set to true by default. This should make
+  using the gateway option easier.
+* The CAS::Filter methods are now properly documented.
+* Simplified guess_service produces better URLs when redirecting to the CAS
+  server for authentication and the service URL is not explicitly specified. 
+  [delagoya]
+* The correct method for overriding the service URL for the client is now
+  properly documented. You should use service_url=, as server_name= no longer
+  works and instead generates a warning message.
+* logout_url() now takes an additional 'service' parameter. If specified, this
+  URL will be passed on to the CAS server as part of the logout URL. 
+
+== Version 1.0.0 :: 2007-07-26
+
+* RubyCAS-Client has matured to the point where it is probably safe to
+  take it out of beta and release version 1.0.
+* Non-SSL CAS URLs will now work. This may be useful for demo purposes, 
+  but certainly shouldn't be used in production. The client automatically
+  disables SSL if the CAS URL starts with http (rather than https). [rubywmq]
+
+== Version 0.12.0
+
+* Prior to redirecting to the CAS login page, the client now stores the
+  current service URI in a session variable. This value is used to
+  validate the service ticket after the user comes back from the CAS
+  server's login page. This should address issues where redirection
+  from the CAS server resulted in a slightly different URI from the original
+  one used prior to login redirection (for example due to variations in the
+  way routing rules are applied by the server).
+* The client now handles malformed CAS server responses more gracefully.
+  This makes debugging a malfunctioning CAS server somewhat easier.
+* When receiving a proxy-granting ticket, the cas_proxy_callback_controller
+  can now take a parameter called 'pgt' (which is what ought to be used
+  according to the published CAS spec) or 'pgtId' (which is what the JA-SIG
+  CAS server uses).
+* Logging has been somewhat quieted down. Many messages that were previously
+  logged as INFO are now logged as DEBUG.
+
+== Version 0.11.0
+
+* Added this changelog to advise users of major changes to the library.
+* Large chunks of the library have been re-written. Beware of the possibility
+  of new bugs (although the re-write was meant to fix a whole slew of existing
+  bugs, so you're almost certainly better off upgrading).
+* service and targetService parameters in requests are now properly URI-encoded,
+  so the filter should behave properly when your service has query parameters.
+  Thanks sakazuki for pointing out the problem.
+* You can now force the CAS client to re-authenticate itself with the CAS server
+  (i.e. override the authentication stored in the session) by providing a new
+  service ticket in the URI. In other words, the client will authenticate with
+  CAS if: a) you have a 'ticket' parameter in the URI, and there is currently no
+  authentication info in the session, or b) you have a 'ticket' parameter in the
+  URI and this ticket is different than the ticket that was used to authenticat
+  the existing session. This is especially useful when you are using CAS proxying,
+  since it allows you to force re-authentication in proxied applications (for
+  example, when the user has logged out and a new user has logged in in the parent
+  proxy-granting application).
+* If your service URI has a 'ticket' parameter, it will now be automatically
+  removed when passing the service as a parameter in any CAS request. This is
+  done because at least some CAS servers will happily accept a service URI with
+  a 'ticket' parameter, which will result in a URI with  multiple 'ticket' 
+  parameters once you are redirected back to CAS (and that in turn can result 
+  in an endless redirection loop).
+* Logging has been greatly improved, which should make debugging your CAS
+  installation much easier. Look for the logs under log/cas_client_RAILS_ENV.log
+* When you install RubyCAS-Client as a Rails plugin, it will now by default
+  use a custom logger. You can change this by explicitly setting your own
+  logger in your environment.rb, or by modifying the plugin's init.rb.
+* CasProxyCallbackController no longer checks to make sure that the incoming
+  request is secure. The check is impossible since the secure header is not 
+  passed on by at least some reverse proxies (like Pound), and if you are using
+  the callback controller then you are almost certainly also using a reverse
+  proxy.
+* Cleaned up and updated documentation, fixed some example code.

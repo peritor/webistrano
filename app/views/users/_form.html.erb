@@ -9,6 +9,7 @@
   <%= text_field 'user', 'email', :style =>'width:330px;' %>
 </p>
 
+<% unless WebistranoConfig[:authentication_method] == :cas -%>
 <p>
   <b>Password</b><br />
   <%= password_field 'user', 'password', :style =>'width:330px;' %>
@@ -18,6 +19,7 @@
   <b>Password confirmation</b><br />
   <%= password_field 'user', 'password_confirmation', :style =>'width:330px;' %>
 </p>
+<% end -%>
 
 <p>
   <b>Timezone</b><br />

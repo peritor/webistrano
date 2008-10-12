@@ -1,0 +1,16 @@
+CHANGELOG.txt
+History.txt
+LICENSE.txt
+Manifest.txt
+README.txt
+Rakefile
+init.rb
+lib/casclient.rb
+lib/casclient/client.rb
+lib/casclient/frameworks/rails/cas_proxy_callback_controller.rb
+lib/casclient/frameworks/rails/filter.rb
+lib/casclient/responses.rb
+lib/casclient/tickets.rb
+lib/casclient/version.rb
+lib/rubycas-client.rb
+setup.rb

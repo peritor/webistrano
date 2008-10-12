@@ -1,6 +1,8 @@
 
 SVN
 
+* Added CAS-auth support. Provided by Tim Shadel.
+
 * Auto-scroll deployment log
 
 * Ability to cancel running deployments. Refactor deployment status.
