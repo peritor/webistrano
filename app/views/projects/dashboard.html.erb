@@ -1,5 +1,17 @@
 <fieldset class="fieldset">
-  <legend>Recent Deployments</legend>
+  <legend>Introduction and Help</legend>
+  <div style="float: right; padding: 10px 5px 5px 5px;">
+    <a href="http://labs.peritor.com/webistrano" target="_blank"><%= image_tag('peritor_theme/webistrano_screenshot.png', :border => '0', :width => '200', :height => '151')%></a>
+  </div>
+  <div style="padding-top: 5px;">
+  Bla bla bla blub
+  </div>
+</fieldset>
+
+<br />
+
+<fieldset class="fieldset">
+  <legend>Recent deployments</legend>
   <% if @deployments.empty? %>
     <br/>
       This user has never deployed any stages. 
@@ -14,7 +26,7 @@
 <br />
 
 <fieldset class="fieldset">
-  <legend>Your Recent Deployments</legend>
+  <legend>Your recent deployments</legend>
   <%= render(:partial => 'users/deployments', :locals => {:deployments => @user_deployments, :user => current_user})%>
 </fieldset>
 
