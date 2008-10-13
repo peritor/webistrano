@@ -4,7 +4,18 @@
     <a href="http://labs.peritor.com/webistrano" target="_blank"><%= image_tag('peritor_theme/webistrano_screenshot.png', :border => '0', :width => '200', :height => '151')%></a>
   </div>
   <div style="padding-top: 5px;">
-  Bla bla bla blub
+   Welcome to Webistrano. Your first steps should be to create a project with a stage.
+   This stage can then be deployed once you made at least one host known to Webistrano.
+   <br /><br />
+   For help and more documentation, see
+   <br />
+   <ul>
+     <li><a href="http://labs.peritor.com/webistrano/">Wiki</a></li>
+     <li><a href="http://labs.peritor.com/webistrano/wiki/ConfigurationParameter">Configuration Parameter</a></li>
+     <li><a href="http://labs.peritor.com/webistrano/wiki/FAQ">FAQ</a></li>
+   </ul>
+   <br />
+   Webistrano is Open Source. Paid support is available by <a href="http://www.peritor.com">Peritor Consulting</a>.
   </div>
 </fieldset>
 
@@ -14,7 +25,7 @@
   <legend>Recent deployments</legend>
   <% if @deployments.empty? %>
     <br/>
-      This user has never deployed any stages. 
+      No recent deployments.
     <br/>
   <% else %>
     <% @deployments.each do |deployment| %>
@@ -24,11 +35,6 @@
 </fieldset>
 
 <br />
-
-<fieldset class="fieldset">
-  <legend>Your recent deployments</legend>
-  <%= render(:partial => 'users/deployments', :locals => {:deployments => @user_deployments, :user => current_user})%>
-</fieldset>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Welcome to Webistrano" %>

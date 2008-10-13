@@ -5,7 +5,6 @@ class ProjectsController < ApplicationController
   
   # GET /projects/dashboard
   def dashboard
-    @user_deployments = current_user.recent_deployments(3)
     @deployments = Deployment.find(:all, :limit => 3, :order => 'created_at DESC')
 
     respond_to do |format|
