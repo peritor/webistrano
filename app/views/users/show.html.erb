@@ -41,10 +41,11 @@
 <div class="clear"></div>
 <br>
 
-<div class="flieldset_top">
-  <span class="flieldset_text">Recent Deployment History</span>
-</div>
-<%= render(:partial => 'deployments', :locals => {:user => @user, :deployments => @deployments})%>
+<fieldset class="fieldset">
+  <legend>Recent deployment history</legend>
+  <%= render(:partial => 'deployments', :locals => {:user => @user, :deployments => @deployments})%>
+</fieldset>
+
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>

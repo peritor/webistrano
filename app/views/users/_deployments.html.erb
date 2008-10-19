@@ -10,6 +10,7 @@
 <% end %>
 <% if deployments.size != user.deployments.count %>
 <div class="fieldset_bottom">
+  <br />
   <%= link_to "Complete deployment history", deployments_user_path(user), :class => 'arrow_link' %>
 </div>
 <% end %>
