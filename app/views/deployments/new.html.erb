@@ -38,7 +38,7 @@
   <script type="text/javascript">
     
     function toggle_host(){
-      var host_id = /host_(\d)/.exec(this.id)[1];
+      var host_id = /host_(\d+)/.exec(this.id)[1];
       var checked = $('deployment_excluded_host_ids_' + host_id).getAttribute('checked');
 
       if( checked == 'checked' ){
