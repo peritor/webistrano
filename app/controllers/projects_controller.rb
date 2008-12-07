@@ -106,7 +106,7 @@ class ProjectsController < ApplicationController
   
   protected
   def load_templates
-    @templates = ProjectConfiguration.templates.collect do |k,v|
+    @templates = ProjectConfiguration.templates.sort.collect do |k,v|
       [k.to_s.titleize, k.to_s]
     end  
     
