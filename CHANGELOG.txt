@@ -1,6 +1,10 @@
 
 SVN
 
+* Add Thin template for Rails. Provided by Richard Piacentini
+
+1.4
+
 * Added CAS-auth support. Provided by Tim Shadel.
 
 * Auto-scroll deployment log
