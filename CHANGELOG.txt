@@ -1,6 +1,8 @@
 
 SVN
 
+* Update Net::SSH to 2.0.10 and Capistrano to 2.5.4
+
 * Add Thin template for Rails. Provided by Richard Piacentini
 
 1.4
