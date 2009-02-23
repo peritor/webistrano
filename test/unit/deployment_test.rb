@@ -314,14 +314,65 @@ class DeploymentTest < Test::Unit::TestCase
     assert_equal "canceled", deployment.status
   end
   
-  
-  protected
-  
-  def create_stage_with_role
-    stage = create_new_stage
-    host = create_new_host
-    role_app = create_new_role(:name => 'app', :stage => stage, :host => host)
-    stage
+  def test_validation_fails_if_stage_locked
+    stage = create_stage_with_role
+    stage.lock
+    
+    assert_raise(ActiveRecord::RecordInvalid) do
+      deployment = create_new_deployment(:stage => stage)
+    end
   end
   
+  def test_validation_does_not_fails_if_stage_locked_but_we_override
+    stage = create_stage_with_role
+    stage.lock
+    
+    assert_nothing_raised do
+      deployment = create_new_deployment(:stage => stage, :override_locking => 1)
+    end
+    
+    stage.reload
+    assert stage.locked?
+  end
+  
+  def test_completing_with_error_clears_the_stage_lock
+    stage = create_stage_with_role
+    deployment = create_new_deployment(:stage => stage, :completed_at => nil)
+    assert deployment.running?
+
+    stage.lock
+    
+    deployment.complete_with_error!
+    
+    stage.reload
+    assert !stage.locked?
+  end
+  
+  def test_completing_success_clears_the_stage_lock
+    stage = create_stage_with_role
+    deployment = create_new_deployment(:stage => stage, :completed_at => nil)
+    assert deployment.running?
+
+    stage.lock
+    
+    deployment.complete_successfully!
+    
+    stage.reload
+    assert !stage.locked?
+  end
+  
+  def test_completing_cancelled_clears_the_stage_lock
+    stage = create_stage_with_role
+    deployment = create_new_deployment(:stage => stage, :completed_at => nil, :pid => 919999)
+    assert deployment.running?
+    stage.lock
+    
+    Process.stubs(:kill)
+    
+    deployment.cancel!
+    
+    stage.reload
+    assert !stage.locked?
+  end
+
 end

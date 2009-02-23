@@ -8,10 +8,12 @@ class Deployment < ActiveRecord::Base
   
   serialize :excluded_host_ids
   
-  attr_accessible :task, :prompt_config, :description, :excluded_host_ids
+  attr_accessible :task, :prompt_config, :description, :excluded_host_ids, :override_locking
     
   # given configuration hash on create in order to satisfy prompt configurations
-  attr_accessor :prompt_config 
+  attr_accessor :prompt_config
+  
+  attr_accessor :override_locking
   
   after_create :add_stage_roles
   
@@ -35,8 +37,29 @@ class Deployment < ActiveRecord::Base
         errors.add('base', "Please fill out the parameter '#{conf.name}'") unless !prompt_config.blank? && !prompt_config[conf.name.to_sym].blank?
       end
       
+      errors.add('lock', 'The stage is locked') if self.stage.locked? && !self.override_locking
+      
       ensure_not_all_hosts_excluded
     end
+  end
+  
+  def self.lock_and_fire(&block)
+    transaction do
+      d = Deployment.new
+      block.call(d)
+      return false unless d.valid?
+      stage = Stage.find(d.stage_id, :lock => true)
+      stage.lock
+      d.save!
+      stage.lock_with(d)
+    end
+    true
+  rescue
+    false
+  end
+  
+  def override_locking?
+    @override_locking.to_i == 1
   end
   
   def prompt_config
@@ -156,6 +179,10 @@ class Deployment < ActiveRecord::Base
     complete_canceled!
   end
   
+  def clear_lock_error
+    self.errors.instance_variable_get("@errors").delete('lock')
+  end
+  
   protected
   def ensure_not_all_hosts_excluded
     unless self.stage.blank? || self.excluded_host_ids.blank?
@@ -167,9 +194,13 @@ class Deployment < ActiveRecord::Base
   
   def save_completed_status!(status)
     raise 'cannot complete a second time' if self.completed?
-    self.status = status
-    self.completed_at = Time.now
-    self.save!
+    transaction do
+      stage = Stage.find(self.stage_id, :lock => true)
+      stage.unlock
+      self.status = status
+      self.completed_at = Time.now
+      self.save!
+    end
   end
   
   def notify_per_mail

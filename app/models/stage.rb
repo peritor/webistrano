@@ -5,10 +5,12 @@ class Stage < ActiveRecord::Base
   has_many :hosts, :through => :roles, :uniq => true
   has_many :configuration_parameters, :dependent => :destroy, :class_name => "StageConfiguration", :order => "name ASC"
   has_many :deployments, :dependent => :destroy, :order => "created_at DESC"
+  belongs_to :locking_deployment, :class_name => 'Deployment', :foreign_key => :locked_by_deployment_id 
   
   validates_uniqueness_of :name, :scope => :project_id
   validates_length_of :name, :maximum => 250
   validates_presence_of :project, :name
+  validates_inclusion_of :locked, :in => [0,1]
   
   attr_accessible :name, :alert_emails
 
@@ -126,6 +128,27 @@ class Stage < ActiveRecord::Base
     rescue
       [{:name => "Error", :description => "Could not load tasks - syntax error in recipe definition?"}]
     end
+  end
+    
+  def lock
+    other_self = self.class.find(self.id, :lock => true)
+    other_self.update_attribute(:locked, 1)
+    self.reload
+  end
+  
+  def unlock
+    other_self = self.class.find(self.id, :lock => true)
+    other_self.update_attribute(:locked, 0)
+    other_self.update_attribute(:locked_by_deployment_id, nil)
+    self.reload
+  end
+  
+  def lock_with(deployment)
+    raise ArgumentError, "stage #{self.id.inspect} must be locked before attaching lock_info to it" unless self.locked?
+    raise ArgumentError, "deployment does not belong to stage" unless deployment.stage_id == self.id
+    other_self = self.class.find(self.id, :lock => true)
+    other_self.update_attribute(:locked_by_deployment_id, deployment.id)
+    self.reload
   end
   
   protected

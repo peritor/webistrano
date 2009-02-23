@@ -41,18 +41,17 @@ class DeploymentsController < ApplicationController
   # POST /projects/1/stages/1/deployments
   # POST /projects/1/stages/1/deployments.xml
   def create
-    @deployment = @stage.deployments.build(params[:deployment])
-    @deployment.prompt_config = params[:deployment][:prompt_config] rescue {}    
-    @deployment.user = current_user
-
+    @deployment = Deployment.new
+    
     respond_to do |format|
-      if @deployment.save
+      if populate_deployment_and_fire
         
         @deployment.deploy_in_background!
 
         format.html { redirect_to project_stage_deployment_url(@project, @stage, @deployment)}
         format.xml  { head :created, :location => project_stage_deployment_url(@project, @stage, @deployment) }
       else
+        @deployment.clear_lock_error
         format.html { render :action => "new" }
         format.xml  { render :xml => @deployment.errors.to_xml }
       end
@@ -117,6 +116,17 @@ class DeploymentsController < ApplicationController
       @auto_scroll = true
     else
       @auto_scroll = false
+    end
+  end
+  
+  # sets @deployment
+  def populate_deployment_and_fire
+    return Deployment.lock_and_fire do |deployment|
+      @deployment = deployment
+      @deployment.attributes = params[:deployment]
+      @deployment.prompt_config = params[:deployment][:prompt_config] rescue {}
+      @deployment.stage = current_stage
+      @deployment.user = current_user
     end
   end
   

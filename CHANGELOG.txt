@@ -1,5 +1,7 @@
 
-SVN
+edge
+
+* Add locking. A running deployment locks the stage, so that no other deployment ca be run. Overridable by checkbox.
 
 * Update Net::SSH to 2.0.10 and Capistrano to 2.5.4
 

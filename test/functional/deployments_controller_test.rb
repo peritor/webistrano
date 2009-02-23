@@ -152,5 +152,5 @@ class DeploymentsControllerTest < Test::Unit::TestCase
     @deployment.reload
     assert @deployment.canceled?, flash[:error]
   end
-  
+    
 end

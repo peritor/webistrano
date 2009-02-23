@@ -1,3 +1,9 @@
+<% if current_stage.locked? %>
+  <% content_for(:flash_content) do %>
+    <%= error_flash( render :partial => 'lock_info', :locals => {:stage => current_stage, :deployment => @deployment}) %>
+  <% end %>
+<% end %>
+
 <% flashed_errors(:deployment) %>
 
 <% form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
@@ -29,6 +35,7 @@
   <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link ontheright' %>
 
   <p>
+    <%= f.hidden_field :override_locking %>
     <%= submit_tag "Start deployment" %>
   </p>
 </div>

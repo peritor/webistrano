@@ -190,4 +190,52 @@ class StageTest < Test::Unit::TestCase
     end
   end
   
+  def test_locking_methods
+    stage = create_new_stage
+    assert !stage.locked?
+    
+    stage.lock
+    
+    assert stage.locked?, stage.inspect
+    
+    stage.unlock
+    
+    assert !stage.locked?
+  end
+  
+  def test_lock_info
+    stage = create_stage_with_role
+    deployment = create_new_deployment(:stage => stage)
+    stage.lock
+    stage.lock_with(deployment)
+    
+    stage.reload
+    assert_equal deployment, stage.locking_deployment
+    
+    stage.unlock
+    assert_nil stage.locking_deployment
+  end
+  
+  def test_lock_with_can_not_be_called_without_being_locked
+    stage = create_stage_with_role
+    deployment = create_new_deployment(:stage => stage)
+    assert !stage.locked?
+    
+    assert_raise(ArgumentError) do
+      stage.lock_with(deployment)
+    end
+  end
+  
+  def test_locked_deployment_belongs_to_stage
+    stage_1 = create_stage_with_role
+    deployment_1 = create_new_deployment(:stage => stage_1)
+    stage_2 = create_stage_with_role
+    deployment_2 = create_new_deployment(:stage => stage_2)
+    
+    stage_1.lock
+    assert_raise(ArgumentError) do
+      stage_1.lock_with(deployment_2)
+    end
+  end
+  
 end

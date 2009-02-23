@@ -1,0 +1,28 @@
+<p>
+  WARNING: The stage is locked.
+</p>
+<% if stage.locking_deployment %>
+  <p>
+    This stage is being deployed by <%= link_to h(stage.locking_deployment.user.login), user_path(stage.locking_deployment.user) %> who executed <%=link_to h(stage.locking_deployment.task), project_stage_deployment_path(current_project, current_stage, stage.locking_deployment) %> at <%=h stage.locking_deployment.created_at.to_s(:log) %>
+  </p>
+  <p>
+    Override locking and deploy anyhow? <input type="checkbox" id="override_locking_trigger" value="1">
+  </p>
+<% end %>
+
+<% content_for(:page_scripts) do %>
+  <script type="text/javascript">
+    Event.observe(window, 'load', function(){    
+      var trigger = $('override_locking_trigger');
+      var target = $('deployment_override_locking');
+      
+      Event.observe(trigger, 'change', function(){
+        if(trigger.checked){
+          target.value = 1;
+        }else{
+          target.value = 0;
+        }
+      })
+    });
+  </script>
+<% end %>
