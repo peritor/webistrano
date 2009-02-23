@@ -19,6 +19,8 @@ module StagesHelper
       val.to_s
     elsif casted_val == Array
       val.to_s
+    elsif casted_val == Hash
+      val.to_s
     elsif (casted_val == TrueClass ) || (casted_val == FalseClass)
       val
     elsif casted_val == NilClass

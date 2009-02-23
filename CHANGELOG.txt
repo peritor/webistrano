@@ -1,6 +1,8 @@
 
 edge
 
+* Add Hash type to variables. Provided by sergio@entrecables.com #103
+
 * Add locking. A running deployment locks the stage, so that no other deployment ca be run. Overridable by checkbox.
 
 * Update Net::SSH to 2.0.10 and Capistrano to 2.5.4
