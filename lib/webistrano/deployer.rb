@@ -229,6 +229,11 @@ module Webistrano
         nil
       when /\[(.*)\]/
         $1.split(',').map{|subval| type_cast(subval)}
+      when /\{(.*)\}/
+        $1.split(',').collect{|pair| pair.split('=>')}.inject({}) { |hash, (key, value)|
+	  hash[type_cast(key)] = type_cast(value)
+	  hash
+	}
       else # symbol or string
         if val.index(':') == 0
           val.slice(1, val.size).to_sym

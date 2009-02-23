@@ -240,6 +240,12 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal ['1', '2', '3', '4'], Webistrano::Deployer.type_cast('[1, 2, 3, 4]')
   end
   
+  def test_type_cast_hashes
+    assert_equal({:a => :b}, Webistrano::Deployer.type_cast("{:a => :b}"))
+    assert_equal({:a => '1'}, Webistrano::Deployer.type_cast("{:a => 1}"))
+    assert_equal({'1' => '1', '2' => '2'}, Webistrano::Deployer.type_cast("{1 => 1, 2 => 2}"))
+  end
+  
   def test_task_invokation_successful
     prepare_config_mocks
     
