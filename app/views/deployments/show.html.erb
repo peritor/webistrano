@@ -1,9 +1,6 @@
 <div id="status_info">
   <%= render(:partial => 'status')%>
 </div>
-<br />
-
-<%= link_to_function 'Scroll to top', "scroll_to_top()", :class => 'arrow_link' %> | <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link', :id => 'back_link_at_the_bottom' %>
 
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
