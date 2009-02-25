@@ -74,15 +74,17 @@
       <%= link_to_function 'Scroll to top', "scroll_to_top()", :class => 'arrow_link' %> | <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link', :id => 'back_link_at_the_bottom' %>
     </td>
     <td align="right" width="120px">
-      <% if @deployment.completed? %>
-          <%= image_tag('peritor_theme/status_' + @deployment.status + '_small.gif', :title => @deployment.status, :width => 20, :heigth => 15, :style => 'vertical-align:middle;') %>
-          <b>Status:</b> <%=h @deployment.status %>
-      <% end %>
+      <%= image_tag('peritor_theme/status_' + @deployment.status + '_small.gif', :title => @deployment.status, :width => 20, :heigth => 15, :style => 'vertical-align:middle;') %>
+      <b>Status:</b> <%=h @deployment.status %>
     </td>
     <td align="right" width="70px">
       <% if @deployment.completed? %>
       &nbsp; &nbsp;
       <%= link_to "Repeat", new_project_stage_deployment_path(current_project, current_stage) + '?repeat=' + h(@deployment.id), :class => 'arrow_link'  %>
+      <% if @deployment.cancelling_possible? %>
+        &nbsp; &nbsp;
+        <%= link_to "Cancel", cancel_project_stage_deployment_path(current_project, current_stage, @deployment), :confirm => "Are you sure? Killing this deployment will not cleanup and rollback.", :method => "post", :class => 'arrow_link' %>
+      <% end %>
       <% end %>
     </td>
   </tr>
