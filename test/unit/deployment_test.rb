@@ -374,5 +374,25 @@ class DeploymentTest < Test::Unit::TestCase
     stage.reload
     assert !stage.locked?
   end
+  
+  def test_effective_and_prompt_config
+    stage = create_stage_with_role
+    stage.configuration_parameters.create!(:name => 'foo123', :value => '123')
+    stage.configuration_parameters.create!(:name => 'promptme', :prompt_on_deploy => 1)
+    stage.project.configuration_parameters.create!(:name => 'bar-123', :value => '123')
+    
+    deployment = Deployment.new
+    deployment.stage = stage
+    deployment.task = 'deploy'
+    deployment.description = 'bugfix'
+    deployment.user = create_new_user
+    deployment.roles << stage.roles
+    deployment.prompt_config = {'promptme' => '098'}
+    
+    assert_not_nil deployment.effective_and_prompt_config
+    assert deployment.effective_and_prompt_config.map(&:name).include?('foo123') rescue puts deployment.effective_and_prompt_config.inspect
+    assert deployment.effective_and_prompt_config.map(&:name).include?('promptme')
+    assert deployment.effective_and_prompt_config.map(&:name).include?('bar-123')
+  end
 
 end

@@ -240,10 +240,28 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     assert_equal ['1', '2', '3', '4'], Webistrano::Deployer.type_cast('[1, 2, 3, 4]')
   end
   
+  def test_type_cast_arrays_with_embedded_content
+    assert_equal ['1', '2', :a, true], Webistrano::Deployer.type_cast('[1, 2, :a, true]')
+    # TODO the parser is very simple for now :-(
+    assert_not_equal ['1', ['3', 'foo'], :a, true], Webistrano::Deployer.type_cast('[1, [3, "foo"], :a, true]')
+  end
+  
   def test_type_cast_hashes
     assert_equal({:a => :b}, Webistrano::Deployer.type_cast("{:a => :b}"))
     assert_equal({:a => '1'}, Webistrano::Deployer.type_cast("{:a => 1}"))
     assert_equal({'1' => '1', '2' => '2'}, Webistrano::Deployer.type_cast("{1 => 1, 2 => 2}"))
+  end
+  
+  def test_type_cast_hashes_with_embedded_content
+    # TODO the parser is very simple for now :-(
+    assert_not_equal({'1' => '1', '2' => [:a, :b, '1']}, Webistrano::Deployer.type_cast("{1 => 1, 2 => [:a, :b, 1]}"))
+  end
+  
+  def test_type_cast_hashes_does_not_cast_evaluations
+    assert_equal '#{foo}', Webistrano::Deployer.type_cast('#{foo}')
+    assert_equal 'a#{foo}', Webistrano::Deployer.type_cast('a#{foo}')
+    assert_equal 'be #{foo}', Webistrano::Deployer.type_cast('be #{foo}')
+    assert_equal '#{foo} 123', Webistrano::Deployer.type_cast(' #{foo} 123')
   end
   
   def test_task_invokation_successful
@@ -445,47 +463,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     deployment.reload
     assert_match /Local scm command not found/, deployment.log
   end
-  
-  
-  #
-  # helper methods
-  #
-  
-  def assert_correct_task_called(task_name)
-    @deployment = create_new_deployment(:stage => @stage, :task => task_name)
-    # prepare Mocks
-    #
-
-    # Logger stubing
-    mock_cap_logger = mock
-    mock_cap_logger.expects(:level=).with(3)
-
-    # config stubbing
-    mock_cap_config = mock
-    mock_cap_config.stubs(:logger).returns(mock_cap_logger)
-    mock_cap_config.stubs(:logger=)
-    mock_cap_config.stubs(:load)
-    mock_cap_config.stubs(:trigger)
-    mock_cap_config.stubs(:[])
-    mock_cap_config.stubs(:fetch).with(:scm)
-
-    # vars
-    mock_cap_config.stubs(:set)
-
-    # roles
-    mock_cap_config.stubs(:role)
-
-    # now the interesting part, the task
-    mock_cap_config.expects(:find_and_execute_task).with(task_name, {:after => :finish, :before => :start})
-
-    # main mock install
-    Webistrano::Configuration.expects(:new).returns(mock_cap_config)
-
-    # get things started
-    deployer = Webistrano::Deployer.new(@deployment)
-    deployer.invoke_task!
-  end
-  
+    
   def test_handling_of_prompt_configuration
     stage_with_prompt = create_new_stage(:name => 'prod', :project => @project)
     role = create_new_role(:stage => stage_with_prompt)
@@ -663,10 +641,6 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     def mock_cap_config.set(key, val=nil)
       $vars_set[key] = val
     end
-
-    # 
-    #mock_cap_config.expects(:set).with(:webistrano_project, 'MySampleProject')
-    #mock_cap_config.expects(:set).with(:webistrano_stage, 'MySampleStage')
     
     # main mock install
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)
@@ -678,6 +652,56 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     # check that the correct project/stage name was set
     assert_equal "my_sample_project", $vars_set[:webistrano_project]
     assert_equal "my_sample_stage_12", $vars_set[:webistrano_stage]
+  end
+  
+  def test_reference_of_configuration_parameters
+    @project.configuration_parameters.create!(:name => 'foo', :value => 'a nice value here, please!')
+    @stage.configuration_parameters.create!(:name => 'using_foo', :value => 'Sir: #{foo}')
+    @stage.configuration_parameters.create!(:name => 'bar', :value => '12')
+    @stage.configuration_parameters.create!(:name => 'using_foo_and_bar', :value => '#{bar} #{foo}')
+    
+    mock_cap_config = prepare_config_mocks
+  
+    # override the configs set in order to let normal set operations happen 
+    $vars_set = {}
+    def mock_cap_config.set(key, val=nil)
+      $vars_set[key] = val
+    end
+
+    # run
+    deployer = Webistrano::Deployer.new(@deployment)
+    deployer.invoke_task!
+    
+    assert_equal "Sir: a nice value here, please!", $vars_set[:using_foo]
+    assert_equal "12 a nice value here, please!", $vars_set[:using_foo_and_bar]
+  end
+
+  def test_reference_of_configuration_parameters_in_prompt_config
+    @project.configuration_parameters.create!(:name => 'foo', :value => 'a nice value here, please!')
+    @stage.configuration_parameters.create!(:name => 'using_foo', :prompt_on_deploy => 1)
+    
+    mock_cap_config = prepare_config_mocks
+  
+    # override the configs set in order to let normal set operations happen 
+    $vars_set = {}
+    def mock_cap_config.set(key, val=nil)
+      $vars_set[key] = val
+    end
+
+    deployment = Deployment.new
+    deployment.stage = @stage
+    deployment.task = 'deploy'
+    deployment.description = 'bugfix'
+    deployment.user = create_new_user
+    deployment.roles << @stage.roles
+    deployment.prompt_config = {:using_foo => '#{foo} 1234'}
+    deployment.save!
+
+    # run
+    deployer = Webistrano::Deployer.new(deployment)
+    deployer.invoke_task!
+    
+    assert_equal "a nice value here, please! 1234", $vars_set[:using_foo]
   end
   
   # test that we do not throw an exception if sudo is used
@@ -829,6 +853,41 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)
     
     mock_cap_config
+  end
+  
+  def assert_correct_task_called(task_name)
+    @deployment = create_new_deployment(:stage => @stage, :task => task_name)
+    # prepare Mocks
+    #
+
+    # Logger stubing
+    mock_cap_logger = mock
+    mock_cap_logger.expects(:level=).with(3)
+
+    # config stubbing
+    mock_cap_config = mock
+    mock_cap_config.stubs(:logger).returns(mock_cap_logger)
+    mock_cap_config.stubs(:logger=)
+    mock_cap_config.stubs(:load)
+    mock_cap_config.stubs(:trigger)
+    mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
+
+    # vars
+    mock_cap_config.stubs(:set)
+
+    # roles
+    mock_cap_config.stubs(:role)
+
+    # now the interesting part, the task
+    mock_cap_config.expects(:find_and_execute_task).with(task_name, {:after => :finish, :before => :start})
+
+    # main mock install
+    Webistrano::Configuration.expects(:new).returns(mock_cap_config)
+
+    # get things started
+    deployer = Webistrano::Deployer.new(@deployment)
+    deployer.invoke_task!
   end
   
 end
