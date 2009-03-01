@@ -1,6 +1,12 @@
 
 edge
 
+* Add support to lookup configuration parameters in the definition of configuration parameters:
+  set :foo, "123"
+  set :bar, "a #{foo} here"
+  
+  Only works for configuration parameters for now. Does not work on Capistrano build-ins like current_path or release_path!
+
 * Add Hash type to variables. Provided by sergio@entrecables.com #103
 
 * Add locking. A running deployment locks the stage, so that no other deployment ca be run. Overridable by checkbox.

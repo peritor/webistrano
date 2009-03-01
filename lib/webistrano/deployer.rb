@@ -128,11 +128,27 @@ module Webistrano
     # sets the stage configuration on the Capistrano configuration
     def set_stage_configuration(config)
       deployment.stage.non_prompt_configurations.each do |effective_conf|
-        config.set effective_conf.name.to_sym, Deployer.type_cast(effective_conf.value)
+        value = resolve_references(effective_conf.value)
+        config.set effective_conf.name.to_sym, Deployer.type_cast(value)
       end
       deployment.prompt_config.each do |k, v|
+        v = resolve_references(v)
         config.set k.to_sym, Deployer.type_cast(v)
       end
+    end
+    
+    def resolve_references(value)
+      value = value.dup
+      references = value.scan(/#\{([a-zA-Z_]+)\}/)
+      unless references.blank?
+        references.flatten.compact.each do |ref|
+          ref_value = deployment.effective_and_prompt_config.select{|conf| conf.name.to_s == ref}.first
+          if ref_value
+            value.sub!(/\#\{#{ref}\}/, ref_value.value) 
+          end
+        end
+      end
+      value
     end
     
     # load the project's custom tasks
@@ -227,13 +243,13 @@ module Webistrano
         false
       when 'nil'
         nil
-      when /\[(.*)\]/
+      when /\A\[(.*)\]/
         $1.split(',').map{|subval| type_cast(subval)}
-      when /\{(.*)\}/
-        $1.split(',').collect{|pair| pair.split('=>')}.inject({}) { |hash, (key, value)|
-	  hash[type_cast(key)] = type_cast(value)
-	  hash
-	}
+      when /\A\{(.*)\}/
+        $1.split(',').collect{|pair| pair.split('=>')}.inject({}) do |hash, (key, value)|
+	        hash[type_cast(key)] = type_cast(value)
+	        hash
+	      end
       else # symbol or string
         if val.index(':') == 0
           val.slice(1, val.size).to_sym

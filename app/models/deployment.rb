@@ -67,6 +67,15 @@ class Deployment < ActiveRecord::Base
     @prompt_config
   end
   
+  def effective_and_prompt_config
+    @effective_and_prompt_config = @effective_and_prompt_config || self.stage.effective_configuration.collect do |conf|
+      if prompt_config.has_key?(conf.name)
+        conf.value = prompt_config[conf.name] 
+      end
+      conf
+    end
+  end
+  
   def add_stage_roles
     self.stage.roles.each do |role|
       self.roles << role
