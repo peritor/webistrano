@@ -128,23 +128,26 @@ module Webistrano
     # sets the stage configuration on the Capistrano configuration
     def set_stage_configuration(config)
       deployment.stage.non_prompt_configurations.each do |effective_conf|
-        value = resolve_references(effective_conf.value)
+        value = resolve_references(config, effective_conf.value)
         config.set effective_conf.name.to_sym, Deployer.type_cast(value)
       end
       deployment.prompt_config.each do |k, v|
-        v = resolve_references(v)
+        v = resolve_references(config, v)
         config.set k.to_sym, Deployer.type_cast(v)
       end
     end
     
-    def resolve_references(value)
+    def resolve_references(config, value)
       value = value.dup
       references = value.scan(/#\{([a-zA-Z_]+)\}/)
       unless references.blank?
         references.flatten.compact.each do |ref|
-          ref_value = deployment.effective_and_prompt_config.select{|conf| conf.name.to_s == ref}.first
-          if ref_value
-            value.sub!(/\#\{#{ref}\}/, ref_value.value) 
+          conf_param_refence = deployment.effective_and_prompt_config.select{|conf| conf.name.to_s == ref}.first
+          if conf_param_refence
+            value.sub!(/\#\{#{ref}\}/, conf_param_refence.value) 
+          elsif config.exists?(ref)
+            build_in_value = config.fetch(ref)
+            value.sub!(/\#\{#{ref}\}/, build_in_value.to_s) 
           end
         end
       end

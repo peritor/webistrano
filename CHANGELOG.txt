@@ -5,7 +5,7 @@ edge
   set :foo, "123"
   set :bar, "a #{foo} here"
   
-  Only works for configuration parameters for now. Does not work on Capistrano build-ins like current_path or release_path!
+  Only works for configuration parameter (build-in like release_path or your own). DOES NOT EXECUTE CODE  
 
 * Add Hash type to variables. Provided by sergio@entrecables.com #103
 

@@ -635,12 +635,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     # roles
     mock_cap_config.stubs(:role)
     
-    # override the configs set in order to let normal set operations happen 
-    # and check project/stage name
-    $vars_set = {}
-    def mock_cap_config.set(key, val=nil)
-      $vars_set[key] = val
-    end
+    install_fake_set(mock_cap_config)
     
     # main mock install
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)
@@ -662,18 +657,38 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     
     mock_cap_config = prepare_config_mocks
   
-    # override the configs set in order to let normal set operations happen 
-    $vars_set = {}
-    def mock_cap_config.set(key, val=nil)
-      $vars_set[key] = val
-    end
-
-    # run
+    install_fake_set(mock_cap_config)
+    
     deployer = Webistrano::Deployer.new(@deployment)
     deployer.invoke_task!
     
     assert_equal "Sir: a nice value here, please!", $vars_set[:using_foo]
     assert_equal "12 a nice value here, please!", $vars_set[:using_foo_and_bar]
+  end
+  
+  def test_reference_of_capistrano_build_ins
+    @project.configuration_parameters.create!(:name => 'foo', :value => 'where is #{release_path} ?')
+
+    deployer = Webistrano::Deployer.new(@deployment)
+    deployer.expects(:exchange_real_revision).with do |conf|
+      conf.fetch(:foo).match("where is /path/to/deployment_base/releases/#{Time.now.year}")
+    end
+    deployer.expects(:save_revision).raises('foo')
+    deployer.invoke_task!
+  end
+  
+  def test_reference_of_random_methods
+    Kernel.expects(:exit).never
+    @project.configuration_parameters.create!(:name => 'foo', :value => '#{Kernel.exit}')
+
+    mock_cap_config = prepare_config_mocks
+
+    install_fake_set(mock_cap_config)
+
+    deployer = Webistrano::Deployer.new(@deployment)
+    deployer.invoke_task!
+
+    assert_equal '#{Kernel.exit}', $vars_set[:foo]
   end
 
   def test_reference_of_configuration_parameters_in_prompt_config
@@ -682,11 +697,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     
     mock_cap_config = prepare_config_mocks
   
-    # override the configs set in order to let normal set operations happen 
-    $vars_set = {}
-    def mock_cap_config.set(key, val=nil)
-      $vars_set[key] = val
-    end
+    install_fake_set(mock_cap_config)
 
     deployment = Deployment.new
     deployment.stage = @stage
@@ -853,6 +864,14 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)
     
     mock_cap_config
+  end
+  
+  def install_fake_set(mock_cap_config)
+    # override the configs set in order to let normal set operations happen 
+    $vars_set = {}
+    def mock_cap_config.set(key, val=nil)
+      $vars_set[key] = val
+    end
   end
   
   def assert_correct_task_called(task_name)
