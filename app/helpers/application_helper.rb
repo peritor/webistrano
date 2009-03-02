@@ -125,7 +125,7 @@ module ApplicationHelper
     out << capture(&block) if block
     out << "</b></div>"
     
-    block ? concat(out, block.binding) : out
+    block ? concat(out) : out
   end
   
 end
