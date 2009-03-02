@@ -1,0 +1,108 @@
+--- !ruby/object:Gem::Specification 
+name: mocha
+version: !ruby/object:Gem::Version 
+  version: 0.4.0
+platform: ruby
+authors: 
+- James Mead
+autorequire: mocha
+bindir: bin
+cert_chain: 
+date: 2007-01-22 00:00:00 +00:00
+default_executable: 
+dependencies: []
+
+description: Mocking and stubbing library with JMock/SchMock syntax, which allows mocking and stubbing of methods on real (non-mock) classes.
+email: mocha-developer@rubyforge.org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+- COPYING
+files: 
+- lib/mocha.rb
+- lib/mocha_standalone.rb
+- lib/stubba.rb
+- lib/mocha/any_instance_method.rb
+- lib/mocha/auto_verify.rb
+- lib/mocha/central.rb
+- lib/mocha/class_method.rb
+- lib/mocha/expectation.rb
+- lib/mocha/expectation_error.rb
+- lib/mocha/infinite_range.rb
+- lib/mocha/inspect.rb
+- lib/mocha/instance_method.rb
+- lib/mocha/metaclass.rb
+- lib/mocha/mock.rb
+- lib/mocha/mock_methods.rb
+- lib/mocha/object.rb
+- lib/mocha/pretty_parameters.rb
+- lib/mocha/setup_and_teardown.rb
+- lib/mocha/standalone.rb
+- lib/mocha/test_case_adapter.rb
+- test/active_record_test_case.rb
+- test/all_tests.rb
+- test/execution_point.rb
+- test/method_definer.rb
+- test/mocha_acceptance_test.rb
+- test/mocha_test_result_integration_test.rb
+- test/standalone_acceptance_test.rb
+- test/stubba_acceptance_test.rb
+- test/stubba_integration_test.rb
+- test/stubba_test_result_integration_test.rb
+- test/test_helper.rb
+- test/mocha/any_instance_method_test.rb
+- test/mocha/auto_verify_test.rb
+- test/mocha/central_test.rb
+- test/mocha/class_method_test.rb
+- test/mocha/expectation_test.rb
+- test/mocha/infinite_range_test.rb
+- test/mocha/inspect_test.rb
+- test/mocha/metaclass_test.rb
+- test/mocha/mock_methods_test.rb
+- test/mocha/mock_test.rb
+- test/mocha/object_test.rb
+- test/mocha/pretty_parameters_test.rb
+- test/mocha/setup_and_teardown_test.rb
+- examples/misc.rb
+- examples/mocha.rb
+- examples/stubba.rb
+- COPYING
+- MIT-LICENSE
+- Rakefile
+- README
+- RELEASE
+has_rdoc: true
+homepage: http://mocha.rubyforge.org
+post_install_message: 
+rdoc_options: 
+- --title
+- Mocha
+- --main
+- README
+- --line-numbers
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">"
+    - !ruby/object:Gem::Version 
+      version: 0.0.0
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: mocha
+rubygems_version: 1.3.1
+signing_key: 
+specification_version: 1
+summary: Mocking and stubbing library
+test_files: 
+- test/all_tests.rb
