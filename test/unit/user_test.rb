@@ -40,6 +40,12 @@ class UserTest < Test::Unit::TestCase
       assert u.errors.on(:email)
     end
   end
+  
+  def test_should_not_authenticate_if_disabled
+    assert_equal users(:quentin), User.authenticate('quentin', 'test')
+    User.find_by_login("quentin").disable
+    assert_equal nil, User.authenticate('quentin', 'test')
+  end
 
   def test_should_reset_password
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
@@ -135,6 +141,35 @@ class UserTest < Test::Unit::TestCase
     assert_equal 5, user.deployments.count
     assert_equal 3, user.recent_deployments.size
     assert_equal 2, user.recent_deployments(2).size
+  end
+  
+  def test_disable
+    user = create_new_user
+    assert !user.disabled?
+    
+    user.disable
+    
+    assert user.disabled?
+    
+    user.enable
+    
+    assert !user.disabled?
+  end
+  
+  def test_enabled_named_scope
+    User.destroy_all
+    assert_equal [], User.enabled
+    assert_equal [], User.disabled
+    
+    user = create_new_user
+    
+    assert_equal [user], User.enabled
+    assert_equal [], User.disabled
+    
+    user.disable
+    
+    assert_equal [], User.enabled
+    assert_equal [user], User.disabled
   end
 
   protected

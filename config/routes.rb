@@ -30,7 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   # RESTful auth
-  map.resources :users,:member => {:deployments => :get}
+  map.resources :users,:member => {:deployments => :get, :enable => :post}
   map.resources :sessions, :collection => {:version => :get}
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.login  '/login', :controller => 'sessions', :action => 'new'
