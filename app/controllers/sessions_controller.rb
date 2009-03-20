@@ -23,15 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    self.current_user.forget_me if logged_in?
-    cookies.delete :auth_token
-    reset_session
-    if WebistranoConfig[:authentication_method] != :cas
-      flash[:notice] = "You have been logged out."
-      redirect_back_or_default( home_path )
-    else
-      redirect_to "#{CASClient::Frameworks::Rails::Filter.config[:logout_url]}?serviceUrl=#{home_url}"
-    end
+    logout
   end
   
   def version

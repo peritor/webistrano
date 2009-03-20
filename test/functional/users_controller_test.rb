@@ -229,6 +229,16 @@ class UsersControllerTest < Test::Unit::TestCase
     assert other.disabled?
   end
   
+  def test_should_logout_if_disabled_after_login
+    user = login
+    
+    user.disable
+    
+    get :index
+    assert_response :redirect
+    assert_redirected_to home_path
+  end
+  
 
   protected
     def create_user(options = {})
