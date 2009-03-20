@@ -156,6 +156,19 @@ class UserTest < Test::Unit::TestCase
     assert !user.disabled?
   end
   
+  def test_disable_resets_remember_me
+    user = create_new_user
+    user.remember_me
+    
+    assert_not_nil user.remember_token
+    assert_not_nil user.remember_token_expires_at
+    
+    user.disable
+    
+    assert_nil user.remember_token
+    assert_nil user.remember_token_expires_at
+  end
+  
   def test_enabled_named_scope
     User.destroy_all
     assert_equal [], User.enabled

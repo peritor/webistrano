@@ -99,6 +99,7 @@ class User < ActiveRecord::Base
   
   def disable
     self.update_attribute(:disabled, Time.now)
+    self.forget_me
   end
   
   def enable
