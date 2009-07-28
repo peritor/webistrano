@@ -23,7 +23,7 @@ module Webistrano
         
         message = hide_passwords(message)
         
-        message.each do |line|
+        (message.respond_to?(:lines) ? message.lines : message).each do |line|
           if line_prefix
             write_msg "#{indent} [#{line_prefix}] #{line.strip}\n"
           else

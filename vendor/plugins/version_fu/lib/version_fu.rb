@@ -52,10 +52,6 @@ module VersionFu
           self.class.after(self)
         end
         
-        # Pass any unknown methods to the parent object
-        def method_missing(method, *args)
-          eval(original_class.to_s.demodulize.underscore).__send__ method, *args
-        end
       end
 
       # Housekeeping on versioned class
@@ -71,9 +67,13 @@ module VersionFu
       # Block extension
       versioned_class.class_eval &block if block_given?
       
-      # Finally setup which columns to version
-      self.versioned_columns =  versioned_class.new.attributes.keys - 
-        [versioned_class.primary_key, versioned_foreign_key, version_column, 'created_at', 'updated_at']
+      if self.versioned_class.table_exists?
+        # Finally setup which columns to version
+        self.versioned_columns =  versioned_class.new.attributes.keys - 
+          [versioned_class.primary_key, versioned_foreign_key, version_column, 'created_at', 'updated_at']
+      else
+          ActiveRecord::Base.logger.warn "Version Table not found"
+      end
     end
     
     def versioned_class
