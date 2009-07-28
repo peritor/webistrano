@@ -1,5 +1,3 @@
-# encoding: iso-8859-1
-
 # Copyright (c) 2005 Thomas Fuchs
 #
 # Permission is hereby granted, free of charge, to any person obtaining

@@ -55,7 +55,7 @@ class RecipeTest < Test::Unit::TestCase
     recipe = Recipe.create(:name => "Copy Config files",
                            :description => "Recipe body intentionally erronous",
                            :body => "set config_files, database.yml'")
-    # assert !recipe.valid?
+    assert !recipe.valid?
     assert_equal "syntax error at line: 1", recipe.errors.on(:body)
   end
   
