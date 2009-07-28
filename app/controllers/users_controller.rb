@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :ensure_admin, :only => [:new, :destroy, :create]
+  before_filter :ensure_admin, :only => [:new, :destroy, :create, :enable]
   before_filter :ensure_admin_or_my_entry, :only => [:edit, :update]
 
   # GET /users
@@ -80,15 +80,26 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.admin? && User.admin_count == 1
-      message = 'Can not delete last admin user.'
+      message = 'Can not disable last admin user.'
     else
-      @user.destroy
-      message = 'User was successfully deleted.'
+      @user.disable
+      message = 'User was successfully disabled.'
     end
 
     respond_to do |format|
       flash[:notice] = message
       format.html { redirect_to users_url }
+      format.xml  { head :ok }
+    end
+  end
+  
+  def enable
+    @user = User.find(params[:id])
+    @user.enable
+    flash[:notice] = "The user was enabled"
+    
+    respond_to do |format|
+      format.html { redirect_to users_path }
       format.xml  { head :ok }
     end
   end

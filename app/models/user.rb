@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
+  
+  named_scope :enabled, :conditions => {:disabled => nil}
+  named_scope :disabled, :conditions => "disabled IS NOT NULL"
     
   def validate_on_update
     if User.find(self.id).admin? && !self.admin?
@@ -25,7 +28,7 @@ class User < ActiveRecord::Base
   
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
-    u = find_by_login(login) # need to get the salt
+    u = find_by_login_and_disabled(login, nil) # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -83,11 +86,24 @@ class User < ActiveRecord::Base
   end
   
   def self.admin_count
-    count(:id, :conditions => ['admin = 1'])
+    count(:id, :conditions => ['admin = 1 AND disabled IS NULL'])
   end
   
   def recent_deployments(limit=3)
     self.deployments.find(:all, :limit => limit, :order => 'created_at DESC')
+  end
+  
+  def disabled?
+    !self.disabled.blank?
+  end
+  
+  def disable
+    self.update_attribute(:disabled, Time.now)
+    self.forget_me
+  end
+  
+  def enable
+    self.update_attribute(:disabled, nil)
   end
 
   protected

@@ -7,7 +7,7 @@ class Recipe < ActiveRecord::Base
 
   attr_accessible :name, :body, :description
   
-  version_fu 
+  version_fu rescue nil # hack to silence migration errors when the original table is not there
   
   def validate
     check_syntax

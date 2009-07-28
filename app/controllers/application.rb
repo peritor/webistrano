@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   before_filter CASClient::Frameworks::Rails::Filter if WebistranoConfig[:authentication_method] == :cas
-  before_filter :login_from_cookie, :login_required
+  before_filter :login_from_cookie, :login_required, :ensure_not_disabled
   around_filter :set_timezone
 
   layout 'application'
@@ -49,6 +49,27 @@ class ApplicationController < ActionController::Base
       flash[:notice] = "Action not allowed"
       redirect_to home_path
       return false
+    end
+  end
+  
+  def ensure_not_disabled
+    if logged_in? && current_user.disabled?
+      logout
+      return false
+    else
+      return true
+    end
+  end
+  
+  def logout
+    self.current_user.forget_me if logged_in?
+    cookies.delete :auth_token
+    reset_session
+    if WebistranoConfig[:authentication_method] != :cas
+      flash[:notice] = "You have been logged out."
+      redirect_back_or_default( home_path )
+    else
+      redirect_to "#{CASClient::Frameworks::Rails::Filter.config[:logout_url]}?serviceUrl=#{home_url}"
     end
   end
   

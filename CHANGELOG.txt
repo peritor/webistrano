@@ -1,6 +1,9 @@
 
 edge
 
+* Users cannot be directly deleted anymore. They are disabled in order to not break references and keep the correct history.
+  If you really want to delete a user you have to resort to the script/console or SQL for now. Fixes ticket #110.
+
 * Move gems to vendor/gems and update Capistrano to 2.5.5 and Net::SSH to 2.0.11
 
 * Update Rails to 2.2.2

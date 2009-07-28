@@ -54,7 +54,8 @@ class Deployment < ActiveRecord::Base
       stage.lock_with(d)
     end
     true
-  rescue
+  rescue => e
+    RAILS_DEFAULT_LOGGER.debug "DEPLOYMENT: could not fire deployment: #{e.inspect} #{e.backtrace.join("\n")}"
     false
   end
   

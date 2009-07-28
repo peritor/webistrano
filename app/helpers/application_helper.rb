@@ -9,6 +9,10 @@ module ApplicationHelper
     render(:partial => 'layouts/flash_error', :locals => {:text => text})
   end
   
+  def locking_flash(text)
+    render(:partial => 'layouts/flash_locking', :locals => {:text => text})
+  end
+  
   def flashed_errors(object_name)
     obj = instance_variable_get("@#{object_name}")
     return nil if obj.errors.blank?

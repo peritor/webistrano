@@ -99,7 +99,7 @@ class UsersControllerTest < Test::Unit::TestCase
     assert admin.admin?
     login(admin)
     delete :destroy, :id => user_2.id
-    assert_equal 3, User.count
+    assert_equal 3, User.enabled.count
   end
   
   def test_admin_status_can_not_be_set_by_non_admins
@@ -147,15 +147,15 @@ class UsersControllerTest < Test::Unit::TestCase
     
     # delete the user
     delete :destroy, :id => user.id
-    assert_equal 2, User.count
+    assert_equal 2, User.enabled.count
     
     # delete the other admin
     delete :destroy, :id => admin_2.id
-    assert_equal 1, User.count
+    assert_equal 1, User.enabled.count
     
     # last admin can not be deleted
     delete :destroy, :id => admin.id
-    assert_equal 1, User.count
+    assert_equal 1, User.enabled.count
   end
   
   # basic non-exception test
@@ -189,6 +189,54 @@ class UsersControllerTest < Test::Unit::TestCase
     post :update, :id => other.id, :user => {:login => 'foobarrr'}
     other.reload
     assert_not_equal 'foobarrr', other.login
+  end
+  
+  def test_destroy_should_only_mark_as_disabled
+    user = admin_login
+    other = create_new_user
+    assert !other.disabled?
+    
+    assert_difference "User.disabled.count" do
+      assert_no_difference "User.count" do
+        post :destroy, :id => other.id
+        assert_response :redirect
+      end
+    end
+    
+  end
+  
+  def test_enable
+    user = admin_login
+    other = create_new_user
+    other.disable
+    
+    post :enable, :id => other.id
+    assert_response :redirect
+    
+    other.reload
+    assert !other.disabled?
+  end
+  
+  def test_enable_only_admin
+    user = login
+    other = create_new_user
+    other.disable
+    
+    post :enable, :id => other.id
+    assert_response :redirect
+    
+    other.reload
+    assert other.disabled?
+  end
+  
+  def test_should_logout_if_disabled_after_login
+    user = login
+    
+    user.disable
+    
+    get :index
+    assert_response :redirect
+    assert_redirected_to home_path
   end
   
 

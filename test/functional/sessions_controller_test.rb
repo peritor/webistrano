@@ -22,6 +22,14 @@ class SessionsControllerTest < Test::Unit::TestCase
     assert session[:user]
     assert_response :redirect
   end
+  
+  def test_should_not_login_if_disabled
+    User.find_by_login('quentin').disable
+    
+    post :create, :login => 'quentin', :password => 'test'
+    assert_nil session[:user]
+    assert_response :success
+  end
 
   def test_should_fail_login_and_not_redirect
     post :create, :login => 'quentin', :password => 'bad password'
