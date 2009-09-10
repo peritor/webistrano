@@ -1,0 +1,946 @@
+
+
+Processing SimpleExampleController#index (for 127.0.0.1 at 2008-11-20 12:05:13) [GET]
+  Session ID: 917a1a0262589e0f5073fd47a17a0743
+  Parameters: {"action"=>"index", "controller"=>"simple_example"}
+Guessed service url: "http://localhost:3000/"
+Redirecting to "https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2F"
+Redirected to https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2F
+Filter chain halted as [CASClient::Frameworks::Rails::Filter] rendered_or_redirected.
+Completed in 0.00075 (1331 reqs/sec) | 302 Found [http://localhost/]
+
+
+Processing SimpleExampleController#index (for 127.0.0.1 at 2008-11-20 12:05:13) [GET]
+  Session ID: BAh7CTofY2FzX3ZhbGlkYXRpb25fcmV0cnlfY291bnRpADoYY2FzX3NlbnRf
+dG9fZ2F0ZXdheUY6HXByZXZpb3VzX3JlZGlyZWN0X3RvX2Nhc0l1OglUaW1l
+DZEqG4DJD9QUBjofQG1hcnNoYWxfd2l0aF91dGNfY29lcmNpb25GIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--b3458ca581ced2c4bb7601e00b9dc7e00c91fcc6
+  Parameters: {"ticket"=>"ST-1227200713rA9077D6EEE2B0745AF", "action"=>"index", "controller"=>"simple_example"}
+Request contains ticket "ST-1227200713rA9077D6EEE2B0745AF".
+Guessed service url: "http://localhost:3000/"
+Requesting CAS response for URI https://mzukowski.urbacon.net:6543/cas/proxyValidate?ticket=ST-1227200713rA9077D6EEE2B0745AF&service=http%3A%2F%2Flocalhost%3A3000%2F
+CAS server responded with #<Net::HTTPOK 200 OK readbody=true>:
+<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas"><cas:authenticationSuccess><cas:user>mzukowski</cas:user><cn>Matt Zukowski</cn><mail>mzukowski@urbacon.net</mail></cas:authenticationSuccess></cas:serviceResponse>
+Ticket "ST-1227200713rA9077D6EEE2B0745AF" for service "http://localhost:3000/" belonging to user "mzukowski" is VALID.
+Extra user attributes provided along with ticket "ST-1227200713rA9077D6EEE2B0745AF": {"cn"=>"Matt Zukowski", "mail"=>"mzukowski@urbacon.net"}.
+Wrote service session lookup file to "/home/URBACON/mzukowski/workspace/rubycas-client2/examples/rails/tmp/sessions/cas_sess.ST-1227200713rA9077D6EEE2B0745AF" with session id "BAh7CTofY2FzX3ZhbGlkYXRpb25fcmV0cnlfY291bnRpADoYY2FzX3NlbnRf\ndG9fZ2F0ZXdheUY6HXByZXZpb3VzX3JlZGlyZWN0X3RvX2Nhc0l1OglUaW1l\nDZEqG4DJD9QUBjofQG1hcnNoYWxfd2l0aF91dGNfY29lcmNpb25GIgpmbGFz\naElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA\ndXNlZHsA--b3458ca581ced2c4bb7601e00b9dc7e00c91fcc6".
+Rendering simple_example/index
+Completed in 0.02824 (35 reqs/sec) | Rendering: 0.00208 (7%) | 200 OK [http://localhost/?ticket=ST-1227200713rA9077D6EEE2B0745AF]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:05:20) [GET]
+  Session ID: BAh7DTofY2FzX3ZhbGlkYXRpb25fcmV0cnlfY291bnRpADoZY2FzX2V4dHJh
+X2F0dHJpYnV0ZXNDOh5IYXNoV2l0aEluZGlmZmVyZW50QWNjZXNzewciB2Nu
+IhJNYXR0IFp1a293c2tpIgltYWlsIhptenVrb3dza2lAdXJiYWNvbi5uZXQ6
+GmNhc19sYXN0X3ZhbGlkX3RpY2tldG86HUNBU0NsaWVudDo6U2VydmljZVRp
+Y2tldAk6DEB0aWNrZXQiJVNULTEyMjcyMDA3MTNyQTkwNzdENkVFRTJCMDc0
+NUFGOg5AcmVzcG9uc2VvOiJDQVNDbGllbnQ6OlZhbGlkYXRpb25SZXNwb25z
+ZQo6FEBwYXJzZV9kYXRldGltZUl1OglUaW1lDZEqG4BX59QUBjofQG1hcnNo
+YWxfd2l0aF91dGNfY29lcmNpb25GOgpAdXNlciIObXp1a293c2tpOglAeG1s
+bzoTUkVYTUw6OkVsZW1lbnQNOgxAcHJlZml4IghjYXM6DkBlbGVtZW50c286
+FFJFWE1MOjpFbGVtZW50cwY6DUBlbGVtZW50QBA6EEBhdHRyaWJ1dGVzSUM6
+FlJFWE1MOjpBdHRyaWJ1dGVzewAGOxZAEDoTQGV4cGFuZGVkX25hbWUiHmNh
+czphdXRoZW50aWNhdGlvblN1Y2Nlc3M6DkBjaGlsZHJlblsIbzsSDzsTIghj
+YXM7FG87FQY7FkAWOh1AaWdub3JlX3doaXRlc3BhY2Vfbm9kZXNGOxdJQzsY
+ewAGOxZAFjoQQHdoaXRlc3BhY2VUOxkiDWNhczp1c2VyOxpbBm86EFJFWE1M
+OjpUZXh0CzoSQHVubm9ybWFsaXplZCIObXp1a293c2tpOgxAc3RyaW5nIg5t
+enVrb3dza2k6EEBub3JtYWxpemVkMDoTQGVudGl0eV9maWx0ZXIwOglAcmF3
+VDoMQHBhcmVudEAWOg1AY29udGV4dHsAOgpAbmFtZSIJdXNlcjsjQBBvOxIQ
+OxMiADsUbzsVBjsWQCE7G0Y7F0lDOxh7AAY7FkAhOxxUOxkiB2NuOxpbBm87
+HQs7HjA7HyISTWF0dCBadWtvd3NraTsgMDshMDsiVDsjQCE7JEAfOyUiB2Nu
+Og9AbmFtZXNwYWNlIgA7I0AQbzsSEDsTIgA7FG87FQY7FkArOxtGOxdJQzsY
+ewAGOxZAKzscVDsZIgltYWlsOxpbBm87HQs7HjA7HyIabXp1a293c2tpQHVy
+YmFjb24ubmV0OyAwOyEwOyJUOyNAKzskQB87JSIJbWFpbDsmIgA7I0AQOyRA
+HzslIhphdXRoZW50aWNhdGlvblN1Y2Nlc3M7I287Eg07EyIIY2FzOxRvOxUG
+OxZANjsXSUM7GHsGIghjYXNvOhVSRVhNTDo6QXR0cmlidXRlDDsTIgp4bWxu
+czsWQDY6C0B2YWx1ZSIfaHR0cDovL3d3dy55YWxlLmVkdS90cC9jYXM7HiIf
+aHR0cDovL3d3dy55YWxlLmVkdS90cC9jYXM7GSIOeG1sbnM6Y2FzOyAwOyUi
+CGNhcwY7FkA2OxkiGGNhczpzZXJ2aWNlUmVzcG9uc2U7GlsGQBA7JEAfOyUi
+FHNlcnZpY2VSZXNwb25zZTsjbzoUUkVYTUw6OkRvY3VtZW50DjsTIgA7FG87
+FQY7FkBEOxdJQzsYewAGOxZARDsZIg5VTkRFRklORUQ7GlsGQDY7JEAfOyUi
+DlVOREVGSU5FRDsmIgA7IzA6DkBwcm90b2NvbGYGMjoWQGV4dHJhX2F0dHJp
+YnV0ZXN7B0AHQAhACUAKOgtAcmVuZXcwOg1Ac2VydmljZSIbaHR0cDovL2xv
+Y2FsaG9zdDozMDAwLzoSY2FzZmlsdGVydXNlckAPOhhjYXNfc2VudF90b19n
+YXRld2F5RiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZs
+YXNoSGFzaHsABjoKQHVzZWR7ADodcHJldmlvdXNfcmVkaXJlY3RfdG9fY2Fz
+SXU7Dg2RKhuAyQ/UFAY7D0Y6DWNhc191c2VyIg5tenVrb3dza2k=--e428be7c02bb1bb56e8603775871520420754a92
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Existing local CAS session detected for "mzukowski". Previous ticket "ST-1227200713rA9077D6EEE2B0745AF" will be re-used.
+Rendering advanced_example/index
+Completed in 0.00290 (344 reqs/sec) | Rendering: 0.00130 (44%) | 200 OK [http://localhost/advanced_example]
+
+
+Processing AdvancedExampleController#my_account (for 127.0.0.1 at 2008-11-20 12:05:22) [GET]
+  Session ID: BAh7DTofY2FzX3ZhbGlkYXRpb25fcmV0cnlfY291bnRpADoZY2FzX2V4dHJh
+X2F0dHJpYnV0ZXNDOh5IYXNoV2l0aEluZGlmZmVyZW50QWNjZXNzewciB2Nu
+IhJNYXR0IFp1a293c2tpIgltYWlsIhptenVrb3dza2lAdXJiYWNvbi5uZXQ6
+GmNhc19sYXN0X3ZhbGlkX3RpY2tldG86HUNBU0NsaWVudDo6U2VydmljZVRp
+Y2tldAk6DEB0aWNrZXQiJVNULTEyMjcyMDA3MTNyQTkwNzdENkVFRTJCMDc0
+NUFGOg5AcmVzcG9uc2VvOiJDQVNDbGllbnQ6OlZhbGlkYXRpb25SZXNwb25z
+ZQo6FEBwYXJzZV9kYXRldGltZUl1OglUaW1lDZEqG4BX59QUBjofQG1hcnNo
+YWxfd2l0aF91dGNfY29lcmNpb25GOgpAdXNlciIObXp1a293c2tpOglAeG1s
+bzoTUkVYTUw6OkVsZW1lbnQNOgxAcHJlZml4IghjYXM6DkBlbGVtZW50c286
+FFJFWE1MOjpFbGVtZW50cwY6DUBlbGVtZW50QBA6EEBhdHRyaWJ1dGVzSUM6
+FlJFWE1MOjpBdHRyaWJ1dGVzewAGOxZAEDoTQGV4cGFuZGVkX25hbWUiHmNh
+czphdXRoZW50aWNhdGlvblN1Y2Nlc3M6DkBjaGlsZHJlblsIbzsSDzsTIghj
+YXM7FG87FQY7FkAWOxdJQzsYewAGOxZAFjodQGlnbm9yZV93aGl0ZXNwYWNl
+X25vZGVzRjoQQHdoaXRlc3BhY2VUOxkiDWNhczp1c2VyOxpbBm86EFJFWE1M
+OjpUZXh0CzoSQHVubm9ybWFsaXplZCIObXp1a293c2tpOgxAc3RyaW5nIg5t
+enVrb3dza2k6EEBub3JtYWxpemVkMDoJQHJhd1Q6E0BlbnRpdHlfZmlsdGVy
+MDoMQHBhcmVudEAWOg1AY29udGV4dHsAOgpAbmFtZSIJdXNlcjsjQBBvOxIQ
+OxMiADsUbzsVBjsWQCE7F0lDOxh7AAY7FkAhOxtGOxxUOxkiB2NuOxpbBm87
+HQs7HjA7HyISTWF0dCBadWtvd3NraTsgMDshVDsiMDsjQCE7JEAfOg9AbmFt
+ZXNwYWNlIgA7JSIHY247I0AQbzsSEDsTIgA7FG87FQY7FkArOxdJQzsYewAG
+OxZAKzsbRjscVDsZIgltYWlsOxpbBm87HQs7HjA7HyIabXp1a293c2tpQHVy
+YmFjb24ubmV0OyAwOyFUOyIwOyNAKzskQB87JiIAOyUiCW1haWw7I0AQOyRA
+HzslIhphdXRoZW50aWNhdGlvblN1Y2Nlc3M7I287Eg07EyIIY2FzOxRvOxUG
+OxZANjsXSUM7GHsGIghjYXNvOhVSRVhNTDo6QXR0cmlidXRlDDsWQDY7EyIK
+eG1sbnM6C0B2YWx1ZSIfaHR0cDovL3d3dy55YWxlLmVkdS90cC9jYXM7HiIf
+aHR0cDovL3d3dy55YWxlLmVkdS90cC9jYXM7GSIOeG1sbnM6Y2FzOyAwOyUi
+CGNhcwY7FkA2OxkiGGNhczpzZXJ2aWNlUmVzcG9uc2U7GlsGQBA7JEAfOyUi
+FHNlcnZpY2VSZXNwb25zZTsjbzoUUkVYTUw6OkRvY3VtZW50DjsTIgA7FG87
+FQY7FkBEOxdJQzsYewAGOxZARDsZIg5VTkRFRklORUQ7GlsGQDY7JEAfOyYi
+ADslIg5VTkRFRklORUQ7IzA6DkBwcm90b2NvbGYGMjoWQGV4dHJhX2F0dHJp
+YnV0ZXN7B0AHQAhACUAKOgtAcmVuZXcwOg1Ac2VydmljZSIbaHR0cDovL2xv
+Y2FsaG9zdDozMDAwLzoSY2FzZmlsdGVydXNlckAPOhhjYXNfc2VudF90b19n
+YXRld2F5RjodcHJldmlvdXNfcmVkaXJlY3RfdG9fY2FzSXU7Dg2RKhuAyQ/U
+FAY7D0YiCmZsYXNoSUM6J0FjdGlvbkNvbnRyb2xsZXI6OkZsYXNoOjpGbGFz
+aEhhc2h7AAY6CkB1c2VkewA6DWNhc191c2VyIg5tenVrb3dza2k=--42885a608a276bbc90475fedf50fe9651d3dbafc
+  Parameters: {"action"=>"my_account", "controller"=>"advanced_example"}
+Existing local CAS session detected for "mzukowski". Previous ticket "ST-1227200713rA9077D6EEE2B0745AF" will be re-used.
+Rendering advanced_example/my_account
+Completed in 0.00314 (318 reqs/sec) | Rendering: 0.00153 (48%) | 200 OK [http://localhost/advanced_example/my_account]
+
+
+Processing AdvancedExampleController#logout (for 127.0.0.1 at 2008-11-20 12:05:31) [GET]
+  Session ID: BAh7DTofY2FzX3ZhbGlkYXRpb25fcmV0cnlfY291bnRpADoZY2FzX2V4dHJh
+X2F0dHJpYnV0ZXNDOh5IYXNoV2l0aEluZGlmZmVyZW50QWNjZXNzewciB2Nu
+IhJNYXR0IFp1a293c2tpIgltYWlsIhptenVrb3dza2lAdXJiYWNvbi5uZXQ6
+GmNhc19sYXN0X3ZhbGlkX3RpY2tldG86HUNBU0NsaWVudDo6U2VydmljZVRp
+Y2tldAk6DEB0aWNrZXQiJVNULTEyMjcyMDA3MTNyQTkwNzdENkVFRTJCMDc0
+NUFGOg5AcmVzcG9uc2VvOiJDQVNDbGllbnQ6OlZhbGlkYXRpb25SZXNwb25z
+ZQo6FEBwYXJzZV9kYXRldGltZUl1OglUaW1lDZEqG4BX59QUBjofQG1hcnNo
+YWxfd2l0aF91dGNfY29lcmNpb25GOgpAdXNlciIObXp1a293c2tpOglAeG1s
+bzoTUkVYTUw6OkVsZW1lbnQNOgxAcHJlZml4IghjYXM6DkBlbGVtZW50c286
+FFJFWE1MOjpFbGVtZW50cwY6DUBlbGVtZW50QBA6EEBhdHRyaWJ1dGVzSUM6
+FlJFWE1MOjpBdHRyaWJ1dGVzewAGOxZAEDoTQGV4cGFuZGVkX25hbWUiHmNh
+czphdXRoZW50aWNhdGlvblN1Y2Nlc3M6DkBjaGlsZHJlblsIbzsSDzsTIghj
+YXM7FG87FQY7FkAWOh1AaWdub3JlX3doaXRlc3BhY2Vfbm9kZXNGOxdJQzsY
+ewAGOxZAFjoQQHdoaXRlc3BhY2VUOxkiDWNhczp1c2VyOxpbBm86EFJFWE1M
+OjpUZXh0CzoSQHVubm9ybWFsaXplZCIObXp1a293c2tpOgxAc3RyaW5nIg5t
+enVrb3dza2k6EEBub3JtYWxpemVkMDoTQGVudGl0eV9maWx0ZXIwOglAcmF3
+VDoMQHBhcmVudEAWOg1AY29udGV4dHsAOgpAbmFtZSIJdXNlcjsjQBBvOxIQ
+OxMiADsUbzsVBjsWQCE7G0Y7F0lDOxh7AAY7FkAhOxxUOxkiB2NuOxpbBm87
+HQs7HjA7HyISTWF0dCBadWtvd3NraTsgMDshMDsiVDsjQCE7JEAfOyUiB2Nu
+Og9AbmFtZXNwYWNlIgA7I0AQbzsSEDsTIgA7FG87FQY7FkArOxtGOxdJQzsY
+ewAGOxZAKzscVDsZIgltYWlsOxpbBm87HQs7HjA7HyIabXp1a293c2tpQHVy
+YmFjb24ubmV0OyAwOyEwOyJUOyNAKzskQB87JSIJbWFpbDsmIgA7I0AQOyRA
+HzslIhphdXRoZW50aWNhdGlvblN1Y2Nlc3M7I287Eg07EyIIY2FzOxRvOxUG
+OxZANjsXSUM7GHsGIghjYXNvOhVSRVhNTDo6QXR0cmlidXRlDDsTIgp4bWxu
+czsWQDY6C0B2YWx1ZSIfaHR0cDovL3d3dy55YWxlLmVkdS90cC9jYXM7HiIf
+aHR0cDovL3d3dy55YWxlLmVkdS90cC9jYXM7GSIOeG1sbnM6Y2FzOyAwOyUi
+CGNhcwY7FkA2OxkiGGNhczpzZXJ2aWNlUmVzcG9uc2U7GlsGQBA7JEAfOyUi
+FHNlcnZpY2VSZXNwb25zZTsjbzoUUkVYTUw6OkRvY3VtZW50DjsTIgA7FG87
+FQY7FkBEOxdJQzsYewAGOxZARDsZIg5VTkRFRklORUQ7GlsGQDY7JEAfOyUi
+DlVOREVGSU5FRDsmIgA7IzA6DkBwcm90b2NvbGYGMjoWQGV4dHJhX2F0dHJp
+YnV0ZXN7B0AHQAhACUAKOgtAcmVuZXcwOg1Ac2VydmljZSIbaHR0cDovL2xv
+Y2FsaG9zdDozMDAwLzoSY2FzZmlsdGVydXNlckAPOhhjYXNfc2VudF90b19n
+YXRld2F5RiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZs
+YXNoSGFzaHsABjoKQHVzZWR7ADodcHJldmlvdXNfcmVkaXJlY3RfdG9fY2Fz
+SXU7Dg2RKhuAyQ/UFAY7D0Y6DWNhc191c2VyIg5tenVrb3dza2k=--e428be7c02bb1bb56e8603775871520420754a92
+  Parameters: {"action"=>"logout", "controller"=>"advanced_example"}
+Existing local CAS session detected for "mzukowski". Previous ticket "ST-1227200713rA9077D6EEE2B0745AF" will be re-used.
+Redirected to https://mzukowski.urbacon.net:6543/cas/logout?destination=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example%2Fmy_account
+Completed in 0.10119 (9 reqs/sec) | 302 Found [http://localhost/advanced_example/logout]
+
+
+Processing SimpleExampleController#index (for 127.0.0.1 at 2008-11-20 12:08:18) [POST]
+  Session ID: 9dccf65589fd53880e80a8e84608169c
+  Parameters: {"action"=>"index", "logoutRequest"=>"<samlp:LogoutRequest ID=\"1227200898rA3D8094B54002E6B73\" Version=\"2.0\" IssueInstant=\"Thu, 20 Nov 2008 12:08:18 -0500\">\n<saml:NameID></saml:NameID>\n<samlp:SessionIndex>ST-1227200713rA9077D6EEE2B0745AF</samlp:SessionIndex>\n</samlp:LogoutRequest>", "controller"=>"simple_example"}
+
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/request_forgery_protection.rb:86:in `verify_authenticity_token'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:173:in `send'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:173:in `evaluate_method'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:161:in `call'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:191:in `call'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:591:in `run_before_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:577:in `call_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (unprocessable_entity)
+
+
+Processing AdvancedExampleController#my_account (for 127.0.0.1 at 2008-11-20 12:08:23) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--3ac0dad26b5ba8bf00d4a6485f54f64cd01e94a4
+  Parameters: {"ticket"=>"ST-1227200903rCC9CF1C7E7B5EF7FA3", "action"=>"my_account", "controller"=>"advanced_example"}
+Request contains ticket "ST-1227200903rCC9CF1C7E7B5EF7FA3".
+Guessed service url: "http://localhost:3000/advanced_example/my_account"
+Requesting CAS response for URI https://mzukowski.urbacon.net:6543/cas/proxyValidate?ticket=ST-1227200903rCC9CF1C7E7B5EF7FA3&service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example%2Fmy_account
+CAS server responded with #<Net::HTTPOK 200 OK readbody=true>:
+<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas"><cas:authenticationSuccess><cas:user>mzukowski</cas:user><cn>Matt Zukowski</cn><mail>mzukowski@urbacon.net</mail></cas:authenticationSuccess></cas:serviceResponse>
+Ticket "ST-1227200903rCC9CF1C7E7B5EF7FA3" for service "http://localhost:3000/advanced_example/my_account" belonging to user "mzukowski" is VALID.
+Extra user attributes provided along with ticket "ST-1227200903rCC9CF1C7E7B5EF7FA3": {"cn"=>"Matt Zukowski", "mail"=>"mzukowski@urbacon.net"}.
+Wrote service session lookup file to "/home/URBACON/mzukowski/workspace/rubycas-client2/examples/rails/tmp/sessions/cas_sess.ST-1227200903rCC9CF1C7E7B5EF7FA3" with session id "BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo\nSGFzaHsABjoKQHVzZWR7AA==--3ac0dad26b5ba8bf00d4a6485f54f64cd01e94a4".
+Rendering advanced_example/my_account
+Completed in 0.02754 (36 reqs/sec) | Rendering: 0.00078 (2%) | 200 OK [http://localhost/advanced_example/my_account?ticket=ST-1227200903rCC9CF1C7E7B5EF7FA3]
+
+
+Processing AdvancedExampleController#logout (for 127.0.0.1 at 2008-11-20 12:08:25) [GET]
+  Session ID: BAh7CjoZY2FzX2V4dHJhX2F0dHJpYnV0ZXNDOh5IYXNoV2l0aEluZGlmZmVy
+ZW50QWNjZXNzewciB2NuIhJNYXR0IFp1a293c2tpIgltYWlsIhptenVrb3dz
+a2lAdXJiYWNvbi5uZXQ6GmNhc19sYXN0X3ZhbGlkX3RpY2tldG86HUNBU0Ns
+aWVudDo6U2VydmljZVRpY2tldAk6DEB0aWNrZXQiJVNULTEyMjcyMDA5MDNy
+Q0M5Q0YxQzdFN0I1RUY3RkEzOg5AcmVzcG9uc2VvOiJDQVNDbGllbnQ6OlZh
+bGlkYXRpb25SZXNwb25zZQo6FEBwYXJzZV9kYXRldGltZUl1OglUaW1lDZEq
+G4BdvXMhBjofQG1hcnNoYWxfd2l0aF91dGNfY29lcmNpb25GOgpAdXNlciIO
+bXp1a293c2tpOglAeG1sbzoTUkVYTUw6OkVsZW1lbnQNOgxAcHJlZml4Ighj
+YXM6DkBlbGVtZW50c286FFJFWE1MOjpFbGVtZW50cwY6DUBlbGVtZW50QBA6
+EEBhdHRyaWJ1dGVzSUM6FlJFWE1MOjpBdHRyaWJ1dGVzewAGOxVAEDoTQGV4
+cGFuZGVkX25hbWUiHmNhczphdXRoZW50aWNhdGlvblN1Y2Nlc3M6DkBjaGls
+ZHJlblsIbzsRDzsSIghjYXM7E287FAY7FUAWOh1AaWdub3JlX3doaXRlc3Bh
+Y2Vfbm9kZXNGOxZJQzsXewAGOxVAFjoQQHdoaXRlc3BhY2VUOxgiDWNhczp1
+c2VyOxlbBm86EFJFWE1MOjpUZXh0CzoSQHVubm9ybWFsaXplZCIObXp1a293
+c2tpOgxAc3RyaW5nIg5tenVrb3dza2k6EEBub3JtYWxpemVkMDoTQGVudGl0
+eV9maWx0ZXIwOglAcmF3VDoMQHBhcmVudEAWOg1AY29udGV4dHsAOgpAbmFt
+ZSIJdXNlcjsiQBBvOxEQOxIiADsTbzsUBjsVQCE7GkY7FklDOxd7AAY7FUAh
+OxtUOxgiB2NuOxlbBm87HAs7HTA7HiISTWF0dCBadWtvd3NraTsfMDsgMDsh
+VDsiQCE7I0AfOyQiB2NuOg9AbmFtZXNwYWNlIgA7IkAQbzsREDsSIgA7E287
+FAY7FUArOxpGOxZJQzsXewAGOxVAKzsbVDsYIgltYWlsOxlbBm87HAs7HTA7
+HiIabXp1a293c2tpQHVyYmFjb24ubmV0Ox8wOyAwOyFUOyJAKzsjQB87JCIJ
+bWFpbDslIgA7IkAQOyNAHzskIhphdXRoZW50aWNhdGlvblN1Y2Nlc3M7Im87
+EQ07EiIIY2FzOxNvOxQGOxVANjsWSUM7F3sGIghjYXNvOhVSRVhNTDo6QXR0
+cmlidXRlDDsSIgp4bWxuczsVQDY6C0B2YWx1ZSIfaHR0cDovL3d3dy55YWxl
+LmVkdS90cC9jYXM7HSIfaHR0cDovL3d3dy55YWxlLmVkdS90cC9jYXM7GCIO
+eG1sbnM6Y2FzOx8wOyQiCGNhcwY7FUA2OxgiGGNhczpzZXJ2aWNlUmVzcG9u
+c2U7GVsGQBA7I0AfOyQiFHNlcnZpY2VSZXNwb25zZTsibzoUUkVYTUw6OkRv
+Y3VtZW50DjsSIgA7E287FAY7FUBEOxZJQzsXewAGOxVARDsYIg5VTkRFRklO
+RUQ7GVsGQDY7I0AfOyQiDlVOREVGSU5FRDslIgA7IjA6DkBwcm90b2NvbGYG
+MjoWQGV4dHJhX2F0dHJpYnV0ZXN7B0AHQAhACUAKOgtAcmVuZXcwOg1Ac2Vy
+dmljZSI2aHR0cDovL2xvY2FsaG9zdDozMDAwL2FkdmFuY2VkX2V4YW1wbGUv
+bXlfYWNjb3VudDoSY2FzZmlsdGVydXNlckAPIgpmbGFzaElDOidBY3Rpb25D
+b250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsAOg1jYXNf
+dXNlciIObXp1a293c2tp--26828c4722e9e049cbdad7d8fa0dddb878618630
+  Parameters: {"action"=>"logout", "controller"=>"advanced_example"}
+Existing local CAS session detected for "mzukowski". Previous ticket "ST-1227200903rCC9CF1C7E7B5EF7FA3" will be re-used.
+Redirected to https://mzukowski.urbacon.net:6543/cas/logout?destination=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example%2Fmy_account
+Completed in 0.00290 (344 reqs/sec) | 302 Found [http://localhost/advanced_example/logout]
+
+
+Processing AdvancedExampleController#my_account (for 127.0.0.1 at 2008-11-20 12:08:25) [POST]
+  Session ID: af9c2c3727f1e3c92c6029fbc68c9973
+  Parameters: {"action"=>"my_account", "logoutRequest"=>"<samlp:LogoutRequest ID=\"1227200905r9264C3C5D67356DE22\" Version=\"2.0\" IssueInstant=\"Thu, 20 Nov 2008 12:08:25 -0500\">\n<saml:NameID></saml:NameID>\n<samlp:SessionIndex>ST-1227200903rCC9CF1C7E7B5EF7FA3</samlp:SessionIndex>\n</samlp:LogoutRequest>", "controller"=>"advanced_example"}
+
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/request_forgery_protection.rb:86:in `verify_authenticity_token'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:173:in `send'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:173:in `evaluate_method'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:161:in `call'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:191:in `call'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:591:in `run_before_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:577:in `call_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (unprocessable_entity)
+
+
+Processing AdvancedExampleController#my_account (for 127.0.0.1 at 2008-11-20 12:31:32) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--3ac0dad26b5ba8bf00d4a6485f54f64cd01e94a4
+  Parameters: {"ticket"=>"ST-1227202292r61123E3CCB49081665", "action"=>"my_account", "controller"=>"advanced_example"}
+Request contains ticket "ST-1227202292r61123E3CCB49081665".
+Guessed service url: "http://localhost:3000/advanced_example/my_account"
+Requesting CAS response for URI https://mzukowski.urbacon.net:6543/cas/proxyValidate?ticket=ST-1227202292r61123E3CCB49081665&service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example%2Fmy_account
+CAS server responded with #<Net::HTTPOK 200 OK readbody=true>:
+<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas"><cas:authenticationSuccess><cas:user>mzukowski</cas:user><cn>Matt Zukowski</cn><mail>mzukowski@urbacon.net</mail></cas:authenticationSuccess></cas:serviceResponse>
+Ticket "ST-1227202292r61123E3CCB49081665" for service "http://localhost:3000/advanced_example/my_account" belonging to user "mzukowski" is VALID.
+Extra user attributes provided along with ticket "ST-1227202292r61123E3CCB49081665": {"cn"=>"Matt Zukowski", "mail"=>"mzukowski@urbacon.net"}.
+Wrote service session lookup file to "/home/URBACON/mzukowski/workspace/rubycas-client2/examples/rails/tmp/sessions/cas_sess.ST-1227202292r61123E3CCB49081665" with session id "BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo\nSGFzaHsABjoKQHVzZWR7AA==--3ac0dad26b5ba8bf00d4a6485f54f64cd01e94a4".
+Rendering advanced_example/my_account
+Completed in 0.06489 (15 reqs/sec) | Rendering: 0.00154 (2%) | 200 OK [http://localhost/advanced_example/my_account?ticket=ST-1227202292r61123E3CCB49081665]
+
+
+Processing SimpleExampleController#index (for 127.0.0.1 at 2008-11-20 12:31:38) [GET]
+  Session ID: BAh7CjoaY2FzX2xhc3RfdmFsaWRfdGlja2V0bzodQ0FTQ2xpZW50OjpTZXJ2
+aWNlVGlja2V0CToLQHJlbmV3MDoOQHJlc3BvbnNlbzoiQ0FTQ2xpZW50OjpW
+YWxpZGF0aW9uUmVzcG9uc2UKOgpAdXNlciIObXp1a293c2tpOhZAZXh0cmFf
+YXR0cmlidXRlc3sHIgdjbiISTWF0dCBadWtvd3NraSIJbWFpbCIabXp1a293
+c2tpQHVyYmFjb24ubmV0OhRAcGFyc2VfZGF0ZXRpbWVJdToJVGltZQ2RKhuA
+ua4CfgY6H0BtYXJzaGFsX3dpdGhfdXRjX2NvZXJjaW9uRjoJQHhtbG86E1JF
+WE1MOjpFbGVtZW50DToMQHByZWZpeCIIY2FzOg5AZWxlbWVudHNvOhRSRVhN
+TDo6RWxlbWVudHMGOg1AZWxlbWVudEAPOhBAYXR0cmlidXRlc0lDOhZSRVhN
+TDo6QXR0cmlidXRlc3sABjsUQA86E0BleHBhbmRlZF9uYW1lIh5jYXM6YXV0
+aGVudGljYXRpb25TdWNjZXNzOg5AY2hpbGRyZW5bCG87EA87ESIIY2FzOxJv
+OxMGOxRAFTodQGlnbm9yZV93aGl0ZXNwYWNlX25vZGVzRjsVSUM7FnsABjsU
+QBU6EEB3aGl0ZXNwYWNlVDsXIg1jYXM6dXNlcjsYWwZvOhBSRVhNTDo6VGV4
+dAs6EkB1bm5vcm1hbGl6ZWQiDm16dWtvd3NraToMQHN0cmluZyIObXp1a293
+c2tpOhBAbm9ybWFsaXplZDA6E0BlbnRpdHlfZmlsdGVyMDoJQHJhd1Q6DEBw
+YXJlbnRAFToNQGNvbnRleHR7ADoKQG5hbWUiCXVzZXI7IUAPbzsQEDsRIgA7
+Em87EwY7FEAgOxlGOxVJQzsWewAGOxRAIDsaVDsXIgdjbjsYWwZvOxsLOxww
+Ox0iEk1hdHQgWnVrb3dza2k7HjA7HzA7IFQ7IUAgOyJAHjsjIgdjbjoPQG5h
+bWVzcGFjZSIAOyFAD287EBA7ESIAOxJvOxMGOxRAKjsZRjsVSUM7FnsABjsU
+QCo7GlQ7FyIJbWFpbDsYWwZvOxsLOxwwOx0iGm16dWtvd3NraUB1cmJhY29u
+Lm5ldDseMDsfMDsgVDshQCo7IkAeOyMiCW1haWw7JCIAOyFADzsiQB47IyIa
+YXV0aGVudGljYXRpb25TdWNjZXNzOyFvOxANOxEiCGNhczsSbzsTBjsUQDU7
+FUlDOxZ7BiIIY2FzbzoVUkVYTUw6OkF0dHJpYnV0ZQw7ESIKeG1sbnM7FEA1
+OgtAdmFsdWUiH2h0dHA6Ly93d3cueWFsZS5lZHUvdHAvY2FzOxwiH2h0dHA6
+Ly93d3cueWFsZS5lZHUvdHAvY2FzOxciDnhtbG5zOmNhczseMDsjIghjYXMG
+OxRANTsXIhhjYXM6c2VydmljZVJlc3BvbnNlOxhbBkAPOyJAHjsjIhRzZXJ2
+aWNlUmVzcG9uc2U7IW86FFJFWE1MOjpEb2N1bWVudA47ESIAOxJvOxMGOxRA
+QzsVSUM7FnsABjsUQEM7FyIOVU5ERUZJTkVEOxhbBkA1OyJAHjsjIg5VTkRF
+RklORUQ7JCIAOyEwOg5AcHJvdG9jb2xmBjI6DUBzZXJ2aWNlIjZodHRwOi8v
+bG9jYWxob3N0OjMwMDAvYWR2YW5jZWRfZXhhbXBsZS9teV9hY2NvdW50OgxA
+dGlja2V0IiVTVC0xMjI3MjAyMjkycjYxMTIzRTNDQ0I0OTA4MTY2NToSY2Fz
+ZmlsdGVydXNlckAIOg1jYXNfdXNlciIObXp1a293c2tpIgpmbGFzaElDOidB
+Y3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA
+OhljYXNfZXh0cmFfYXR0cmlidXRlc0M6Hkhhc2hXaXRoSW5kaWZmZXJlbnRB
+Y2Nlc3N7B0AKQAtADEAN--e09693932a713df8635d9d1bd844b67e5406b0b0
+  Parameters: {"action"=>"index", "controller"=>"simple_example"}
+Existing local CAS session detected for "mzukowski". Previous ticket "ST-1227202292r61123E3CCB49081665" will be re-used.
+Rendering simple_example/index
+Completed in 0.00278 (359 reqs/sec) | Rendering: 0.00116 (41%) | 200 OK [http://localhost/]
+
+
+Processing SimpleExampleController#logout (for 127.0.0.1 at 2008-11-20 12:31:40) [GET]
+  Session ID: BAh7CjoaY2FzX2xhc3RfdmFsaWRfdGlja2V0bzodQ0FTQ2xpZW50OjpTZXJ2
+aWNlVGlja2V0CToLQHJlbmV3MDoNQHNlcnZpY2UiNmh0dHA6Ly9sb2NhbGhv
+c3Q6MzAwMC9hZHZhbmNlZF9leGFtcGxlL215X2FjY291bnQ6DkByZXNwb25z
+ZW86IkNBU0NsaWVudDo6VmFsaWRhdGlvblJlc3BvbnNlCjoKQHVzZXIiDm16
+dWtvd3NraToWQGV4dHJhX2F0dHJpYnV0ZXN7ByIHY24iEk1hdHQgWnVrb3dz
+a2kiCW1haWwiGm16dWtvd3NraUB1cmJhY29uLm5ldDoUQHBhcnNlX2RhdGV0
+aW1lSXU6CVRpbWUNkSobgLmuAn4GOh9AbWFyc2hhbF93aXRoX3V0Y19jb2Vy
+Y2lvbkY6CUB4bWxvOhNSRVhNTDo6RWxlbWVudA06DEBwcmVmaXgiCGNhczoO
+QGVsZW1lbnRzbzoUUkVYTUw6OkVsZW1lbnRzBjoNQGVsZW1lbnRAEDoQQGF0
+dHJpYnV0ZXNJQzoWUkVYTUw6OkF0dHJpYnV0ZXN7AAY7FUAQOhNAZXhwYW5k
+ZWRfbmFtZSIeY2FzOmF1dGhlbnRpY2F0aW9uU3VjY2VzczoOQGNoaWxkcmVu
+WwhvOxEPOxIiCGNhczsTbzsUBjsVQBY7FklDOxd7AAY7FUAWOh1AaWdub3Jl
+X3doaXRlc3BhY2Vfbm9kZXNGOhBAd2hpdGVzcGFjZVQ7GCINY2FzOnVzZXI7
+GVsGbzoQUkVYTUw6OlRleHQLOhJAdW5ub3JtYWxpemVkIg5tenVrb3dza2k6
+DEBzdHJpbmciDm16dWtvd3NraToQQG5vcm1hbGl6ZWQwOglAcmF3VDoTQGVu
+dGl0eV9maWx0ZXIwOgxAcGFyZW50QBY6DUBjb250ZXh0ewA6CkBuYW1lIgl1
+c2VyOyJAEG87ERA7EiIAOxNvOxQGOxVAITsWSUM7F3sABjsVQCE7GkY7G1Q7
+GCIHY247GVsGbzscCzsdMDseIhJNYXR0IFp1a293c2tpOx8wOyBUOyEwOyJA
+ITsjQB86D0BuYW1lc3BhY2UiADskIgdjbjsiQBBvOxEQOxIiADsTbzsUBjsV
+QCs7FklDOxd7AAY7FUArOxpGOxtUOxgiCW1haWw7GVsGbzscCzsdMDseIhpt
+enVrb3dza2lAdXJiYWNvbi5uZXQ7HzA7IFQ7ITA7IkArOyNAHzslIgA7JCIJ
+bWFpbDsiQBA7I0AfOyQiGmF1dGhlbnRpY2F0aW9uU3VjY2VzczsibzsRDTsS
+IghjYXM7E287FAY7FUA2OxZJQzsXewYiCGNhc286FVJFWE1MOjpBdHRyaWJ1
+dGUMOxVANjsSIgp4bWxuczoLQHZhbHVlIh9odHRwOi8vd3d3LnlhbGUuZWR1
+L3RwL2NhczsdIh9odHRwOi8vd3d3LnlhbGUuZWR1L3RwL2NhczsYIg54bWxu
+czpjYXM7HzA7JCIIY2FzBjsVQDY7GCIYY2FzOnNlcnZpY2VSZXNwb25zZTsZ
+WwZAEDsjQB87JCIUc2VydmljZVJlc3BvbnNlOyJvOhRSRVhNTDo6RG9jdW1l
+bnQOOxIiADsTbzsUBjsVQEQ7FklDOxd7AAY7FUBEOxgiDlVOREVGSU5FRDsZ
+WwZANjsjQB87JSIAOyQiDlVOREVGSU5FRDsiMDoOQHByb3RvY29sZgYyOgxA
+dGlja2V0IiVTVC0xMjI3MjAyMjkycjYxMTIzRTNDQ0I0OTA4MTY2NToSY2Fz
+ZmlsdGVydXNlckAJOg1jYXNfdXNlciIObXp1a293c2tpIgpmbGFzaElDOidB
+Y3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsA
+OhljYXNfZXh0cmFfYXR0cmlidXRlc0M6Hkhhc2hXaXRoSW5kaWZmZXJlbnRB
+Y2Nlc3N7B0ALQAxADUAO--05ed2abdb70dda36ad8c307bdb9a18dd2d28884a
+  Parameters: {"action"=>"logout", "controller"=>"simple_example"}
+Existing local CAS session detected for "mzukowski". Previous ticket "ST-1227202292r61123E3CCB49081665" will be re-used.
+Redirected to https://mzukowski.urbacon.net:6543/cas/logout?destination=http%3A%2F%2Flocalhost%3A3000%2F
+Completed in 0.02304 (43 reqs/sec) | 302 Found [http://localhost/simple_example/logout]
+
+
+Processing AdvancedExampleController#my_account (for 127.0.0.1 at 2008-11-20 12:31:40) [POST]
+  Session ID: 22b93e12d13c98d3d7602555f4bc5db0
+  Parameters: {"action"=>"my_account", "logoutRequest"=>"<samlp:LogoutRequest ID=\"1227202300r40EB96184DA355FD93\" Version=\"2.0\" IssueInstant=\"Thu, 20 Nov 2008 12:31:40 -0500\">\n<saml:NameID></saml:NameID>\n<samlp:SessionIndex>ST-1227202292r61123E3CCB49081665</samlp:SessionIndex>\n</samlp:LogoutRequest>", "controller"=>"advanced_example"}
+Intercepted single-sign-out request for CAS session "ST-1227202292r61123E3CCB49081665".
+
+
+NameError (uninitialized constant CGI::Session::ActiveRecordStore):
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:493:in `const_missing'
+    /usr/lib/ruby/gems/1.8/gems/rubycas-client-2.0.99/lib/casclient/frameworks/rails/filter.rb:199:in `single_sign_out'
+    /usr/lib/ruby/gems/1.8/gems/rubycas-client-2.0.99/lib/casclient/frameworks/rails/filter.rb:18:in `filter'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:180:in `send'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:180:in `evaluate_method'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/callbacks.rb:161:in `call'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:191:in `call'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:591:in `run_before_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:577:in `call_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing SimpleExampleController#index (for 127.0.0.1 at 2008-11-20 12:31:48) [GET]
+  Session ID: BAh7BiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo
+SGFzaHsABjoKQHVzZWR7AA==--3ac0dad26b5ba8bf00d4a6485f54f64cd01e94a4
+  Parameters: {"action"=>"index", "controller"=>"simple_example"}
+Guessed service url: "http://localhost:3000/"
+Redirecting to "https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2F"
+Redirected to https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2F
+Filter chain halted as [CASClient::Frameworks::Rails::Filter] rendered_or_redirected.
+Completed in 0.00076 (1322 reqs/sec) | 302 Found [http://localhost/]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:32:25) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheUY6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4AAdAF/BjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--06eb7b8f984114f478515d7f7bafc48a6c584e9b
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Guessed service url: "http://localhost:3000/advanced_example"
+Redirecting to "https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example&gateway=true"
+Redirected to https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example&gateway=true
+Filter chain halted as [CASClient::Frameworks::Rails::GatewayFilter] rendered_or_redirected.
+Completed in 0.00068 (1459 reqs/sec) | 302 Found [http://localhost/advanced_example/]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:32:25) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Returning from CAS gateway without authentication.
+This CAS client is configured to use gatewaying, so we will permit the user to continue without authentication.
+Rendering advanced_example/index
+Completed in 0.00303 (330 reqs/sec) | Rendering: 0.00127 (42%) | 200 OK [http://localhost/advanced_example]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:32:46) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Returning from CAS gateway without authentication.
+This CAS client is configured to use gatewaying, so we will permit the user to continue without authentication.
+Rendering advanced_example/index
+Completed in 0.00305 (327 reqs/sec) | Rendering: 0.00128 (41%) | 200 OK [http://localhost/advanced_example]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:38:42) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Returning from CAS gateway without authentication.
+This CAS client is configured to use gatewaying, so we will permit the user to continue without authentication.
+
+
+NoMethodError (undefined method `login_url' for CASClient::Frameworks::Rails::Filter:Class):
+    /app/controllers/advanced_example_controller.rb:15:in `index'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:38:49) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Returning from CAS gateway without authentication.
+This CAS client is configured to use gatewaying, so we will permit the user to continue without authentication.
+
+
+NoMethodError (undefined method `login_url' for CASClient::Frameworks::Rails::Filter:Class):
+    /app/controllers/advanced_example_controller.rb:15:in `index'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:38:51) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Returning from CAS gateway without authentication.
+This CAS client is configured to use gatewaying, so we will permit the user to continue without authentication.
+
+
+NoMethodError (undefined method `login_url' for CASClient::Frameworks::Rails::Filter:Class):
+    /app/controllers/advanced_example_controller.rb:15:in `index'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:1166:in `perform_action_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:579:in `call_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:572:in `perform_action_without_benchmark'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/1.8/benchmark.rb:293:in `measure'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/rescue.rb:201:in `perform_action'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `send'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:529:in `process_without_filters'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/filters.rb:568:in `process_without_session_management_support'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/session_management.rb:130:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/base.rb:389:in `process'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:149:in `handle_request'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:107:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:104:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:120:in `dispatch_cgi'
+    /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/dispatcher.rb:35:in `dispatch'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:76:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `synchronize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/../lib/mongrel/rails.rb:74:in `process'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:159:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:158:in `process_client'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:285:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `initialize'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `new'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel.rb:268:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:282:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `each'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/configurator.rb:281:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:128:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/lib/mongrel/command.rb:212:in `run'
+    /usr/lib/ruby/gems/1.8/gems/mongrel-1.1.4/bin/mongrel_rails:281
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:503:in `load'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/servers/mongrel.rb:64
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:355:in `new_constants_in'
+    /usr/lib/ruby/gems/1.8/gems/activesupport-2.1.2/lib/active_support/dependencies.rb:510:in `require'
+    /usr/lib/ruby/gems/1.8/gems/rails-2.1.2/lib/commands/server.rb:39
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+    /usr/lib/ruby/site_ruby/1.8/rubygems/custom_require.rb:31:in `require'
+    script/server:3
+
+Rendering /usr/lib/ruby/gems/1.8/gems/actionpack-2.1.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:39:28) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54
+  Parameters: {"action"=>"index", "controller"=>"advanced_example"}
+Returning from CAS gateway without authentication.
+This CAS client is configured to use gatewaying, so we will permit the user to continue without authentication.
+Guessed service url: "http://localhost:3000/advanced_example"
+Generated login url: https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example
+Rendering advanced_example/index
+Completed in 0.00380 (263 reqs/sec) | Rendering: 0.00124 (32%) | 200 OK [http://localhost/advanced_example]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:39:38) [GET]
+  Session ID: BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz
+aElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA
+dXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54
+  Parameters: {"ticket"=>"ST-1227202778r635C166263A75DC7C1", "action"=>"index", "controller"=>"advanced_example"}
+Request contains ticket "ST-1227202778r635C166263A75DC7C1".
+Guessed service url: "http://localhost:3000/advanced_example"
+Requesting CAS response for URI https://mzukowski.urbacon.net:6543/cas/proxyValidate?ticket=ST-1227202778r635C166263A75DC7C1&service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example
+CAS server responded with #<Net::HTTPOK 200 OK readbody=true>:
+<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas"><cas:authenticationSuccess><cas:user>mzukowski</cas:user><cn>Matt Zukowski</cn><mail>mzukowski@urbacon.net</mail></cas:authenticationSuccess></cas:serviceResponse>
+Ticket "ST-1227202778r635C166263A75DC7C1" for service "http://localhost:3000/advanced_example" belonging to user "mzukowski" is VALID.
+Extra user attributes provided along with ticket "ST-1227202778r635C166263A75DC7C1": {"cn"=>"Matt Zukowski", "mail"=>"mzukowski@urbacon.net"}.
+Wrote service session lookup file to "/home/URBACON/mzukowski/workspace/rubycas-client2/examples/rails/tmp/sessions/cas_sess.ST-1227202778r635C166263A75DC7C1" with session id "BAh7CToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0\nX3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf\nY29lcmNpb25GOh9jYXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFz\naElDOidBY3Rpb25Db250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpA\ndXNlZHsA--d884e6ed45ef09f8cb038d5e0290d264b2765d54".
+Guessed service url: "http://localhost:3000/advanced_example"
+Generated login url: https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example
+Rendering advanced_example/index
+Completed in 0.02237 (44 reqs/sec) | Rendering: 0.00058 (2%) | 200 OK [http://localhost/advanced_example?ticket=ST-1227202778r635C166263A75DC7C1]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:47:00) [GET]
+  Session ID: BAh7DToaY2FzX2xhc3RfdmFsaWRfdGlja2V0bzodQ0FTQ2xpZW50OjpTZXJ2
+aWNlVGlja2V0CToLQHJlbmV3MDoOQHJlc3BvbnNlbzoiQ0FTQ2xpZW50OjpW
+YWxpZGF0aW9uUmVzcG9uc2UKOgpAdXNlciIObXp1a293c2tpOhZAZXh0cmFf
+YXR0cmlidXRlc3sHIgdjbiISTWF0dCBadWtvd3NraSIJbWFpbCIabXp1a293
+c2tpQHVyYmFjb24ubmV0OhRAcGFyc2VfZGF0ZXRpbWVJdToJVGltZQ2RKhuA
+mKhungY6H0BtYXJzaGFsX3dpdGhfdXRjX2NvZXJjaW9uRjoJQHhtbG86E1JF
+WE1MOjpFbGVtZW50DToMQHByZWZpeCIIY2FzOg5AZWxlbWVudHNvOhRSRVhN
+TDo6RWxlbWVudHMGOg1AZWxlbWVudEAPOhBAYXR0cmlidXRlc0lDOhZSRVhN
+TDo6QXR0cmlidXRlc3sABjsUQA86E0BleHBhbmRlZF9uYW1lIh5jYXM6YXV0
+aGVudGljYXRpb25TdWNjZXNzOg5AY2hpbGRyZW5bCG87EA87ESIIY2FzOxJv
+OxMGOxRAFTodQGlnbm9yZV93aGl0ZXNwYWNlX25vZGVzRjsVSUM7FnsABjsU
+QBU6EEB3aGl0ZXNwYWNlVDsXIg1jYXM6dXNlcjsYWwZvOhBSRVhNTDo6VGV4
+dAs6EkB1bm5vcm1hbGl6ZWQiDm16dWtvd3NraToMQHN0cmluZyIObXp1a293
+c2tpOhBAbm9ybWFsaXplZDA6E0BlbnRpdHlfZmlsdGVyMDoJQHJhd1Q6DEBw
+YXJlbnRAFToNQGNvbnRleHR7ADoKQG5hbWUiCXVzZXI7IUAPbzsQEDsRIgA7
+Em87EwY7FEAgOxlGOxVJQzsWewAGOxRAIDsaVDsXIgdjbjsYWwZvOxsLOxww
+Ox0iEk1hdHQgWnVrb3dza2k7HjA7HzA7IFQ7IUAgOyJAHjsjIgdjbjoPQG5h
+bWVzcGFjZSIAOyFAD287EBA7ESIAOxJvOxMGOxRAKjsZRjsVSUM7FnsABjsU
+QCo7GlQ7FyIJbWFpbDsYWwZvOxsLOxwwOx0iGm16dWtvd3NraUB1cmJhY29u
+Lm5ldDseMDsfMDsgVDshQCo7IkAeOyMiCW1haWw7JCIAOyFADzsiQB47IyIa
+YXV0aGVudGljYXRpb25TdWNjZXNzOyFvOxANOxEiCGNhczsSbzsTBjsUQDU7
+FUlDOxZ7BiIIY2FzbzoVUkVYTUw6OkF0dHJpYnV0ZQw7ESIKeG1sbnM7FEA1
+OgtAdmFsdWUiH2h0dHA6Ly93d3cueWFsZS5lZHUvdHAvY2FzOxwiH2h0dHA6
+Ly93d3cueWFsZS5lZHUvdHAvY2FzOxciDnhtbG5zOmNhczseMDsjIghjYXMG
+OxRANTsXIhhjYXM6c2VydmljZVJlc3BvbnNlOxhbBkAPOyJAHjsjIhRzZXJ2
+aWNlUmVzcG9uc2U7IW86FFJFWE1MOjpEb2N1bWVudA47ESIAOxJvOxMGOxRA
+QzsVSUM7FnsABjsUQEM7FyIOVU5ERUZJTkVEOxhbBkA1OyJAHjsjIg5VTkRF
+RklORUQ7JCIAOyEwOg5AcHJvdG9jb2xmBjI6DUBzZXJ2aWNlIitodHRwOi8v
+bG9jYWxob3N0OjMwMDAvYWR2YW5jZWRfZXhhbXBsZToMQHRpY2tldCIlU1Qt
+MTIyNzIwMjc3OHI2MzVDMTY2MjYzQTc1REM3QzE6EmNhc2ZpbHRlcnVzZXJA
+CDoYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0X3Rv
+X2Nhc0l1Ow0NkSobgCHSmIEGOw5GOg1jYXNfdXNlciIObXp1a293c2tpOh9j
+YXNfdmFsaWRhdGlvbl9yZXRyeV9jb3VudGkAIgpmbGFzaElDOidBY3Rpb25D
+b250cm9sbGVyOjpGbGFzaDo6Rmxhc2hIYXNoewAGOgpAdXNlZHsAOhljYXNf
+ZXh0cmFfYXR0cmlidXRlc0M6Hkhhc2hXaXRoSW5kaWZmZXJlbnRBY2Nlc3N7
+B0AKQAtADEAN--c3c095f05414d41aeebb5c6cd3630f3995da698e
+  Parameters: {"ticket"=>"ST-1227202778r635C166263A75DC7C1", "action"=>"index", "controller"=>"advanced_example"}
+Request contains ticket "ST-1227202778r635C166263A75DC7C1".
+Guessed service url: "http://localhost:3000/advanced_example"
+Re-using previously validated ticket since the ticket id and service are the same.
+Guessed service url: "http://localhost:3000/advanced_example"
+Generated login url: https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example
+Rendering advanced_example/index
+Completed in 0.00501 (199 reqs/sec) | Rendering: 0.00194 (38%) | 200 OK [http://localhost/advanced_example?ticket=ST-1227202778r635C166263A75DC7C1]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:48:47) [GET]
+  Session ID: BAh7DToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOg1jYXNfdXNlciIObXp1a293c2tpOh9jYXNfdmFsaWRhdGlv
+bl9yZXRyeV9jb3VudGkAOhljYXNfZXh0cmFfYXR0cmlidXRlc0M6Hkhhc2hX
+aXRoSW5kaWZmZXJlbnRBY2Nlc3N7ByIHY24iEk1hdHQgWnVrb3dza2kiCW1h
+aWwiGm16dWtvd3NraUB1cmJhY29uLm5ldCIKZmxhc2hJQzonQWN0aW9uQ29u
+dHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7ADoaY2FzX2xh
+c3RfdmFsaWRfdGlja2V0bzodQ0FTQ2xpZW50OjpTZXJ2aWNlVGlja2V0CToO
+QHJlc3BvbnNlbzoiQ0FTQ2xpZW50OjpWYWxpZGF0aW9uUmVzcG9uc2UKOgpA
+dXNlciIObXp1a293c2tpOglAeG1sbzoTUkVYTUw6OkVsZW1lbnQNOgxAcHJl
+Zml4IghjYXM6DkBlbGVtZW50c286FFJFWE1MOjpFbGVtZW50cwY6DUBlbGVt
+ZW50QBM6EEBhdHRyaWJ1dGVzSUM6FlJFWE1MOjpBdHRyaWJ1dGVzewAGOxlA
+EzoTQGV4cGFuZGVkX25hbWUiHmNhczphdXRoZW50aWNhdGlvblN1Y2Nlc3M6
+DkBjaGlsZHJlblsIbzsVDzsWIghjYXM7F287GAY7GUAZOxpJQzsbewAGOxlA
+GTodQGlnbm9yZV93aGl0ZXNwYWNlX25vZGVzRjoQQHdoaXRlc3BhY2VUOxwi
+DWNhczp1c2VyOx1bBm86EFJFWE1MOjpUZXh0CzoSQHVubm9ybWFsaXplZCIO
+bXp1a293c2tpOgxAc3RyaW5nIg5tenVrb3dza2k6EEBub3JtYWxpemVkMDoJ
+QHJhd1Q6E0BlbnRpdHlfZmlsdGVyMDoMQHBhcmVudEAZOg1AY29udGV4dHsA
+OgpAbmFtZSIJdXNlcjsmQBNvOxUQOxYiADsXbzsYBjsZQCQ7GklDOxt7AAY7
+GUAkOx5GOx9UOxwiB2NuOx1bBm87IAs7ITA7IiISTWF0dCBadWtvd3NraTsj
+MDskVDslMDsmQCQ7J0AiOg9AbmFtZXNwYWNlIgA7KCIHY247JkATbzsVEDsW
+IgA7F287GAY7GUAuOxpJQzsbewAGOxlALjseRjsfVDscIgltYWlsOx1bBm87
+IAs7ITA7IiIabXp1a293c2tpQHVyYmFjb24ubmV0OyMwOyRUOyUwOyZALjsn
+QCI7KSIAOygiCW1haWw7JkATOydAIjsoIhphdXRoZW50aWNhdGlvblN1Y2Nl
+c3M7Jm87FQ07FiIIY2FzOxdvOxgGOxlAOTsaSUM7G3sGIghjYXNvOhVSRVhN
+TDo6QXR0cmlidXRlDDsZQDk7FiIKeG1sbnM6C0B2YWx1ZSIfaHR0cDovL3d3
+dy55YWxlLmVkdS90cC9jYXM7ISIfaHR0cDovL3d3dy55YWxlLmVkdS90cC9j
+YXM7HCIOeG1sbnM6Y2FzOyMwOygiCGNhcwY7GUA5OxwiGGNhczpzZXJ2aWNl
+UmVzcG9uc2U7HVsGQBM7J0AiOygiFHNlcnZpY2VSZXNwb25zZTsmbzoUUkVY
+TUw6OkRvY3VtZW50DjsWIgA7F287GAY7GUBHOxpJQzsbewAGOxlARzscIg5V
+TkRFRklORUQ7HVsGQDk7J0AiOykiADsoIg5VTkRFRklORUQ7JjA6FkBleHRy
+YV9hdHRyaWJ1dGVzewdACUAKQAtADDoOQHByb3RvY29sZgYyOhRAcGFyc2Vf
+ZGF0ZXRpbWVJdTsHDZEqG4CYqG6eBjsIRjoLQHJlbmV3MDoNQHNlcnZpY2Ui
+K2h0dHA6Ly9sb2NhbGhvc3Q6MzAwMC9hZHZhbmNlZF9leGFtcGxlOgxAdGlj
+a2V0IiVTVC0xMjI3MjAyNzc4cjYzNUMxNjYyNjNBNzVEQzdDMToSY2FzZmls
+dGVydXNlckAS--9d74601d600be2c4d5ece518aff1f040923892d8
+  Parameters: {"ticket"=>"ST-1227202778r635C166263A75DC7C1", "action"=>"index", "controller"=>"advanced_example"}
+Request contains ticket "ST-1227202778r635C166263A75DC7C1".
+Guessed service url: "http://localhost:3000/advanced_example"
+Re-using previously validated ticket since the ticket id and service are the same.
+Guessed service url: "http://localhost:3000/advanced_example"
+Generated login url: https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example
+Rendering advanced_example/index
+Completed in 0.00383 (260 reqs/sec) | Rendering: 0.00132 (34%) | 200 OK [http://localhost/advanced_example?ticket=ST-1227202778r635C166263A75DC7C1]
+
+
+Processing AdvancedExampleController#index (for 127.0.0.1 at 2008-11-20 12:49:40) [GET]
+  Session ID: BAh7DToYY2FzX3NlbnRfdG9fZ2F0ZXdheVQ6HXByZXZpb3VzX3JlZGlyZWN0
+X3RvX2Nhc0l1OglUaW1lDZEqG4Ah0piBBjofQG1hcnNoYWxfd2l0aF91dGNf
+Y29lcmNpb25GOg1jYXNfdXNlciIObXp1a293c2tpOh9jYXNfdmFsaWRhdGlv
+bl9yZXRyeV9jb3VudGkAOhljYXNfZXh0cmFfYXR0cmlidXRlc0M6Hkhhc2hX
+aXRoSW5kaWZmZXJlbnRBY2Nlc3N7ByIHY24iEk1hdHQgWnVrb3dza2kiCW1h
+aWwiGm16dWtvd3NraUB1cmJhY29uLm5ldDoaY2FzX2xhc3RfdmFsaWRfdGlj
+a2V0bzodQ0FTQ2xpZW50OjpTZXJ2aWNlVGlja2V0CToLQHJlbmV3MDoOQHJl
+c3BvbnNlbzoiQ0FTQ2xpZW50OjpWYWxpZGF0aW9uUmVzcG9uc2UKOgpAdXNl
+ciIObXp1a293c2tpOhZAZXh0cmFfYXR0cmlidXRlc3sHQAlACkALQAw6CUB4
+bWxvOhNSRVhNTDo6RWxlbWVudA06DEBwcmVmaXgiCGNhczoOQGVsZW1lbnRz
+bzoUUkVYTUw6OkVsZW1lbnRzBjoNQGVsZW1lbnRAEToQQGF0dHJpYnV0ZXNJ
+QzoWUkVYTUw6OkF0dHJpYnV0ZXN7AAY7GUAROhNAZXhwYW5kZWRfbmFtZSIe
+Y2FzOmF1dGhlbnRpY2F0aW9uU3VjY2VzczoOQGNoaWxkcmVuWwhvOxUPOxYi
+CGNhczsXbzsYBjsZQBc6HUBpZ25vcmVfd2hpdGVzcGFjZV9ub2Rlc0Y7GklD
+Oxt7AAY7GUAXOhBAd2hpdGVzcGFjZVQ7HCINY2FzOnVzZXI7HVsGbzoQUkVY
+TUw6OlRleHQLOhJAdW5ub3JtYWxpemVkIg5tenVrb3dza2k6DEBzdHJpbmci
+Dm16dWtvd3NraToQQG5vcm1hbGl6ZWQwOhNAZW50aXR5X2ZpbHRlcjA6CUBy
+YXdUOgxAcGFyZW50QBc6DUBjb250ZXh0ewA6CkBuYW1lIgl1c2VyOyZAEW87
+FRA7FiIAOxdvOxgGOxlAIjseRjsaSUM7G3sABjsZQCI7H1Q7HCIHY247HVsG
+bzsgCzshMDsiIhJNYXR0IFp1a293c2tpOyMwOyQwOyVUOyZAIjsnQCA7KCIH
+Y246D0BuYW1lc3BhY2UiADsmQBFvOxUQOxYiADsXbzsYBjsZQCw7HkY7GklD
+Oxt7AAY7GUAsOx9UOxwiCW1haWw7HVsGbzsgCzshMDsiIhptenVrb3dza2lA
+dXJiYWNvbi5uZXQ7IzA7JDA7JVQ7JkAsOydAIDsoIgltYWlsOykiADsmQBE7
+J0AgOygiGmF1dGhlbnRpY2F0aW9uU3VjY2VzczsmbzsVDTsWIghjYXM7F287
+GAY7GUA3OxpJQzsbewYiCGNhc286FVJFWE1MOjpBdHRyaWJ1dGUMOxYiCnht
+bG5zOxlANzoLQHZhbHVlIh9odHRwOi8vd3d3LnlhbGUuZWR1L3RwL2Nhczsh
+Ih9odHRwOi8vd3d3LnlhbGUuZWR1L3RwL2NhczscIg54bWxuczpjYXM7IzA7
+KCIIY2FzBjsZQDc7HCIYY2FzOnNlcnZpY2VSZXNwb25zZTsdWwZAETsnQCA7
+KCIUc2VydmljZVJlc3BvbnNlOyZvOhRSRVhNTDo6RG9jdW1lbnQOOxYiADsX
+bzsYBjsZQEU7GklDOxt7AAY7GUBFOxwiDlVOREVGSU5FRDsdWwZANzsnQCA7
+KCIOVU5ERUZJTkVEOykiADsmMDoUQHBhcnNlX2RhdGV0aW1lSXU7Bw2RKhuA
+mKhungY7CEY6DkBwcm90b2NvbGYGMjoNQHNlcnZpY2UiK2h0dHA6Ly9sb2Nh
+bGhvc3Q6MzAwMC9hZHZhbmNlZF9leGFtcGxlOgxAdGlja2V0IiVTVC0xMjI3
+MjAyNzc4cjYzNUMxNjYyNjNBNzVEQzdDMSIKZmxhc2hJQzonQWN0aW9uQ29u
+dHJvbGxlcjo6Rmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7ADoSY2FzZmls
+dGVydXNlckAP--f6abd28027e3ebd81f1197903bf4266e4b3a7a16
+  Parameters: {"ticket"=>"ST-1227202778r635C166263A75DC7C1", "action"=>"index", "controller"=>"advanced_example"}
+Request contains ticket "ST-1227202778r635C166263A75DC7C1".
+Guessed service url: "http://localhost:3000/advanced_example"
+Re-using previously validated ticket since the ticket id and service are the same.
+Guessed service url: "http://localhost:3000/advanced_example"
+Generated login url: https://mzukowski.urbacon.net:6543/cas/login?service=http%3A%2F%2Flocalhost%3A3000%2Fadvanced_example
+Rendering advanced_example/index
+Completed in 0.00497 (201 reqs/sec) | Rendering: 0.00177 (35%) | 200 OK [http://localhost/advanced_example?ticket=ST-1227202778r635C166263A75DC7C1]

@@ -1,0 +1,11 @@
+<h1>AdvancedExample#my_account</h1>
+<p><%= @username %>'s Account page</p>
+
+<p>
+<strong>Extra Attributes</strong>:<br />
+<% unless @extra_attributes.blank? %>
+  <%= debug(@extra_attributes) %>
+<% end %>
+</p>
+
+<p>[ <%= link_to("Logout", :action => 'logout') %> ]</p>

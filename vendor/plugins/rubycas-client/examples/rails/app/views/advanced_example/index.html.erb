@@ -1,0 +1,13 @@
+<h1>AdvancedExample#index</h1>
+
+<% if @username %>
+  <p>Hello, <%= @username %>! You are authenticated.</p>
+<% else %>
+  <p>You are not yet authenticated. <%= link_to("Login", @login_url) %>
+<% end %>
+
+<p>&raquo; <%= link_to("Go To My Account", :action => 'my_account') %></p>
+
+<% if @username %>
+<p>[ <%= link_to("Logout", :action => 'logout') %> ]</p>
+<% end %>

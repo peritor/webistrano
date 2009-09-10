@@ -1,0 +1,12 @@
+h1. Very flat merb app with casclient support
+
+Run rubycas-server or other CAS server on localhost:7777
+
+Then type this:
+<pre><code>
+merb -I merb_auth_cas.rb
+</code></pre>
+
+Then point your web browser to http://localhost:4000.
+You should be redirected to the CAS login screen, then
+to your Merb application showing your username.

@@ -1,0 +1,16 @@
+This is a skeleton Rails application hooked up for CAS authentication.
+
+To try this out:
+
+1. If you have an existing CAS server, modify the CAS client settings in 
+   config/environment.rb to point to your server. If you do not yet 
+   have a CAS server, install rubycas-server, and configure it to run on
+   http://localhost:7777 (or modify environment.rb to your likings).
+
+2. Run `ruby script/server`
+
+3. Point your web browser to http://localhost:3000
+
+4. Have a look at the source code in app/controllers/simple_example_controller.rb
+   and app/controllers/advanced_example_controller.rb. The 
+   corresponding views under app/views might also be worth looking at.

@@ -55,3 +55,9 @@ hoe = Hoe.new(GEM_NAME, VERS) do |p|
   #p.spec_extras    - A hash of extra values to set in the gemspec.
   p.extra_deps = ['activesupport']
 end
+
+desc 'Build and install rubycas-client'
+task :install do
+  system "gem build rubycas-client.gemspec"
+  system "sudo gem install rubycas-client-#{VERS}.gem"
+end
