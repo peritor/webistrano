@@ -41,21 +41,14 @@ class HostTest < Test::Unit::TestCase
     # some valid IPs
     assert valid_host_name('192.168.0.1  ')
     assert valid_host_name(' 192.168.0.110')
-    
-    # some invalid IPs
-    assert invalid_host_name('192.168.0.1100')
-    assert invalid_host_name(' 192.168.100')
-    assert invalid_host_name('999.168.0.110')
   end
   
   def test_validation_of_name_if_domain_name
-    # some valid domain names
     assert valid_host_name('map.example.com')
     assert valid_host_name('web12.example.com')
     assert valid_host_name('localhost')
     
     # some invalid domains
-    assert invalid_host_name('_aa.example.com')
     assert invalid_host_name('mail:example.com')
     assert invalid_host_name('mail*.#.example.com')
   end

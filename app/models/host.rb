@@ -19,7 +19,7 @@ class Host < ActiveRecord::Base
   end
   
   def valid_hostname?
-    self.name == 'localhost' || self.name =~ /^([a-zA-Z0-9][a-zA-Z0-9._-]*\.)*[a-zA-Z0-9][a-zA-Z0-9._-]*\.[a-zA-Z]{2,5}$/
+    self.name =~ /\A[a-zA-Z0-9\_\-\.]+\Z/
   end
   
   def valid_ip?
