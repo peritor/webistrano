@@ -18,13 +18,13 @@ class Recipe < ActiveRecord::Base
 
    result = ""
    Open4::popen4 "ruby -wc" do |pid, stdin, stdout, stderr|
-     stdin.write self.body
+     stdin.write body
      stdin.close
      output = stdout.read
      errors = stderr.read
-     result = output.any? ? output : errors
+     result = output.empty? ? errors : output
    end
-
+   
    unless result == "Syntax OK"
      line = $1.to_i if result =~ /^-:(\d+):/
      errors.add(:body, "syntax error at line: #{line}") unless line.nil?
