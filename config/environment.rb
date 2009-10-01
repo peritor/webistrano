@@ -27,13 +27,13 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   config.time_zone = 'UTC'
   
-  config.gem 'net-ssh', :version => '2.0.11', :lib => 'net/ssh'
-  config.gem 'net-scp', :version => '1.0.1', :lib => 'net/scp'
-  config.gem 'net-sftp', :version => '2.0.1', :lib => 'net/sftp'
-  config.gem 'net-ssh-gateway', :version => '1.0.0', :lib => 'net/ssh/gateway'
-  config.gem 'capistrano', :version => '2.5.5'
+  config.gem 'net-ssh', :version => '2.0.15', :lib => 'net/ssh'
+  config.gem 'net-scp', :version => '1.0.2', :lib => 'net/scp'
+  config.gem 'net-sftp', :version => '2.0.2', :lib => 'net/sftp'
+  config.gem 'net-ssh-gateway', :version => '1.0.1', :lib => 'net/ssh/gateway'
+  config.gem 'capistrano', :version => '2.5.9'
   config.gem 'mocha', :version => '0.4.0'
-  config.gem 'highline', :version => '1.5.0'
+  config.gem 'highline', :version => '1.5.1'
   config.gem 'open4', :version => '0.9.3'
   config.gem 'syntax', :version => '1.0.0'
 end
