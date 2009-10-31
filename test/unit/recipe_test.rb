@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class RecipeTest < Test::Unit::TestCase
+class RecipeTest < ActiveSupport::TestCase
 
   def test_create
     assert_nothing_raised{

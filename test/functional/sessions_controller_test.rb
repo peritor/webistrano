@@ -1,12 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'sessions_controller'
 
-# Re-raise errors caught by the controller.
-class SessionsController; def rescue_action(e) raise e end; end
-
-class SessionsControllerTest < Test::Unit::TestCase
-  # Be sure to include AuthenticatedTestHelper in test/test_helper.rb instead
-  # Then, you can remove it from this and the units test.
+class SessionsControllerTest < ActionController::TestCase
   include AuthenticatedTestHelper
 
   fixtures :users
@@ -57,7 +51,7 @@ class SessionsControllerTest < Test::Unit::TestCase
   def test_should_delete_token_on_logout
     login_as :quentin
     get :destroy
-    assert_equal @response.cookies["auth_token"], []
+    assert_nil @response.cookies["auth_token"]
   end
 
   def test_should_login_with_cookie

@@ -1,17 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'project_configurations_controller'
 
-# Re-raise errors caught by the controller.
-class ProjectConfigurationsController; def rescue_action(e) raise e end; end
-
-class ProjectConfigurationsControllerTest < Test::Unit::TestCase
-  fixtures :project_configurations
+class ProjectConfigurationsControllerTest < ActionController::TestCase
 
   def setup
-    @controller = ProjectConfigurationsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-    
     @project = create_new_project
     @config = create_new_project_configuration(:project => @project)
     @user = login

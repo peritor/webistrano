@@ -5,8 +5,6 @@ class StylesheetsController < ApplicationController
     skip_before_filter CASClient::Frameworks::Rails::Filter
   end
   
-  session :off
-  
   caches_page :application
   
   def application

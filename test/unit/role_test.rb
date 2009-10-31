@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class RoleTest < Test::Unit::TestCase
+class RoleTest < ActiveSupport::TestCase
 
   def setup
     @stage = create_new_stage

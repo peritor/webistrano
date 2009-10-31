@@ -1,17 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'stage_configurations_controller'
 
-# Re-raise errors caught by the controller.
-class StageConfigurationsController; def rescue_action(e) raise e end; end
-
-class StageConfigurationsControllerTest < Test::Unit::TestCase
-  fixtures :stage_configurations
+class StageConfigurationsControllerTest < ActionController::TestCase
 
   def setup
-    @controller = StageConfigurationsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-    
     @project = create_new_project
     @stage = create_new_stage(:project => @project)
     @config = create_new_stage_configuration(:stage => @stage)

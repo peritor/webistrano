@@ -1,5 +1,4 @@
-require 'cgi'
-require 'erb'
+require 'action_view/erb/util'
 require 'set'
 
 module ActionView
@@ -98,13 +97,13 @@ module ActionView
       # Returns an escaped version of +html+ without affecting existing escaped entities.
       #
       # ==== Examples
-      #   escape_once("1 > 2 &amp; 3")
+      #   escape_once("1 < 2 &amp; 3")
       #   # => "1 &lt; 2 &amp; 3"
       #
       #   escape_once("&lt;&lt; Accept & Checkout")
       #   # => "&lt;&lt; Accept &amp; Checkout"
       def escape_once(html)
-        html.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }
+        ActiveSupport::Multibyte.clean(html.to_s).gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }
       end
 
       private

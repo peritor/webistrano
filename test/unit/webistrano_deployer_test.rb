@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class Webistrano::DeployerTest < Test::Unit::TestCase
+class Webistrano::DeployerTest < ActiveSupport::TestCase
 
   def setup
     @project = create_new_project(:template => 'pure_file')
@@ -385,11 +385,11 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
     #
 
     # Logger stubing
-    mock_cap_logger = mock
+    mock_cap_logger = mock()
     mock_cap_logger.expects(:level=).with(3)
 
     # config stubbing
-    mock_cap_config = mock
+    mock_cap_config = mock()
     mock_cap_config.stubs(:logger).returns(mock_cap_logger)
     mock_cap_config.stubs(:logger=)
     mock_cap_config.stubs(:load)
@@ -412,7 +412,7 @@ class Webistrano::DeployerTest < Test::Unit::TestCase
       else
         [:password, :application, :repository, :real_revision, :webistrano_stage, :webistrano_project].include?(x)
       end
-    }.times(8)
+    }.times(7)
 
     # main mock install
     Webistrano::Configuration.expects(:new).returns(mock_cap_config)

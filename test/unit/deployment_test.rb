@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class DeploymentTest < Test::Unit::TestCase
+class DeploymentTest < ActiveSupport::TestCase
 
   def setup
     @stage = create_new_stage

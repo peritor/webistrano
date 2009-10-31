@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class StageTest < Test::Unit::TestCase
+class StageTest < ActiveSupport::TestCase
   
   def setup
     Stage.delete_all

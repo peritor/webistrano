@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class ProjectTest < Test::Unit::TestCase
+class ProjectTest < ActiveSupport::TestCase
 
   def test_creation
     assert_equal 0, Project.count

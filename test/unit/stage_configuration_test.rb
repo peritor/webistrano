@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class StageConfigurationTest < Test::Unit::TestCase
+class StageConfigurationTest < ActiveSupport::TestCase
   
   def test_uniqiness_of_name
     p = create_new_project

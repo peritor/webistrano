@@ -1,17 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'stages_controller'
 
-# Re-raise errors caught by the controller.
-class StagesController; def rescue_action(e) raise e end; end
-
-class StagesControllerTest < Test::Unit::TestCase
-  fixtures :stages
+class StagesControllerTest < ActionController::TestCase
 
   def setup
-    @controller = StagesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-    
     @project = create_new_project(:template => 'mongrel_rails')
     @stage = create_new_stage(:project => @project, :name => 'my_stage')
     @user = login
