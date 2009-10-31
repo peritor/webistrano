@@ -38,31 +38,9 @@ Rails::Initializer.run do |config|
   config.gem 'syntax', :version => '1.0.0'
 end
 
-
-# Include your application configuration below
-
-if WebistranoConfig[:authentication_method] == :cas
-  cas_options = YAML::load_file(RAILS_ROOT+'/config/cas.yml')
-  CASClient::Frameworks::Rails::Filter.configure(cas_options[RAILS_ENV])
-end
-
-WEBISTRANO_VERSION = '1.5'
-
-ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update(:log => '%Y-%m-%d %H:%M')
-ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update(:date_with_day => '%Y-%m-%d')
-
 require 'open4'
 require 'capistrano/cli'
 require 'syntax/convertors/html'
-
-ActionMailer::Base.delivery_method = WebistranoConfig[:smtp_delivery_method] 
-ActionMailer::Base.smtp_settings = WebistranoConfig[:smtp_settings] 
-
-Notification.webistrano_sender_address = WebistranoConfig[:webistrano_sender_address]
-
-ExceptionNotifier.exception_recipients = WebistranoConfig[:exception_recipients] 
-ExceptionNotifier.sender_address = WebistranoConfig[:exception_sender_address] 
-
 
 # delete cached stylesheet on boot in order to delete stale versions
 File.delete("#{RAILS_ROOT}/public/stylesheets/application.css") if File.exists?("#{RAILS_ROOT}/public/stylesheets/application.css")
