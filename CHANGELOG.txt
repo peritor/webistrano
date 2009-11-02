@@ -1,6 +1,8 @@
 
 edge
 
+* Update to Rails 2.3.4
+
 * Users cannot be directly deleted anymore. They are disabled in order to not break references and keep the correct history.
   If you really want to delete a user you have to resort to the script/console or SQL for now. Fixes ticket #110.
 
