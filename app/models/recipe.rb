@@ -7,6 +7,8 @@ class Recipe < ActiveRecord::Base
 
   attr_accessible :name, :body, :description
   
+  named_scope :ordered, :order => "name ASC"
+  
   version_fu rescue nil # hack to silence migration errors when the original table is not there
   
   def validate

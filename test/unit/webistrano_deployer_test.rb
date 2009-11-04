@@ -569,6 +569,51 @@ class Webistrano::DeployerTest < ActiveSupport::TestCase
     deployer.invoke_task!
   end
   
+  def test_load_order_of_recipes
+    recipe_1 = create_new_recipe(:name => 'B', :body => 'foobar here')
+    @stage.recipes << recipe_1
+    
+    recipe_2 = create_new_recipe(:name => 'A', :body => 'more foobar here')
+    @stage.recipes << recipe_2
+    
+    # Logger stubing
+    mock_cap_logger = mock
+    mock_cap_logger.expects(:level=).with(3)
+
+    # config stubbing
+    mock_cap_config = mock
+    mock_cap_config.stubs(:trigger)
+    mock_cap_config.stubs(:logger).returns(mock_cap_logger)
+    mock_cap_config.stubs(:logger=)
+    mock_cap_config.stubs(:find_and_execute_task)
+    mock_cap_config.stubs(:[])
+    mock_cap_config.stubs(:fetch).with(:scm)
+
+    # vars
+    mock_cap_config.stubs(:set)
+
+    # roles
+    mock_cap_config.stubs(:role)
+    
+    #
+    # now the interesting part, load
+    #
+    
+    seq = sequence('recipe_loading')
+    mock_cap_config.stubs(:load)
+    mock_cap_config.expects(:load).with(:string => recipe_2.body ).in_sequence(seq)
+    mock_cap_config.expects(:load).with(:string => recipe_1.body ).in_sequence(seq)
+
+    # main mock install
+    Webistrano::Configuration.expects(:new).returns(mock_cap_config)
+    
+    #
+    # start 
+    
+    deployer = Webistrano::Deployer.new(@deployment)
+    deployer.invoke_task!
+  end
+  
   def test_handling_of_exceptions_during_command_execution
     # Logger stubing
     mock_cap_logger = mock

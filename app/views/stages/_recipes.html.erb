@@ -9,7 +9,7 @@
       <th width="40%">Name</th>
       <th width="60%">Description</th>
     </tr>
-    <% for recipe in @stage.recipes %>
+    <% for recipe in @stage.recipes.ordered %>
       <tr class="<%= cycle :even, :odd, :name => 'recipes'  %>">
         <td><%= link_to h(recipe.name), recipe_path(recipe) %></td>
         <td><%=h recipe.description %></td>
