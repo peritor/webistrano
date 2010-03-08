@@ -1,6 +1,8 @@
 
 edge
 
+* Update to Rails 2.3.5
+
 * When cloning, also clone roles. Provided by Sergio Cambra.
 
 * Update to Rails 2.3.4
