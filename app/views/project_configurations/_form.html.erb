@@ -14,7 +14,7 @@
 	<tr>
 	  <td>
         <% disabled = @configuration.prompt? ? {:disabled =>'disabled'} : {} %>
-        <%= text_field 'configuration', 'value', :style =>'width: 330px' %>
+        <%= text_field 'configuration', 'value', disabled.merge(:style =>'width: 330px') %>
       </td>
       <td style="padding:0px;">&nbsp;<b>or</b>&nbsp;</td>
       <td valign="bottom">
