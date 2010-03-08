@@ -68,6 +68,10 @@ class Project < ActiveRecord::Base
       stage.recipes.each do |recipe|
         new_stage.recipes << recipe
       end
+
+      stage.roles.each do |role|
+        new_stage.roles << Role.new(role.attributes)
+      end
     end
     
     self.reload
