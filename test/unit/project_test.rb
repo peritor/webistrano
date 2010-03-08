@@ -105,6 +105,12 @@ class ProjectTest < ActiveSupport::TestCase
       create_new_stage_configuration(:stage => stage_2, :name => "stage2-conf", :value => "stage2-value")
     recipe = create_new_recipe
     stage_1.recipes << recipe
+    
+    host = Host.new(:name => '192.168.0.1')
+    r = Role.new(:name => 'web') 
+    r.stage = stage_1
+    r.host = host
+    r.save!
       
     new_project = create_new_project
     new_project.clone(original)
@@ -132,6 +138,10 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal stage_2.configuration_parameters.first.name, cloned_stage_2.configuration_parameters.first.name 
     assert_equal stage_2.configuration_parameters.first.value, cloned_stage_2.configuration_parameters.first.value
     assert_equal [recipe], cloned_stage_1.recipes
+    
+    # check roles
+    assert_equal 1, cloned_stage_1.roles.size
+    assert_equal host, cloned_stage_1.roles.first.host
   end
   
   def test_recent_deployments
