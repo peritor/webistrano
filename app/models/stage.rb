@@ -125,7 +125,8 @@ class Stage < ActiveRecord::Base
     deployer = Webistrano::Deployer.new(d)
     begin
       deployer.list_tasks.collect { |t| {:name => t.fully_qualified_name, :description => t.description} }.delete_if{|t| t[:name] == 'shell' || t[:name] == 'invoke'}
-    rescue
+    rescue Exception => e
+      RAILS_DEFAULT_LOGGER.error("Problem listing tasks of stage #{id}: #{e} - #{e.backtrace.join("\n")} ")
       [{:name => "Error", :description => "Could not load tasks - syntax error in recipe definition?"}]
     end
   end
