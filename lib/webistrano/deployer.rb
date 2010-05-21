@@ -138,13 +138,13 @@ module Webistrano
     end
     
     def resolve_references(config, value)
-      value = value.dup
+      value = value.dup.to_s
       references = value.scan(/#\{([a-zA-Z_]+)\}/)
       unless references.blank?
         references.flatten.compact.each do |ref|
           conf_param_refence = deployment.effective_and_prompt_config.select{|conf| conf.name.to_s == ref}.first
           if conf_param_refence
-            value.sub!(/\#\{#{ref}\}/, conf_param_refence.value) 
+            value.sub!(/\#\{#{ref}\}/, conf_param_refence.value) if conf_param_refence.value.present?
           elsif config.exists?(ref)
             build_in_value = config.fetch(ref)
             value.sub!(/\#\{#{ref}\}/, build_in_value.to_s) 
