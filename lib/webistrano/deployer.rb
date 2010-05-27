@@ -111,9 +111,10 @@ module Webistrano
       set_pre_vars(config)
       load_recipes(config)
 
+      set_project_and_stage_names(config)
       set_stage_configuration(config)
       set_stage_roles(config)
-      set_project_and_stage_names(config)
+      
       load_project_template_tasks(config)
       load_stage_custom_recipes(config)
       config
