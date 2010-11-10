@@ -9,11 +9,13 @@
     <% end %>
   <% else %>
     <div class="menu_item">No recipe created yet</div>
-    <a href="<%= new_recipe_path %>" class="menu_link  menu_link_create">
-  	  <div class="menu_link_title">
-  	    New recipe
-  	  </div>
-	  </a>
+      <%- if current_user.can_manage_recipes? -%>
+        <a href="<%= new_recipe_path %>" class="menu_link  menu_link_create">
+      	  <div class="menu_link_title">
+      	    New recipe
+      	  </div>
+    	  </a>
+    	<%- end -%>
   <% end %>
 </div>
 <div id="recipes_closed_content" style="<%=h show_if_closed(status) %>">

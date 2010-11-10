@@ -2,7 +2,10 @@ class Project < ActiveRecord::Base
   has_many :stages, :dependent => :destroy, :order => 'name ASC'
   has_many :deployments, :through => :stages
   has_many :configuration_parameters, :dependent => :destroy, :class_name => "ProjectConfiguration", :order => 'name ASC'
-  
+
+  has_many :user_project_links, :dependent => :destroy
+  has_many :users, :through => :user_project_links
+    
   validates_uniqueness_of :name
   validates_presence_of :name
   validates_length_of :name, :maximum => 250
@@ -24,6 +27,10 @@ class Project < ActiveRecord::Base
         config.save!
       end
     end
+  end
+  
+  def editable_by?(_user)
+    _user.admin?
   end
   
   # returns a string with all custom tasks to be loaded by the Capistrano config

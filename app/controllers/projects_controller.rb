@@ -1,7 +1,9 @@
 class ProjectsController < ApplicationController
   
   before_filter :load_templates, :only => [:new, :create, :edit, :update]
-  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
+  before_filter :ensure_can_access_project
+  before_filter :ensure_can_edit_project, :only => [:edit, :update]
+  before_filter :ensure_can_manage_projects, :except => [:new, :create, :destroy]
   
   # GET /projects/dashboard
   def dashboard
@@ -15,8 +17,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.find(:all, :order => 'name ASC')
-
+    @projects = Project.find(:all, :order => 'name ASC', :include => :users).select { |p| 
+      ensure_can_access_project(p)
+    }
+    
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @projects.to_xml }

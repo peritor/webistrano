@@ -1,6 +1,6 @@
 <div id="projects_open_content" style="<%=h show_if_opened(status) %>">
   <% if Project.count > 0 %>
-    <% for project in Project.find(:all, :order => "name ASC") %>
+    <% for project in Project.find(:all, :order => "name ASC", :include => :users).select {|p| ensure_can_access_project(p) } %>
       <a href="<%= project_path(project) %>" class="menu_link <%=h active_link_class(project) %>" title="<%=h project.name %>">
 		    <div class="menu_icons">
 		  
@@ -18,7 +18,7 @@
 	          <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px"><%=h stage.name %></div>
 			    </a>
         <% end %>
-		<% else %>
+		<% elsif current_user.can_edit?(project) %>
       <a href="<%= new_project_stage_path(project) %>" class="menu_link menu_link_new">
 	      <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px">New stage</div>
 	    </a>

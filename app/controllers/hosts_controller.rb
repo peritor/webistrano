@@ -1,5 +1,5 @@
 class HostsController < ApplicationController
-  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
+  before_filter :ensure_can_manage_hosts, :only => [:new, :edit, :destroy, :create, :update]
   
   # GET /hosts
   # GET /hosts.xml

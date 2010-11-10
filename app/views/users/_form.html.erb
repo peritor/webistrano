@@ -1,25 +1,27 @@
 <% flashed_errors(:user) %>
-<p>
-  <b>Login</b><br />
-  <%= text_field 'user', 'login', :style =>'width:330px;' %>
-</p>
+<%- if @user.local_user? -%>
+  <p>
+    <b>Login</b><br />
+    <%= text_field 'user', 'login', :style =>'width:330px;' %>
+  </p>
 
-<p>
-  <b>Email</b><br />
-  <%= text_field 'user', 'email', :style =>'width:330px;' %>
-</p>
+  <p>
+    <b>Email</b><br />
+    <%= text_field 'user', 'email', :style =>'width:330px;' %>
+  </p>
 
-<% unless WebistranoConfig[:authentication_method] == :cas -%>
-<p>
-  <b>Password</b><br />
-  <%= password_field 'user', 'password', :style =>'width:330px;' %>
-</p>
+  <% unless WebistranoConfig[:authentication_method] == :cas -%>
+  <p>
+    <b>Password</b><br />
+    <%= password_field 'user', 'password', :style =>'width:330px;' %>
+  </p>
 
-<p>
-  <b>Password confirmation</b><br />
-  <%= password_field 'user', 'password_confirmation', :style =>'width:330px;' %>
-</p>
-<% end -%>
+  <p>
+    <b>Password confirmation</b><br />
+    <%= password_field 'user', 'password_confirmation', :style =>'width:330px;' %>
+  </p>
+  <% end -%>
+<%- end -%>
 
 <p>
   <b>Timezone</b><br />
@@ -28,7 +30,26 @@
 
 <% if logged_in? && current_user.admin? -%>
   <p>
-    <b>Admin?</b><br />
-    <%= check_box 'user', 'admin', :class => 'noframe' %>
+    <%= check_box 'user', 'admin', :class => 'noframe' %> <b>Admin?</b> 
   </p>
+  
+  <p>
+    <%= check_box 'user', 'manage_hosts', :class => 'noframe' %> <b>Can manage hosts?</b> 
+  </p>
+  
+  <p>
+    <%= check_box 'user', 'manage_recipes', :class => 'noframe' %> <b>Can manage recipes?</b> 
+  </p>
+  
+  <p>
+    <%= check_box 'user', 'manage_projects', :class => 'noframe' %> <b>Can manage projects?</b> 
+  </p>
+  
+  <h3>Project access</h3>
+  <%- @projects.each do |project| -%>
+    <p>
+      <%= check_box_tag "user[project_ids][]", project.id, @user.projects.include?(project), :class => 'noframe' %> <b><%= project.name %></b> 
+    </p>
+  <%- end -%>
+  
 <% end -%>

@@ -14,7 +14,7 @@
       <td><%= link_to h(host.name), host_path(host) %></td>
       <td><%=h host.stages.count %></td>
       <td><%=h host.roles.count %></td>
-      <% if current_user.admin? %>
+      <% if current_user.can_manage_hosts? %>
         <td><%= link_to 'Edit', edit_host_path(host) %></td>
         <td><%= link_to 'Delete', host_path(host), :confirm => 'Are you sure?', :method => :delete %></td>
       <% end %>
@@ -28,7 +28,7 @@
   <% end %>
 <% end %>
 
-<% if current_user.admin? %>
+<% if current_user.can_manage_hosts? %>
   <br />
   <%= link_to 'New host', new_host_path, :class => 'arrow_link' %>
 <% end %>

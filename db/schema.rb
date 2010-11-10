@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101109185024) do
+ActiveRecord::Schema.define(:version => 20101110200852) do
 
   create_table "auth_sources", :force => true do |t|
     t.string   "type",              :limit => 30, :default => "",    :null => false
@@ -126,6 +126,13 @@ ActiveRecord::Schema.define(:version => 20101109185024) do
     t.integer  "locked",                  :default => 0
   end
 
+  create_table "user_project_links", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
@@ -138,6 +145,12 @@ ActiveRecord::Schema.define(:version => 20101109185024) do
     t.integer  "admin",                                   :default => 0
     t.string   "time_zone",                               :default => "UTC"
     t.datetime "disabled"
+    t.integer  "auth_source_id"
+    t.boolean  "manage_hosts",                            :default => false
+    t.boolean  "manage_recipes",                          :default => false
+    t.boolean  "manage_users",                            :default => false
+    t.boolean  "manage_stages",                           :default => false
+    t.boolean  "manage_projects",                         :default => false
   end
 
   add_index "users", ["disabled"], :name => "index_users_on_disabled"

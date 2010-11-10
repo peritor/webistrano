@@ -131,5 +131,11 @@ module ApplicationHelper
     
     block ? concat(out) : out
   end
+
   
+  def ensure_can_access_project(project=nil)
+    project ||= @project
+    current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project)
+  end
+    
 end

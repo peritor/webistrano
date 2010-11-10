@@ -1,6 +1,9 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :deployments, :dependent => :nullify, :order => 'created_at DESC'
+  has_many :user_project_links, :dependent => :destroy
+  has_many :projects, :through => :user_project_links
+  belongs_to :auth_source
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password
@@ -43,6 +46,10 @@ class User < ActiveRecord::Base
   
   def local_user?
     self.auth_source.blank?
+  end
+  
+  def remote_user?
+    self.auth_source.present?
   end
 
   # Encrypts some data with the salt.
@@ -117,6 +124,22 @@ class User < ActiveRecord::Base
   
   def enable
     self.update_attribute(:disabled, nil)
+  end
+  
+  def can_edit?(obj)
+    self.admin? || obj.editable_by?(self)
+  end
+  
+  def can_manage_hosts?
+    self.admin? || self.manage_hosts?
+  end
+  
+  def can_manage_recipes?
+    self.admin? || self.manage_recipes?
+  end
+  
+  def can_manage_projects?
+    self.admin? || self.manage_projects?
   end
 
   protected

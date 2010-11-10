@@ -52,6 +52,27 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def ensure_can_access_project(project=nil)
+    project ||= @project
+    current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project)
+  end
+  
+  def ensure_can_manage_projects
+    current_user.can_manage_projects?
+  end
+  
+  def ensure_can_edit_project
+    current_user.can_edit?(@project)
+  end
+  
+  def ensure_can_manage_hosts
+    current_user.can_manage_hosts?
+  end
+  
+  def ensure_can_manage_recipes
+    current_user.can_manage_recipes?
+  end
+  
   def ensure_not_disabled
     if logged_in? && current_user.disabled?
       logout
