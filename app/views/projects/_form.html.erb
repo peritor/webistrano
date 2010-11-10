@@ -12,6 +12,14 @@
   <%= text_area 'project', 'description', :style =>'width:330px; height: 100px' %>
 </p>
 
+<h3>User access</h3>
+<%- User.all.each do |user| -%>
+  <p>
+    <%= check_box_tag "project[user_ids][]", user.id, @project.users.include?(user), :class => 'noframe' %> <b><%= user.login %></b> 
+  </p>
+<%- end -%>
+
+
 
 <% content_for(:page_scripts) do %>
  <script type="text/javascript">

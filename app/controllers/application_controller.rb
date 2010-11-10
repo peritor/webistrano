@@ -46,31 +46,35 @@ class ApplicationController < ActionController::Base
     if logged_in? && current_user.admin?
       return true
     else
-      flash[:notice] = "Action not allowed"
-      redirect_to home_path
-      return false
+      handle_no_access
     end
+  end
+  
+  def handle_no_access(messsage = "Action not allowed")
+    flash[:notice] = messsage
+    redirect_to home_path
+    return false
   end
   
   def ensure_can_access_project(project=nil)
     project ||= @project
-    current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project)
+    current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project) || handle_no_access
   end
   
   def ensure_can_manage_projects
-    current_user.can_manage_projects?
+    current_user.can_manage_projects? || handle_no_access
   end
   
   def ensure_can_edit_project
-    current_user.can_edit?(@project)
+    current_user.can_edit?(@project) || handle_no_access
   end
   
   def ensure_can_manage_hosts
-    current_user.can_manage_hosts?
+    current_user.can_manage_hosts? || handle_no_access
   end
   
   def ensure_can_manage_recipes
-    current_user.can_manage_recipes?
+    current_user.can_manage_recipes? || handle_no_access
   end
   
   def ensure_not_disabled

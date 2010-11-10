@@ -71,6 +71,15 @@
   <br />
 </fieldset>
 
+<br /><br />
+
+<fieldset class="fieldset">
+  <legend>Users</legend>
+  <%- @project.users.each do |u| -%>
+    <%= u.login %><br />
+  <%- end -%>
+</fieldset>
+
 <% content_for(:breadcrumb) do %>
   <% breadcrumb_box do %>
     <%- if current_user.can_manage_projects? -%>

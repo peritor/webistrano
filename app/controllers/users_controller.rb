@@ -19,8 +19,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @projects = Project.find(:all, :order => 'name ASC')
+    
     if current_user.admin?
       @user.admin = params[:user][:admin].to_i rescue 0
+      
+      @user.manage_projects = params[:user][:manage_projects]
+      @user.manage_hosts    = params[:user][:manage_hosts]
+      @user.manage_recipes  = params[:user][:manage_recipes]
+      @user.manage_stages   = params[:user][:manage_stages]
+      
+      @user.project_ids = params[:user][:project_ids] || []
     end
     
     respond_to do |format|

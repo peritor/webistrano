@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
   
   before_filter :load_templates, :only => [:new, :create, :edit, :update]
-  before_filter :ensure_can_access_project
+  before_filter :ensure_can_access_project, :except => [:dashboard, :index]
   before_filter :ensure_can_edit_project, :only => [:edit, :update]
-  before_filter :ensure_can_manage_projects, :except => [:new, :create, :destroy]
+  before_filter :ensure_can_manage_projects, :only => [:new, :create, :destroy]
   
   # GET /projects/dashboard
   def dashboard
@@ -62,10 +62,11 @@ class ProjectsController < ApplicationController
     else
       action_to_render = 'new'  
     end
+    
+    @project.user_ids = params[:project][:user_ids] || []
       
     respond_to do |format|
       if @project.save
-        
         @project.clone(@original) if load_clone_original
         
         flash[:notice] = 'Project was successfully created.'
@@ -82,6 +83,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.xml
   def update
     @project = Project.find(params[:id])
+    @project.user_ids = params[:project][:user_ids] || []
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
