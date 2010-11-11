@@ -34,12 +34,30 @@ class User < ActiveRecord::Base
     return nil if login.blank? || password.blank?
     
     user = User.find_by_login_and_disabled(login, nil)
-    return nil if user.blank?
     
-    if user.local_user?
-      return nil unless user.authenticated?(password)
+    if user
+      if user.local_user?
+        return nil unless user.authenticated?(password)
+      else
+        return nil unless user.auth_source.authenticate(login, password)  
+      end
     else
-      return nil unless user.auth_source.authenticate(login, password)  
+      user = User.try_onthefly_registration(login, password)
+    end
+    user
+  end
+  
+  def self.try_onthefly_registration(login, password)
+    # user is not yet registered, try to authenticate with available sources
+    attrs = AuthSource.authenticate(login, password)
+    attrs = attrs.first if attrs.is_a? Array
+    if attrs
+      user = new(attrs)
+      user.login = login
+      if user.save
+        user.reload
+        logger.info("User '#{user.login}' created from external auth source: #{user.auth_source.type} - #{user.auth_source.name}") if logger && user.auth_source
+      end
     end
     user
   end
@@ -151,7 +169,7 @@ class User < ActiveRecord::Base
     end
     
     def password_required?
-      WebistranoConfig[:authentication_method] != :cas && (crypted_password.blank? || !password.blank?)
+      self.remote_user? || WebistranoConfig[:authentication_method] != :cas && (crypted_password.blank? || !password.blank?)
     end
 
     

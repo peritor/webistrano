@@ -9,18 +9,41 @@
     <b>Email</b><br />
     <%= text_field 'user', 'email', :style =>'width:330px;' %>
   </p>
-
-  <% unless WebistranoConfig[:authentication_method] == :cas -%>
+  
+  <script type="text/javascript" charset="utf-8">
+   function handle_auth_source_select_change(obj) {
+     if(obj.value === '' || obj.value === null) {
+       $('local_user_fields').show();
+     } else {
+       $('local_user_fields').hide();
+     }
+       // $('user_auth_source_id').value === '1' || $('user_auth_source_id').value == null)
+      // alert(obj.value); 
+    } 
+  </script>
   <p>
-    <b>Password</b><br />
-    <%= password_field 'user', 'password', :style =>'width:330px;' %>
+    <b>Auth Source</b><br />
+    <%= select 'user', 'auth_source_id', AuthSource.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }, :style =>'width:330px;', 
+      :onchange => "handle_auth_source_select_change(this)" %>
   </p>
 
-  <p>
-    <b>Password confirmation</b><br />
-    <%= password_field 'user', 'password_confirmation', :style =>'width:330px;' %>
-  </p>
-  <% end -%>
+  <div id="local_user_fields">
+    <% unless WebistranoConfig[:authentication_method] == :cas -%>
+    <p>
+      <b>Password</b><br />
+      <%= password_field 'user', 'password', :style =>'width:330px;' %>
+    </p>
+
+    <p>
+      <b>Password confirmation</b><br />
+      <%= password_field 'user', 'password_confirmation', :style =>'width:330px;' %>
+    </p>
+  
+    <script type="text/javascript" charset="utf-8">
+     handle_auth_source_select_change($('user_auth_source_id'));
+    </script>
+    <% end -%>
+  </div>
 <%- end -%>
 
 <p>

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def new
     # render new.rhtml
     @user = User.new
+    @projects = Project.find(:all, :order => 'name ASC')
   end
 
   # POST /users
