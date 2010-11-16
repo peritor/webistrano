@@ -38,9 +38,6 @@ ActionController::Routing::Routes.draw do |map|
   map.login  '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   
-  # stylesheet
-  map.stylesheet '/stylesheets/application.css', :controller => 'stylesheets', :action => 'application'
-
   # Install the default route as the lowest priority.
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action/:id'

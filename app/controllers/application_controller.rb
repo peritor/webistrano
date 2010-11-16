@@ -58,15 +58,15 @@ class ApplicationController < ActionController::Base
   
   def ensure_can_access_project(project=nil)
     project ||= @project
-    current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project) || handle_no_access
+    @can_access_project = current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project) || handle_no_access
   end
   
   def ensure_can_manage_projects
-    current_user.can_manage_projects? || handle_no_access
+    @can_manage_projects = current_user.can_manage_projects? || handle_no_access
   end
   
   def ensure_can_edit_project
-    current_user.can_edit?(@project) || handle_no_access
+    @can_edit_project = current_user.can_edit?(@project) || handle_no_access
   end
   
   def ensure_can_manage_hosts

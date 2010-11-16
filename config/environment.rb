@@ -41,9 +41,6 @@ require 'open4'
 require 'capistrano/cli'
 require 'syntax/convertors/html'
 
-# delete cached stylesheet on boot in order to delete stale versions
-File.delete("#{RAILS_ROOT}/public/stylesheets/application.css") if File.exists?("#{RAILS_ROOT}/public/stylesheets/application.css")
-
 # set default time_zone to UTC
 ENV['TZ'] = 'UTC'
 Time.zone = 'UTC'

@@ -38,7 +38,7 @@
 		  <%=h @stage.hosts.count %>
 		</p>
 		<br />
-    <%- if current_user.can_manage_stages? -%>
+    <%- if @can_edit_project -%>
 		  <%= link_to 'Edit stage', edit_project_stage_path(current_project, @stage), :class => 'arrow_link' %> | 
 		  <%= link_to 'Delete stage', project_stage_path(current_project, @stage), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %> | 
 		<%- end -%>
@@ -59,7 +59,7 @@
     <%= render(:partial => 'effective_config')%>
     <br />
   </div>
-  <%- if current_user.can_manage_stages? -%>
+  <%- if @can_edit_project -%>
     <%= link_to 'New configuration', new_project_stage_stage_configuration_path(current_project, @stage), :class => 'arrow_link' %> | 
   <%- end -%>
   <a id="s_e_c" href="#" onclick="show_effective_config(); return false" class="arrow_link">Show effective configuration</a>
@@ -72,7 +72,7 @@
   <legend>Used recipes</legend>
   <%= render(:partial => 'recipes')%>
   <br />
-  <%- if current_user.can_manage_stages? -%>
+  <%- if @can_edit_project -%>
     <%= link_to 'Manage stage recipes', {:action => 'recipes', :project_id => current_project, :id => @stage} , :class => 'arrow_link'%>
   <%- end -%>
 </fieldset>
