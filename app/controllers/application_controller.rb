@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
   
   def load_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:project_id] || params[:id])
   end
   
   def load_stage

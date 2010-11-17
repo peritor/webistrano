@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   
   before_filter :load_templates, :only => [:new, :create, :edit, :update]
+  before_filter :load_project, :only => [:show, :destroy, :edit, :update]
   before_filter :ensure_can_access_project, :except => [:dashboard, :index]
   before_filter :ensure_can_edit_project, :only => [:edit, :update]
   before_filter :ensure_can_manage_projects, :only => [:new, :create, :destroy]
@@ -30,7 +31,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id])
+    @can_edit_project = current_user.can_edit?(@project)
 
     respond_to do |format|
       format.html # show.rhtml
@@ -49,7 +50,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1;edit
   def edit
-    @project = Project.find(params[:id])
   end
 
   # POST /projects
@@ -82,7 +82,6 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    @project = Project.find(params[:id])
     @project.user_ids = params[:project][:user_ids] || []
 
     respond_to do |format|
@@ -100,7 +99,6 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.xml
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
 
     respond_to do |format|

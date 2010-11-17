@@ -17,7 +17,8 @@ class StagesController < ApplicationController
   def show
     @stage = current_project.stages.find(params[:id])
     @task_list = [['All tasks: ', '']] + @stage.list_tasks.collect{|task| [task[:name], task[:name]]}.sort()
-
+    @can_edit_project = current_user.can_edit?(@project)
+    
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @stage.to_xml }
