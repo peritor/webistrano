@@ -48,26 +48,28 @@ class User < ActiveRecord::Base
   end
   
   def self.try_onthefly_registration(login, password)
-    # user is not yet registered, try to authenticate with available sources
     attrs = AuthSource.authenticate(login, password)
+    logger.debug "attrs 1: #{attrs.inspect}"
     attrs = attrs.first if attrs.is_a? Array
-    if attrs
-      user = new(attrs)
+    logger.debug "attrs 2: #{attrs.inspect}"
+    if attrs.present?
+      user = User.new
+      user.auth_source_id = attrs[:auth_source_id]
+      user.email = attrs[:mail]
       user.login = login
-      if user.save
-        user.reload
-        logger.info("User '#{user.login}' created from external auth source: #{user.auth_source.type} - #{user.auth_source.name}") if logger && user.auth_source
-      end
+      user.save!
+      user.reload
+      logger.debug "User '#{user.login}' created from external auth source: #{user.auth_source.type} - #{user.auth_source.name}"
     end
     user
   end
   
   def local_user?
-    self.auth_source.blank?
+    self.auth_source_id.blank?
   end
   
   def remote_user?
-    self.auth_source.present?
+    self.auth_source_id.present?
   end
 
   # Encrypts some data with the salt.
