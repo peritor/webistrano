@@ -255,7 +255,9 @@ module Webistrano
 	        hash
 	      end
       else # symbol or string
-        if val.index(':') == 0
+        if cvs_root_defintion?(val)
+          val.to_s
+        elsif val.index(':') == 0
           val.slice(1, val.size).to_sym
         elsif match = val.match(/'(.*)'/) || val.match(/"(.*)"/)
           match[1]
@@ -263,6 +265,10 @@ module Webistrano
           val
         end
       end
+    end
+    
+    def self.cvs_root_defintion?(val)
+      val.index(':') == 0 && val.scan(":").size > 1
     end
     
     # override in order to use DB logger 
