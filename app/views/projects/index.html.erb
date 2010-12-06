@@ -34,7 +34,7 @@
 
 <br />
 
-<%- if current_user.can_edit?(project) -%>
+<%- if current_user.admin? || current_user.manage_projects? -%>
   <%= link_to 'New project', new_project_path, :class => 'arrow_link' %>
 <%- end -%>
 

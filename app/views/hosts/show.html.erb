@@ -13,11 +13,11 @@
 		</p>
 		<p>
 		  <b>#Stages:</b>
-		  <%=h @host.stages.uniq.size %>
+		  <%=h @stages.length %>
 		</p>
 		<p>
 		  <b>#Roles:</b>
-		  <%=h @host.roles.count %>
+		  <%=h @host.roles.length %>
 		</p>
 		<% if current_user.can_manage_hosts? %>
   		<br />

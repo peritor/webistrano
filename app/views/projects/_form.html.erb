@@ -12,6 +12,10 @@
   <%= text_area 'project', 'description', :style =>'width:330px; height: 100px' %>
 </p>
 
+<p>
+  <%= check_box 'project', 'archived', :class => 'noframe' %> <b>Archived?</b>
+</p>
+
 <h3>User access</h3>
 <%- User.all.each do |user| -%>
   <p>

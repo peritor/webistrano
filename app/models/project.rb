@@ -13,7 +13,12 @@ class Project < ActiveRecord::Base
   
   after_create :create_template_defaults
   
-  attr_accessible :name, :description, :template
+  attr_accessible :name, :description, :template, :archived
+  
+  named_scope :active,
+    :include    => [:users, {:stages => [:hosts, :recipes]}, :configuration_parameters, :user_project_links],
+    :conditions => {:archived => false},
+    :order      => "projects.name ASC"
   
   # creates the default configuration parameters based on the template
   def create_template_defaults
@@ -31,6 +36,10 @@ class Project < ActiveRecord::Base
   
   def editable_by?(_user)
     _user.admin?
+  end
+  
+  def viewable_by?(_user)
+    _user.admin? || _user.can_manage_projects? || (!self.archived? && _user.projects.include?(self))
   end
   
   # returns a string with all custom tasks to be loaded by the Capistrano config

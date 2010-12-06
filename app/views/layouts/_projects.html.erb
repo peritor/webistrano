@@ -1,6 +1,6 @@
 <div id="projects_open_content" style="<%=h show_if_opened(status) %>">
-  <% if Project.count > 0 %>
-    <% for project in Project.find(:all, :order => "name ASC", :include => :users).select {|p| ensure_can_access_project(p) } %>
+  <% if @sidebar_projects.present? %>
+    <% for project in @sidebar_projects %>
       <a href="<%= project_path(project) %>" class="menu_link <%=h active_link_class(project) %>" title="<%=h project.name %>">
 		    <div class="menu_icons">
 		  
@@ -12,7 +12,7 @@
 		    </div>
       </a>
       <div id="<%=h dom_id(project) %>_stages" style="<%=h show_stages_of_project(project) %>">
-	    <% if project.stages.count > 0 %>
+	    <% if project.stages.present? %>
         <% for stage in project.stages %>
           <a href="<%= project_stage_path(project, stage) %>" class="menu_link <%=h active_link_class(stage) %>" title="<%=h stage.name %>">
 	          <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px"><%=h stage.name %></div>
@@ -33,7 +33,7 @@
 <div id="projects_closed_content" style="<%=h show_if_closed(status) %>">
   <a href="javascript:open_menu_box('projects')" class="menu_link  menu_link_create">
 	  <div class="menu_link_title">
-	    <%=h pluralize(Project.count, 'project')%>
+	    <%=h pluralize(@sidebar_projects.length, 'project')%>
 	  </div>
   </a>
 </div>

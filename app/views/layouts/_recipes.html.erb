@@ -1,6 +1,6 @@
 <div id="recipes_open_content" style="<%=h show_if_opened(status) %>">
-  <% if Recipe.count > 0 %>
-    <% for recipe in Recipe.find(:all, :order => "name ASC") %>
+  <% if @sidebar_recipes.present? %>
+    <% for recipe in @sidebar_recipes %>
       <a href="<%= recipe_path(recipe) %>" class="menu_link <%=h active_link_class(recipe) %>" title="<%=h recipe.name %>">
 		    <div class="menu_link_title">
 		      <%=h recipe.name %>
@@ -21,7 +21,7 @@
 <div id="recipes_closed_content" style="<%=h show_if_closed(status) %>">
   <a href="javascript:open_menu_box('recipes')" class="menu_link  menu_link_create">
 	  <div class="menu_link_title">
-	    <%=h pluralize(Recipe.count, 'recipe')%>
+	    <%=h pluralize(@sidebar_recipes.length, 'recipe')%>
 	  </div>
   </a>
 </div>

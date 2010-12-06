@@ -12,14 +12,14 @@ class UsersController < ApplicationController
   def new
     # render new.rhtml
     @user = User.new
-    @projects = Project.find(:all, :order => 'name ASC')
+    @projects = Project.active
   end
 
   # POST /users
   # POST /users.xml
   def create
     @user = User.new(params[:user])
-    @projects = Project.find(:all, :order => 'name ASC')
+    @projects = Project.active
     
     if current_user.admin?
       @user.admin = params[:user][:admin].to_i rescue 0
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         format.xml  { head :created, :location => user_url(@user) }
       else
         format.html {
-          @projects = Project.find(:all, :order => 'name ASC')
+          @projects = Project.active
           render :action => "new"
         }
         format.xml  { render :xml => @user.errors.to_xml }
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   # GET /users/edit/1
   def edit
     @user = User.find(params[:id])
-    @projects = Project.find(:all, :order => 'name ASC')
+    @projects = Project.active
   end
   
   # PUT /users/1
@@ -90,7 +90,7 @@ class UsersController < ApplicationController
         format.xml  { head :ok }
       else
         format.html {
-          @projects = Project.find(:all, :order => 'name ASC')
+          @projects = Project.active
           render :action => "edit"
         }
         format.xml  { render :xml => @user.errors.to_xml }

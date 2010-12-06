@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.find(:all, :order => 'name ASC', :include => :users).select { |p| 
+    @projects = Project.active.select { |p| 
       ensure_can_access_project(p)
     }
     
@@ -87,7 +87,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update_attributes(params[:project])
         flash[:notice] = 'Project was successfully updated.'
-        format.html { redirect_to project_url(@project) }
+        format.html { redirect_to(@project.archived? ? projects_path : project_url(@project))}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -121,7 +121,7 @@ class ProjectsController < ApplicationController
   
   def load_clone_original
     if params[:clone]
-      @original = Project.find(params[:clone])
+      @original = Project.active.find(params[:clone])
     else
       false
     end

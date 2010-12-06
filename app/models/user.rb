@@ -147,7 +147,11 @@ class User < ActiveRecord::Base
   end
   
   def can_edit?(obj)
-    self.admin? || obj.editable_by?(self)
+    obj.editable_by?(self)
+  end
+  
+  def can_view?(obj)
+    obj.viewable_by?(self)
   end
   
   def can_manage_hosts?

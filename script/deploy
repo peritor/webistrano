@@ -79,7 +79,7 @@ require ENV['RAILS_ROOT'] + '/config/environment'
 ################################################################################
 begin
   user    = User.find_by_login(options.username) or raise "no such user: #{options.username}"
-  project = Project.find_by_name(webistrano_project) or raise "no such project: #{webistrano_project}"
+  project = Project.active.find_by_name(webistrano_project) or raise "no such project: #{webistrano_project}"
   stage   = project.stages.find_by_name(webistrano_stage) or raise "no such stage: #{webistrano_stage}"
   
   unless stage.prompt_configurations.empty?

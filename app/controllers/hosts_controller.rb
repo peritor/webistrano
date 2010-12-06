@@ -15,8 +15,8 @@ class HostsController < ApplicationController
   # GET /hosts/1
   # GET /hosts/1.xml
   def show
-    @host = Host.find(params[:id])
-    @stages = @host.stages.uniq.sort_by{|x| x.project.name}
+    @host = Host.find(params[:id], :include => [{:stages => :project}, :roles])
+    @stages = @host.stages.select{|s| current_user.can_view?(s)}.uniq.sort_by{|x| x.project.name}
 
     respond_to do |format|
       format.html # show.rhtml

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   
   before_filter CASClient::Frameworks::Rails::Filter if WebistranoConfig[:authentication_method] == :cas
-  before_filter :login_from_cookie, :login_required, :ensure_not_disabled
+  before_filter :login_from_cookie, :login_required, :ensure_not_disabled, :setup_sidebar_vars
   around_filter :set_timezone
 
   layout 'application'
@@ -18,6 +18,14 @@ class ApplicationController < ActionController::Base
   
   protected
   
+  def setup_sidebar_vars
+    @sidebar_projects = Project.active
+    @sidebar_hosts    = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:hosts).flatten.uniq.sort
+    @sidebar_recipes  = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:recipes).flatten.uniq.sort
+    @sidebar_users    = User.find(:all, :order => "login ASC")
+    
+  end
+  
   def set_timezone
     # default timezone is UTC
     Time.zone = logged_in? ? ( current_user.time_zone rescue 'UTC'): 'UTC'
@@ -26,7 +34,7 @@ class ApplicationController < ActionController::Base
   end
   
   def load_project
-    @project = Project.find(params[:project_id] || params[:id])
+    @project = Project.active.find(params[:project_id] || params[:id])
   end
   
   def load_stage
@@ -58,23 +66,23 @@ class ApplicationController < ActionController::Base
   
   def ensure_can_access_project(project=nil)
     project ||= @project
-    @can_access_project = current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project) || handle_no_access
+    @can_access_project = current_user.can_view?(project) or handle_no_access
   end
   
   def ensure_can_manage_projects
-    @can_manage_projects = current_user.can_manage_projects? || handle_no_access
+    @can_manage_projects = current_user.can_manage_projects? or handle_no_access
   end
   
   def ensure_can_edit_project
-    @can_edit_project = current_user.can_edit?(@project) || handle_no_access
+    @can_edit_project = current_user.can_edit?(@project) or handle_no_access
   end
   
   def ensure_can_manage_hosts
-    current_user.can_manage_hosts? || handle_no_access
+    current_user.can_manage_hosts? or handle_no_access
   end
   
   def ensure_can_manage_recipes
-    current_user.can_manage_recipes? || handle_no_access
+    current_user.can_manage_recipes? or handle_no_access
   end
   
   def ensure_not_disabled
