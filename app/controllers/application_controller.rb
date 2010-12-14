@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
   
   def setup_sidebar_vars
     @sidebar_projects = Project.active
-    @sidebar_hosts    = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:hosts).flatten.uniq.sort
-    @sidebar_recipes  = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:recipes).flatten.uniq.sort
+    @sidebar_hosts    = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:hosts).flatten.uniq
+    @sidebar_recipes  = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:recipes).flatten.uniq
     @sidebar_users    = User.find(:all, :order => "login ASC")
     
   end
