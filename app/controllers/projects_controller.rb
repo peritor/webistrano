@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   
   before_filter :load_templates, :only => [:new, :create, :edit, :update]
   before_filter :load_project, :only => [:show, :destroy, :edit, :update]
-  before_filter :ensure_can_access_project, :except => [:dashboard, :index]
+  before_filter :ensure_can_access_project, :except => [:new, :create, :dashboard, :index]
   before_filter :ensure_can_edit_project, :only => [:edit, :update]
   before_filter :ensure_can_manage_projects, :only => [:new, :create, :destroy]
   
