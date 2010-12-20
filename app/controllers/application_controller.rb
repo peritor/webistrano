@@ -19,11 +19,12 @@ class ApplicationController < ActionController::Base
   protected
   
   def setup_sidebar_vars
-    @sidebar_projects = Project.active
-    @sidebar_hosts    = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:hosts).flatten.uniq
-    @sidebar_recipes  = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:recipes).flatten.uniq
-    @sidebar_users    = User.find(:all, :order => "login ASC")
-    
+    if logged_in?
+      @sidebar_projects = Project.active.select { |p| current_user.can_view?(p) }
+      @sidebar_hosts    = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:hosts).flatten.uniq
+      @sidebar_recipes  = @sidebar_projects.collect(&:stages).flatten.uniq.collect(&:recipes).flatten.uniq
+      @sidebar_users    = User.find(:all, :order => "login ASC")
+    end
   end
   
   def set_timezone
