@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
   end
   
   def editable_by?(_user)
-    _user.admin?
+    _user.admin? || _user.can_manage_projects? || (!self.archived? && _user.projects.include?(self))
   end
   
   def viewable_by?(_user)
