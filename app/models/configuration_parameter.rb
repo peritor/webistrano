@@ -1,5 +1,5 @@
 class ConfigurationParameter < ActiveRecord::Base
-  attr_accessible :name, :value, :prompt_on_deploy
+  attr_accessible :name, :value, :prompt_on_deploy, :prompt_default, :prompt_description
   
   validates_presence_of :name
   validates_inclusion_of :prompt_on_deploy, :in => 0..1
@@ -26,4 +26,8 @@ class ConfigurationParameter < ActiveRecord::Base
       ''
     end
   end
+  
+  def prompt_default_display
+    self.prompt? ? self.prompt_default : ''
+  end  
 end
