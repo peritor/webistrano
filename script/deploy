@@ -82,11 +82,27 @@ begin
   project = Project.find_by_name(webistrano_project) or raise "no such project: #{webistrano_project}"
   stage   = project.stages.find_by_name(webistrano_stage) or raise "no such stage: #{webistrano_stage}"
   
+  deployment = stage.deployments.build(:task => options.task, :description => options.description)
+  
+  # Prompt for configuration
   unless stage.prompt_configurations.empty?
-    raise "this stage requires prompted configuration, which is not yet implemented in deploy"
+    prompt_config = {}
+    stage.prompt_configurations.each do |conf|
+      unless conf.prompt_description.blank?
+        Capistrano::CLI.ui.say("#{conf.name.to_s}: #{conf.prompt_description.to_s}")
+      end
+      var = nil
+      while var.blank?
+        var = Capistrano::CLI.ui.ask("#{conf.name.to_s}: [#{conf.prompt_default.to_s}] : ")
+        if var.blank?
+          var = conf.prompt_default
+        end
+      end
+      prompt_config[conf.name.intern] = var
+    end
+    deployment.prompt_config = prompt_config
   end
   
-  deployment = stage.deployments.build(:task => options.task, :description => options.description)
   deployment.user = user
   deployment.save or raise "failed to create deployment record: #{deployment.errors.full_messages}"
 
