@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090319185505) do
+ActiveRecord::Schema.define(:version => 20110308233449) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(:version => 20090319185505) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "prompt_on_deploy", :default => 0
+    t.integer  "prompt_on_deploy",   :default => 0
+    t.string   "prompt_default"
+    t.string   "prompt_description"
   end
 
   create_table "deployments", :force => true do |t|
