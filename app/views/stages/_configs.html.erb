@@ -8,14 +8,16 @@
   <table class="sortable">
     <tr>
       <th width="1%">Name</th>
-      <th width="98%">Value</th>
+      <th width="97%">Value</th>
       <th width="1%">Prompt?</th>
+      <th width="1%">Prompt Default</th>
     </tr>
   <% for config in @stage.configuration_parameters %>
     <tr class="<%= cycle :even, :odd, :name => 'configs' %>">
       <td title="<%=h config.name %>"><%= truncate(h(config.name), :length => 25) %></td>
       <td title="<%=h config.value %>"><%=h truncate(hide_password_in_value(config), :length => 45) %></td>
       <td><%= config.prompt_status_in_html %></td>
+      <td title="<%= config.prompt_default_display %>"><%=h truncate(h(config.prompt_default_display), :length => 25) %></td>
       <td><%= link_to 'Edit', edit_project_stage_stage_configuration_path(@project, @stage, config) %></td>
       <td><%= link_to 'Delete', project_stage_stage_configuration_path(@project, @stage, config), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>

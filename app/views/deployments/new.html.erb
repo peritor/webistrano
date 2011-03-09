@@ -22,7 +22,11 @@
     <% @stage.prompt_configurations.each do |conf| %>
       <p>
         <b>Config: <%=h conf.name %></b><br />
-        <input type="<%=h input_type(conf.name) %>" id="deployment_prompt_config_<%=h conf.name %>" name="deployment[prompt_config][<%=h conf.name %>]" style="width:330px;" value="<%=h @deployment.prompt_config[conf.name.to_sym]%>" />
+        <% unless conf.prompt_description.blank? %>
+          <span><%=h conf.prompt_description %></span>
+        <% end%>
+        <% value = @deployment.prompt_config[conf.name.to_sym].blank? ? conf.prompt_default : @deployment.prompt_config[conf.name.to_sym] %>
+        <input type="<%=h input_type(conf.name) %>" id="deployment_prompt_config_<%=h conf.name %>" name="deployment[prompt_config][<%=h conf.name %>]" style="width:330px;" value="<%=h value %>" />
       </p>
     <% end %>
   <% end %>

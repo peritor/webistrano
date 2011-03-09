@@ -5,24 +5,36 @@
 </p>
 
 
-  <table border="0" cellpadding="0" cellspacing="0">
-    <tr>
-      <td colspan="3">
-        <b>Value</b><br />
-	  </td>
-	</tr>
-	<tr>
-	  <td>
-        <% disabled = @configuration.prompt? ? {:disabled =>'disabled'} : {} %>
-        <%= text_field 'configuration', 'value', disabled.merge(:style =>'width: 330px') %>
-      </td>
-      <td style="padding:0px;">&nbsp;<b>or</b>&nbsp;</td>
-      <td valign="bottom">
-		<%= check_box 'configuration', 'prompt_on_deploy', :style =>'' %>
-        Prompt for value on deployment
-      </td>
-    </tr>
-  </table>
+<table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 15px;">
+  <tr>
+    <td colspan="3">
+      <b>Value</b><br />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <% disabled = @configuration.prompt? ? {:disabled =>'disabled'} : {} %>
+      <%= text_field 'configuration', 'value', disabled.merge(:style =>'width: 330px') %>
+    </td>
+    <td style="padding:0px;">&nbsp;<b>or</b>&nbsp;</td>
+    <td valign="bottom">
+      <%= check_box 'configuration', 'prompt_on_deploy', :style =>'' %>
+      Prompt for value on deployment
+    </td>
+  </tr>
+</table>
+
+<div id="project_prompt_options" style="<%= @configuration.prompt? ?  "" : "display: none;" %>">
+  <p>
+    <b>Prompt Default</b><br />
+    <%= text_field 'configuration', 'prompt_default', :style =>'width: 330px' %>
+  </p>
+  <p>
+    <b>Prompt Description</b><br />
+    <%= text_area 'configuration', 'prompt_description', :style =>'width:330px; height: 100px' %>
+  </p>
+</div>
+
 
 <% content_for(:page_scripts) do %>
   <script type="text/javascript">
@@ -32,10 +44,12 @@
 
         if( $F('configuration_prompt_on_deploy') == '1' ){
           $('configuration_value').disable();
+          $('project_prompt_options').show();
         } else {
           $('configuration_value').enable();
+          $('project_prompt_options').hide();
         }
-      
+        
       });
     });
   
