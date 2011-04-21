@@ -235,6 +235,10 @@ class Webistrano::DeployerTest < ActiveSupport::TestCase
     assert_equal 'la le lu 123', Webistrano::Deployer.type_cast('la le lu 123')
   end
   
+  def test_type_cast_cvs_root
+    assert_equal ":ext:msaba@xxxxx.xxxx.com:/project/cvsroot", Webistrano::Deployer.type_cast(":ext:msaba@xxxxx.xxxx.com:/project/cvsroot")
+  end
+  
   def test_type_cast_arrays
     assert_equal ['foo', :bar, 'bam'], Webistrano::Deployer.type_cast("[foo, :bar, 'bam']")
     assert_equal ['1', '2', '3', '4'], Webistrano::Deployer.type_cast('[1, 2, 3, 4]')
@@ -319,7 +323,7 @@ class Webistrano::DeployerTest < ActiveSupport::TestCase
     assert !@deployment.success?
     
     # check error message
-    assert_match /sorry - no capistrano today/, @deployment.log
+    assert_match(/sorry - no capistrano today/, @deployment.log)
   end
   
   def test_db_logging
@@ -367,7 +371,7 @@ class Webistrano::DeployerTest < ActiveSupport::TestCase
     
     # the log in the DB should not be empty
     @deployment.reload
-    assert_match /Please specify the repository that houses your application's code, set :repository, 'foo'/, @deployment.log # ' fix highlighting
+    assert_match(/Please specify the repository that houses your application's code, set :repository, 'foo'/, @deployment.log) # ' fix highlighting
   end
   
   def test_config_logger_and_real_revision_are_set
@@ -441,7 +445,7 @@ class Webistrano::DeployerTest < ActiveSupport::TestCase
     deployer.invoke_task!
     
     deployment.reload
-    assert_match /Local scm command failed/, deployment.log
+    assert_match(/Local scm command failed/, deployment.log)
   end
   
   def test_handling_of_open_scm_command_error
@@ -461,7 +465,7 @@ class Webistrano::DeployerTest < ActiveSupport::TestCase
     deployer.invoke_task!
     
     deployment.reload
-    assert_match /Local scm command not found/, deployment.log
+    assert_match(/Local scm command not found/, deployment.log)
   end
     
   def test_handling_of_prompt_configuration
@@ -647,7 +651,7 @@ class Webistrano::DeployerTest < ActiveSupport::TestCase
     deployer.invoke_task!
     
     @deployment.reload
-    assert_match /RuntimeError/, @deployment.log
+    assert_match(/RuntimeError/, @deployment.log)
   end
   
   def test_setting_of_project_and_stage_name
