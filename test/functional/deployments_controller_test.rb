@@ -25,6 +25,12 @@ class DeploymentsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
   
+  def test_should_allow_to_prefil_description
+    get :new, :project_id => @project.id, :stage_id => @stage.id, :description => 'hello bert'
+    assert_response :success
+    assert_match /hello bert/, @response.body
+  end
+  
   def test_should_create_deployment_if_deployment_possbile
     Deployment.delete_all
     assert @stage.deployment_possible?
