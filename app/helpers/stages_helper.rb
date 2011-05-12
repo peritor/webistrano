@@ -12,8 +12,8 @@ module StagesHelper
   # returns the escaped format of a config value
   def capfile_cast(val)
     casted_val = Webistrano::Deployer.type_cast(val).class
-    
-    if casted_val == String
+
+    if casted_val == String || casted_val == ActiveSupport::SafeBuffer
       val.inspect
     elsif casted_val == Symbol
       val.to_s
