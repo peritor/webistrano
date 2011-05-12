@@ -1,6 +1,8 @@
 
 edge
 
+* Add some missing indices
+
 * Allow to prefill the deployment descirption, see https://github.com/peritor/webistrano/issues/12 [tomfotherby]
 
 * Update to Rails 2.3.5
