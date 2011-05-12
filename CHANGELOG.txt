@@ -1,6 +1,8 @@
 
 edge
 
+* Add Unicorn template [vongrippen]
+
 * Switch to Bundler based deployment
 
 * Add some missing indices
