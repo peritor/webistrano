@@ -3,6 +3,8 @@ edge
 
 * Add Unicorn template [vongrippen]
 
+* Update to Rails 2.3.11 and Capistrano 2.6.0
+
 * Switch to Bundler based deployment
 
 * Add some missing indices
