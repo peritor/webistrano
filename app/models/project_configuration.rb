@@ -11,7 +11,8 @@ class ProjectConfiguration < ConfigurationParameter
       'mongrel_rails' => Webistrano::Template::MongrelRails,
       'thin_rails' => Webistrano::Template::ThinRails,   
       'mod_rails' => Webistrano::Template::ModRails,
-      'pure_file' => Webistrano::Template::PureFile
+      'pure_file' => Webistrano::Template::PureFile,
+      'unicorn' => Webistrano::Template::Unicorn
     }
   end
   
