@@ -1,6 +1,8 @@
 
 edge
 
+* Switch to Bundler based deployment
+
 * Add some missing indices
 
 * Allow to prefill the deployment descirption, see https://github.com/peritor/webistrano/issues/12 [tomfotherby]

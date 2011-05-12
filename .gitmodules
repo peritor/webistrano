@@ -1,3 +1,0 @@
-[submodule "vendor/plugins/exception_notification"]
-	path = vendor/plugins/exception_notification
-	url = git://github.com/smartinez87/exception_notification.git
