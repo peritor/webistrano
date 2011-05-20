@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'bundler', "1.0.10"
+gem 'bundler', "~>1.0.10"
 gem "rails", "2.3.11"
 gem "mysql"
 gem "erubis"
