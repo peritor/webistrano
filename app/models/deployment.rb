@@ -133,7 +133,7 @@ class Deployment < ActiveRecord::Base
   
   # returns an unsaved, new deployment with the same task/stage/description
   def repeat
-    returning Deployment.new do |d|
+    Deployment.new.tap do |d|
       d.stage = self.stage
       d.task = self.task
       d.description = "Repetition of deployment #{self.id}: \n" 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110308233449) do
+ActiveRecord::Schema.define(:version => 20110512144542) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(:version => 20110308233449) do
     t.integer  "pid"
     t.string   "status",            :default => "running"
   end
+
+  add_index "deployments", ["stage_id"], :name => "index_deployments_on_stage_id"
+  add_index "deployments", ["user_id"], :name => "index_deployments_on_user_id"
 
   create_table "deployments_roles", :id => false, :force => true do |t|
     t.integer "deployment_id"
@@ -97,6 +100,9 @@ ActiveRecord::Schema.define(:version => 20110308233449) do
     t.integer  "no_symlink", :default => 0
   end
 
+  add_index "roles", ["host_id"], :name => "index_roles_on_host_id"
+  add_index "roles", ["stage_id"], :name => "index_roles_on_stage_id"
+
   create_table "stage_configurations", :force => true do |t|
   end
 
@@ -109,6 +115,8 @@ ActiveRecord::Schema.define(:version => 20110308233449) do
     t.integer  "locked_by_deployment_id"
     t.integer  "locked",                  :default => 0
   end
+
+  add_index "stages", ["project_id"], :name => "index_stages_on_project_id"
 
   create_table "users", :force => true do |t|
     t.string   "login"

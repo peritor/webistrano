@@ -10,5 +10,5 @@ ActionMailer::Base.smtp_settings = WebistranoConfig[:smtp_settings]
 
 Notification.webistrano_sender_address = WebistranoConfig[:webistrano_sender_address]
 
-ExceptionNotifier.exception_recipients = WebistranoConfig[:exception_recipients] 
-ExceptionNotifier.sender_address = WebistranoConfig[:exception_sender_address] 
+ExceptionNotification::Notifier.exception_recipients = WebistranoConfig[:exception_recipients]
+ExceptionNotification::Notifier.sender_address = WebistranoConfig[:exception_sender_address]
