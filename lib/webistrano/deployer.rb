@@ -22,7 +22,7 @@ module Webistrano
     
       @deployment = deployment
       
-      if(@deployment.task && !@deployment.new_record?)
+      if(@deployment.send(:task) && !@deployment.new_record?)
         # a read deployment
         @logger = Webistrano::Logger.new(deployment)
         @logger.level = Webistrano::Logger::TRACE
