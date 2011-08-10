@@ -78,12 +78,12 @@ class Role < ActiveRecord::Base
   
   # tells if this role had a successful setup
   def setup_done?
-    deployed_at_least_once? && self.deployments.first(:conditions => {"deployments.task" => Deployment::SETUP_TASKS, "deployments.status" => Deployment::STATUS_SUCCESS}).present?
+    deployed_at_least_once? && self.deployments.exists?(:conditions => {"deployments.task" => Deployment::SETUP_TASKS, "deployments.status" => Deployment::STATUS_SUCCESS})
   end
   
   # tells if this role had a successful deployment (deploy)
   def deployed?
-    deployed_at_least_once? && self.deployments.first(:conditions => {"deployments.task" => Deployment::DEPLOY_TASKS, "deployments.status" => Deployment::STATUS_SUCCESS}).present?
+    deployed_at_least_once? && self.deployments.exists?(:conditions => {"deployments.task" => Deployment::DEPLOY_TASKS, "deployments.status" => Deployment::STATUS_SUCCESS})
   end
   
   # tells if this role had any deployment at all
