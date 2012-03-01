@@ -1,0 +1,3 @@
+[submodule "lib/fast_remote_cache"]
+	path = lib/fast_remote_cache
+	url = https://github.com/37signals/fast_remote_cache.git
