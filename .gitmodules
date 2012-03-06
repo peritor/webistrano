@@ -1,3 +1,6 @@
 [submodule "vendor/plugins/fast_remote_cache"]
 	path = vendor/plugins/fast_remote_cache
 	url = https://github.com/37signals/fast_remote_cache.git
+[submodule "vendor/plugins/encrypted_copy"]
+	path = vendor/plugins/encrypted_copy
+	url = git://github.com/Yggdrasil/cap_encrypted_copy.git
