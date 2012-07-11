@@ -13,3 +13,7 @@ gem "exception_notification", "2.3.3.0"
 group :test do
   gem "mocha", "0.9.8"
 end
+
+group :development do
+  gem "powder"
+end
