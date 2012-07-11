@@ -22,7 +22,7 @@ module Webistrano
     
       @deployment = deployment
       
-      if(@deployment.task && !@deployment.new_record?)
+      if(@deployment.send(:task) && !@deployment.new_record?)
         # a read deployment
         @logger = Webistrano::Logger.new(deployment)
         @logger.level = Webistrano::Logger::TRACE
@@ -63,8 +63,12 @@ module Webistrano
         set_webistrano_logger(config)
         
         set_up_config(config)
-        
-        exchange_real_revision(config) unless (config.fetch(:scm).to_s == 'git') # git cannot do a local query by default
+
+        # git and mercurial cannot do a local query by default
+        unless %w(git mercurial).include? config.fetch(:scm).to_s 
+          exchange_real_revision(config)
+        end
+
         save_revision(config)
         save_pid
         
