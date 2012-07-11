@@ -51,7 +51,7 @@ class Project < ActiveRecord::Base
     self.configuration_parameters.destroy_all
       
     other.configuration_parameters.each do |conf|
-      self.configuration_parameters << ProjectConfiguration.new(:name => conf.name, :value => conf.value, :prompt_on_deploy => conf.prompt_on_deploy)
+      self.configuration_parameters << ProjectConfiguration.new(:name => conf.name, :value => conf.value, :prompt_on_deploy => conf.prompt_on_deploy, :prompt_default => conf.prompt_default, :prompt_description => conf.prompt_description)
     end
     
     other.stages.each do |stage|
@@ -62,7 +62,7 @@ class Project < ActiveRecord::Base
       new_stage.save!
       
       stage.configuration_parameters.each do |conf|
-        new_stage.configuration_parameters << StageConfiguration.new(:name => conf.name, :value => conf.value, :prompt_on_deploy => conf.prompt_on_deploy)
+        new_stage.configuration_parameters << StageConfiguration.new(:name => conf.name, :value => conf.value, :prompt_on_deploy => conf.prompt_on_deploy, :prompt_default => conf.prompt_default, :prompt_description => conf.prompt_description)
       end
       
       stage.recipes.each do |recipe|
