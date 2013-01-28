@@ -26,14 +26,14 @@
 	</p>
 	<p>
 	  <b>Stage:</b>
-	  <%= link_to @deployment.stage.name, project_stage_path(@project, @stage) %> 
+	  <%= link_to @deployment.stage.name, project_stage_path(@project, @stage) %>
 	</p>
 	<p>
-	  <b>Deployed by:</b> 
+	  <b>Deployed by:</b>
 	  <%= user_info(@deployment.user) rescue '' %>
 	</p>
 	<p>
-	  <b>Revision:</b> 
+	  <b>Revision:</b>
 	  <%= @deployment.revision %>
 	</p>
 	<p>
@@ -92,10 +92,34 @@
 
 
 
+<% unless @deployment.completed? and @deployment.completed_at < 1.minute.ago %>
+  <script type="text/javascript">
+    (function() {
+      var opts, noti;
+      // icon & iconUrl both provided for different versions of the draft standard
+      opts = {
+        title:    '<%=@project.name%>/<%=@deployment.stage.name%>: <%=@deployment.task%>',
+        body:     'Status: <%=@deployment.status%>',
+        iconUrl:  '<%=image_path("peritor_theme/status_#{@deployment.status}.gif")%>',
+        icon:     '<%=image_path("peritor_theme/status_#{@deployment.status}.gif")%>',
+        tag:      '<%=@project.id%>-<%=@deployment.stage.id%>-<%=@deployment.id%>',
+        titleDir: 'auto',
+        bodyDir:  'auto'
+      }
+      if( this.Notification ) {
+        noti = new this.Notification(opts['title'], opts )
+        noti.onshow = function() { setTimeout(noti.close, 15000) }
+        noti.show()
+      } else {
+        console.log('no Notification API available')
+      }
+    }).call(this);
+  </script>
+<% end %>
 
 <% unless @deployment.completed? %>
   <script type="text/javascript">
-    
+
     function update_status(){
       new Ajax.Updater('status_info','<%=h project_stage_deployment_path(@project, @stage, @deployment) %>.js',{
         method: 'get',
@@ -106,7 +130,7 @@
         }
       });
     }
-    
+
     setTimeout(update_status, 3000);
     check_auto_scroll_log();
   </script>
