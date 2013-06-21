@@ -1,4 +1,0 @@
-
-* Support compiling without extension registration for win32 and java targets.
-* Figure out why need_gem = false caused releasing to fail
-* Add a non-repository source (ENV or file) for per-project per-developer certificate chains. (?)
