@@ -1,0 +1,58 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    actionmailer (2.3.11)
+      actionpack (= 2.3.11)
+    actionpack (2.3.11)
+      activesupport (= 2.3.11)
+      rack (~> 1.1.0)
+    activerecord (2.3.11)
+      activesupport (= 2.3.11)
+    activeresource (2.3.11)
+      activesupport (= 2.3.11)
+    activesupport (2.3.11)
+    capistrano (2.6.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
+    erubis (2.7.0)
+    exception_notification (2.3.3.0)
+    highline (1.6.19)
+    mocha (0.9.8)
+      rake
+    mysql (2.9.1)
+    net-scp (1.1.1)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.7)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
+    open4 (0.9.3)
+    rack (1.1.6)
+    rails (2.3.11)
+      actionmailer (= 2.3.11)
+      actionpack (= 2.3.11)
+      activerecord (= 2.3.11)
+      activeresource (= 2.3.11)
+      activesupport (= 2.3.11)
+      rake (>= 0.8.3)
+    rake (10.1.0)
+    syntax (1.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0.10)
+  capistrano (= 2.6.0)
+  erubis
+  exception_notification (= 2.3.3.0)
+  mocha (= 0.9.8)
+  mysql
+  open4 (= 0.9.3)
+  rails (= 2.3.11)
+  rake
+  syntax (= 1.0.0)
