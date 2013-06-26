@@ -1,3 +1,7 @@
+<%= render(:partial => 'layouts/menu_box', :locals => {
+                                             :box_type => 'favorites',
+                                             :status => controller_in_use_or(ProjectsController, :open, Project),
+                                             :path => projects_path } )%>
 
 <%= render(:partial => 'layouts/menu_box', :locals => {
                                              :box_type => 'projects', 

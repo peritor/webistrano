@@ -1,6 +1,6 @@
 <div id="projects_open_content" style="<%=h show_if_opened(status) %>">
   <% if Project.count > 0 %>
-    <% for project in Project.find(:all, :conditions => { :favorite => 0 },  :order => "name ASC") %>
+    <% for project in Project.find(:all, :conditions => { :favorite => 1 },  :order => "name ASC") %>
       <a href="<%= project_path(project) %>" class="menu_link <%=h active_link_class(project) %>" title="<%=h project.name %>">
 		    <div class="menu_icons">
 		  
