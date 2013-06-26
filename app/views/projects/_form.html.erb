@@ -11,7 +11,10 @@
   <b>Description</b><br />
   <%= text_area 'project', 'description', :style =>'width:330px; height: 100px' %>
 </p>
-
+<p>
+  <%= check_box 'project', 'favorite' %>
+  <b>Favorite Project?</b><br />
+</p>
 
 <% content_for(:page_scripts) do %>
  <script type="text/javascript">

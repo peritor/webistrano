@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   
   after_create :create_template_defaults
   
-  attr_accessible :name, :description, :template
+  attr_accessible :name, :description, :template, :favorite
   
   # creates the default configuration parameters based on the template
   def create_template_defaults
