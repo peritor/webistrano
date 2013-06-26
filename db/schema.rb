@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130626123429) do
+ActiveRecord::Schema.define(:version => 20130626141121) do
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(:version => 20130626123429) do
     t.string   "template"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "favorite"
+    t.integer  "favorite",    :default => 0, :null => false
   end
+
+  add_index "projects", ["favorite"], :name => "index_projects_on_favorite"
 
   create_table "recipe_versions", :force => true do |t|
     t.integer  "recipe_id"
