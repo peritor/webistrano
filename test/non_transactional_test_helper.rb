@@ -1,7 +1,7 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'rails/test_help'
-require 'mocha'
+require 'mocha/setup'
 require File.expand_path(File.dirname(__FILE__) + "/factories")
 
 class Test::Unit::TestCase

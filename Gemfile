@@ -45,5 +45,5 @@ gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototyp
 # end
 
 group :test do
-  gem 'mocha'
+  gem "mocha", "0.13.2", :require => false
 end
