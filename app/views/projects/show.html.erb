@@ -64,11 +64,9 @@
 </fieldset>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Manage projects", projects_path, :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> 
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

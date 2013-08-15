@@ -10,11 +10,9 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Back to project", project_path(@original), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Clone <%= link_to @original.name, project_path(@original) %> 
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

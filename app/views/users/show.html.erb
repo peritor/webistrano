@@ -52,11 +52,9 @@
 
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Manage users", users_path, :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Users", users_path %> &gt; 
     User <%= link_to @user.login, user_path(@user) %> 
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

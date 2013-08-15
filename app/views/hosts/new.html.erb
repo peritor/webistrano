@@ -14,11 +14,9 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Manage hosts", hosts_path, :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Hosts", hosts_path %> &gt; 
     New
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

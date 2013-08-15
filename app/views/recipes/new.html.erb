@@ -12,11 +12,9 @@
 
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Manage recipes", recipes_path, :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Recipes", recipes_path %> &gt; 
     New
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
