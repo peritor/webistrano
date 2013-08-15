@@ -19,6 +19,7 @@ gem 'syntax'
 # could not make it work
 #gem 'exception_notification', :require => 'exception_notifier'
 
+gem 'prototype_legacy_helper', '0.0.0', :git => 'git://github.com/rails/prototype_legacy_helper.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'
