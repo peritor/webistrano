@@ -172,11 +172,6 @@ class Deployment < ActiveRecord::Base
     self.read_attribute('excluded_host_ids').blank? ? [] : self.read_attribute('excluded_host_ids')
   end
   
-  def excluded_host_ids=(val)
-    val = [val] unless val.is_a?(Array)
-    self.write_attribute('excluded_host_ids', val.map(&:to_i))
-  end
-  
   def cancelling_possible?
     !self.pid.blank? && !completed?
   end
