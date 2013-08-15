@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.11' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.18' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -27,14 +27,14 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   config.time_zone = 'UTC'
   
-  config.gem 'net-ssh', :version => '2.0.15', :lib => 'net/ssh'
-  config.gem 'net-scp', :version => '1.0.2', :lib => 'net/scp'
-  config.gem 'net-sftp', :version => '2.0.2', :lib => 'net/sftp'
-  config.gem 'net-ssh-gateway', :version => '1.0.1', :lib => 'net/ssh/gateway'
-  config.gem 'capistrano', :version => '2.5.9'
-  config.gem 'highline', :version => '1.5.1'
-  config.gem 'open4', :version => '0.9.3'
-  config.gem 'syntax', :version => '1.0.0'
+  config.gem 'net-ssh', :lib => 'net/ssh'
+  config.gem 'net-scp', :lib => 'net/scp'
+  config.gem 'net-sftp', :lib => 'net/sftp'
+  config.gem 'net-ssh-gateway', :lib => 'net/ssh/gateway'
+  config.gem 'capistrano'
+  config.gem 'highline'
+  config.gem 'open4'
+  config.gem 'syntax'
 end
 
 require 'open4'
