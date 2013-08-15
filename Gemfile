@@ -16,6 +16,10 @@ gem 'highline'
 gem 'open4'
 gem 'syntax'
 
+# could not make it work
+#gem 'exception_notification', :require => 'exception_notifier'
+
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
