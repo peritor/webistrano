@@ -1,5 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
+# load Webistrano configuration
+require File.expand_path('../webistrano_config', __FILE__)
+
 # moved fro preinitializer
 # is this necessary
 begin
@@ -45,7 +48,7 @@ module Www
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
     #config.plugins = [ :browser_filters, :exception_notification, :multiple_select, :query_trace,
     #                   :restful_authentication, :rubycas_client, :version_fu ]
-    config.plugins = [ :browser_filters ]
+    config.plugins = [ :browser_filters, :version_fu ]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
@@ -67,12 +70,15 @@ module Www
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.action_dispatch.session = {
+        :key    => '_webistrano_session',
+        :secret => WebistranoConfig[:session_secret]
+    }
+
   end
 end
 
-
-# load Webistrano configuration
-require "#{Rails.root.to_s}/config/webistrano_config"
 require 'open4'
 require 'capistrano/cli'
 require 'syntax/convertors/html'
