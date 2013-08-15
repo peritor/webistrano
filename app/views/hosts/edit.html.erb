@@ -1,6 +1,6 @@
 <% flashed_errors(:host) %>
 
-<% form_for(:host, :url => host_path(@host), :html => { :method => :put }) do |f| %>
+<%= form_for(:host, :url => host_path(@host), :html => { :method => :put }) do |f| %>
   <p>
     <b>Name (DNS name or IP address)</b><br />
     <%= f.text_field :name, :style => 'width: 330px' %>

@@ -1,6 +1,6 @@
 <% flashed_errors(:stage) %>
 
-<% form_for(:stage, :url => project_stage_path(@project, @stage), :html => { :method => :put }) do |f| %>
+<%= form_for(:stage, :url => project_stage_path(@project, @stage), :html => { :method => :put }) do |f| %>
   
   <%= render(:partial => 'form' ) %>
   

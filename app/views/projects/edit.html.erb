@@ -1,4 +1,4 @@
-<% form_for(:project, :url => project_path(@project), :html => { :method => :put }) do |f| %>
+<%= form_for(:project, :url => project_path(@project), :html => { :method => :put }) do |f| %>
   
   <%= render(:partial => 'form')%>
 

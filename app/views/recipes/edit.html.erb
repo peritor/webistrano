@@ -1,4 +1,4 @@
-<% form_for(:recipe, :url => recipe_path(@recipe), :html => { :method => :put }) do |f| %>
+<%= form_for(:recipe, :url => recipe_path(@recipe), :html => { :method => :put }) do |f| %>
 
   <%= render(:partial => 'form')%>
 

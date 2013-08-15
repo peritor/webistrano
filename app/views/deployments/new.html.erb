@@ -6,7 +6,7 @@
 
 <% flashed_errors(:deployment) %>
 
-<% form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
+<%= form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
 <div style="width:330px;">
   <p>
     <b>Task</b><br />
