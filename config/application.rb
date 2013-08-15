@@ -6,20 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-# load Webistrano configuration
-require "#{Rails.root.to_s}/config/webistrano_config"
-require 'open4'
-require 'capistrano/cli'
-require 'syntax/convertors/html'
-
-# from environment.rb needed?
-# delete cached stylesheet on boot in order to delete stale versions
-#File.delete("#{Rails.root.to_s}/public/stylesheets/application.css") if File.exists?("#{Rails.root.to_s}/public/stylesheets/application.css")
-
-# set default time_zone to UTC
-#ENV['TZ'] = 'UTC'
-#Time.zone = 'UTC'
-
 module Www
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -28,12 +14,14 @@ module Www
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths << "#{Rails.root}/lib"
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-    config.plugins = [ :browser_filters, :exception_notification, :multiple_select, :query_trace,
-                       :restful_authentication, :rubycas_client, :version_fu ]
+    #config.plugins = [ :browser_filters, :exception_notification, :multiple_select, :query_trace,
+    #                   :restful_authentication, :rubycas_client, :version_fu ]
+    config.plugins = [ :browser_filters ]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
@@ -57,3 +45,18 @@ module Www
     config.filter_parameters += [:password]
   end
 end
+
+
+# load Webistrano configuration
+require "#{Rails.root.to_s}/config/webistrano_config"
+require 'open4'
+require 'capistrano/cli'
+require 'syntax/convertors/html'
+
+# from environment.rb needed?
+# delete cached stylesheet on boot in order to delete stale versions
+#File.delete("#{Rails.root.to_s}/public/stylesheets/application.css") if File.exists?("#{Rails.root.to_s}/public/stylesheets/application.css")
+
+# set default time_zone to UTC
+#ENV['TZ'] = 'UTC'
+#Time.zone = 'UTC'
