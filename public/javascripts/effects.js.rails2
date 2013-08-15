@@ -1,6 +1,4 @@
-// script.aculo.us effects.js v1.8.3, Thu Oct 08 11:23:33 +0200 2009
-
-// Copyright (c) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
+// Copyright (c) 2005-2008 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
 // Contributors:
 //  Justin Palmer (http://encytemedia.com/)
 //  Mark Pilgrim (http://diveintomark.org/)
@@ -72,20 +70,25 @@ var Effect = {
   Transitions: {
     linear: Prototype.K,
     sinoidal: function(pos) {
-      return (-Math.cos(pos*Math.PI)/2) + .5;
+      return (-Math.cos(pos*Math.PI)/2) + 0.5;
     },
     reverse: function(pos) {
       return 1-pos;
     },
     flicker: function(pos) {
-      var pos = ((-Math.cos(pos*Math.PI)/4) + .75) + Math.random()/4;
+      var pos = ((-Math.cos(pos*Math.PI)/4) + 0.75) + Math.random()/4;
       return pos > 1 ? 1 : pos;
     },
     wobble: function(pos) {
-      return (-Math.cos(pos*Math.PI*(9*pos))/2) + .5;
+      return (-Math.cos(pos*Math.PI*(9*pos))/2) + 0.5;
     },
     pulse: function(pos, pulses) {
-      return (-Math.cos((pos*((pulses||5)-.5)*2)*Math.PI)/2) + .5;
+      pulses = pulses || 5;
+      return (
+        ((pos % (1/pulses)) * pulses).round() == 0 ?
+              ((pos * pulses * 2) - (pos * pulses * 2).floor()) :
+          1 - ((pos * pulses * 2) - (pos * pulses * 2).floor())
+        );
     },
     spring: function(pos) {
       return 1 - (Math.cos(pos * 4.5 * Math.PI) * Math.exp(-pos * 6));
@@ -147,13 +150,14 @@ var Effect = {
     'blind':  ['BlindDown','BlindUp'],
     'appear': ['Appear','Fade']
   },
-  toggle: function(element, effect, options) {
+  toggle: function(element, effect) {
     element = $(element);
-    effect  = (effect || 'appear').toLowerCase();
-
-    return Effect[ Effect.PAIRS[ effect ][ element.visible() ? 1 : 0 ] ](element, Object.extend({
+    effect = (effect || 'appear').toLowerCase();
+    var options = Object.extend({
       queue: { position:'end', scope:(element.id || 'global'), limit: 1 }
-    }, options || {}));
+    }, arguments[2] || { });
+    Effect[element.visible() ?
+      Effect.PAIRS[effect][1] : Effect.PAIRS[effect][0]](element, options);
   }
 };
 
@@ -229,6 +233,12 @@ Effect.Queue = Effect.Queues.get('global');
 Effect.Base = Class.create({
   position: null,
   start: function(options) {
+    function codeForEvent(options,eventName){
+      return (
+        (options[eventName+'Internal'] ? 'this.options.'+eventName+'Internal(this);' : '') +
+        (options[eventName] ? 'this.options.'+eventName+'(this);' : '')
+      );
+    }
     if (options && options.transition === false) options.transition = Effect.Transitions.linear;
     this.options      = Object.extend(Object.extend({ },Effect.DefaultOptions), options || { });
     this.currentFrame = 0;
@@ -239,30 +249,18 @@ Effect.Base = Class.create({
     this.totalTime    = this.finishOn-this.startOn;
     this.totalFrames  = this.options.fps*this.options.duration;
 
-    this.render = (function() {
-      function dispatch(effect, eventName) {
-        if (effect.options[eventName + 'Internal'])
-          effect.options[eventName + 'Internal'](effect);
-        if (effect.options[eventName])
-          effect.options[eventName](effect);
-      }
-
-      return function(pos) {
-        if (this.state === "idle") {
-          this.state = "running";
-          dispatch(this, 'beforeSetup');
-          if (this.setup) this.setup();
-          dispatch(this, 'afterSetup');
-        }
-        if (this.state === "running") {
-          pos = (this.options.transition(pos) * this.fromToDelta) + this.options.from;
-          this.position = pos;
-          dispatch(this, 'beforeUpdate');
-          if (this.update) this.update(pos);
-          dispatch(this, 'afterUpdate');
-        }
-      };
-    })();
+    eval('this.render = function(pos){ '+
+      'if (this.state=="idle"){this.state="running";'+
+      codeForEvent(this.options,'beforeSetup')+
+      (this.setup ? 'this.setup();':'')+
+      codeForEvent(this.options,'afterSetup')+
+      '};if (this.state=="running"){'+
+      'pos=this.options.transition(pos)*'+this.fromToDelta+'+'+this.options.from+';'+
+      'this.position=pos;'+
+      codeForEvent(this.options,'beforeUpdate')+
+      (this.update ? 'this.update(pos);':'')+
+      codeForEvent(this.options,'afterUpdate')+
+      '}}');
 
     this.event('beforeStart');
     if (!this.options.sync)
@@ -509,16 +507,17 @@ Effect.Highlight = Class.create(Effect.Base, {
 
 Effect.ScrollTo = function(element) {
   var options = arguments[1] || { },
-  scrollOffsets = document.viewport.getScrollOffsets(),
-  elementOffsets = $(element).cumulativeOffset();
+    scrollOffsets = document.viewport.getScrollOffsets(),
+    elementOffsets = $(element).cumulativeOffset(),
+    max = (window.height || document.body.scrollHeight) - document.viewport.getHeight();
 
   if (options.offset) elementOffsets[1] += options.offset;
 
   return new Effect.Tween(null,
     scrollOffsets.top,
-    elementOffsets[1],
+    elementOffsets[1] > max ? max : elementOffsets[1],
     options,
-    function(p){ scrollTo(scrollOffsets.left, p.round()); }
+    function(p){ scrollTo(scrollOffsets.left, p.round()) }
   );
 };
 
@@ -569,7 +568,7 @@ Effect.Puff = function(element) {
      new Effect.Opacity(element, { sync: true, to: 0.0 } ) ],
      Object.extend({ duration: 1.0,
       beforeSetupInternal: function(effect) {
-        Position.absolutize(effect.effects[0].element);
+        Position.absolutize(effect.effects[0].element)
       },
       afterFinishInternal: function(effect) {
          effect.effects[0].element.hide().setStyle(oldStyle); }
@@ -626,7 +625,7 @@ Effect.SwitchOff = function(element) {
         afterFinishInternal: function(effect) {
           effect.element.hide().undoClipping().undoPositioned().setStyle({opacity: oldOpacity});
         }
-      });
+      })
     }
   }, arguments[1] || { }));
 };
@@ -675,7 +674,7 @@ Effect.Shake = function(element) {
     new Effect.Move(effect.element,
       { x: -distance, y: 0, duration: split, afterFinishInternal: function(effect) {
         effect.element.undoPositioned().setStyle(oldStyle);
-  }}); }}); }}); }}); }}); }});
+  }}) }}) }}) }}) }}) }});
 };
 
 Effect.SlideDown = function(element) {
@@ -817,7 +816,7 @@ Effect.Grow = function(element) {
                effect.effects[0].element.undoClipping().undoPositioned().setStyle(oldStyle);
              }
            }, options)
-      );
+      )
     }
   });
 };
@@ -878,13 +877,11 @@ Effect.Shrink = function(element) {
 
 Effect.Pulsate = function(element) {
   element = $(element);
-  var options    = arguments[1] || { },
-    oldOpacity = element.getInlineOpacity(),
-    transition = options.transition || Effect.Transitions.linear,
-    reverser   = function(pos){
-      return 1 - transition((-Math.cos((pos*(options.pulses||5)*2)*Math.PI)/2) + .5);
-    };
-
+  var options    = arguments[1] || { };
+  var oldOpacity = element.getInlineOpacity();
+  var transition = options.transition || Effect.Transitions.sinoidal;
+  var reverser   = function(pos){ return transition(1-Effect.Transitions.pulse(pos, options.pulses)) };
+  reverser.bind(transition);
   return new Effect.Opacity(element,
     Object.extend(Object.extend({  duration: 2.0, from: 0,
       afterFinishInternal: function(effect) { effect.element.setStyle({opacity: oldOpacity}); }
@@ -937,7 +934,7 @@ Effect.Morph = Class.create(Effect.Base, {
           effect.transforms.each(function(transform) {
             effect.element.style[transform.style] = '';
           });
-        };
+        }
       }
     }
     this.start(options);
@@ -948,7 +945,7 @@ Effect.Morph = Class.create(Effect.Base, {
       if (!color || ['rgba(0, 0, 0, 0)','transparent'].include(color)) color = '#ffffff';
       color = color.parseColor();
       return $R(0,2).map(function(i){
-        return parseInt( color.slice(i*2+1,i*2+3), 16 );
+        return parseInt( color.slice(i*2+1,i*2+3), 16 )
       });
     }
     this.transforms = this.style.map(function(pair){
@@ -981,7 +978,7 @@ Effect.Morph = Class.create(Effect.Base, {
           transform.unit != 'color' &&
           (isNaN(transform.originalValue) || isNaN(transform.targetValue))
         )
-      );
+      )
     });
   },
   update: function(position) {
@@ -1077,14 +1074,14 @@ if (document.defaultView && document.defaultView.getComputedStyle) {
   Element.getStyles = function(element) {
     element = $(element);
     var css = element.currentStyle, styles;
-    styles = Element.CSS_PROPERTIES.inject({ }, function(results, property) {
-      results[property] = css[property];
-      return results;
+    styles = Element.CSS_PROPERTIES.inject({ }, function(hash, property) {
+      hash.set(property, css[property]);
+      return hash;
     });
-    if (!styles.opacity) styles.opacity = element.getOpacity();
+    if (!styles.opacity) styles.set('opacity', element.getOpacity());
     return styles;
   };
-}
+};
 
 Effect.Methods = {
   morph: function(element, style) {
@@ -1093,7 +1090,7 @@ Effect.Methods = {
     return element;
   },
   visualEffect: function(element, effect, options) {
-    element = $(element);
+    element = $(element)
     var s = effect.dasherize().camelize(), klass = s.charAt(0).toUpperCase() + s.substring(1);
     new Effect[klass](element, options);
     return element;
@@ -1112,7 +1109,7 @@ $w('fade appear grow shrink fold blindUp blindDown slideUp slideDown '+
       element = $(element);
       Effect[effect.charAt(0).toUpperCase() + effect.substring(1)](element, options);
       return element;
-    };
+    }
   }
 );
 
