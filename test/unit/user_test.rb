@@ -169,7 +169,7 @@ class UserTest < ActiveSupport::TestCase
     assert_nil user.remember_token_expires_at
   end
   
-  def test_enabled_named_scope
+  def test_enabled_scope
     User.destroy_all
     assert_equal [], User.enabled
     assert_equal [], User.disabled
