@@ -17,10 +17,12 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
   
-  named_scope :enabled, :conditions => {:disabled => nil}
-  named_scope :disabled, :conditions => "disabled IS NOT NULL"
-    
-  def validate_on_update
+  scope :enabled, :conditions => {:disabled => nil}
+  scope :disabled, :conditions => "disabled IS NOT NULL"
+
+  validate :do_validate_on_update, :on => :update
+
+  def do_validate_on_update
     if User.find(self.id).admin? && !self.admin?
       errors.add('admin', 'status can no be revoked as there needs to be one admin left.') if User.admin_count == 1
     end

@@ -11,7 +11,9 @@ class Stage < ActiveRecord::Base
   validates_length_of :name, :maximum => 250
   validates_presence_of :project, :name
   validates_inclusion_of :locked, :in => [0,1]
-  
+
+  validate :do_validate
+
   attr_accessible :name, :alert_emails
 
   # fake attr (Hash) that hold info why deployment is not possible
@@ -21,7 +23,7 @@ class Stage < ActiveRecord::Base
   EMAIL_BASE_REGEX = '([^@\s\,\<\>\?\&\;\:]+)@((?:[\-a-z0-9]+\.)+[a-z]{2,})'
   EMAIL_REGEX = /^#{EMAIL_BASE_REGEX}$/i
     
-  def validate
+  def do_validate
     unless self.alert_emails.blank?
       self.alert_emails.split(" ").each do |email|
         unless email.match(EMAIL_REGEX)

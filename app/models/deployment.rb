@@ -26,7 +26,9 @@ class Deployment < ActiveRecord::Base
   STATUS_VALUES   = [STATUS_SUCCESS, STATUS_FAILED, STATUS_CANCELED, STATUS_RUNNING]
   
   validates_inclusion_of :status, :in => STATUS_VALUES
-    
+
+  validate :validate_on_create, :on => :create
+
   # check (on on creation ) that the stage is ready
   # his has to done only on creation as later DB logging MUST always work
   def validate_on_create
