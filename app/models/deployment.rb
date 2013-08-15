@@ -27,11 +27,11 @@ class Deployment < ActiveRecord::Base
   
   validates_inclusion_of :status, :in => STATUS_VALUES
 
-  validate :validate_on_create, :on => :create
+  validate :check_stage_ready, :on => :create
 
   # check (on on creation ) that the stage is ready
   # his has to done only on creation as later DB logging MUST always work
-  def validate_on_create
+  def check_stage_ready
     unless self.stage.blank?
       errors.add('stage', 'is not ready to deploy') unless self.stage.deployment_possible?
       

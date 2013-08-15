@@ -20,9 +20,9 @@ class User < ActiveRecord::Base
   scope :enabled, :conditions => {:disabled => nil}
   scope :disabled, :conditions => "disabled IS NOT NULL"
 
-  validate :do_validate_on_update, :on => :update
+  validate :check_for_last_admin, :on => :update
 
-  def do_validate_on_update
+  def check_for_last_admin
     if User.find(self.id).admin? && !self.admin?
       errors.add('admin', 'status can no be revoked as there needs to be one admin left.') if User.admin_count == 1
     end
