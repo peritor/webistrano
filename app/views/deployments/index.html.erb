@@ -27,6 +27,6 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Deployment history: Project #{h(current_project.name)} - Stage #{h(current_stage.name)} " %>
-  <h2>Deployment history of <%= link_to h(current_stage.name), project_stage_path(current_project, current_stage) %></h2>
+  <h2>Deployment history of <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %></h2>
 <% end %>
 

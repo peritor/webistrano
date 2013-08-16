@@ -19,5 +19,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Edit recipe #{h(@recipe.name)}" %>
-  <h2>Edit recipe <%= link_to h(@recipe.name), recipe_path(@recipe) %></h2>
+  <h2>Edit recipe <%= link_to @recipe.name, recipe_path(@recipe) %></h2>
 <% end %>

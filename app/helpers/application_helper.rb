@@ -30,7 +30,7 @@ module ApplicationHelper
 
   def web_friendly_text(text)
     return text if text.blank?
-    h(text).gsub("\n",'<br />').gsub("\r",'')
+    text.gsub("\n",'<br />').gsub("\r",'')
   end
 
   def hide_password_in_value(config)
@@ -42,7 +42,7 @@ module ApplicationHelper
   end
 
   def current_stage_project_description
-    "stage: #{link_to h(current_stage.name), project_stage_path(current_project, current_stage)} (of project #{link_to h(current_project.name), project_path(current_project)})"
+    "stage: #{link_to current_stage.name, project_stage_path(current_project, current_stage)} (of project #{link_to current_project.name, project_path(current_project)})"
   end
 
   # returns the open/closed status of a menu

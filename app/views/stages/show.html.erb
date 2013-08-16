@@ -23,19 +23,19 @@
   <div class="box_middle">
 	  <p>
 	    <b>Name:</b>
-		   <%=h @stage.name %>
+		   <%= @stage.name %>
 		</p>
 		<p>
 		  <b>Project:</b>
-		  <%= link_to h(@stage.project.name), project_url(current_project) %>
+		  <%= link_to @stage.project.name, project_url(current_project) %>
 		</p>
 		<p>
 		  <b>Alert on deploy:</b>
-		  <%=h @stage.alert_emails %>
+		  <%= @stage.alert_emails %>
 		</p>
 		<p>
 		  <b>#Hosts:</b>
-		  <%=h @stage.hosts.count %>
+		  <%= @stage.hosts.count %>
 		</p>
 		<br />
 		<%= link_to 'Edit stage', edit_project_stage_path(current_project, @stage), :class => 'arrow_link' %> | 
@@ -114,6 +114,6 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Project #{h(current_project.name)} - Stage #{h(@stage.name)}"%>
-  <h2>Stage <%= link_to h(@stage.name), project_stage_path(current_project, @stage) %></h2>
+  <h2>Stage <%= link_to @stage.name, project_stage_path(current_project, @stage) %></h2>
 <% end %>
 

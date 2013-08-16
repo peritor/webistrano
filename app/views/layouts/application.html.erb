@@ -4,7 +4,7 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <meta name="description" content="Peritor Webistrano - Capristrano Deployment the easy way" />
   <meta name="keywords" content="rubyonrails ruby rails capistrano deployment" />
-  <title>Peritor Webistrano - <%=h @page_title %></title>
+  <title>Peritor Webistrano - <%= @page_title %></title>
   <link rel="shortcut icon" href="/favicon.ico" />
   <%= javascript_include_tag :defaults %>
   <%= stylesheet_link_tag 'application' %>
@@ -52,10 +52,10 @@
   <div id="footer">
     <div id="footer_logged">
       <% if logged_in? %>
-       Logged in as <%= link_to h(current_user.login), user_path(current_user) %> | <%= link_to 'Logout', logout_path %>
+       Logged in as <%= link_to current_user.login, user_path(current_user) %> | <%= link_to 'Logout', logout_path %>
       <% end %>
     </div>
-    Copyright &copy; 2007, 2008, 2009 | Version <%=h WEBISTRANO_VERSION %> | <a href="http://labs.peritor.com/webistrano" target="_blank">http://labs.peritor.com/webistrano</a>
+    Copyright &copy; 2007, 2008, 2009 | Version <%= WEBISTRANO_VERSION %> | <a href="http://labs.peritor.com/webistrano" target="_blank">http://labs.peritor.com/webistrano</a>
   </div>
 </body>
 

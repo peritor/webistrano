@@ -15,19 +15,19 @@
 		<% end %>
 		<p>
 			  <b>Login:</b>
-			  <%=h @user.login %>
+			  <%= @user.login %>
 			</p>
 
 			<p>
 			  <b>Email:</b>
-			  <%=h @user.email %>
+			  <%= @user.email %>
 			</p>
       
 			<p>
-			  <b>Timezone:</b> <%=h @user.time_zone.to_s %>
+			  <b>Timezone:</b> <%= @user.time_zone.to_s %>
 			</p>
 			<p>
-			  <b>#Deployments:</b> <%=h @user.deployments.count %>
+			  <b>#Deployments:</b> <%= @user.deployments.count %>
 			</p>
 			<br/>
 			<% if current_user.admin? || current_user == @user %>

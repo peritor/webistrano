@@ -14,11 +14,11 @@
     </tr>
   <% for role in @stage.roles %>
     <tr class="<%= cycle :even, :odd, :name => 'roles' %>">
-      <td><%= link_to h(role.host.name), host_path(role.host) %></td>
-      <td><%=h role.name %></td>
-      <td><%=h role.ssh_port || 'default' %></td>
-      <td><%=h role.role_attribute_hash.inspect unless role.role_attribute_hash.blank?  %></td>
-      <td><%= role.status_in_html %></td>
+      <td><%= link_to role.host.name, host_path(role.host) %></td>
+      <td><%= role.name %></td>
+      <td><%= role.ssh_port || 'default' %></td>
+      <td><%= role.role_attribute_hash.inspect unless role.role_attribute_hash.blank?  %></td>
+      <td><%= simple_format role.status_in_html %></td>
       <td><%= link_to 'Edit', edit_project_stage_role_path(@project, @stage, role) %></td>
       <td><%= link_to 'Delete', project_stage_role_path(@project, @stage, role), :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>

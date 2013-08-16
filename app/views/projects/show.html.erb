@@ -4,7 +4,7 @@
     <% if @project.stages.count > 0 %>
       <p><strong>Choose a stage:</strong></p>
       <% for stage in @project.stages %>
-          <p><%= link_to h(stage.name), project_stage_path(@project, stage), :class => 'arrow_link'  %></p>
+          <p><%= link_to stage.name, project_stage_path(@project, stage, :class => 'arrow_link')  %></p>
       <% end %>
     <% else %>  
       <p><strong>No stage configured yet</strong></p>
@@ -19,15 +19,15 @@
   <div class="box_middle">
 		<p>
 		<b>Description:</b>
-		  <%=h @project.description %>
+		  <%= @project.description %>
 		</p>
 		<p>
 		  <b>Project Type:</b>
-		  <%=h @project.template %>
+		  <%= @project.template %>
 		</p>
 		<p>
     <b>#Deployments:</b>
-	  <%=h @project.deployments.count %>
+	  <%= @project.deployments.count %>
  		</p><br />
   	<%= link_to 'Edit project', edit_project_path(@project), :class => 'arrow_link' %> | 
 	  <%= link_to 'Clone project', clone_form_path(@project), :class => 'arrow_link' %> | 
@@ -71,5 +71,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Project #{h(current_project.name)}" %>
-  <h2>Project <%= link_to h(current_project.name), project_path(current_project) %></h2>
+  <h2>Project <%= link_to current_project.name, project_path(current_project) %></h2>
 <% end %>

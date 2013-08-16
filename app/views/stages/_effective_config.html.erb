@@ -14,8 +14,8 @@
     </tr>
   <% @stage.effective_configuration.each do |conf| %>
     <tr class="<%= cycle :even, :odd, :name => 'effective_conf' %>">
-      <td title="<%=h conf.name %>"><%= truncate(h(conf.name), :length => 25) %></td>
-      <td title="<%=h conf.value %>"><%=h truncate(hide_password_in_value(conf), :length => 45) %></td>
+      <td title="<%= conf.name %>"><%= truncate(h(conf.name), :length => 25) %></td>
+      <td title="<%= conf.value %>"><%= truncate(hide_password_in_value(conf), :length => 45) %></td>
       <td><%= conf.prompt_status_in_html %></td>
     </tr>
   <% end %>

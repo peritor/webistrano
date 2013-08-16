@@ -9,15 +9,15 @@
   <div class="box_middle">
 		<p>
 		  <b>Name:</b>
-		  <%=h @host.name %>
+		  <%= @host.name %>
 		</p>
 		<p>
 		  <b>#Stages:</b>
-		  <%=h @host.stages.uniq.size %>
+		  <%= @host.stages.uniq.size %>
 		</p>
 		<p>
 		  <b>#Roles:</b>
-		  <%=h @host.roles.count %>
+		  <%= @host.roles.count %>
 		</p>
 		<% if current_user.admin? %>
   		<br />
@@ -44,5 +44,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "Host #{h(@host.name)}" %>
-  <h2>Host <%=h @host.name %></h2>
+  <h2>Host <%= @host.name %></h2>
 <% end %>

@@ -1,5 +1,5 @@
 <fieldset class="fieldset">
-  <legend> <%=h pluralize(User.count, 'User')%> listed</legend>
+  <legend> <%= pluralize(User.count, 'User')%> listed</legend>
 
 <% if @users.empty? %>
   <br/>
@@ -16,15 +16,15 @@
     </tr>
     <% for user in @users %>
       <tr class="<%= cycle :even, :odd, :name => 'users'  %>">
-        <td nowrap><%= link_to h(user.login), user_path(user) %></td>
-        <td><%=h user.email %></td>
-        <td><%=h user.admin? ? 'Admin' : '' %></td>
+        <td nowrap><%= link_to user.login, user_path(user) %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin? ? 'Admin' : '' %></td>
         <td>
           <% if user.disabled? %>
             <span style="color:red">disabled</span>
           <% end %>
         </td>
-        <td><%=h user.created_at.to_s(:date_with_day) %></td>
+        <td><%= user.created_at.to_s(:date_with_day) %></td>
         <% if current_user.admin? || current_user == user -%>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <% end -%>

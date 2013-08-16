@@ -18,5 +18,5 @@
 
 <% content_for(:page_title) do %>
   <% @page_title = "New host for #{h(current_stage.name)}" %>
-  <h2>New role for <%=h current_stage.name %></h2>
+  <h2>New role for <%= current_stage.name %></h2>
 <% end %>

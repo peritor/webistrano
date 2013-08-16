@@ -1,5 +1,5 @@
 <fieldset class="fieldset">
-  <legend> <%=h pluralize(Project.count, 'Project')%> listed</legend>
+  <legend> <%= pluralize(Project.count, 'Project')%> listed</legend>
 
 <% if @projects.empty? %>
 <br/>
@@ -17,11 +17,11 @@
     </tr>
     <% for project in @projects %>
       <tr class="<%= cycle :even, :odd, :name => 'projects'  %>">
-        <td><%= link_to h(project.name), project_path(project) %></td>
-        <td><%=h project.description %></td>
-        <td><%=h project.stages.count %></td>
-        <td><%=h project.deployments.count %></td>
-        <td><%=h project.created_at.to_s(:date_with_day) %></td>
+        <td><%= link_to project.name, project_path(project) %></td>
+        <td><%= project.description %></td>
+        <td><%= project.stages.count %></td>
+        <td><%= project.deployments.count %></td>
+        <td><%= project.created_at.to_s(:date_with_day) %></td>
         <td><%= link_to 'Edit', edit_project_path(project) %></td>
         <td><%= link_to 'Clone', clone_form_path(project) %></td>
         <td><%= link_to 'Delete', project_path(project), :confirm => 'Are you sure?', :method => :delete %></td>

@@ -31,7 +31,7 @@
    
    function hide_all_infos(){
      <% for template in @template_infos %>
-       $('<%=h template.first %>_desc').hide();
+       $('<%= template.first %>_desc').hide();
      <% end %>
    }
 
@@ -43,7 +43,7 @@
   <div class="small_box_middle" style="min-height: 230px; *height: 230px;">
 		 <h3>Project Type:</h3>
 		   <% for template in @template_infos %>
-		     <div id="<%=h template.first %>_desc" style="display:none;">
+		     <div id="<%= template.first %>_desc" style="display:none;">
 		         <b><%= template.first.to_s.titleize %>:</b><br />
 		         <%= template.last %>
 		     </div>

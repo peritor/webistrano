@@ -1,31 +1,31 @@
 <table border="0" width="100%" cellpadding="0" cellspacing="0" class="deployment_block">
   <tr>
     <td align="right"><b>Project:</b></td>
-    <td><%= link_to truncate(h(deployment.stage.project.name), :length => 21), project_path(deployment.stage.project), :title => h(deployment.stage.project.name) %></td>
+    <td><%= link_to truncate(deployment.stage.project.name, :length => 21), project_path(deployment.stage.project), :title => deployment.stage.project.name %></td>
     <td align="right"><b>User:</b></td>
-    <td><%= link_to truncate(h(deployment.user.login), :length => 10) , user_path(deployment.user), :title => h(deployment.user.login) %></td>
+    <td><%= link_to truncate(deployment.user.login, :length => 10) , user_path(deployment.user), :title => deployment.user.login %></td>
     <td align="right"><b>Started:</b></td>
-    <td><%=h deployment.created_at.to_s(:log) %></td>
+    <td><%= deployment.created_at.to_s(:log) %></td>
     <td width="1" rowspan="3"><%= image_tag('peritor_theme/pixel_grey.gif', :width => '1', :height => '50') %></td>
     <td width="80" rowspan="2" align="center">
-      <a href="<%= project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %>" title="<%=h deployment.status %>">
+      <a href="<%= project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %>" title="<%= deployment.status %>">
         <%= image_tag("peritor_theme/status_#{deployment.status}_small.gif", :width => '53', :height => '40', :border => '0') %>
       </a>
     </td>
   </tr>
   <tr>
     <td align="right"><b>Stage:</b></td>
-    <td><%= link_to truncate(h(deployment.stage.name), :length => 19), project_stage_path(deployment.stage.project, deployment.stage), :title => h(deployment.stage.name) %></td>
+    <td><%= link_to truncate(h(deployment.stage.name), :length => 19), project_stage_path(deployment.stage.project, deployment.stage), :title => deployment.stage.name %></td>
     <td align="right" title="Revision"><b>Rev:</b></td>
-    <td title="<%=h deployment.revision rescue '' %>"><%= truncate(h(deployment.revision), :length =>  10) rescue '' %></td>
+    <td title="<%= deployment.revision rescue '' %>"><%= truncate(h(deployment.revision), :length =>  10) rescue '' %></td>
     <td align="right"><b>Duration:</b></td>
-    <td><%=h distance_of_time_in_words(deployment.created_at, deployment.completed_at, true) rescue "" %></td>
+    <td><%= distance_of_time_in_words(deployment.created_at, deployment.completed_at, true) rescue "" %></td>
   </tr>
   <tr>
     <td align="right"><b>Comment:</b></td>
-    <td colspan="3" title="<%=h deployment.description %>"><%= truncate(h(deployment.description), :length => 30) %></td>
+    <td colspan="3" title="<%= deployment.description %>"><%= truncate(h(deployment.description), :length => 30) %></td>
     <td align="right"><b>Task:</b></td>
-    <td title="<%=h deployment.task %>"><%=h truncate(deployment.task, :length => 20) %></td>
+    <td title="<%= deployment.task %>"><%= truncate(deployment.task, :length => 20) %></td>
     <td align="center">
       <%= link_to 'Show', project_stage_deployment_path(deployment.stage.project, deployment.stage, deployment) %>
     </td>
