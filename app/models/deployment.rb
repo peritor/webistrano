@@ -187,7 +187,9 @@ class Deployment < ActiveRecord::Base
   end
   
   def clear_lock_error
-    self.errors.instance_variable_get("@errors").delete('lock')
+    if self.errors.size > 0
+      RAILS_DEFAULT_LOGGER.error "clear lock error : #{self.errors.keys}"
+    end
   end
   
   protected
