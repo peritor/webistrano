@@ -30,7 +30,7 @@ class Recipe < ActiveRecord::Base
      errors.add(:body, "syntax error at line: #{line}") unless line.nil?
    end
   rescue => e
-    RAILS_DEFAULT_LOGGER.error "Error while validating recipe syntax of recipe #{self.id}: #{e.inspect} - #{e.backtrace.join("\n")}"
+    Rails.logger.error "Error while validating recipe syntax of recipe #{self.id}: #{e.inspect} - #{e.backtrace.join("\n")}"
   end
  
 end

@@ -1,6 +1,6 @@
 if WebistranoConfig[:authentication_method] == :cas
-  cas_options = YAML::load_file(RAILS_ROOT+'/config/cas.yml')
-  CASClient::Frameworks::Rails::Filter.configure(cas_options[RAILS_ENV])
+  cas_options = YAML::load_file(Rails.root.to_s+'/config/cas.yml')
+  CASClient::Frameworks::Rails::Filter.configure(cas_options[Rails.env])
 end
 
 WEBISTRANO_VERSION = '1.5'

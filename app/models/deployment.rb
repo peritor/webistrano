@@ -57,7 +57,7 @@ class Deployment < ActiveRecord::Base
     end
     true
   rescue => e
-    RAILS_DEFAULT_LOGGER.debug "DEPLOYMENT: could not fire deployment: #{e.inspect} #{e.backtrace.join("\n")}"
+    Rails.logger.debug "DEPLOYMENT: could not fire deployment: #{e.inspect} #{e.backtrace.join("\n")}"
     false
   end
   
@@ -127,9 +127,9 @@ class Deployment < ActiveRecord::Base
   # deploy through Webistrano::Deployer in background (== other process)
   # TODO - at the moment `Unix &` hack
   def deploy_in_background! 
-    unless RAILS_ENV == 'test'   
-      RAILS_DEFAULT_LOGGER.info "Calling other ruby process in the background in order to deploy deployment #{self.id} (stage #{self.stage.id}/#{self.stage.name})"
-      system("sh -c \"cd #{RAILS_ROOT} && ruby script/runner -e #{RAILS_ENV} ' deployment = Deployment.find(#{self.id}); deployment.prompt_config = #{self.prompt_config.inspect.gsub('"', '\"')} ; Webistrano::Deployer.new(deployment).invoke_task! ' >> #{RAILS_ROOT}/log/#{RAILS_ENV}.log 2>&1\" &")
+    unless Rails.env == 'test'
+      Rails.logger.info "Calling other ruby process in the background in order to deploy deployment #{self.id} (stage #{self.stage.id}/#{self.stage.name})"
+      system("sh -c \"cd #{Rails.root.to_s} && ruby script/rails runner -e #{Rails.env} ' deployment = Deployment.find(#{self.id}); deployment.prompt_config = #{self.prompt_config.inspect.gsub('"', '\"')} ; Webistrano::Deployer.new(deployment).invoke_task! ' >> #{Rails.root.to_s}/log/#{Rails.env}.log 2>&1\" &")
     end
   end
   
@@ -188,7 +188,7 @@ class Deployment < ActiveRecord::Base
   
   def clear_lock_error
     if self.errors.size > 0
-      RAILS_DEFAULT_LOGGER.error "clear lock error : #{self.errors.keys}"
+      Rails.logger.error "clear lock error : #{self.errors.keys}"
     end
   end
   
