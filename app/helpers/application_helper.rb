@@ -16,12 +16,10 @@ module ApplicationHelper
     return nil if obj.errors.blank?
 
 
-    error_messages = obj.errors.full_messages.map {|msg| content_tag(:li, msg)}
+    error_messages = obj.errors.full_messages.map {|msg| content_tag(:li, msg, nil, false)}
 
-    html = content_tag(:p,"#{pluralize(obj.errors.size, 'error')} prohibited this #{object_name.to_s.gsub('_', ' ')} from being saved")
-    html << content_tag(:div,
-                        content_tag(:ul, error_messages)
-    )
+    html = content_tag(:p,"#{pluralize(obj.errors.size, 'error')} prohibited this #{object_name.to_s.gsub('_', ' ')} from being saved", nil, false)
+    html << content_tag(:div, content_tag(:ul, error_messages, nil, false))
 
     content_for(:flash_content) do
       error_flash(html)
