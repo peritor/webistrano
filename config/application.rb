@@ -48,7 +48,7 @@ module Www
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
     #config.plugins = [ :browser_filters, :exception_notification, :multiple_select, :query_trace,
     #                   :restful_authentication, :rubycas_client, :version_fu ]
-    config.plugins = [ :browser_filters, :version_fu ]
+    config.plugins = [ :browser_filters, :version_fu, :rails_upgrade]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
