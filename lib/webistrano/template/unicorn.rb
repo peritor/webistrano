@@ -31,7 +31,7 @@ module Webistrano
         end
 
         def unicorn_restart_cmd
-          "kill -USR2 `cat #{unicorn_pid}"
+          "kill -USR2 `cat #{unicorn_pid}`"
         end
       
         namespace :webistrano do
