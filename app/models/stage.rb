@@ -81,6 +81,14 @@ class Stage < ActiveRecord::Base
     @deployment_problems.blank?
   end
   
+  def editable_by?(_user)
+    self.project.editable_by?(_user)
+  end
+  
+  def viewable_by?(_user)
+    self.project.viewable_by?(_user)
+  end
+  
   def needed_roles_present?
     # for now just check if there are any roles
     if self.roles.empty? 

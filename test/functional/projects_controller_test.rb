@@ -49,7 +49,7 @@ class ProjectsControllerTest < ActionController::TestCase
     
     assert_redirected_to project_path(assigns(:project))
     
-    assert_not_nil Project.find(:first).configuration_parameters.find_by_name('scm_username')
+    assert_not_nil Project.active.find(:first).configuration_parameters.find_by_name('scm_username')
   end
 
   def test_should_show_project

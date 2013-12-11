@@ -12,7 +12,9 @@
 
 
 <% content_for(:breadcrumb) do %>
-    <%= link_to "Manage recipes", recipes_path, :style => "float:right", :class => "arrow_link" %>
+    <%- if current_user.can_manage_recipes? -%>
+      <%= link_to "Manage recipes", recipes_path, :style => "float:right", :class => "arrow_link" %>
+    <%- end -%>
     <%= link_to "Recipes", recipes_path %> &gt; 
     New
 <% end %>

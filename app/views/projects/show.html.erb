@@ -8,7 +8,9 @@
       <% end %>
     <% else %>  
       <p><strong>No stage configured yet</strong></p>
-      <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
+      <%- if current_user.can_edit?(@project) -%>
+        <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
+      <%- end -%>
     <% end %>
   </div>
   <div class="special_box_bottom"></div>
@@ -29,9 +31,11 @@
     <b>#Deployments:</b>
 	  <%= @project.deployments.count %>
  		</p><br />
-  	<%= link_to 'Edit project', edit_project_path(@project), :class => 'arrow_link' %> | 
-	  <%= link_to 'Clone project', clone_form_path(@project), :class => 'arrow_link' %> | 
- 		<%= link_to 'Delete project', project_path(@project), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
+ 		<%- if current_user.can_edit?(@project) -%>
+  	  <%= link_to 'Edit project', edit_project_path(@project), :class => 'arrow_link' %> | 
+	    <%= link_to 'Clone project', clone_form_path(@project), :class => 'arrow_link' %> | 
+ 		  <%= link_to 'Delete project', project_path(@project), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link' %>
+ 		<%- end -%>
   </div>
   <div class="box_bottom"></div>
 </div>
@@ -43,7 +47,9 @@
   <legend>Project configuration</legend>
   <%= render(:partial => 'configs')%>
   <br />
-  <%= link_to 'New configuration', new_project_project_configuration_path(@project), :class => 'arrow_link' %>
+  <%- if current_user.can_edit?(@project) -%>
+    <%= link_to 'New configuration', new_project_project_configuration_path(@project), :class => 'arrow_link' %>
+  <%- end -%>
 </fieldset>
 
 <br /><br />
@@ -52,7 +58,9 @@
   <legend>Stages</legend>
   <%= render(:partial => 'stages')%>
   <br />
-  <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
+  <%- if current_user.can_edit?(@project) -%>
+    <%= link_to 'New stage', new_project_stage_path(@project), :class => 'arrow_link' %>
+  <%- end -%>
 </fieldset>
 
 <br /><br />
@@ -63,8 +71,19 @@
   <br />
 </fieldset>
 
+<br /><br />
+
+<fieldset class="fieldset">
+  <legend>Users</legend>
+  <%- @project.users.each do |u| -%>
+    <%= u.login %><br />
+  <%- end -%>
+</fieldset>
+
 <% content_for(:breadcrumb) do %>
-    <%= link_to "Manage projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <%- if current_user.can_manage_projects? -%>
+      <%= link_to "Manage projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <%- end -%>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> 
 <% end %>

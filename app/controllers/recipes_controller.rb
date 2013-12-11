@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
+  before_filter :ensure_can_manage_recipes, :except => [:show, :index]
   
   # GET /recipes
   # GET /recipes.xml

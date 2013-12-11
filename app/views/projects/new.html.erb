@@ -13,7 +13,9 @@
 
 
 <% content_for(:breadcrumb) do %>
-    <%= link_to "Manage Projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <%- if current_user.can_manage_projects? -%>
+      <%= link_to "Manage Projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <%- end -%>
     <%= link_to "Projects", projects_path %> &gt; 
     New
 <% end %>

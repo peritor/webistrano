@@ -1,0 +1,46 @@
+<%= error_messages_for 'auth_source' %>
+
+<div class="box">
+<!--[form:auth_source]-->
+<p><label for="auth_source_name">Name <span class="required">*</span></label>
+<%= text_field 'auth_source', 'name'  %></p>
+
+<p><label for="auth_source_host">Host <span class="required">*</span></label>
+<%= text_field 'auth_source', 'host'  %></p>
+
+<p><label for="auth_source_port">Port <span class="required">*</span></label>
+<%= text_field 'auth_source', 'port', :size => 6 %> <%= check_box 'auth_source', 'tls'  %> LDAPS</p>
+
+<p><label for="auth_source_account">Account</label>
+<%= text_field 'auth_source', 'account'  %></p>
+
+<p><label for="auth_source_account_password">Password</label>
+<%= password_field 'auth_source', 'account_password', :name => 'ignore',
+                                           :value => ((@auth_source.new_record? || @auth_source.account_password.blank?) ? '' : ('x'*15)),
+                                           :onfocus => "this.value=''; this.name='auth_source[account_password]';",
+                                           :onchange => "this.name='auth_source[account_password]';" %></p>
+
+<p><label for="auth_source_base_dn">Base DN <span class="required">*</span></label>
+<%= text_field 'auth_source', 'base_dn', :size => 60 %></p>
+
+<p><label for="auth_source_onthefly_register">On the fly registration?</label>
+<%= check_box 'auth_source', 'onthefly_register' %></p>
+</div>
+
+<fieldset class="box"><legend>Attributes</legend>
+<p><label for="auth_source_attr_login">Login <span class="required">*</span></label>
+<%= text_field 'auth_source', 'attr_login', :size => 20  %></p>
+
+<p><label for="auth_source_attr_firstname">Firstname</label>
+<%= text_field 'auth_source', 'attr_firstname', :size => 20  %></p>
+
+<p><label for="auth_source_attr_lastname">Lastname</label>
+<%= text_field 'auth_source', 'attr_lastname', :size => 20  %></p>
+
+<p><label for="auth_source_attr_mail">Email</label>
+<%= text_field 'auth_source', 'attr_mail', :size => 20  %></p>
+</fieldset>
+<!--[eoform:auth_source]-->
+
+
+

@@ -22,9 +22,11 @@
         <td><%= project.stages.count %></td>
         <td><%= project.deployments.count %></td>
         <td><%= project.created_at.to_s(:date_with_day) %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Clone', clone_form_path(project) %></td>
-        <td><%= link_to 'Delete', project_path(project), :confirm => 'Are you sure?', :method => :delete %></td>
+        <%- if current_user.can_edit?(project) -%>
+          <td><%= link_to 'Edit', edit_project_path(project) %></td>
+          <td><%= link_to 'Clone', clone_form_path(project) %></td>
+          <td><%= link_to 'Delete', project_path(project), :confirm => 'Are you sure?', :method => :delete %></td>
+        <%- end -%>
       </tr>
     <% end %>
   </table>
@@ -32,7 +34,9 @@
 
 <br />
 
-<%= link_to 'New project', new_project_path, :class => 'arrow_link' %>
+<%- if current_user.admin? || current_user.manage_projects? -%>
+  <%= link_to 'New project', new_project_path, :class => 'arrow_link' %>
+<%- end -%>
 
 </fieldset>
 

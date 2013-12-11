@@ -1,0 +1,6 @@
+<h2>New authentication mode (<%= @auth_source.auth_method_name %>)</h2>
+
+<% form_tag({:action => 'create'}, :class => "tabular") do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Create' %>
+<% end %>

@@ -1,11 +1,18 @@
 class ProjectsController < ApplicationController
   
   before_filter :load_templates, :only => [:new, :create, :edit, :update]
-  before_filter :ensure_admin, :only => [:new, :edit, :destroy, :create, :update]
+  before_filter :load_project, :only => [:show, :destroy, :edit, :update]
+  before_filter :ensure_can_access_project, :except => [:new, :create, :dashboard, :index]
+  before_filter :ensure_can_edit_project, :only => [:edit, :update]
+  before_filter :ensure_can_manage_projects, :only => [:new, :create, :destroy]
   
   # GET /projects/dashboard
   def dashboard
-    @deployments = Deployment.find(:all, :limit => 3, :order => 'created_at DESC')
+    @deployments = Deployment.find(:all,
+                                   :include    => {:stage => :project},
+                                   :conditions => {'stages.project_id' => @sidebar_projects},
+                                   :order      => 'deployments.created_at DESC',
+                                   :limit      => 3)
 
     respond_to do |format|
       format.html # dashboard.rhtml
@@ -15,8 +22,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.find(:all, :order => 'name ASC')
-
+    @projects = Project.active.select { |p| 
+      ensure_can_access_project(p)
+    }
+    
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @projects.to_xml }
@@ -26,7 +35,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id])
+    @can_edit_project = current_user.can_edit?(@project)
 
     respond_to do |format|
       format.html # show.rhtml
@@ -45,7 +54,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1;edit
   def edit
-    @project = Project.find(params[:id])
   end
 
   # POST /projects
@@ -58,10 +66,11 @@ class ProjectsController < ApplicationController
     else
       action_to_render = 'new'  
     end
+    
+    @project.user_ids = params[:project][:user_ids] || []
       
     respond_to do |format|
       if @project.save
-        
         @project.clone(@original) if load_clone_original
         
         flash[:notice] = 'Project was successfully created.'
@@ -77,12 +86,12 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    @project = Project.find(params[:id])
+    @project.user_ids = params[:project][:user_ids] || []
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
         flash[:notice] = 'Project was successfully updated.'
-        format.html { redirect_to project_url(@project) }
+        format.html { redirect_to(@project.archived? ? projects_path : project_url(@project))}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -94,7 +103,6 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.xml
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
 
     respond_to do |format|
@@ -117,7 +125,7 @@ class ProjectsController < ApplicationController
   
   def load_clone_original
     if params[:clone]
-      @original = Project.find(params[:clone])
+      @original = Project.active.find(params[:clone])
     else
       false
     end

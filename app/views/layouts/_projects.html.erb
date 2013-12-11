@@ -1,6 +1,6 @@
 <div id="projects_open_content" style="<%= show_if_opened(status) %>">
-  <% if Project.count > 0 %>
-    <% for project in Project.find(:all, :order => "name ASC") %>
+  <% if @sidebar_projects.present? %>
+    <% for project in @sidebar_projects %>
       <a href="<%= project_path(project) %>" class="menu_link <%= active_link_class(project) %>" title="<%= project.name %>">
 		    <div class="menu_icons">
 		  
@@ -12,13 +12,13 @@
 		    </div>
       </a>
       <div id="<%= dom_id(project) %>_stages" style="<%= show_stages_of_project(project) %>">
-	    <% if project.stages.count > 0 %>
+	    <% if project.stages.present? %>
         <% for stage in project.stages %>
           <a href="<%= project_stage_path(project, stage) %>" class="menu_link <%= active_link_class(stage) %>" title="<%= stage.name %>">
 	          <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px"><%= stage.name %></div>
 			    </a>
         <% end %>
-		<% else %>
+		<% elsif current_user.can_edit?(project) %>
       <a href="<%= new_project_stage_path(project) %>" class="menu_link menu_link_new">
 	      <div class="menu_link_title" style="padding-left: 30px; *padding-left: 33px">New stage</div>
 	    </a>
@@ -33,7 +33,7 @@
 <div id="projects_closed_content" style="<%= show_if_closed(status) %>">
   <a href="javascript:open_menu_box('projects')" class="menu_link  menu_link_create">
 	  <div class="menu_link_title">
-	    <%= pluralize(Project.count, 'project')%>
+	    <%=h pluralize(@sidebar_projects.length, 'project')%>
 	  </div>
   </a>
 </div>

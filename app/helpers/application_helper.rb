@@ -45,11 +45,11 @@ module ApplicationHelper
 
   # returns the open/closed status of a menu
   # either the active controller is used or the given status is returned
-  def controller_in_use_or(contr_name, status, klass)
+  def controller_in_use_or(contr_name, status, objects)
     if controller.is_a? contr_name
       :open
     else
-      if status == :closed && (klass.count <= 3 )
+      if status == :closed && (objects.length <= 3 )
         # the box should be closed
         # open it anyway if we have less than three
         status = :open
@@ -120,4 +120,10 @@ module ApplicationHelper
     end
   end
 
+  
+  def ensure_can_access_project(project=nil)
+    project ||= @project
+    current_user.admin? || current_user.can_manage_projects? || current_user.projects.include?(project)
+  end
+    
 end

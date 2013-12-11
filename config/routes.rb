@@ -1,4 +1,6 @@
 Www::Application.routes.draw do
+  map.resources :auth_sources
+
 
   match '/' => 'projects#dashboard', :as => :home
   match ':controller/service.wsdl' => '#wsdl'
@@ -43,7 +45,6 @@ Www::Application.routes.draw do
       get :deployments
       post :enable
     end
-
   end
 
   resources :sessions do
