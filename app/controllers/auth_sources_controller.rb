@@ -1,6 +1,6 @@
 class AuthSourcesController < ApplicationController
   before_filter :ensure_admin
-
+  
   def index
     @auth_sources = auth_source_class.all
     render "auth_sources/index"
@@ -35,7 +35,7 @@ class AuthSourcesController < ApplicationController
       render 'auth_sources/edit'
     end
   end
-  
+
   def test_connection
     @auth_method = AuthSource.find(params[:id])
     begin
@@ -59,6 +59,6 @@ class AuthSourcesController < ApplicationController
   protected
 
   def auth_source_class
-    AuthSource
+    AuthSourceLdap
   end
 end

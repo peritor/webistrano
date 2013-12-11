@@ -3,7 +3,7 @@ if WebistranoConfig[:authentication_method] == :cas
   CASClient::Frameworks::Rails::Filter.configure(cas_options[Rails.env])
 end
 
-WEBISTRANO_VERSION = '1.5'
+WEBISTRANO_VERSION = '1.5 - JS 1.0'
 
 ActionMailer::Base.delivery_method = WebistranoConfig[:smtp_delivery_method] 
 ActionMailer::Base.smtp_settings = WebistranoConfig[:smtp_settings] 

@@ -25,6 +25,7 @@
     <b>Auth Source</b><br />
     <%= select 'user', 'auth_source_id', AuthSource.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }, :style =>'width:330px;', 
       :onchange => "handle_auth_source_select_change(this)" %>
+      <%= link_to 'Edit & change auth sources', auth_sources_path %>
   </p>
 
   <div id="local_user_fields">

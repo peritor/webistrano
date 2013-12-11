@@ -1,6 +1,7 @@
 <fieldset class="fieldset">
   <legend> <%= pluralize(User.count, 'User')%> listed</legend>
 
+
 <% if @users.empty? %>
   <br/>
     No users added yet.<br />
@@ -42,6 +43,7 @@
 <% end %>
 
 </fieldset>
+
 
 <% content_for(:breadcrumb) do %>
     <%= link_to "Users", users_path %>

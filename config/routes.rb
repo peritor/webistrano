@@ -1,6 +1,7 @@
 Www::Application.routes.draw do
-  map.resources :auth_sources
-
+  
+  resources :auth_sources
+  resources :auth_sources_ldap
 
   match '/' => 'projects#dashboard', :as => :home
   match ':controller/service.wsdl' => '#wsdl'
@@ -52,6 +53,8 @@ Www::Application.routes.draw do
       get :version
     end
   end
+  
+
 
   match '/signup' => 'users#new', :as => :signup
   match '/login' => 'sessions#new', :as => :login

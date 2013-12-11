@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
   
-  attr_accessible :login, :email, :password, :password_confirmation, :time_zone, :tz
+  attr_accessible :login, :email, :password, :password_confirmation, :time_zone, :tz, :auth_source_id
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?

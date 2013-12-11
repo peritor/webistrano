@@ -4,13 +4,14 @@
 
 <h2>Authentication modes</h2>
 
-<table class="list">
+<table class="sortable">
   <thead><tr>
-	  <th>Name</th>
-	  <th>Type</th>
-	  <th>Host</th>
-	  <th>Users</th>
-	  <th></th>
+	  <th width="25%">Name</th>
+	  <th width="1%">Type</th>
+	  <th width="50%">Host</th>
+	  <th width="1%">Users</th>
+	  <th width="1%"></th>
+	  <th width="1%"></th>
   </tr></thead>
   <tbody>
 <% for source in @auth_sources %>
@@ -21,6 +22,8 @@
     <td align="center"><%= source.users.count %></td>
     <td class="buttons">
     	<%= link_to 'Test', :action => 'test_connection', :id => source %>
+   	</td>
+   	<td class="buttons">
     	<%= link_to 'Delete', { :action => 'destroy', :id => source },
     																										:method => :post,
                                                         :confirm => 'Are you sure ?',
