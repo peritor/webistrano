@@ -6,7 +6,7 @@
 
 <% flashed_errors(:deployment) %>
 
-<% form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
+<%= form_for(:deployment, :url => project_stage_deployments_path(@project, @stage)) do |f| %>
 <div style="width:330px;">
   <p>
     <b>Task</b><br />
@@ -21,15 +21,15 @@
   <% unless @stage.prompt_configurations.empty? %>
     <% @stage.prompt_configurations.each do |conf| %>
       <p>
-        <b>Config: <%=h conf.name %></b><br />
-        <input type="<%=h input_type(conf.name) %>" id="deployment_prompt_config_<%=h conf.name %>" name="deployment[prompt_config][<%=h conf.name %>]" style="width:330px;" value="<%=h @deployment.prompt_config[conf.name.to_sym]%>" />
+        <b>Config: <%= conf.name %></b><br />
+        <input type="<%= input_type(conf.name) %>" id="deployment_prompt_config_<%= conf.name %>" name="deployment[prompt_config][<%= conf.name %>]" style="width:330px;" value="<%= @deployment.prompt_config[conf.name.to_sym]%>" />
       </p>
     <% end %>
   <% end %>
   
   <!-- hidden ids of hosts to exlude -->
   <% for host in @stage.hosts.sort_by{|x| x.name} %>
-    <input style="display:none;" type="checkbox" value="<%=h host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%=h host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
+    <input style="display:none;" type="checkbox" value="<%= host.id %>" name="deployment[excluded_host_ids][]" id="deployment_excluded_host_ids_<%= host.id %>" <%= (@deployment.excluded_host_ids.include?(host.id) ? 'checked="checked"' : ''  rescue '')%>/></td>
   <% end %>
   
   <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link ontheright' %>
@@ -94,7 +94,7 @@
 		    <form name="excluded_hosts_form" id="excluded_hosts_form">
           <table border="0" width="210">
             <% for host in @stage.hosts.sort_by{|x| x.name} %>
-              <tr class="toggle_host <%= if_disabled_host?(host,'disabled_host') %> <%= if_enabled_host?(host,'enabled_host') %>" id="host_<%=h host.id %>">
+              <tr class="toggle_host <%= if_disabled_host?(host,'disabled_host') %> <%= if_enabled_host?(host,'enabled_host') %>" id="host_<%= host.id %>">
                 <td width="1%" style="padding:3px 0px 0px 0px;" valign="middle" align="center">
                   <%= image_tag('peritor_theme/checkbox_on.gif', 
                                 :id => "host_#{host.id}_on", 
@@ -103,8 +103,8 @@
                                 :id => "host_#{host.id}_off", 
                                 :style => if_enabled_host?(host,'display:none;') + 'cursor:pointer;')%>
                 </td>
-                <td width="99%" title="<%=h h(host.name) %>" class="toggle_host" id="toggle_host_<%=h host.id %>">
-                  <div style="overflow: hidden; padding-left: 5px; width: 180px; white-space: nowrap; cursor: pointer;"><%=h host.name %></div>
+                <td width="99%" title="<%= host.name %>" class="toggle_host" id="toggle_host_<%= host.id %>">
+                  <div style="overflow: hidden; padding-left: 5px; width: 180px; white-space: nowrap; cursor: pointer;"><%= host.name %></div>
                 </td>
               </tr>
             <% end %>
@@ -119,13 +119,11 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Back to stage", project_stage_path(current_project, current_stage), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
     Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %> &gt; 
     Deployment
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

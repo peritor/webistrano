@@ -9,17 +9,17 @@
   <div class="box_middle">
 		<p>
 		  <b>Name:</b>
-		  <%=h @host.name %>
+		  <%= @host.name %>
 		</p>
 		<p>
 		  <b>#Stages:</b>
-		  <%=h @host.stages.uniq.size %>
+		  <%= @host.stages.uniq.size %>
 		</p>
 		<p>
 		  <b>#Roles:</b>
-		  <%=h @host.roles.count %>
+		  <%= @host.roles.count %>
 		</p>
-		<% if current_user.admin? %>
+		<% if current_user.can_manage_hosts? %>
   		<br />
 	  	<%= link_to 'Edit Host', edit_host_path(@host), :class => 'arrow_link' %> | 
 		  <%= link_to 'Delete', host_path(@host), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %>
@@ -37,14 +37,14 @@
 </fieldset>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
-    <%= link_to "Manage hosts", hosts_path, :style => "float:right", :class => "arrow_link" %>
+    <%- if current_user.can_manage_hosts? -%>
+      <%= link_to "Manage hosts", hosts_path, :style => "float:right", :class => "arrow_link" %>
+    <%- end -%>
     <%= link_to "Hosts", hosts_path %> &gt; 
     Host <%= link_to @host.name, host_path(@host) %> 
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Host #{h(@host.name)}" %>
-  <h2>Host <%=h @host.name %></h2>
+  <h2>Host <%= @host.name %></h2>
 <% end %>

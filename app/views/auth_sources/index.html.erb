@@ -1,0 +1,36 @@
+<div class="contextual">
+<%= link_to 'New authentication mode', {:action => 'new'}, :class => 'icon icon-add' %>
+</div>
+
+<h2>Authentication modes</h2>
+
+<table class="sortable">
+  <thead><tr>
+	  <th width="25%">Name</th>
+	  <th width="1%">Type</th>
+	  <th width="50%">Host</th>
+	  <th width="1%">Users</th>
+	  <th width="1%"></th>
+	  <th width="1%"></th>
+  </tr></thead>
+  <tbody>
+<% for source in @auth_sources %>
+  <tr class="<%= cycle("odd", "even") %>">
+    <td><%= link_to source.name, :action => 'edit', :id => source%></td>
+    <td align="center"><%= source.auth_method_name %></td>
+    <td align="center"><%= source.host %></td>    
+    <td align="center"><%= source.users.count %></td>
+    <td class="buttons">
+    	<%= link_to 'Test', :action => 'test_connection', :id => source %>
+   	</td>
+   	<td class="buttons">
+    	<%= link_to 'Delete', { :action => 'destroy', :id => source },
+    																										:method => :post,
+                                                        :confirm => 'Are you sure ?',
+                                                        :class => 'icon icon-del',
+                                                        :disabled => source.users.any? %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>

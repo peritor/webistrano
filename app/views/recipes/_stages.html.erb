@@ -10,8 +10,8 @@
     </tr>
   <% for stage in @recipe.stages %>
     <tr class="<%= cycle :even, :odd, :name => 'stages' %>">
-      <td><%= link_to h(stage.project.name), project_path(stage.project) %></td>
-      <td><%= link_to h(stage.name), project_stage_path(stage.project, stage) %></td>
+      <td><%= link_to stage.project.name, project_path(stage.project) %></td>
+      <td><%= link_to stage.name, project_stage_path(stage.project, stage) %></td>
     </tr>
   <% end %>
   </table>

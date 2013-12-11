@@ -2,7 +2,10 @@ class Project < ActiveRecord::Base
   has_many :stages, :dependent => :destroy, :order => 'name ASC'
   has_many :deployments, :through => :stages
   has_many :configuration_parameters, :dependent => :destroy, :class_name => "ProjectConfiguration", :order => 'name ASC'
-  
+
+  has_many :user_project_links, :dependent => :destroy
+  has_many :users, :through => :user_project_links
+    
   validates_uniqueness_of :name
   validates_presence_of :name
   validates_length_of :name, :maximum => 250
@@ -10,7 +13,12 @@ class Project < ActiveRecord::Base
   
   after_create :create_template_defaults
   
-  attr_accessible :name, :description, :template
+  attr_accessible :name, :description, :template, :archived
+  
+  named_scope :active,
+    :include    => [:users, {:stages => [:hosts, :recipes]}, :configuration_parameters, :user_project_links],
+    :conditions => {:archived => false},
+    :order      => "projects.name ASC"
   
   # creates the default configuration parameters based on the template
   def create_template_defaults
@@ -24,6 +32,14 @@ class Project < ActiveRecord::Base
         config.save!
       end
     end
+  end
+  
+  def editable_by?(_user)
+    _user.admin? || _user.can_manage_projects? || (!self.archived? && _user.projects.include?(self))
+  end
+  
+  def viewable_by?(_user)
+    _user.admin? || _user.can_manage_projects? || (!self.archived? && _user.projects.include?(self))
   end
   
   # returns a string with all custom tasks to be loaded by the Capistrano config

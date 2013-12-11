@@ -1,0 +1,7 @@
+<h2>Authentication mode (<%= @auth_source.auth_method_name %>)</h2>
+
+<% form_for @auth_source do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Save' %>
+<% end %>
+

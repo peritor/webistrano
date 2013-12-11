@@ -1,4 +1,4 @@
-<% form_for(:project, :url => projects_path) do |f| %>
+<%= form_for(:project, :url => projects_path) do |f| %>
 <div style="width:335px;">
 
   <%= render(:partial => 'form')%>
@@ -13,11 +13,11 @@
 
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
-    <%= link_to "Manage Projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <%- if current_user.can_manage_projects? -%>
+      <%= link_to "Manage Projects", projects_path, :style => "float:right", :class => "arrow_link" %>
+    <%- end -%>
     <%= link_to "Projects", projects_path %> &gt; 
     New
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

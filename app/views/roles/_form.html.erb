@@ -22,7 +22,7 @@
 </p>
 <p>
   <b>Host</b><br />
-  <span class="<%= @role.errors.on('host') ? 'fieldWithErrors' : '' %>">
+  <span class="<%= @role.errors.include?(:host) ? 'fieldWithErrors' : '' %>">
   <%= select('role', 'host_id', @host_choices, { :include_blank => true }, {:style => 'width:250px;'}) %>
   </span>
 </p>

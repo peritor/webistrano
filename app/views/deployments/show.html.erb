@@ -3,17 +3,15 @@
 </div>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
-    <%= link_to "Projects", projects_path %> &gt; 
+    <%= link_to "Projects", projects_path %> &gt;
     Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
     Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %> &gt; 
     Deployment
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Deployment of stage #{h(current_stage.name)} of project #{h(current_project.name)}" %>
-  <h2>Deployment: <%= link_to h(@deployment.task), project_stage_deployment_path(current_project, current_stage, @deployment) %></h2>
+  <h2>Deployment: <%= link_to @deployment.task, project_stage_deployment_path(current_project, current_stage, @deployment) %></h2>
 <% end %>
 
 <% content_for(:page_scripts) do %>

@@ -1,25 +1,27 @@
-<div id="recipes_open_content" style="<%=h show_if_opened(status) %>">
-  <% if Recipe.count > 0 %>
-    <% for recipe in Recipe.find(:all, :order => "name ASC") %>
-      <a href="<%= recipe_path(recipe) %>" class="menu_link <%=h active_link_class(recipe) %>" title="<%=h recipe.name %>">
+<div id="recipes_open_content" style="<%= show_if_opened(status) %>">
+  <% if @sidebar_recipes.present? %>
+    <% for recipe in @sidebar_recipes %>
+      <a href="<%= recipe_path(recipe) %>" class="menu_link <%= active_link_class(recipe) %>" title="<%= recipe.name %>">
 		    <div class="menu_link_title">
-		      <%=h recipe.name %>
+		      <%= recipe.name %>
 		    </div>
 	    </a>
     <% end %>
   <% else %>
     <div class="menu_item">No recipe created yet</div>
-    <a href="<%= new_recipe_path %>" class="menu_link  menu_link_create">
-  	  <div class="menu_link_title">
-  	    New recipe
-  	  </div>
-	  </a>
+      <%- if current_user.can_manage_recipes? -%>
+        <a href="<%= new_recipe_path %>" class="menu_link  menu_link_create">
+      	  <div class="menu_link_title">
+      	    New recipe
+      	  </div>
+    	  </a>
+    	<%- end -%>
   <% end %>
 </div>
-<div id="recipes_closed_content" style="<%=h show_if_closed(status) %>">
+<div id="recipes_closed_content" style="<%= show_if_closed(status) %>">
   <a href="javascript:open_menu_box('recipes')" class="menu_link  menu_link_create">
 	  <div class="menu_link_title">
-	    <%=h pluralize(Recipe.count, 'recipe')%>
+	    <%=h pluralize(@sidebar_recipes.length, 'recipe')%>
 	  </div>
   </a>
 </div>

@@ -12,6 +12,18 @@
   <%= text_area 'project', 'description', :style =>'width:330px; height: 100px' %>
 </p>
 
+<p>
+  <%= check_box 'project', 'archived', :class => 'noframe' %> <b>Archived?</b>
+</p>
+
+<h3>User access</h3>
+<%- User.all.each do |user| -%>
+  <p>
+    <%= check_box_tag "project[user_ids][]", user.id, @project.users.include?(user), :class => 'noframe' %> <b><%= user.login %></b> 
+  </p>
+<%- end -%>
+
+
 
 <% content_for(:page_scripts) do %>
  <script type="text/javascript">
@@ -31,7 +43,7 @@
    
    function hide_all_infos(){
      <% for template in @template_infos %>
-       $('<%=h template.first %>_desc').hide();
+       $('<%= template.first %>_desc').hide();
      <% end %>
    }
 
@@ -43,7 +55,7 @@
   <div class="small_box_middle" style="min-height: 230px; *height: 230px;">
 		 <h3>Project Type:</h3>
 		   <% for template in @template_infos %>
-		     <div id="<%=h template.first %>_desc" style="display:none;">
+		     <div id="<%= template.first %>_desc" style="display:none;">
 		         <b><%= template.first.to_s.titleize %>:</b><br />
 		         <%= template.last %>
 		     </div>

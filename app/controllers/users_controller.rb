@@ -12,14 +12,24 @@ class UsersController < ApplicationController
   def new
     # render new.rhtml
     @user = User.new
+    @projects = Project.active
   end
 
   # POST /users
   # POST /users.xml
   def create
     @user = User.new(params[:user])
+    @projects = Project.active
+    
     if current_user.admin?
       @user.admin = params[:user][:admin].to_i rescue 0
+      
+      @user.manage_projects = params[:user][:manage_projects]
+      @user.manage_hosts    = params[:user][:manage_hosts]
+      @user.manage_recipes  = params[:user][:manage_recipes]
+      @user.manage_stages   = params[:user][:manage_stages]
+      
+      @user.project_ids = params[:user][:project_ids] || []
     end
     
     respond_to do |format|
@@ -28,7 +38,10 @@ class UsersController < ApplicationController
         format.html { redirect_to user_url(@user) }
         format.xml  { head :created, :location => user_url(@user) }
       else
-        format.html { render :action => "new" }
+        format.html {
+          @projects = Project.active
+          render :action => "new"
+        }
         format.xml  { render :xml => @user.errors.to_xml }
       end
     end
@@ -50,6 +63,7 @@ class UsersController < ApplicationController
   # GET /users/edit/1
   def edit
     @user = User.find(params[:id])
+    @projects = Project.active
   end
   
   # PUT /users/1
@@ -60,6 +74,13 @@ class UsersController < ApplicationController
     
     if current_user.admin?
       @user.admin = params[:user][:admin].to_i rescue 0
+      
+      @user.manage_projects = params[:user][:manage_projects]
+      @user.manage_hosts    = params[:user][:manage_hosts]
+      @user.manage_recipes  = params[:user][:manage_recipes]
+      @user.manage_stages   = params[:user][:manage_stages]
+      
+      @user.project_ids = params[:user][:project_ids] || []
     end
     
     respond_to do |format|
@@ -68,7 +89,10 @@ class UsersController < ApplicationController
         format.html { redirect_to user_url(@user) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html {
+          @projects = Project.active
+          render :action => "edit"
+        }
         format.xml  { render :xml => @user.errors.to_xml }
       end
     end

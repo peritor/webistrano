@@ -23,23 +23,25 @@
   <div class="box_middle">
 	  <p>
 	    <b>Name:</b>
-		   <%=h @stage.name %>
+		   <%= @stage.name %>
 		</p>
 		<p>
 		  <b>Project:</b>
-		  <%= link_to h(@stage.project.name), project_url(current_project) %>
+		  <%= link_to @stage.project.name, project_url(current_project) %>
 		</p>
 		<p>
 		  <b>Alert on deploy:</b>
-		  <%=h @stage.alert_emails %>
+		  <%= @stage.alert_emails %>
 		</p>
 		<p>
 		  <b>#Hosts:</b>
-		  <%=h @stage.hosts.count %>
+		  <%= @stage.hosts.count %>
 		</p>
 		<br />
-		<%= link_to 'Edit stage', edit_project_stage_path(current_project, @stage), :class => 'arrow_link' %> | 
-		<%= link_to 'Delete stage', project_stage_path(current_project, @stage), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %> | 
+    <%- if @can_edit_project -%>
+		  <%= link_to 'Edit stage', edit_project_stage_path(current_project, @stage), :class => 'arrow_link' %> | 
+		  <%= link_to 'Delete stage', project_stage_path(current_project, @stage), :confirm => 'Are you sure?', :method => :delete, :class => 'arrow_link'  %> | 
+		<%- end -%>
 		<%= link_to 'Export capfile', {:action => 'capfile', :project_id => current_project, :id => @stage}, {:onclick => "loadWindow('#{url_for(:action => 'capfile', :project_id => current_project, :id => @stage)}'); return false", :class => 'arrow_link'} %>
 	</div>	
   <div class="box_bottom"></div>
@@ -57,7 +59,9 @@
     <%= render(:partial => 'effective_config')%>
     <br />
   </div>
-  <%= link_to 'New configuration', new_project_stage_stage_configuration_path(current_project, @stage), :class => 'arrow_link' %> | 
+  <%- if @can_edit_project -%>
+    <%= link_to 'New configuration', new_project_stage_stage_configuration_path(current_project, @stage), :class => 'arrow_link' %> | 
+  <%- end -%>
   <a id="s_e_c" href="#" onclick="show_effective_config(); return false" class="arrow_link">Show effective configuration</a>
   <a id="h_e_c" href="#" onclick="hide_effective_config(); return false" class="arrow_link" style="display:none;">Hide effective configuration</a>
 </fieldset>
@@ -68,7 +72,9 @@
   <legend>Used recipes</legend>
   <%= render(:partial => 'recipes')%>
   <br />
-  <%= link_to 'Manage stage recipes', {:action => 'recipes', :project_id => current_project, :id => @stage} , :class => 'arrow_link'%>
+  <%- if @can_edit_project -%>
+    <%= link_to 'Manage stage recipes', {:action => 'recipes', :project_id => current_project, :id => @stage} , :class => 'arrow_link'%>
+  <%- end -%>
 </fieldset>
 
 <br /><br />
@@ -106,16 +112,14 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Back to project", project_path(@project), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
     Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %>
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Project #{h(current_project.name)} - Stage #{h(@stage.name)}"%>
-  <h2>Stage <%= link_to h(@stage.name), project_stage_path(current_project, @stage) %></h2>
+  <h2>Stage <%= link_to @stage.name, project_stage_path(current_project, @stage) %></h2>
 <% end %>
 
