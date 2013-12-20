@@ -1,4 +1,4 @@
-<% form_for(:project, :url => project_path(@project), :html => { :method => :put }) do |f| %>
+<%= form_for(:project, :url => project_path(@project), :html => { :method => :put }) do |f| %>
   
   <%= render(:partial => 'form')%>
 
@@ -11,15 +11,13 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Back to project", project_path(current_project), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
     Edit
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Edit project #{h(current_project.name)}" %>
-  <h2>Edit <%= link_to h(current_project.name), project_path(current_project) %></h2>
+  <h2>Edit <%= link_to current_project.name, project_path(current_project) %></h2>
 <% end %>

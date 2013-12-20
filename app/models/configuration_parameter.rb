@@ -5,8 +5,10 @@ class ConfigurationParameter < ActiveRecord::Base
   validates_inclusion_of :prompt_on_deploy, :in => 0..1
   
   before_validation :empty_value_if_deploy_is_set
-  
-  def validate
+
+  validate :do_validate
+
+  def do_validate
     self.errors.add('value', 'must be empty if prompt on deploy is set') if (self.prompt? && !self.value.blank?)
     self.errors.add('name', 'can\'t contain a colon') if (!self.name.blank? && self.name.strip.starts_with?(":"))
   end

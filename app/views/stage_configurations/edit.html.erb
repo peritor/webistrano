@@ -1,6 +1,6 @@
 <% flashed_errors(:configuration) %>
 
-<% form_for(:configuration, :url => project_stage_stage_configuration_path(@project, @stage, @configuration), :html => { :method => :put }) do |f| %>
+<%= form_for(:configuration, :url => project_stage_stage_configuration_path(@project, @stage, @configuration), :html => { :method => :put }) do |f| %>
   
   <%= render(:partial => 'project_configurations/form')%>
   <br/>
@@ -13,13 +13,11 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Back to stage", project_stage_path(current_project, current_stage), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> &gt;  
     Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %> &gt; 
     Edit
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

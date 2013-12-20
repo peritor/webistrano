@@ -11,7 +11,9 @@ class Stage < ActiveRecord::Base
   validates_length_of :name, :maximum => 250
   validates_presence_of :project, :name
   validates_inclusion_of :locked, :in => [0,1]
-  
+
+  validate :do_validate
+
   attr_accessible :name, :alert_emails
 
   # fake attr (Hash) that hold info why deployment is not possible
@@ -21,7 +23,7 @@ class Stage < ActiveRecord::Base
   EMAIL_BASE_REGEX = '([^@\s\,\<\>\?\&\;\:]+)@((?:[\-a-z0-9]+\.)+[a-z]{2,})'
   EMAIL_REGEX = /^#{EMAIL_BASE_REGEX}$/i
     
-  def validate
+  def do_validate
     unless self.alert_emails.blank?
       self.alert_emails.split(" ").each do |email|
         unless email.match(EMAIL_REGEX)
@@ -79,6 +81,14 @@ class Stage < ActiveRecord::Base
     @deployment_problems.blank?
   end
   
+  def editable_by?(_user)
+    self.project.editable_by?(_user)
+  end
+  
+  def viewable_by?(_user)
+    self.project.viewable_by?(_user)
+  end
+  
   def needed_roles_present?
     # for now just check if there are any roles
     if self.roles.empty? 
@@ -126,7 +136,7 @@ class Stage < ActiveRecord::Base
     begin
       deployer.list_tasks.collect { |t| {:name => t.fully_qualified_name, :description => t.description} }.delete_if{|t| t[:name] == 'shell' || t[:name] == 'invoke'}
     rescue Exception => e
-      RAILS_DEFAULT_LOGGER.error("Problem listing tasks of stage #{id}: #{e} - #{e.backtrace.join("\n")} ")
+      Rails.logger.error("Problem listing tasks of stage #{id}: #{e} - #{e.backtrace.join("\n")} ")
       [{:name => "Error", :description => "Could not load tasks - syntax error in recipe definition?"}]
     end
   end

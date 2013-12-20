@@ -1,0 +1,25 @@
+== Welcome to Webistrano on Rails 3 including LDAP authentication
+
+
+
+== Getting Started
+
+To install this version just clone the repo into your local directory and run "bundle install". 
+This should download all needed dependencies. If you encounter problems check if ruby 1.9.x and bundler
+(gem install bundle) are installed.
+
+== Configure Webistrano
+
+To configure webistrano please remove (or copy the files) the sample files in the config dir and edit it accordingly.
+
+== First run
+
+To initialize the database you have to run a rake command. You can execute it via "bundle exec rake db:migrate" this will
+execute the migration of the development environment. If you want to migrate or initialize another environment just run
+the command like that: "RAILS_ENV=production bundle exec rake db:migrate".
+
+To do a dry run you can just execute "script/rails s" and a server should be launched on http://localhost:3000.
+
+== Passenger configuration
+TBD
+

@@ -3,7 +3,7 @@
     <table>
     <% @tasks.sort{|a, b| a[:name] <=> b[:name]}.each do |task| %>
 	<tr>
-   	<td valign="top"><%= link_to task[:name], new_project_stage_deployment_path(current_project, @stage) + "?task=#{task[:name]}", :class => 'arrow_link', :name => h(task[:name])%></td>
+   	<td valign="top"><%= link_to task[:name], new_project_stage_deployment_path(current_project, @stage) + "?task=#{task[:name]}", :class => 'arrow_link', :name => task[:name]%></td>
    	<td>&nbsp;&nbsp;</td>
 	  <td valign="top"><%= simple_format task[:description] %></td>
 	</tr>
@@ -16,13 +16,11 @@
 <%= link_to 'Back to stage', project_stage_path(@project, @stage), :class => 'arrow_link'  %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Back to stage", project_stage_path(current_project, current_stage), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Projects", projects_path %> &gt; 
     Project <%= link_to current_project.name, project_path(current_project) %> &gt; 
     Stage <%= link_to current_stage.name, project_stage_path(current_project, current_stage) %> &gt; 
     Task list
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

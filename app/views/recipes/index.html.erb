@@ -1,5 +1,5 @@
 <fieldset class="fieldset">
-  <legend> <%=h pluralize(Recipe.count, 'Recipe')%> listed</legend>
+  <legend> <%= pluralize(Recipe.count, 'Recipe')%> listed</legend>
 
 <% if @recipes.empty? %>
   <br/>
@@ -16,11 +16,11 @@
     </tr>
     <% for recipe in @recipes %>
       <tr class="<%= cycle :even, :odd, :name => 'recipes'  %>">
-        <td><%= link_to h(recipe.name), recipe_path(recipe) %></td>
-        <td><%=h recipe.description %></td>
-        <td><%=h recipe.stages.count %></td>
-        <td><%=h recipe.created_at.to_s(:date_with_day) rescue nil %></td>
-        <% if current_user.admin? %>
+        <td><%= link_to recipe.name, recipe_path(recipe) %></td>
+        <td><%= recipe.description %></td>
+        <td><%= recipe.stages.count %></td>
+        <td><%= recipe.created_at.to_s(:date_with_day) rescue nil %></td>
+        <% if current_user.can_manage_recipes? %>
           <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
           <td><%= link_to 'Delete', recipe_path(recipe), :confirm => 'Are you sure?', :method => :delete %></td>
         <% end %>
@@ -29,7 +29,7 @@
   </table>
 <% end %>
 
-<% if current_user.admin? %>
+<% if current_user.can_manage_recipes? %>
   <br />
   <%= link_to 'New recipe', new_recipe_path, :class => 'arrow_link' %>
 <% end %>
@@ -37,9 +37,7 @@
 </fieldset>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Recipes", recipes_path %>
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>

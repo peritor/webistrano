@@ -1,8 +1,19 @@
+
+# ide files
+.idea
+*.iml
+
+# confid files
 config/*.yml
 config/webistrano_config.rb
-tmp/*
-log/*
+
+# mac files
 *~
 .DS_Store
 *.tmproj
-Gemfile.lock
+
+# rails3 default
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/

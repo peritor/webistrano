@@ -1,6 +1,6 @@
 <% flashed_errors(:host) %>
 
-<% form_for(:host, :url => host_path(@host), :html => { :method => :put }) do |f| %>
+<%= form_for(:host, :url => host_path(@host), :html => { :method => :put }) do |f| %>
   <p>
     <b>Name (DNS name or IP address)</b><br />
     <%= f.text_field :name, :style => 'width: 330px' %>
@@ -14,15 +14,13 @@
 <% end %>
 
 <% content_for(:breadcrumb) do %>
-  <% breadcrumb_box do %>
     <%= link_to "Back to host", host_path(@host), :style => "float:right", :class => "arrow_link" %>
     <%= link_to "Hosts", hosts_path %> &gt; 
     Host <%= link_to @host.name, host_path(@host) %>  &gt; 
     Edit
-  <% end %>
 <% end %>
 
 <% content_for(:page_title) do %>
   <% @page_title = "Edit host #{h(@host.name)}" %>
-  <h2>Edit host <%=h @host.name %></h2>
+  <h2>Edit host <%= @host.name %></h2>
 <% end %>

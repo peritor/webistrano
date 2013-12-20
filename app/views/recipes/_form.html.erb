@@ -14,7 +14,7 @@
   <%= text_area 'recipe', 'body', :style =>'width:663px; height: 400px;' %>
 </p>
 
-<%= observe_field "recipe_body", :frequency => 2.5, :with => "Form.Element.serialize('recipe_body')", :url => preview_recipes_url%>
+<%= observe_field "recipe_body", :frequency => 2.5, :with => "Form.Element.serialize('recipe_body')", :url => preview_recipes_url, :update => "preview" %>
 <div id="preview_fieldset">
   <fieldset class="fieldset" style="width:560px;">
     <legend>Code-Preview</legend>

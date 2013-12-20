@@ -1,6 +1,9 @@
 class StageConfigurationsController < ApplicationController
   
   before_filter :load_stage
+  before_filter :load_project
+  before_filter :ensure_can_access_project
+  before_filter :ensure_can_edit_project, :except => [:dashboard, :index, :show]
   
   # GET /project/1/stage/1/stage_configurations/1
   # GET /project/1/stage/1/stage_configurations/1.xml

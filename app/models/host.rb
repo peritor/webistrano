@@ -9,12 +9,14 @@ class Host < ActiveRecord::Base
   attr_accessible :name
   
   before_validation :strip_whitespace
-  
+
+  validate :do_validate
+
   def strip_whitespace
     self.name = self.name.strip rescue nil
   end
   
-  def validate
+  def do_validate
     errors.add("name", "is not a valid hostname or IP") unless ( valid_ip? || valid_hostname? )
   end
   

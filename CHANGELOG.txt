@@ -1,3 +1,10 @@
+1.5 - JS 1.0
+* added rails 3 support (merged from janschumann)
+
+* added ldap and extra rights (merged from bradly)
+
+* included auth sources ui in user edit view
+
 
 edge
 

@@ -26,10 +26,12 @@ class Deployment < ActiveRecord::Base
   STATUS_VALUES   = [STATUS_SUCCESS, STATUS_FAILED, STATUS_CANCELED, STATUS_RUNNING]
   
   validates_inclusion_of :status, :in => STATUS_VALUES
-    
+
+  validate :check_stage_ready, :on => :create
+
   # check (on on creation ) that the stage is ready
   # his has to done only on creation as later DB logging MUST always work
-  def validate_on_create
+  def check_stage_ready
     unless self.stage.blank?
       errors.add('stage', 'is not ready to deploy') unless self.stage.deployment_possible?
       
@@ -55,7 +57,7 @@ class Deployment < ActiveRecord::Base
     end
     true
   rescue => e
-    RAILS_DEFAULT_LOGGER.debug "DEPLOYMENT: could not fire deployment: #{e.inspect} #{e.backtrace.join("\n")}"
+    Rails.logger.debug "DEPLOYMENT: could not fire deployment: #{e.inspect} #{e.backtrace.join("\n")}"
     false
   end
   
@@ -125,9 +127,9 @@ class Deployment < ActiveRecord::Base
   # deploy through Webistrano::Deployer in background (== other process)
   # TODO - at the moment `Unix &` hack
   def deploy_in_background! 
-    unless RAILS_ENV == 'test'   
-      RAILS_DEFAULT_LOGGER.info "Calling other ruby process in the background in order to deploy deployment #{self.id} (stage #{self.stage.id}/#{self.stage.name})"
-      system("sh -c \"cd #{RAILS_ROOT} && ruby script/runner -e #{RAILS_ENV} ' deployment = Deployment.find(#{self.id}); deployment.prompt_config = #{self.prompt_config.inspect.gsub('"', '\"')} ; Webistrano::Deployer.new(deployment).invoke_task! ' >> #{RAILS_ROOT}/log/#{RAILS_ENV}.log 2>&1\" &")
+    unless Rails.env == 'test'
+      Rails.logger.info "Calling other ruby process in the background in order to deploy deployment #{self.id} (stage #{self.stage.id}/#{self.stage.name})"
+      system("sh -c \"cd #{Rails.root.to_s} && ruby script/rails runner -e #{Rails.env} ' deployment = Deployment.find(#{self.id}); deployment.prompt_config = #{self.prompt_config.inspect.gsub('"', '\"')} ; Webistrano::Deployer.new(deployment).invoke_task! ' >> #{Rails.root.to_s}/log/#{Rails.env}.log 2>&1\" &")
     end
   end
   
@@ -170,11 +172,6 @@ class Deployment < ActiveRecord::Base
     self.read_attribute('excluded_host_ids').blank? ? [] : self.read_attribute('excluded_host_ids')
   end
   
-  def excluded_host_ids=(val)
-    val = [val] unless val.is_a?(Array)
-    self.write_attribute('excluded_host_ids', val.map(&:to_i))
-  end
-  
   def cancelling_possible?
     !self.pid.blank? && !completed?
   end
@@ -190,7 +187,9 @@ class Deployment < ActiveRecord::Base
   end
   
   def clear_lock_error
-    self.errors.instance_variable_get("@errors").delete('lock')
+    if self.errors.size > 0
+      Rails.logger.error "clear lock error : #{self.errors.keys}"
+    end
   end
   
   protected

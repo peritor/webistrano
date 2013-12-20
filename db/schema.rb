@@ -1,15 +1,35 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of Active Record to incrementally modify your database, and
-# then regenerate this schema definition.
+# encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your database schema. If you need
-# to create the application database on another system, you should be using db:schema:load, not running
-# all the migrations from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20110512144542) do
+
+  create_table "auth_sources", :force => true do |t|
+    t.string   "type",              :limit => 30, :default => "",    :null => false
+    t.string   "name",              :limit => 60, :default => "",    :null => false
+    t.string   "host",              :limit => 60
+    t.integer  "port"
+    t.string   "account"
+    t.string   "account_password",  :limit => 60
+    t.string   "base_dn"
+    t.string   "attr_login",        :limit => 30
+    t.string   "attr_firstname",    :limit => 30
+    t.string   "attr_lastname",     :limit => 30
+    t.string   "attr_mail",         :limit => 30
+    t.boolean  "onthefly_register",               :default => false, :null => false
+    t.boolean  "tls",                             :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "configuration_parameters", :force => true do |t|
     t.string   "name"
@@ -60,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20110512144542) do
     t.string   "template"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "archived",    :default => false
   end
 
   create_table "recipe_versions", :force => true do |t|
@@ -116,6 +137,13 @@ ActiveRecord::Schema.define(:version => 20110512144542) do
 
   add_index "stages", ["project_id"], :name => "index_stages_on_project_id"
 
+  create_table "user_project_links", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
@@ -128,6 +156,12 @@ ActiveRecord::Schema.define(:version => 20110512144542) do
     t.integer  "admin",                                   :default => 0
     t.string   "time_zone",                               :default => "UTC"
     t.datetime "disabled"
+    t.integer  "auth_source_id"
+    t.boolean  "manage_hosts",                            :default => false
+    t.boolean  "manage_recipes",                          :default => false
+    t.boolean  "manage_users",                            :default => false
+    t.boolean  "manage_stages",                           :default => false
+    t.boolean  "manage_projects",                         :default => false
   end
 
   add_index "users", ["disabled"], :name => "index_users_on_disabled"
