@@ -2,15 +2,14 @@ module Webistrano
   module Template
     module Unicorn
 
-      CONFIG = Webistrano::Template::Rails::CONFIG.dup.merge({
-                                                                 :unicorn_workers => '8',
+      CONFIG = Webistrano::Template::Jaguar::CONFIG.dup.merge({
+                                                                 :rails_env               => 'set-rails-env',
+                                                                 :unicorn_workers         => '4',
                                                                  :unicorn_workers_timeout => '30',
-                                                                 :unicorn_user => 'user',
-                                                                 :unicorn_group => 'group',
-                                                                 :unicorn_bin => 'bundle exec unicorn',
-                                                                 :unicorn_socket => 'Absolute path to Unicorn socket',
-                                                                 :unicorn_config => "Absolute path to Unicorn configuration",
-                                                                 :unicorn_pid => 'Absolute path to the pid of the Unicorn process'
+                                                                 :unicorn_user            => 'deployer',
+                                                                 :unicorn_group           => 'deployer',
+                                                                 :unicorn_bin             => 'bundle exec unicorn_rails',
+                                                                 :unicorn_pid             => '#{deploy_to}/current/tmp/pids/unicorn.pid'
                                                              }).freeze
 
       DESC = <<-'EOS'
@@ -20,10 +19,10 @@ module Webistrano
         unicorn signals instead.
       EOS
 
-      TASKS = Webistrano::Template::Base::TASKS + <<-'EOS'
+      TASKS = Webistrano::Template::Jaguar::TASKS + <<-'EOS'
 
         def unicorn_start_cmd
-          "cd #{current_path} && #{unicorn_bin} -c #{unicorn_config} -E #{rails_env} -D"
+          "cd #{current_path} && #{unicorn_bin} -E #{rails_env} -D"
         end
 
         def unicorn_stop_cmd
