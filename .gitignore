@@ -5,4 +5,5 @@ log/*
 *~
 .DS_Store
 *.tmproj
-Gemfile.lock
+vendor/bundle
+.rsync_cache

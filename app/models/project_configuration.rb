@@ -12,6 +12,7 @@ class ProjectConfiguration < ConfigurationParameter
       'thin_rails' => Webistrano::Template::ThinRails,   
       'mod_rails' => Webistrano::Template::ModRails,
       'pure_file' => Webistrano::Template::PureFile,
+      'stasis' => Webistrano::Template::Stasis,
       'unicorn' => Webistrano::Template::Unicorn
     }
   end
