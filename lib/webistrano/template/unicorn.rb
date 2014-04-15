@@ -31,7 +31,13 @@ module Webistrano
         end
 
         def unicorn_restart_cmd
-          "kill -USR2 `cat #{unicorn_pid}"
+          running = capture("[ -f #{unicorn_pid} ] || printf '0'")
+          if running != "0"
+	    old_pid = capture("cat #{unicorn_pid}")
+	    "kill -USR2 #{old_pid}; sleep 5;  kill -QUIT #{old_pid}"
+          else
+	    unicorn_start_cmd
+          end
         end
       
         namespace :webistrano do
@@ -39,13 +45,13 @@ module Webistrano
             desc "Start Unicorn directly"
             task :start, :roles => :app, :except => { :no_release => true } do
               as = fetch(:runner, "app")
-              invoke_command "#{unicorn_start_cmd} start", :via => run_method, :as => as
+              invoke_command "#{unicorn_start_cmd}", :via => run_method, :as => as
             end
             
             desc "Stop Unicorn directly"
             task :stop, :roles => :app, :except => { :no_release => true } do
               as = fetch(:runner, "app")
-              invoke_command "#{unicorn_stop_cmd} stop", :via => run_method, :as => as
+              invoke_command "#{unicorn_stop_cmd}", :via => run_method, :as => as
             end
             
             desc "Restart Unicorn app directly"

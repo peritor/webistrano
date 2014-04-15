@@ -18,4 +18,4 @@ config.action_controller.perform_caching             = true
 # config.action_mailer.raise_delivery_errors = false
 
 # long only errors
-config.log_level = :error
+# config.log_level = :debug
